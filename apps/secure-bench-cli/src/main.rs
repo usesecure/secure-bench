@@ -1,10 +1,14 @@
 //! Secure Bench command-line interface for neutral recorded and live evaluation.
 
 use clap::{Parser, Subcommand, ValueEnum};
+use secure_bench_core::adapter::fingerprint;
 use secure_bench_core::corpus::{inspect_corpus, validate_corpus};
 use secure_bench_core::runner::{
     DEFAULT_SECURE_ENGINE_ARGUMENTS, RunnerRequest, load_live_run, run_secure_engine,
     valid_report_path,
+};
+use secure_bench_core::taxonomy::{
+    canonical_taxonomy_json, inspect_taxonomy, load_taxonomy, taxonomy_content_hash,
 };
 use secure_bench_core::{
     BenchmarkResult, EvaluationInput, LiveEvaluationInput, RESULT_SCHEMA_V2, evaluate,
@@ -38,6 +42,11 @@ enum Command {
     Corpus {
         #[command(subcommand)]
         command: CorpusCommand,
+    },
+    /// Validate, inspect, or canonically serialize the frozen neutral taxonomy.
+    Taxonomy {
+        #[command(subcommand)]
+        command: TaxonomyCommand,
     },
     /// Execute an explicitly supplied Secure Engine binary as a black box.
     Run {
@@ -101,6 +110,28 @@ enum Command {
 }
 
 #[derive(Debug, Subcommand)]
+enum TaxonomyCommand {
+    /// Validate schema, semantics, content hash, and canonical serialization.
+    Validate {
+        /// Frozen taxonomy JSON document.
+        taxonomy: PathBuf,
+    },
+    /// Report declared and computed fingerprints without validating the hash.
+    Inspect {
+        /// Frozen taxonomy JSON document.
+        taxonomy: PathBuf,
+    },
+    /// Emit deterministic canonical JSON after complete validation.
+    Canonicalize {
+        /// Frozen taxonomy JSON document.
+        taxonomy: PathBuf,
+        /// Optional output path; canonical JSON is printed when omitted.
+        #[arg(long)]
+        output: Option<PathBuf>,
+    },
+}
+
+#[derive(Debug, Subcommand)]
 enum CorpusCommand {
     /// Validate schemas, semantics, leakage controls, provenance, and fingerprints.
     Validate {
@@ -138,6 +169,7 @@ fn main() -> ExitCode {
 fn run(cli: Cli) -> Result<(), String> {
     match cli.command {
         Command::Corpus { command } => run_corpus_command(command),
+        Command::Taxonomy { command } => run_taxonomy_command(command),
         Command::Run {
             suite,
             tool,
@@ -205,6 +237,63 @@ fn run(cli: Cli) -> Result<(), String> {
                 .map_err(|error| format!("result JSON is invalid at line {}", error.line()))?;
             println!("{}", summary_text(&parsed));
             Ok(())
+        }
+    }
+}
+
+fn run_taxonomy_command(command: TaxonomyCommand) -> Result<(), String> {
+    match command {
+        TaxonomyCommand::Validate { taxonomy } => {
+            let bytes = read_bounded(&taxonomy, MAX_MANIFEST_BYTES, "taxonomy")?;
+            let parsed = load_taxonomy(&bytes).map_err(|error| error.to_string())?;
+            let canonical = canonical_taxonomy_json(&parsed).map_err(|error| error.to_string())?;
+            if bytes != canonical {
+                return Err("taxonomy is valid but is not stored in canonical JSON form".to_owned());
+            }
+            println!(
+                "Validated neutral taxonomy {} with {} categories and content hash {}.",
+                parsed.taxonomy_version,
+                parsed.categories.len(),
+                parsed.content_hash
+            );
+            Ok(())
+        }
+        TaxonomyCommand::Inspect { taxonomy } => {
+            let bytes = read_bounded(&taxonomy, MAX_MANIFEST_BYTES, "taxonomy")?;
+            let parsed = inspect_taxonomy(&bytes).map_err(|error| error.to_string())?;
+            let computed = taxonomy_content_hash(&parsed).map_err(|error| error.to_string())?;
+            let canonical = canonical_taxonomy_json(&parsed).map_err(|error| error.to_string())?;
+            let output = serde_json::json!({
+                "artifact_fingerprint": fingerprint(&bytes),
+                "canonical_serialization": bytes == canonical,
+                "categories": parsed.categories.len(),
+                "computed_content_hash": computed,
+                "content_hash_matches": parsed.content_hash == computed,
+                "declared_content_hash": parsed.content_hash,
+                "publication_date": parsed.publication_date,
+                "schema_version": parsed.schema_version,
+                "taxonomy_version": parsed.taxonomy_version,
+            });
+            let mut output = serde_json::to_vec_pretty(&output)
+                .map_err(|error| format!("could not serialize taxonomy inspection: {error}"))?;
+            output.push(b'\n');
+            io::stdout()
+                .write_all(&output)
+                .map_err(|error| format!("could not write taxonomy inspection: {error}"))
+        }
+        TaxonomyCommand::Canonicalize { taxonomy, output } => {
+            let bytes = read_bounded(&taxonomy, MAX_MANIFEST_BYTES, "taxonomy")?;
+            let parsed = load_taxonomy(&bytes).map_err(|error| error.to_string())?;
+            let canonical = canonical_taxonomy_json(&parsed).map_err(|error| error.to_string())?;
+            if let Some(path) = output {
+                atomic_write(&path, &canonical)?;
+                eprintln!("Wrote canonical taxonomy to {}.", path.display());
+                Ok(())
+            } else {
+                io::stdout()
+                    .write_all(&canonical)
+                    .map_err(|error| format!("could not write canonical taxonomy: {error}"))
+            }
         }
     }
 }

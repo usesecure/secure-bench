@@ -321,6 +321,7 @@ mod tests {
             finding_id: "finding-1".to_owned(),
             case_id: "case-1".to_owned(),
             native_rule_id: "rule".to_owned(),
+            taxonomy: None,
             category: "injection".to_owned(),
             invariant: "untrusted input must not reach command execution".to_owned(),
             severity: crate::model::Severity::High,

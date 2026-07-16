@@ -11,6 +11,7 @@ pub mod pipeline;
 pub mod runner;
 pub mod schema;
 pub mod score;
+pub mod taxonomy;
 
 pub use adapter::{
     Adapter, AdapterError, AdapterInput, AdapterRegistry, SarifAdapter, SecureJsonAdapter,

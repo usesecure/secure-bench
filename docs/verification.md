@@ -1,4 +1,4 @@
-# Secure Bench Phase 0–1 Verification
+# Secure Bench Phase 0–1.5 Verification
 
 ## Environment baseline
 
@@ -51,6 +51,8 @@ Phase 1 tests additionally prove:
 - equivalent recorded and live adapter entry points; and
 - byte-identical repeated evaluation of one captured live bundle.
 
+Phase 1.5 tests additionally prove strict frozen-taxonomy schema and semantic validation, canonical serialization and hashing, every explicit unmapped state, equivalent native/SARIF metadata, scanner-alias rejection, prose-independent prospective matching, and exact byte preservation of the committed Phase 1 result. The taxonomy CLI validates and inspects only committed public contract data; it does not execute a scanner.
+
 ## Mock end-to-end check
 
 The mock helper is a Rust executable used only to exercise public black-box behavior. Its output is not a Secure Engine baseline and must not be represented as analyzer quality.
@@ -96,3 +98,5 @@ On 2026-07-16, the signed Phase 0 anchor `5e911044f8692d2611b3bc685086a39eac3cf8
 On the Phase 1 branch, formatting, strict Clippy, all 46 workspace tests, RustSec audit, and dependency policy were rerun after the final baseline was captured. Corpus validation reported 14 cases, split into seven vulnerable cases and seven controls, with aggregate fingerprint `9a32028a28d7c0396a630db8a2698a8977e173328578b1108f14603372e77761`. The committed Rust mock helper completed an end-to-end run; evaluating its retained bundle twice produced byte-identical results. Mock output is contract evidence only and is not the Secure Engine baseline.
 
 The real Phase 6 baseline used locally verified binary SHA-256 `3787db2091b9e5d5e05495d8642e7fe0005cd035ee3d9d84a402f5c08dae0504` under an outer Linux network namespace. AI validation was disabled, no configuration or credentials were supplied, and only `scan {fixture} --format secure-json-v1 --output {report}` was invoked. All 14 reports were complete, used `secure-json-v1`, and declared zero scanner errors. The evaluated result was byte-identical across two evaluations and retained zero failures, 11 normalized findings, zero exact expectation matches, three flagged controls, four clean controls, and zero duplicates. The retained JSON privacy scan found no absolute paths, secrets, prior-binary identifiers, provider data, or credentials.
+
+Phase 1.5 was created directly above the signed Phase 1 commit without modifying those baseline artifacts. Its detailed historical and taxonomy checks are recorded in [Phase 1.5 verification](phase-1-5-verification.md). No scanner was invoked for Phase 1.5.

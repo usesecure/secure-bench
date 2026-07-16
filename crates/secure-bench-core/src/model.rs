@@ -123,6 +123,9 @@ pub enum NetworkPolicy {
 pub struct ExpectedFinding {
     /// Stable expectation identifier.
     pub expectation_id: String,
+    /// Prospective canonical taxonomy coordinates; absent from immutable Phase 0 and Phase 1 data.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub taxonomy: Option<TaxonomyCoordinates>,
     /// Violated security invariant.
     pub invariant: String,
     /// Neutral category.
@@ -137,6 +140,33 @@ pub struct ExpectedFinding {
     pub sink: LocationConstraint,
     /// Evidence-path requirements.
     pub evidence: EvidenceConstraint,
+}
+
+/// Complete canonical coordinates used by prospective taxonomy-aware expectations.
+#[derive(Clone, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct TaxonomyCoordinates {
+    /// Frozen taxonomy version.
+    pub taxonomy_version: String,
+    /// Stable neutral category identifier.
+    pub category_id: String,
+    /// Stable neutral security invariant identifier.
+    pub invariant_id: String,
+}
+
+/// Scanner-reported taxonomy metadata before neutral resolution.
+#[derive(Clone, Debug, Default, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct ReportedTaxonomyMetadata {
+    /// Reported taxonomy version, when present.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub taxonomy_version: Option<String>,
+    /// Reported canonical category identifier, when present.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub category_id: Option<String>,
+    /// Reported canonical invariant identifier, when present.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub invariant_id: Option<String>,
 }
 
 /// One required location with optional equivalent variants.
@@ -322,6 +352,9 @@ pub struct NormalizedFinding {
     pub case_id: String,
     /// Native rule identifier retained only for traceability.
     pub native_rule_id: String,
+    /// Prospective reported taxonomy metadata; absent means explicitly unresolved by adapters.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub taxonomy: Option<ReportedTaxonomyMetadata>,
     /// Neutral category.
     pub category: String,
     /// Reported invariant.

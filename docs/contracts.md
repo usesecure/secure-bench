@@ -18,6 +18,12 @@ Phase 1 adds these contracts without changing the Phase 0 schemas:
 | Live run bundle | `secure-bench-live-run-v1` | `schemas/live-run-v1.schema.json` |
 | Live evaluated result | `secure-bench-result-v2` | `schemas/result-v2.schema.json` |
 
+Phase 1.5 adds one prospective contract without changing any Phase 0 or Phase 1 artifact:
+
+| Contract | Identifier | Committed schema |
+|---|---|---|
+| Frozen neutral taxonomy | `secure-bench-taxonomy-v1` / taxonomy `1.0.0` | `schemas/taxonomy-v1.schema.json` |
+
 Unknown fields are rejected by the native contract and the typed benchmark contracts. The SARIF adapter tolerates unrelated standard SARIF fields while requiring the Phase 0 properties used for neutral normalization.
 
 ## Recorded runs
@@ -38,6 +44,8 @@ Performance values are accepted only for successful cases. This prevents failed 
 ## Normalized findings
 
 Normalized findings contain case identity, native rule identity for traceability, neutral category and invariant, severity, confidence, source, sink, evidence hops, adapter identity, raw result index, and report fingerprint. They do not contain scanner messages, source text, absolute paths, usernames, or repository roots.
+
+Prospective findings may also contain a strict `taxonomy` object with `taxonomy_version`, `category_id`, and `invariant_id`. The native JSON and SARIF adapters preserve the same object without inferring aliases. Absence remains absence, partial coordinates remain incomplete, and unknown or conflicting identifiers remain unmapped. Historical reports omit this optional object and serialize exactly as before.
 
 The content-derived finding identifier excludes native rule identity and tool identity. Equivalent native and SARIF evidence therefore enters the matcher under the same neutral identity. A raw-index suffix keeps identical duplicate alerts separately inspectable.
 

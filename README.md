@@ -2,7 +2,7 @@
 
 Reproducible, evidence-aware benchmarks for static security analyzers.
 
-Secure Bench is an independent, local-first Rust benchmark harness. Phase 0 established versioned contracts, scoring-blind adapters, deterministic matching, separate metrics, provenance, and explicit failure accounting using committed mock reports. Phase 1 adds an original JavaScript and TypeScript corpus and a direct black-box runner for an explicitly supplied Secure Engine binary.
+Secure Bench is an independent, local-first Rust benchmark harness. Phase 0 established versioned contracts, scoring-blind adapters, deterministic matching, separate metrics, provenance, and explicit failure accounting using committed mock reports. Phase 1 adds an original JavaScript and TypeScript corpus and a direct black-box runner for an explicitly supplied Secure Engine binary. Phase 1.5 freezes a public neutral taxonomy for prospective reports without changing the historical Phase 1 result.
 
 This remains an intentionally neutral foundation. It is not a production benchmark, scanner comparison, public leaderboard, or basis for claiming that Secure Engine—or any other analyzer—is superior. A Phase 1 baseline measures one explicitly identified binary on a small synthetic corpus and must be reported with its raw artifacts, denominators, environment, and limitations.
 
@@ -20,6 +20,7 @@ secure-bench/
 |- fixtures/corpus/             Original scanner-visible JavaScript/TypeScript projects
 |- fixtures/reports/            Committed Phase 0 mock reports
 |- schemas/                     Versioned JSON Schemas
+|- taxonomy/                    Frozen prospective neutral taxonomy data
 |- GOAL.md                      Preserved Phase 0 goal
 `- PLAN.md                      Product plan and boundaries
 ```
@@ -58,6 +59,17 @@ cargo run --bin secure-bench -- summary artifacts/phase-1-result.json
 
 Machine-readable JSON is written only to the requested file or standard output. Human diagnostics and summaries use standard error during evaluation when JSON is emitted.
 
+## Frozen neutral taxonomy
+
+Taxonomy `1.0.0` defines seven stable category/invariant pairs derived from public security invariants and official MITRE CWE records. It was designed without consulting scanner output and applies only prospectively. Missing, incomplete, unknown, version-mismatched, or conflicting report metadata remains explicitly unmapped; there are no rule aliases, prose fallbacks, or scanner-specific exceptions.
+
+```bash
+cargo run --bin secure-bench -- taxonomy validate taxonomy/secure-bench-taxonomy-v1.json
+cargo run --bin secure-bench -- taxonomy inspect taxonomy/secure-bench-taxonomy-v1.json
+```
+
+See [Frozen neutral taxonomy v1](docs/neutral-taxonomy-v1.md). The existing Phase 0 and Phase 1 evaluators remain unchanged in behavior, and the committed Phase 1 baseline is neither recalculated nor retrospectively remapped.
+
 ## Preserved Phase 0 commands
 
 The original option-based forms remain supported and continue to evaluate only committed recorded reports:
@@ -83,7 +95,7 @@ cargo audit --deny warnings
 cargo deny check
 ```
 
-See [Architecture](docs/architecture.md), [Methodology](docs/methodology.md), [Contracts](docs/contracts.md), [Corpus provenance](docs/phase-1-corpus.md), [Runner boundaries](docs/phase-1-runner.md), and [Verification](docs/verification.md).
+See [Architecture](docs/architecture.md), [Methodology](docs/methodology.md), [Contracts](docs/contracts.md), [Frozen taxonomy](docs/neutral-taxonomy-v1.md), [Corpus provenance](docs/phase-1-corpus.md), [Runner boundaries](docs/phase-1-runner.md), and [Verification](docs/verification.md).
 
 ## License
 

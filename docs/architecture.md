@@ -1,4 +1,4 @@
-# Secure Bench Phase 0–1 Architecture
+# Secure Bench Phase 0–1.5 Architecture
 
 ## Purpose and boundary
 
@@ -80,3 +80,9 @@ The runner accepts only an explicit regular-file binary, invokes it without a sh
 The suite, labels, and expectations remain outside the temporary scan directory. The live adapter receives only report bytes, report fingerprint, neutral case scope, and a path prefix. It cannot inspect expectations or award credit. Every successful raw report follows the same normalized model and matcher used by recorded input.
 
 Phase 1 does not claim the kernel-enforced network and read-only filesystem sandboxing planned for Phase 3. Its declared network-disabled policy, cleared environment, copied temporary project, direct invocation, time/output bounds, observed memory termination, and process cleanup are documented precisely in [Phase 1 runner boundaries](phase-1-runner.md).
+
+## Phase 1.5 prospective taxonomy boundary
+
+Phase 1.5 adds a frozen, typed taxonomy document and an independent prospective matcher API. Native JSON and SARIF adapters may preserve canonical version/category/invariant metadata, but cannot create it, translate scanner rule IDs, compare prose, or consult expectations. Resolution is explicit before source, sink, and evidence constraints are evaluated.
+
+The Phase 0 and Phase 1 pipeline entry points do not invoke this API. This separation prevents a newly published taxonomy from changing the bytes or interpretation of the retained Phase 1 baseline. See [Frozen neutral taxonomy v1](neutral-taxonomy-v1.md).

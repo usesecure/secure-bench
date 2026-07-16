@@ -1,4 +1,4 @@
-# Secure Bench Phase 0–1 Methodology
+# Secure Bench Phase 0–1.5 Methodology
 
 ## Neutrality statement
 
@@ -67,3 +67,11 @@ Eligibility, labels, constraints, evidence requirements, and resource budgets ar
 Fourteen synthetic cases cannot support public rankings, confidence intervals, broad framework coverage, production quality claims, or cross-tool conclusions. A single Secure Engine baseline is sensitive to the exact binary, configuration, host, and public CLI behavior. Timing and observed memory are descriptive measurements, not comparative performance claims.
 
 Phase 1 does not claim kernel-enforced network isolation, a read-only mount sandbox, descendant-inclusive memory accounting, or hard filesystem quotas. The child environment is cleared, cases are copied to temporary workspaces, direct-process memory is sampled, time and accepted report sizes are bounded, and process groups are cleaned. Stronger execution isolation remains later roadmap work.
+
+## Phase 1.5 prospective taxonomy methodology
+
+Taxonomy `1.0.0` freezes seven namespaced category/invariant pairs before any future report is eligible for taxonomy-aware evaluation. The design uses public security invariants and official MITRE CWE definitions; scanner output, rule registries, private implementations, and the retained Phase 1 findings were excluded from taxonomy design.
+
+Prospective matching requires an exact taxonomy version, category ID, invariant ID, source constraint, sink constraint, and evidence-path constraint. Display prose, CWE associations, native rule IDs, severity, confidence, fingerprints, and tool identity cannot grant credit. Missing, incomplete, version-mismatched, unknown, and conflicting coordinates remain explicitly unmapped rather than guessed.
+
+The contract is not applied retrospectively. The Phase 1 baseline remains byte-identical and retains its original exact-match outcome. Taxonomy publication therefore cannot be used to relabel an existing measurement, add post-execution aliases, or claim that any analyzer was treated more favorably.

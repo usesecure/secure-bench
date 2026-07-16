@@ -5,6 +5,7 @@ use crate::model::{
     SUITE_SCHEMA_V1, SUITE_SCHEMA_V2,
 };
 use crate::runner::LiveRun;
+use crate::taxonomy::FrozenTaxonomy;
 use serde_json::Value;
 use thiserror::Error;
 
@@ -14,6 +15,7 @@ const RUN_SCHEMA: &str = include_str!("../../../schemas/run-v1.schema.json");
 const LIVE_RUN_SCHEMA: &str = include_str!("../../../schemas/live-run-v1.schema.json");
 const RESULT_SCHEMA: &str = include_str!("../../../schemas/result-v1.schema.json");
 const RESULT_SCHEMA_V2_JSON: &str = include_str!("../../../schemas/result-v2.schema.json");
+const TAXONOMY_SCHEMA: &str = include_str!("../../../schemas/taxonomy-v1.schema.json");
 
 /// Schema loading or validation failure.
 #[derive(Clone, Debug, Eq, Error, PartialEq)]
@@ -100,6 +102,15 @@ pub fn validate_result(result: &BenchmarkResult) -> Result<(), SchemaError> {
     validate_typed("result", schema, result)
 }
 
+/// Validates the JSON projection of the frozen neutral taxonomy.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] for invalid committed schemas, projections, or instances.
+pub fn validate_taxonomy(taxonomy: &FrozenTaxonomy) -> Result<(), SchemaError> {
+    validate_typed("taxonomy", TAXONOMY_SCHEMA, taxonomy)
+}
+
 fn validate_typed<T: serde::Serialize>(
     contract: &'static str,
     schema_text: &str,
@@ -141,6 +152,7 @@ mod tests {
             ("live run", LIVE_RUN_SCHEMA),
             ("result", RESULT_SCHEMA),
             ("result v2", RESULT_SCHEMA_V2_JSON),
+            ("taxonomy", TAXONOMY_SCHEMA),
         ] {
             let value: Value = serde_json::from_str(schema)?;
             jsonschema::validator_for(&value)

@@ -1,8 +1,8 @@
 //! Strict, scoring-blind adapters for committed mock reports.
 
 use crate::model::{
-    Confidence, EvidenceHop, FindingProvenance, NormalizedFinding, ReportFormat, Severity,
-    SourceLocation,
+    Confidence, EvidenceHop, FindingProvenance, NormalizedFinding, ReportFormat,
+    ReportedTaxonomyMetadata, Severity, SourceLocation,
 };
 use serde::Deserialize;
 use sha2::{Digest, Sha256};
@@ -158,6 +158,7 @@ impl Adapter for SecureJsonAdapter {
                 let mut parts = FindingParts {
                     case_id,
                     native_rule_id: finding.rule_id,
+                    taxonomy: finding.taxonomy,
                     category: finding.category,
                     invariant: finding.invariant,
                     severity: finding.severity,
@@ -233,6 +234,8 @@ struct NativeFinding {
     #[serde(default)]
     case_id: Option<String>,
     rule_id: String,
+    #[serde(default)]
+    taxonomy: Option<ReportedTaxonomyMetadata>,
     category: String,
     invariant: String,
     severity: Severity,
@@ -304,6 +307,8 @@ struct SarifResult {
 struct SarifProperties {
     #[serde(default)]
     case_id: Option<String>,
+    #[serde(default)]
+    taxonomy: Option<ReportedTaxonomyMetadata>,
     category: String,
     invariant: String,
     #[serde(default)]
@@ -441,6 +446,7 @@ fn normalize_sarif_result(
     let mut parts = FindingParts {
         case_id: scoped_case_id(result.properties.case_id.as_deref(), scoped_case)?,
         native_rule_id: result.rule_id,
+        taxonomy: result.properties.taxonomy,
         category: result.properties.category,
         invariant: result.properties.invariant,
         severity,
@@ -478,6 +484,7 @@ fn apply_path_prefix(finding: &mut FindingParts, prefix: Option<&str>) {
 struct FindingParts {
     case_id: String,
     native_rule_id: String,
+    taxonomy: Option<ReportedTaxonomyMetadata>,
     category: String,
     invariant: String,
     severity: Severity,
@@ -510,6 +517,22 @@ fn build_finding(
     hasher.update([0]);
     hasher.update(parts.invariant.as_bytes());
     hasher.update([0]);
+    if let Some(taxonomy) = &parts.taxonomy {
+        hasher.update([1]);
+        for value in [
+            taxonomy.taxonomy_version.as_deref(),
+            taxonomy.category_id.as_deref(),
+            taxonomy.invariant_id.as_deref(),
+        ] {
+            if let Some(value) = value {
+                hasher.update([1]);
+                hasher.update(u64::try_from(value.len()).unwrap_or(u64::MAX).to_be_bytes());
+                hasher.update(value.as_bytes());
+            } else {
+                hasher.update([0]);
+            }
+        }
+    }
     hasher.update(parts.source.path.as_bytes());
     hasher.update(parts.source.line.to_be_bytes());
     hasher.update(parts.sink.path.as_bytes());
@@ -526,6 +549,7 @@ fn build_finding(
         finding_id,
         case_id: parts.case_id,
         native_rule_id: sanitized_rule_id(&parts.native_rule_id),
+        taxonomy: parts.taxonomy,
         category: parts.category,
         invariant: parts.invariant,
         severity: parts.severity,

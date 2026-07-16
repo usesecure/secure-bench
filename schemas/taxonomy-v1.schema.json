@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/secure-bench/schemas/taxonomy-v1.schema.json",
+  "title": "Secure Bench Frozen Neutral Security Taxonomy v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "taxonomy_version",
+    "publication_date",
+    "source_version",
+    "source_urls",
+    "content_hash",
+    "categories"
+  ],
+  "properties": {
+    "schema_version": { "const": "secure-bench-taxonomy-v1" },
+    "taxonomy_version": { "const": "1.0.0" },
+    "publication_date": { "const": "2026-07-16" },
+    "source_version": { "const": "CWE 4.20" },
+    "source_urls": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 64,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^https://cwe\\.mitre\\.org/data/definitions/[1-9][0-9]*\\.html$"
+      }
+    },
+    "content_hash": { "$ref": "#/$defs/sha256" },
+    "categories": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": { "$ref": "#/$defs/category" }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "neutralCategoryId": {
+      "type": "string",
+      "pattern": "^secure-bench\\.category\\.[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "neutralInvariantId": {
+      "type": "string",
+      "pattern": "^secure-bench\\.invariant\\.[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "cwe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "url"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^CWE-[1-9][0-9]*$" },
+        "url": {
+          "type": "string",
+          "pattern": "^https://cwe\\.mitre\\.org/data/definitions/[1-9][0-9]*\\.html$"
+        }
+      }
+    },
+    "category": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "category_id",
+        "invariant_id",
+        "primary_cwe",
+        "secondary_references",
+        "title",
+        "description"
+      ],
+      "properties": {
+        "category_id": { "$ref": "#/$defs/neutralCategoryId" },
+        "invariant_id": { "$ref": "#/$defs/neutralInvariantId" },
+        "primary_cwe": { "$ref": "#/$defs/cwe" },
+        "secondary_references": {
+          "type": "array",
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/cwe" }
+        },
+        "title": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "description": { "type": "string", "minLength": 1, "maxLength": 1000 }
+      }
+    }
+  }
+}
