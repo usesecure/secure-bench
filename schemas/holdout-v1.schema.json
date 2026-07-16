@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/secure-bench/schemas/holdout-v1.schema.json",
+  "title": "Secure Bench Frozen Holdout v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "holdout_id",
+    "title",
+    "description",
+    "methodology_version",
+    "frozen_at_utc",
+    "taxonomy",
+    "design_sources",
+    "commitment",
+    "scoring",
+    "protocol",
+    "creation",
+    "provenance",
+    "pairs"
+  ],
+  "properties": {
+    "schema_version": { "const": "secure-bench-holdout-v1" },
+    "holdout_id": { "const": "phase-3-expanded-frozen-holdout" },
+    "title": { "type": "string", "minLength": 1 },
+    "description": { "type": "string", "minLength": 1 },
+    "methodology_version": { "const": "phase-3.0" },
+    "frozen_at_utc": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$" },
+    "taxonomy": { "$ref": "#/$defs/taxonomyBinding" },
+    "design_sources": {
+      "type": "array",
+      "minItems": 10,
+      "uniqueItems": true,
+      "items": { "type": "string", "format": "uri", "pattern": "^https://" }
+    },
+    "commitment": { "$ref": "#/$defs/commitment" },
+    "scoring": { "$ref": "#/$defs/scoring" },
+    "protocol": { "$ref": "#/$defs/protocol" },
+    "creation": { "$ref": "#/$defs/creation" },
+    "provenance": { "$ref": "#/$defs/provenance" },
+    "pairs": {
+      "type": "array",
+      "minItems": 28,
+      "maxItems": 28,
+      "items": { "$ref": "#/$defs/pair" }
+    }
+  },
+  "$defs": {
+    "identifier": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[:%\\\\]).+$"
+    },
+    "taxonomyBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "taxonomy_version", "artifact_sha256", "content_hash"],
+      "properties": {
+        "schema_version": { "const": "secure-bench-taxonomy-v1" },
+        "taxonomy_version": { "const": "1.0.0" },
+        "artifact_sha256": { "$ref": "#/$defs/sha256" },
+        "content_hash": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "commitment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pair_count",
+        "case_count",
+        "vulnerable_count",
+        "safe_control_count",
+        "aggregate_corpus_sha256",
+        "contract_merkle_root"
+      ],
+      "properties": {
+        "pair_count": { "const": 28 },
+        "case_count": { "const": 56 },
+        "vulnerable_count": { "const": 28 },
+        "safe_control_count": { "const": 28 },
+        "aggregate_corpus_sha256": { "$ref": "#/$defs/sha256" },
+        "contract_merkle_root": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "scoring": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "exact_requires",
+        "partial_detection_credit",
+        "one_to_one_matching",
+        "duplicate_detection_credit",
+        "failed_cases_are_clean",
+        "safe_controls_scored_separately",
+        "composite_score"
+      ],
+      "properties": {
+        "exact_requires": {
+          "const": ["taxonomy_version", "category", "invariant", "primary_cwe", "source", "sink", "evidence_path"]
+        },
+        "partial_detection_credit": { "const": false },
+        "one_to_one_matching": { "const": true },
+        "duplicate_detection_credit": { "const": false },
+        "failed_cases_are_clean": { "const": false },
+        "safe_controls_scored_separately": { "const": true },
+        "composite_score": { "const": false }
+      }
+    },
+    "protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["one_shot", "ledger_path", "result_path_template", "result_write_mode", "network", "evaluation_state"],
+      "properties": {
+        "one_shot": { "const": true },
+        "ledger_path": { "const": "holdout/phase-3/execution-ledger.jsonl" },
+        "result_path_template": { "const": "holdout/phase-3/results/{commitment_root}/{run_id}.json" },
+        "result_write_mode": { "const": "create-new" },
+        "network": { "const": "disabled" },
+        "evaluation_state": { "const": "sealed-not-executed" }
+      }
+    },
+    "creation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scanner_executions", "scanner_reports_consulted", "scanner_specific_inputs", "answers_scanner_visible"],
+      "properties": {
+        "scanner_executions": { "const": 0 },
+        "scanner_reports_consulted": { "const": false },
+        "scanner_specific_inputs": { "const": false },
+        "answers_scanner_visible": { "const": false }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["origin", "license", "revision", "modifications", "authors"],
+      "properties": {
+        "origin": { "type": "string", "minLength": 1 },
+        "license": { "const": "Apache-2.0" },
+        "revision": { "const": "phase-3" },
+        "modifications": { "type": "string", "minLength": 1 },
+        "authors": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "pair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pair_id", "language", "framework", "variation", "taxonomy", "primary_cwe", "rationale", "mutation", "vulnerable", "control"],
+      "properties": {
+        "pair_id": { "$ref": "#/$defs/identifier" },
+        "language": { "enum": ["java_script", "jsx", "type_script", "tsx"] },
+        "framework": { "enum": ["node_js", "express", "next_app_router", "next_server_actions"] },
+        "variation": { "enum": ["direct", "helper_mediated", "inter_file_aliased", "control_flow_sensitive"] },
+        "taxonomy": { "$ref": "#/$defs/taxonomyCoordinates" },
+        "primary_cwe": { "type": "string", "pattern": "^CWE-[1-9][0-9]*$" },
+        "rationale": { "type": "string", "minLength": 1 },
+        "mutation": { "$ref": "#/$defs/mutation" },
+        "vulnerable": { "$ref": "#/$defs/vulnerableCase" },
+        "control": { "$ref": "#/$defs/controlCase" }
+      }
+    },
+    "taxonomyCoordinates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["taxonomy_version", "category_id", "invariant_id"],
+      "properties": {
+        "taxonomy_version": { "const": "1.0.0" },
+        "category_id": { "type": "string", "pattern": "^secure-bench\\.category\\.[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "invariant_id": { "type": "string", "pattern": "^secure-bench\\.invariant\\.[a-z0-9]+(?:-[a-z0-9]+)*$" }
+      }
+    },
+    "caseBase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_id", "kind", "fixture_path", "fixture_sha256", "contract_sha256", "expected", "security_property", "provenance"],
+      "properties": {
+        "case_id": { "$ref": "#/$defs/identifier" },
+        "kind": { "enum": ["vulnerable", "safe_control"] },
+        "fixture_path": { "$ref": "#/$defs/relativePath" },
+        "fixture_sha256": { "$ref": "#/$defs/sha256" },
+        "contract_sha256": { "$ref": "#/$defs/sha256" },
+        "expected": { "oneOf": [{ "$ref": "#/$defs/expectation" }, { "type": "null" }] },
+        "security_property": { "type": ["string", "null"], "minLength": 1 },
+        "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "vulnerableCase": {
+      "allOf": [
+        { "$ref": "#/$defs/caseBase" },
+        { "properties": { "kind": { "const": "vulnerable" }, "expected": { "$ref": "#/$defs/expectation" }, "security_property": { "type": "null" } } }
+      ]
+    },
+    "controlCase": {
+      "allOf": [
+        { "$ref": "#/$defs/caseBase" },
+        { "properties": { "kind": { "const": "safe_control" }, "expected": { "type": "null" }, "security_property": { "type": "string", "minLength": 1 } } }
+      ]
+    },
+    "expectation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["expectation_id", "source", "sink", "evidence", "rationale"],
+      "properties": {
+        "expectation_id": { "$ref": "#/$defs/identifier" },
+        "source": { "$ref": "#/$defs/location" },
+        "sink": { "$ref": "#/$defs/location" },
+        "evidence": { "$ref": "#/$defs/evidence" },
+        "rationale": { "type": "string", "minLength": 1 }
+      }
+    },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "line", "alternatives"],
+      "properties": {
+        "path": { "$ref": "#/$defs/relativePath" },
+        "line": { "type": "integer", "minimum": 1 },
+        "alternatives": { "type": "array", "maxItems": 0 }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimum_hops", "required_kinds"],
+      "properties": {
+        "minimum_hops": { "type": "integer", "minimum": 2 },
+        "required_kinds": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "enum": ["source", "propagation", "branch", "guard", "sink"] }
+        }
+      }
+    },
+    "mutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "vulnerable_lines", "control_lines", "vulnerable_fragment_sha256", "control_fragment_sha256", "guard_property"],
+      "properties": {
+        "file": { "$ref": "#/$defs/relativePath" },
+        "vulnerable_lines": { "$ref": "#/$defs/lineRange" },
+        "control_lines": { "$ref": "#/$defs/lineRange" },
+        "vulnerable_fragment_sha256": { "$ref": "#/$defs/sha256" },
+        "control_fragment_sha256": { "$ref": "#/$defs/sha256" },
+        "guard_property": { "type": "string", "minLength": 1 }
+      }
+    },
+    "lineRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end"],
+      "properties": {
+        "start": { "type": "integer", "minimum": 1 },
+        "end": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}

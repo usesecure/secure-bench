@@ -1,0 +1,2424 @@
+{
+  "schema_version": "secure-bench-holdout-v1",
+  "holdout_id": "phase-3-expanded-frozen-holdout",
+  "title": "Secure Bench Phase 3 Expanded Frozen Holdout Corpus",
+  "description": "Scanner-neutral, precommitted examination material for a future one-shot evaluation. It is not a production benchmark, scanner comparison, ranking, or superiority claim.",
+  "methodology_version": "phase-3.0",
+  "frozen_at_utc": "2026-07-16T12:00:00Z",
+  "taxonomy": {
+    "schema_version": "secure-bench-taxonomy-v1",
+    "taxonomy_version": "1.0.0",
+    "artifact_sha256": "059fe22d7707cf8d17f2c1621fdae9819787a1958ba2ef0421eca4e4ec858452",
+    "content_hash": "22852bd7401020b315af11dfa2b60c0b46f78eb19f95079e6400d7b3bea3272c"
+  },
+  "design_sources": [
+    "https://cwe.mitre.org/data/definitions/22.html",
+    "https://cwe.mitre.org/data/definitions/601.html",
+    "https://cwe.mitre.org/data/definitions/78.html",
+    "https://cwe.mitre.org/data/definitions/862.html",
+    "https://cwe.mitre.org/data/definitions/89.html",
+    "https://cwe.mitre.org/data/definitions/918.html",
+    "https://cwe.mitre.org/data/definitions/95.html",
+    "https://expressjs.com/en/5x/api.html",
+    "https://nextjs.org/docs/app/api-reference/directives/use-server",
+    "https://nextjs.org/docs/app/building-your-application/routing/route-handlers",
+    "https://nodejs.org/api/child_process.html",
+    "https://nodejs.org/api/fs.html",
+    "https://nodejs.org/api/vm.html"
+  ],
+  "commitment": {
+    "pair_count": 28,
+    "case_count": 56,
+    "vulnerable_count": 28,
+    "safe_control_count": 28,
+    "aggregate_corpus_sha256": "28f4599c9711465a7cbbfe0ebc356e017a3bb6145bc77d57577b3b5d31790844",
+    "contract_merkle_root": "fcfbe4f8d5dc0fc871ce55c1eac3e3d2618bcc76261bfa16bd4b1f98833c96e5"
+  },
+  "scoring": {
+    "exact_requires": [
+      "taxonomy_version",
+      "category",
+      "invariant",
+      "primary_cwe",
+      "source",
+      "sink",
+      "evidence_path"
+    ],
+    "partial_detection_credit": false,
+    "one_to_one_matching": true,
+    "duplicate_detection_credit": false,
+    "failed_cases_are_clean": false,
+    "safe_controls_scored_separately": true,
+    "composite_score": false
+  },
+  "protocol": {
+    "one_shot": true,
+    "ledger_path": "holdout/phase-3/execution-ledger.jsonl",
+    "result_path_template": "holdout/phase-3/results/{commitment_root}/{run_id}.json",
+    "result_write_mode": "create-new",
+    "network": "disabled",
+    "evaluation_state": "sealed-not-executed"
+  },
+  "creation": {
+    "scanner_executions": 0,
+    "scanner_reports_consulted": false,
+    "scanner_specific_inputs": false,
+    "answers_scanner_visible": false
+  },
+  "provenance": {
+    "origin": "Secure Bench original work",
+    "license": "Apache-2.0",
+    "revision": "phase-3",
+    "modifications": "Original Phase 3 suite material derived only from public platform contracts.",
+    "authors": [
+      "Secure Bench maintainers"
+    ]
+  },
+  "pairs": [
+    {
+      "pair_id": "exam-pair-01",
+      "language": "java_script",
+      "framework": "node_js",
+      "variation": "direct",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.authorization-dominance",
+        "invariant_id": "secure-bench.invariant.authorization-before-sensitive-operation"
+      },
+      "primary_cwe": "CWE-862",
+      "rationale": "The sensitive operation is reachable without an authorization decision covering the principal, action, and resource.",
+      "mutation": {
+        "file": "src/relay.js",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 4
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 6
+        },
+        "vulnerable_fragment_sha256": "71c76d39f9e683184cf59e3286e7c3fd083f51bc84bc4f9d1d7486c2728e738e",
+        "control_fragment_sha256": "79665f995ccbef7c4ad830213638461f65627ad9365cacd89241e67d0e030003",
+        "guard_property": "A verified principal with the required resource scope dominates the sensitive operation."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-01-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-01-a",
+        "fixture_sha256": "ef2995629b7fd12d648e0ccae5913af6b2fb135efeca14b2329a6297188893c0",
+        "contract_sha256": "ccf6fd46cd5f014d885c6ec7f34e58b157035732221508a6f30d32eb8766eb74",
+        "expected": {
+          "expectation_id": "exam-observation-01",
+          "source": {
+            "path": "src/relay.js",
+            "line": 3,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "src/relay.js",
+            "line": 4,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 2,
+            "required_kinds": [
+              "source",
+              "sink"
+            ]
+          },
+          "rationale": "The sensitive operation is reachable without an authorization decision covering the principal, action, and resource."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-01-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-01-b",
+        "fixture_sha256": "2c3d8cea8bb0d5868d4ab3e71928db2dc07a1116ae43d05ad797ad6308f46f9e",
+        "contract_sha256": "bd20718060e078ee752ac25e1863e45158e8ffedcd549019a1b7b1021bccef3b",
+        "expected": null,
+        "security_property": "A verified principal with the required resource scope dominates the sensitive operation.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-02",
+      "language": "jsx",
+      "framework": "express",
+      "variation": "helper_mediated",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.authorization-dominance",
+        "invariant_id": "secure-bench.invariant.authorization-before-sensitive-operation"
+      },
+      "primary_cwe": "CWE-862",
+      "rationale": "The sensitive operation is reachable without an authorization decision covering the principal, action, and resource.",
+      "mutation": {
+        "file": "src/gateway.jsx",
+        "vulnerable_lines": {
+          "start": 3,
+          "end": 3
+        },
+        "control_lines": {
+          "start": 3,
+          "end": 5
+        },
+        "vulnerable_fragment_sha256": "d383c2ca8443154345cfc7c5eda387cb0dd37df1e69c5b270aab717b008fd7bf",
+        "control_fragment_sha256": "f2109d776e4b2308085214fb38927299aeda6b59ece494e6cc0d2a565d2ab272",
+        "guard_property": "A verified principal with the required resource scope dominates the sensitive operation."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-02-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-02-a",
+        "fixture_sha256": "70e3d19cb5ecc21f1f312b968ca0306c97e0a88bcb90de25812fa0e283b8bdaa",
+        "contract_sha256": "8b3bcf38f4b410cbf7231bb15b02cf4923587170b5c069f0db958073f625941c",
+        "expected": {
+          "expectation_id": "exam-observation-02",
+          "source": {
+            "path": "src/gateway.jsx",
+            "line": 6,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "src/gateway.jsx",
+            "line": 3,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "propagation",
+              "sink"
+            ]
+          },
+          "rationale": "The sensitive operation is reachable without an authorization decision covering the principal, action, and resource."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-02-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-02-b",
+        "fixture_sha256": "b0a045afdab6e5b58db6cc855532de20a5d307462b49563234c4db052313e6bc",
+        "contract_sha256": "5ea6ef0c014c4d997eb693fc8e7d7ac1d04bdd09113fc33a8d5a570f082abf1f",
+        "expected": null,
+        "security_property": "A verified principal with the required resource scope dominates the sensitive operation.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-03",
+      "language": "type_script",
+      "framework": "next_app_router",
+      "variation": "inter_file_aliased",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.authorization-dominance",
+        "invariant_id": "secure-bench.invariant.authorization-before-sensitive-operation"
+      },
+      "primary_cwe": "CWE-862",
+      "rationale": "The sensitive operation is reachable without an authorization decision covering the principal, action, and resource.",
+      "mutation": {
+        "file": "app/api/channel/service.ts",
+        "vulnerable_lines": {
+          "start": 3,
+          "end": 3
+        },
+        "control_lines": {
+          "start": 3,
+          "end": 5
+        },
+        "vulnerable_fragment_sha256": "05d49820be70f360d04af8fa53af19434c79a679cf117b9fb6c782f5b38b8767",
+        "control_fragment_sha256": "9f86715a5f63d346e9075e029d5af6d2c16e36d7e21c8ab9a448252ada64adf5",
+        "guard_property": "A verified principal with the required resource scope dominates the sensitive operation."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-03-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-03-a",
+        "fixture_sha256": "47558995bbb9621c9070710e09eddb8f7b1453297fd0fa7bbb41f0f3b04424d3",
+        "contract_sha256": "f3480f3f19194fb0df5b57da92cfc969d235fc765f5611372dfdc0f1985406c7",
+        "expected": {
+          "expectation_id": "exam-observation-03",
+          "source": {
+            "path": "app/api/channel/route.ts",
+            "line": 3,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "app/api/channel/service.ts",
+            "line": 3,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "propagation",
+              "sink"
+            ]
+          },
+          "rationale": "The sensitive operation is reachable without an authorization decision covering the principal, action, and resource."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-03-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-03-b",
+        "fixture_sha256": "0992d701141251819b82e05dacaa76532fa2705323570247f418ff78777711ac",
+        "contract_sha256": "4ac27b38a65a2e66d4e8226ac0f59571dc69afc8a41ec4d3b362a70ea1854a8e",
+        "expected": null,
+        "security_property": "A verified principal with the required resource scope dominates the sensitive operation.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-04",
+      "language": "tsx",
+      "framework": "next_server_actions",
+      "variation": "control_flow_sensitive",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.authorization-dominance",
+        "invariant_id": "secure-bench.invariant.authorization-before-sensitive-operation"
+      },
+      "primary_cwe": "CWE-862",
+      "rationale": "The sensitive operation is reachable without an authorization decision covering the principal, action, and resource.",
+      "mutation": {
+        "file": "app/workcell/operation.ts",
+        "vulnerable_lines": {
+          "start": 6,
+          "end": 6
+        },
+        "control_lines": {
+          "start": 6,
+          "end": 8
+        },
+        "vulnerable_fragment_sha256": "d8fa72b33d542711cce94aa01fb0babadfed1f6571f51a9797a32930b53be640",
+        "control_fragment_sha256": "c07e7ea49a81afe36f84fe77dbcf976d4a7af71bcd410a9da7c19744f8879911",
+        "guard_property": "A verified principal with the required resource scope dominates the sensitive operation."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-04-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-04-a",
+        "fixture_sha256": "7e3e962d9afd4b6b494502e74613922e6a08cbe0c761416fb44ba985c973947f",
+        "contract_sha256": "44b7a4a23d5923e96952c662264e16af7af22ff552396b4e98a823701f0388b6",
+        "expected": {
+          "expectation_id": "exam-observation-04",
+          "source": {
+            "path": "app/workcell/operation.ts",
+            "line": 4,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "app/workcell/operation.ts",
+            "line": 6,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "branch",
+              "sink"
+            ]
+          },
+          "rationale": "The sensitive operation is reachable without an authorization decision covering the principal, action, and resource."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-04-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-04-b",
+        "fixture_sha256": "870a64b87e30886f7b7ad1ae7aa6c771e63c340e859d5112ae7158215af6b455",
+        "contract_sha256": "97eb1f6512b2d118e3cf49efd65ac46d4459e67e5cf4c31563b322ab75fb3cb6",
+        "expected": null,
+        "security_property": "A verified principal with the required resource scope dominates the sensitive operation.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-05",
+      "language": "java_script",
+      "framework": "node_js",
+      "variation": "direct",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.command-execution",
+        "invariant_id": "secure-bench.invariant.command-control-data-separation"
+      },
+      "primary_cwe": "CWE-78",
+      "rationale": "Externally influenced text becomes part of the operating-system command structure.",
+      "mutation": {
+        "file": "src/relay.js",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 4
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 4
+        },
+        "vulnerable_fragment_sha256": "a348e3abaf663fe8edd5612e86c09f92405b48117f1a7683cdb3b607e1874812",
+        "control_fragment_sha256": "a5b9fee2239096495195812619e76af87c1cff6ee9288a3e8b2415d5fc45eeb0",
+        "guard_property": "The executable and argument structure are fixed while external input remains a distinct data argument."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-05-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-05-a",
+        "fixture_sha256": "5d6be3c2aa3659c0244b214df0ed00f40b4025645bfc5d9042908c2f40b22ff6",
+        "contract_sha256": "94fb83d254dca3eed02888c73945b4dc32018694043feafcd170f45c7cbe6705",
+        "expected": {
+          "expectation_id": "exam-observation-05",
+          "source": {
+            "path": "src/relay.js",
+            "line": 3,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "src/relay.js",
+            "line": 4,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 2,
+            "required_kinds": [
+              "source",
+              "sink"
+            ]
+          },
+          "rationale": "Externally influenced text becomes part of the operating-system command structure."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-05-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-05-b",
+        "fixture_sha256": "6eb6ae7c404882e96d24b25beedd3e59e3144053b5ea87d59f2e3e6e055f566e",
+        "contract_sha256": "0869332bd5a4648abf60e870257b006d615a6b9454c5893fb43867ca7837a2ec",
+        "expected": null,
+        "security_property": "The executable and argument structure are fixed while external input remains a distinct data argument.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-06",
+      "language": "jsx",
+      "framework": "express",
+      "variation": "helper_mediated",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.command-execution",
+        "invariant_id": "secure-bench.invariant.command-control-data-separation"
+      },
+      "primary_cwe": "CWE-78",
+      "rationale": "Externally influenced text becomes part of the operating-system command structure.",
+      "mutation": {
+        "file": "src/gateway.jsx",
+        "vulnerable_lines": {
+          "start": 3,
+          "end": 3
+        },
+        "control_lines": {
+          "start": 3,
+          "end": 3
+        },
+        "vulnerable_fragment_sha256": "e45aa1fa85a71eca51d89871b217321e41388ff1a08ab244fc6a0d0dd621f6fe",
+        "control_fragment_sha256": "ec357ba05092f50610d07e624763f75455910801756940feab3e4ba0a020784b",
+        "guard_property": "The executable and argument structure are fixed while external input remains a distinct data argument."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-06-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-06-a",
+        "fixture_sha256": "0a12dd032883dc5610dfad9cf25cfd02fb5777c6fe09570525b698dc1d219cc2",
+        "contract_sha256": "b6873aa70d1d8a67cd237df889610da33f6b6d737e5b67f5d791fa24e291a94c",
+        "expected": {
+          "expectation_id": "exam-observation-06",
+          "source": {
+            "path": "src/gateway.jsx",
+            "line": 6,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "src/gateway.jsx",
+            "line": 3,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "propagation",
+              "sink"
+            ]
+          },
+          "rationale": "Externally influenced text becomes part of the operating-system command structure."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-06-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-06-b",
+        "fixture_sha256": "3f09034e4b55eb3230eb68586851f4d4789a5876505ee9dc23a25df9e95f98aa",
+        "contract_sha256": "9b0677ff4d836b8d8c8bb2ca373cdc0983e678e1f02c8c3ee56d666423a591d1",
+        "expected": null,
+        "security_property": "The executable and argument structure are fixed while external input remains a distinct data argument.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-07",
+      "language": "type_script",
+      "framework": "next_app_router",
+      "variation": "inter_file_aliased",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.command-execution",
+        "invariant_id": "secure-bench.invariant.command-control-data-separation"
+      },
+      "primary_cwe": "CWE-78",
+      "rationale": "Externally influenced text becomes part of the operating-system command structure.",
+      "mutation": {
+        "file": "app/api/channel/service.ts",
+        "vulnerable_lines": {
+          "start": 3,
+          "end": 3
+        },
+        "control_lines": {
+          "start": 3,
+          "end": 3
+        },
+        "vulnerable_fragment_sha256": "0de1b7e92c372f9064fac4367754579584f743936efc91889f3bb1abe89a7571",
+        "control_fragment_sha256": "4e5750ca441a12a9b02670a7c3ce97105184b196946d9d87988d62e9b82cb74d",
+        "guard_property": "The executable and argument structure are fixed while external input remains a distinct data argument."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-07-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-07-a",
+        "fixture_sha256": "ec641f90800a7bc682322a8f25e2efcaf1b06f4a2211fc372188612206c29043",
+        "contract_sha256": "82a72d94457a725b00d1c81a757b401a91aee78438c1a8d588f6794a6fac2fcd",
+        "expected": {
+          "expectation_id": "exam-observation-07",
+          "source": {
+            "path": "app/api/channel/route.ts",
+            "line": 3,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "app/api/channel/service.ts",
+            "line": 3,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "propagation",
+              "sink"
+            ]
+          },
+          "rationale": "Externally influenced text becomes part of the operating-system command structure."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-07-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-07-b",
+        "fixture_sha256": "08f28f8337529821e038a648152f857238cf347f014b6bf8fc191c356188bbd3",
+        "contract_sha256": "a69b491ecd02ea7954e4092696e83b2f122e3dc4908e1e79a7470ba401a47a82",
+        "expected": null,
+        "security_property": "The executable and argument structure are fixed while external input remains a distinct data argument.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-08",
+      "language": "tsx",
+      "framework": "next_server_actions",
+      "variation": "control_flow_sensitive",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.command-execution",
+        "invariant_id": "secure-bench.invariant.command-control-data-separation"
+      },
+      "primary_cwe": "CWE-78",
+      "rationale": "Externally influenced text becomes part of the operating-system command structure.",
+      "mutation": {
+        "file": "app/workcell/operation.ts",
+        "vulnerable_lines": {
+          "start": 6,
+          "end": 6
+        },
+        "control_lines": {
+          "start": 6,
+          "end": 6
+        },
+        "vulnerable_fragment_sha256": "32f297cab0f49c58903351dae2728947b9ed8c735563ec41abb05145e4aecf79",
+        "control_fragment_sha256": "72fb29eb1bd80445d12a5f59166e9d393afc29338c3012bc97f2720e44bbe803",
+        "guard_property": "The executable and argument structure are fixed while external input remains a distinct data argument."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-08-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-08-a",
+        "fixture_sha256": "b0182e323b86a61e1541a46fbeef35495eafd2f939a294d4c06a50c72dcd703e",
+        "contract_sha256": "7dc599c851f6b14e83223e6d15b677944aeab72598ce02e5519a3d4b991e6dca",
+        "expected": {
+          "expectation_id": "exam-observation-08",
+          "source": {
+            "path": "app/workcell/operation.ts",
+            "line": 4,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "app/workcell/operation.ts",
+            "line": 6,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "branch",
+              "sink"
+            ]
+          },
+          "rationale": "Externally influenced text becomes part of the operating-system command structure."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-08-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-08-b",
+        "fixture_sha256": "1324e985b3e78ff6476d5f99a07fce730c295f3ee2cea96cd772d8371a879308",
+        "contract_sha256": "fab549f42bd3076b2d5beaaa53bf1d4a3b68f4d466f090118962242b65f8ea99",
+        "expected": null,
+        "security_property": "The executable and argument structure are fixed while external input remains a distinct data argument.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-09",
+      "language": "java_script",
+      "framework": "node_js",
+      "variation": "direct",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.dynamic-code-execution",
+        "invariant_id": "secure-bench.invariant.dynamic-code-control-data-separation"
+      },
+      "primary_cwe": "CWE-95",
+      "rationale": "Externally influenced text is interpreted as executable program structure.",
+      "mutation": {
+        "file": "src/relay.js",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 4
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 5
+        },
+        "vulnerable_fragment_sha256": "ca11f401e5e5388c1acf142d9e8a6ec9783b9596e314ade3431a41ea0c4de33b",
+        "control_fragment_sha256": "bab53255234085c4a7792a884fee2a788a02b701fa8968c28d54f5cff2e6544a",
+        "guard_property": "External input selects only a fixed operation and never becomes executable syntax."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-09-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-09-a",
+        "fixture_sha256": "c05c41d703c2601c3c576cafc547ee772b506e4f381f5cd22dbdf26e63bcbd3c",
+        "contract_sha256": "64a7f2ed8fc7bf7230ed4c51431c69011b9be16c161aefbc2117041cda037344",
+        "expected": {
+          "expectation_id": "exam-observation-09",
+          "source": {
+            "path": "src/relay.js",
+            "line": 3,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "src/relay.js",
+            "line": 4,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 2,
+            "required_kinds": [
+              "source",
+              "sink"
+            ]
+          },
+          "rationale": "Externally influenced text is interpreted as executable program structure."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-09-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-09-b",
+        "fixture_sha256": "c8c627e95f3f0d6581f728a4b6ec2674c1a7020d1e3953c4af214f523dacc36f",
+        "contract_sha256": "e4a3bae049612cfac15eba16e979dc89ac3b853ab11da61532ee5cc5ca74f4b2",
+        "expected": null,
+        "security_property": "External input selects only a fixed operation and never becomes executable syntax.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-10",
+      "language": "jsx",
+      "framework": "express",
+      "variation": "helper_mediated",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.dynamic-code-execution",
+        "invariant_id": "secure-bench.invariant.dynamic-code-control-data-separation"
+      },
+      "primary_cwe": "CWE-95",
+      "rationale": "Externally influenced text is interpreted as executable program structure.",
+      "mutation": {
+        "file": "src/gateway.jsx",
+        "vulnerable_lines": {
+          "start": 3,
+          "end": 3
+        },
+        "control_lines": {
+          "start": 3,
+          "end": 4
+        },
+        "vulnerable_fragment_sha256": "9e55d2f48e752e48a54b96ca694f40e525473d7d7ce53b5bd0c6decb0c54e837",
+        "control_fragment_sha256": "203e76e23957e23459c5b7a4b03915cd1075be5bd5c9a38de453e0f37c0e0041",
+        "guard_property": "External input selects only a fixed operation and never becomes executable syntax."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-10-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-10-a",
+        "fixture_sha256": "0c5ccbbc2ac28ff23bbdcfa30603c627d6ac9ea053b27f8c0cfa13d4fa22f5ac",
+        "contract_sha256": "41a076c28c16b8660269eee476a88c0ac8824c8cdd6480434abf6d436285c52f",
+        "expected": {
+          "expectation_id": "exam-observation-10",
+          "source": {
+            "path": "src/gateway.jsx",
+            "line": 6,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "src/gateway.jsx",
+            "line": 3,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "propagation",
+              "sink"
+            ]
+          },
+          "rationale": "Externally influenced text is interpreted as executable program structure."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-10-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-10-b",
+        "fixture_sha256": "94631497d88e0f7f2d8e017c809e34f1558e8e42a617c269c929eeb5a1112f90",
+        "contract_sha256": "35168eb172c45dc5a500958592308841c22af6ee1dfd69b2228b2e596d58dd9e",
+        "expected": null,
+        "security_property": "External input selects only a fixed operation and never becomes executable syntax.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-11",
+      "language": "type_script",
+      "framework": "next_app_router",
+      "variation": "inter_file_aliased",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.dynamic-code-execution",
+        "invariant_id": "secure-bench.invariant.dynamic-code-control-data-separation"
+      },
+      "primary_cwe": "CWE-95",
+      "rationale": "Externally influenced text is interpreted as executable program structure.",
+      "mutation": {
+        "file": "app/api/channel/service.ts",
+        "vulnerable_lines": {
+          "start": 3,
+          "end": 3
+        },
+        "control_lines": {
+          "start": 3,
+          "end": 4
+        },
+        "vulnerable_fragment_sha256": "ed9da2b20b6599aab64ed26e942aa66aaf9b4a54b710f0a8379e814aec454a26",
+        "control_fragment_sha256": "29175b386b2702fb867bb415e268561ff35f904b6ac03a85c51bb96118551bd1",
+        "guard_property": "External input selects only a fixed operation and never becomes executable syntax."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-11-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-11-a",
+        "fixture_sha256": "ca37cae21e64dc54dd8bcaca4b310738979deac5f5e3aee3a61ea81f73c8013f",
+        "contract_sha256": "0ab473a42bfd6c888fbe340287a8c09958e85d5b8e168144f84363d35d881572",
+        "expected": {
+          "expectation_id": "exam-observation-11",
+          "source": {
+            "path": "app/api/channel/route.ts",
+            "line": 3,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "app/api/channel/service.ts",
+            "line": 3,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "propagation",
+              "sink"
+            ]
+          },
+          "rationale": "Externally influenced text is interpreted as executable program structure."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-11-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-11-b",
+        "fixture_sha256": "a4b53e02b478f9652c986de904ea87bebdd733287cf12fb074aa947a9230cf71",
+        "contract_sha256": "f51acadf0a46bb779f37b868817790ef24adb0490819f2042f108104d46758dd",
+        "expected": null,
+        "security_property": "External input selects only a fixed operation and never becomes executable syntax.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-12",
+      "language": "tsx",
+      "framework": "next_server_actions",
+      "variation": "control_flow_sensitive",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.dynamic-code-execution",
+        "invariant_id": "secure-bench.invariant.dynamic-code-control-data-separation"
+      },
+      "primary_cwe": "CWE-95",
+      "rationale": "Externally influenced text is interpreted as executable program structure.",
+      "mutation": {
+        "file": "app/workcell/operation.ts",
+        "vulnerable_lines": {
+          "start": 6,
+          "end": 6
+        },
+        "control_lines": {
+          "start": 6,
+          "end": 7
+        },
+        "vulnerable_fragment_sha256": "2f4e6065a91fc124b091e7ffb0530b0df11b320b08d4a52f6e5cd4142a269a32",
+        "control_fragment_sha256": "c1a0413c3568a6db5f80be5f9bb158c74e7550bc8977116cef4a1db34ca552bf",
+        "guard_property": "External input selects only a fixed operation and never becomes executable syntax."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-12-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-12-a",
+        "fixture_sha256": "c40feffb92ad47b7d8e1920ea790a0fd9bf242822819841db8340a364ff93681",
+        "contract_sha256": "fccc2e9f27cc37d7d2285e3dc375dde163c80905352f53c28a015f4b5487c76c",
+        "expected": {
+          "expectation_id": "exam-observation-12",
+          "source": {
+            "path": "app/workcell/operation.ts",
+            "line": 4,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "app/workcell/operation.ts",
+            "line": 6,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "branch",
+              "sink"
+            ]
+          },
+          "rationale": "Externally influenced text is interpreted as executable program structure."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-12-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-12-b",
+        "fixture_sha256": "a1ddc24706452a1529302139db54bd42034b52305883b21f44eec95c8d96b65e",
+        "contract_sha256": "e8a380fd4619f198480ef7ce4ca003cde44b09f424e1f87fc7fb4cac953429dd",
+        "expected": null,
+        "security_property": "External input selects only a fixed operation and never becomes executable syntax.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-13",
+      "language": "java_script",
+      "framework": "node_js",
+      "variation": "direct",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.filesystem-boundary",
+        "invariant_id": "secure-bench.invariant.filesystem-path-confinement"
+      },
+      "primary_cwe": "CWE-22",
+      "rationale": "An external path component reaches a filesystem operation without canonical boundary confinement.",
+      "mutation": {
+        "file": "src/relay.js",
+        "vulnerable_lines": {
+          "start": 5,
+          "end": 5
+        },
+        "control_lines": {
+          "start": 5,
+          "end": 8
+        },
+        "vulnerable_fragment_sha256": "25b17fbc5b2d3d12eaa492439d194a4f9dd8a40d92f4a420b0c251865ddb5098",
+        "control_fragment_sha256": "f449c28cbfbe14f348d2579892434e8bf0ae788ffcd39fff9d7e02e356d9ba10",
+        "guard_property": "Canonical resolution and a boundary-aware prefix check confine the selected path to the intended root."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-13-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-13-a",
+        "fixture_sha256": "99cd5cb4f8b5263f454638c3a8379d51bcf6b5a2f6f63851df7435f6f93f04c4",
+        "contract_sha256": "56972ab1f948be3ac2216127f0cfb078ec521d079fe11bc916a3db2a50e845b8",
+        "expected": {
+          "expectation_id": "exam-observation-13",
+          "source": {
+            "path": "src/relay.js",
+            "line": 4,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "src/relay.js",
+            "line": 5,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 2,
+            "required_kinds": [
+              "source",
+              "sink"
+            ]
+          },
+          "rationale": "An external path component reaches a filesystem operation without canonical boundary confinement."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-13-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-13-b",
+        "fixture_sha256": "361b3df5a5fef8fc04c105c7c967d808eedf261f9f88dee3548d2897ac200293",
+        "contract_sha256": "23790622725a1dbe6ec876990d2561aa43e76cbd7a17d2365c6b038e2e575847",
+        "expected": null,
+        "security_property": "Canonical resolution and a boundary-aware prefix check confine the selected path to the intended root.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-14",
+      "language": "jsx",
+      "framework": "express",
+      "variation": "helper_mediated",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.filesystem-boundary",
+        "invariant_id": "secure-bench.invariant.filesystem-path-confinement"
+      },
+      "primary_cwe": "CWE-22",
+      "rationale": "An external path component reaches a filesystem operation without canonical boundary confinement.",
+      "mutation": {
+        "file": "src/gateway.jsx",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 4
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 7
+        },
+        "vulnerable_fragment_sha256": "c6c343642ec6db4238733b60113844258f9630c04c17175adabc0af27b55be1a",
+        "control_fragment_sha256": "cabb6b9307154ed489d8f605e56744e43b806f49108955b8a266aa98b6aaaa9f",
+        "guard_property": "Canonical resolution and a boundary-aware prefix check confine the selected path to the intended root."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-14-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-14-a",
+        "fixture_sha256": "19802af1cc161a8abd8bb974c749e8f11f127901eabcdc5d49162e2c5f8316db",
+        "contract_sha256": "a631406892d9de14266b1d4e7fc28943440b5df99dcaf2b743d4d78f35416af5",
+        "expected": {
+          "expectation_id": "exam-observation-14",
+          "source": {
+            "path": "src/gateway.jsx",
+            "line": 7,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "src/gateway.jsx",
+            "line": 4,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "propagation",
+              "sink"
+            ]
+          },
+          "rationale": "An external path component reaches a filesystem operation without canonical boundary confinement."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-14-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-14-b",
+        "fixture_sha256": "3e241ee7981bbd010293b3596504e289706d9fc225d499215cd77e8336d1acf9",
+        "contract_sha256": "a9c6c672938673c86e45ba167386a5b1543aded8aab1cdb3cbcf6fbe525c0d70",
+        "expected": null,
+        "security_property": "Canonical resolution and a boundary-aware prefix check confine the selected path to the intended root.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-15",
+      "language": "type_script",
+      "framework": "next_app_router",
+      "variation": "inter_file_aliased",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.filesystem-boundary",
+        "invariant_id": "secure-bench.invariant.filesystem-path-confinement"
+      },
+      "primary_cwe": "CWE-22",
+      "rationale": "An external path component reaches a filesystem operation without canonical boundary confinement.",
+      "mutation": {
+        "file": "app/api/channel/service.ts",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 4
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 7
+        },
+        "vulnerable_fragment_sha256": "575576baee7adeea01bdcb505d0403981f90bce0a18cd56755972d1187a92a27",
+        "control_fragment_sha256": "aa906e0e9cfa9dea90f0d81681888d1eeea559d67e9531dd0c0169cde5e692e6",
+        "guard_property": "Canonical resolution and a boundary-aware prefix check confine the selected path to the intended root."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-15-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-15-a",
+        "fixture_sha256": "551071ba8af22ae62f77b01dfb6f27db92e9edb15ce864bc93f4a452952bc7a1",
+        "contract_sha256": "d386602ae75e1cc6da672217b66455574379dd1128833ce453b2c776dd95d233",
+        "expected": {
+          "expectation_id": "exam-observation-15",
+          "source": {
+            "path": "app/api/channel/route.ts",
+            "line": 3,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "app/api/channel/service.ts",
+            "line": 4,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "propagation",
+              "sink"
+            ]
+          },
+          "rationale": "An external path component reaches a filesystem operation without canonical boundary confinement."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-15-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-15-b",
+        "fixture_sha256": "241589d2886501c8daa440c95f66fcd22cbc6f19d43541c5551894740cd450c5",
+        "contract_sha256": "82bf629875719bbbac223b20f0951b286693662ef78843de6a32313a38651a04",
+        "expected": null,
+        "security_property": "Canonical resolution and a boundary-aware prefix check confine the selected path to the intended root.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-16",
+      "language": "tsx",
+      "framework": "next_server_actions",
+      "variation": "control_flow_sensitive",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.filesystem-boundary",
+        "invariant_id": "secure-bench.invariant.filesystem-path-confinement"
+      },
+      "primary_cwe": "CWE-22",
+      "rationale": "An external path component reaches a filesystem operation without canonical boundary confinement.",
+      "mutation": {
+        "file": "app/workcell/operation.ts",
+        "vulnerable_lines": {
+          "start": 7,
+          "end": 7
+        },
+        "control_lines": {
+          "start": 7,
+          "end": 10
+        },
+        "vulnerable_fragment_sha256": "25632431adaaec03ada7fde908adf614f24be81d41501f1bf8543e22293d7692",
+        "control_fragment_sha256": "3fd8a607593194723295a71b69f85f082950b81a91912f26ea1285c84f6755f7",
+        "guard_property": "Canonical resolution and a boundary-aware prefix check confine the selected path to the intended root."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-16-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-16-a",
+        "fixture_sha256": "2bc00a2c085b4ad9e48ba1a9740e07fc0155a6d45dd7e893c9eb7b168981de5f",
+        "contract_sha256": "303c4641f2e8d0a4f2dc8ba9b850a1c32d99e84c2f6698314f29926baa3ee590",
+        "expected": {
+          "expectation_id": "exam-observation-16",
+          "source": {
+            "path": "app/workcell/operation.ts",
+            "line": 5,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "app/workcell/operation.ts",
+            "line": 7,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "branch",
+              "sink"
+            ]
+          },
+          "rationale": "An external path component reaches a filesystem operation without canonical boundary confinement."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-16-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-16-b",
+        "fixture_sha256": "c21fc85a8ca2aee040ee19430a38616055e6f6b1c1fcb9103fb22f6093dc50fe",
+        "contract_sha256": "fbd0802a250d567a43aedd81c287d4ff01a02af157a36c3823555b3a995e7693",
+        "expected": null,
+        "security_property": "Canonical resolution and a boundary-aware prefix check confine the selected path to the intended root.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-17",
+      "language": "java_script",
+      "framework": "node_js",
+      "variation": "direct",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.outbound-request-boundary",
+        "invariant_id": "secure-bench.invariant.outbound-destination-policy"
+      },
+      "primary_cwe": "CWE-918",
+      "rationale": "External input controls the destination of a server-side outbound request.",
+      "mutation": {
+        "file": "src/relay.js",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 4
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 6
+        },
+        "vulnerable_fragment_sha256": "13ab52d88fdcf2a1a0db56b441d128cfd9f20b84fc1302870eb672bdeaf57b7d",
+        "control_fragment_sha256": "bd52be263bb5a413c463f495179931a9ae8552e0fa5b50a2a66d5ba91710cb88",
+        "guard_property": "A fixed HTTPS hostname policy constrains the complete outbound destination before dispatch."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-17-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-17-a",
+        "fixture_sha256": "092a32de7f834e834f77bbbbc000a79e8a28ce2d2b9f98a28956879bad521277",
+        "contract_sha256": "c9ba93b44ff6eb0bbb2fe2e236847ebf679fc24a55e6243e80311fedbb627606",
+        "expected": {
+          "expectation_id": "exam-observation-17",
+          "source": {
+            "path": "src/relay.js",
+            "line": 3,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "src/relay.js",
+            "line": 4,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 2,
+            "required_kinds": [
+              "source",
+              "sink"
+            ]
+          },
+          "rationale": "External input controls the destination of a server-side outbound request."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-17-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-17-b",
+        "fixture_sha256": "92440e41a94e271fbd161701a871ae2fe2bde469ee54b69344f7d593a7b07c1e",
+        "contract_sha256": "4d1656da7df9e35cd70123a08bd410211a8fc8e9895aa93ccce2a44c37fe9e06",
+        "expected": null,
+        "security_property": "A fixed HTTPS hostname policy constrains the complete outbound destination before dispatch.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-18",
+      "language": "jsx",
+      "framework": "express",
+      "variation": "helper_mediated",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.outbound-request-boundary",
+        "invariant_id": "secure-bench.invariant.outbound-destination-policy"
+      },
+      "primary_cwe": "CWE-918",
+      "rationale": "External input controls the destination of a server-side outbound request.",
+      "mutation": {
+        "file": "src/gateway.jsx",
+        "vulnerable_lines": {
+          "start": 3,
+          "end": 3
+        },
+        "control_lines": {
+          "start": 3,
+          "end": 5
+        },
+        "vulnerable_fragment_sha256": "17e35e0b17c503b461d5abe4e0aedb5b7bbc7ae598b160f3c388896c6ba2d463",
+        "control_fragment_sha256": "be9eb06e078c0b32b8cfea6bcb08633d2f31e092d1f2369f9b92c5c94833f2f0",
+        "guard_property": "A fixed HTTPS hostname policy constrains the complete outbound destination before dispatch."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-18-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-18-a",
+        "fixture_sha256": "4c7454a5a3e2d2002a7250ea692a5ddaa96a0f415fb2fca9cdb872974d4fa284",
+        "contract_sha256": "0e22303fc41703238b8d088e07960eead55b01022ede13a77260fa42f616591c",
+        "expected": {
+          "expectation_id": "exam-observation-18",
+          "source": {
+            "path": "src/gateway.jsx",
+            "line": 6,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "src/gateway.jsx",
+            "line": 3,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "propagation",
+              "sink"
+            ]
+          },
+          "rationale": "External input controls the destination of a server-side outbound request."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-18-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-18-b",
+        "fixture_sha256": "3782ad101018dbfe09ba0dce49b04547edd5e50b86917fcc11c832f4fa0c39b8",
+        "contract_sha256": "3fe481cb718adc4ad2e2cc9a3f44786362d8813282db188a0bbc6544f42e6355",
+        "expected": null,
+        "security_property": "A fixed HTTPS hostname policy constrains the complete outbound destination before dispatch.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-19",
+      "language": "type_script",
+      "framework": "next_app_router",
+      "variation": "inter_file_aliased",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.outbound-request-boundary",
+        "invariant_id": "secure-bench.invariant.outbound-destination-policy"
+      },
+      "primary_cwe": "CWE-918",
+      "rationale": "External input controls the destination of a server-side outbound request.",
+      "mutation": {
+        "file": "app/api/channel/service.ts",
+        "vulnerable_lines": {
+          "start": 3,
+          "end": 3
+        },
+        "control_lines": {
+          "start": 3,
+          "end": 5
+        },
+        "vulnerable_fragment_sha256": "d7a80587e9de6b3733639c4f4eebe65775fa2344bb30eca012f7135d20571d6c",
+        "control_fragment_sha256": "6ce6f0f2d47e6f276abd86deed6d88111962f6666b29d0dec2831ea5c8c60744",
+        "guard_property": "A fixed HTTPS hostname policy constrains the complete outbound destination before dispatch."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-19-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-19-a",
+        "fixture_sha256": "47ec5fe141d231a163fdb882ebb4b7754658f3f3020cf7d8342d3f79604a4c68",
+        "contract_sha256": "3705cac1bc568d414428a74b988bb5cfdcd1765c403416053c91af410cdbbb44",
+        "expected": {
+          "expectation_id": "exam-observation-19",
+          "source": {
+            "path": "app/api/channel/route.ts",
+            "line": 3,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "app/api/channel/service.ts",
+            "line": 3,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "propagation",
+              "sink"
+            ]
+          },
+          "rationale": "External input controls the destination of a server-side outbound request."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-19-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-19-b",
+        "fixture_sha256": "0ef891eee75f03887cdcd42e68e09922ea1efbc2d66144270720d619bdbb32b6",
+        "contract_sha256": "a14dfcc509c7373433344ca900452b43455b8797c2bd78e8dbaeff8c96c670c5",
+        "expected": null,
+        "security_property": "A fixed HTTPS hostname policy constrains the complete outbound destination before dispatch.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-20",
+      "language": "tsx",
+      "framework": "next_server_actions",
+      "variation": "control_flow_sensitive",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.outbound-request-boundary",
+        "invariant_id": "secure-bench.invariant.outbound-destination-policy"
+      },
+      "primary_cwe": "CWE-918",
+      "rationale": "External input controls the destination of a server-side outbound request.",
+      "mutation": {
+        "file": "app/workcell/operation.ts",
+        "vulnerable_lines": {
+          "start": 6,
+          "end": 6
+        },
+        "control_lines": {
+          "start": 6,
+          "end": 8
+        },
+        "vulnerable_fragment_sha256": "01904ce7d773420a1129cc15eaad43415e4dff74b33098b045b478373b5584d2",
+        "control_fragment_sha256": "1d1cfa935f36cb31586fcdf6242edd261d26a33c5c9d35c0c6e367403299f051",
+        "guard_property": "A fixed HTTPS hostname policy constrains the complete outbound destination before dispatch."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-20-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-20-a",
+        "fixture_sha256": "86203f7838f77f7121bd3bdcad75fffcaafd0487c212b89d96b31b2aec209803",
+        "contract_sha256": "282a088a63113c8bd87764e8cd545cbda06cc371627bcd0d03bf2a6de0fb566c",
+        "expected": {
+          "expectation_id": "exam-observation-20",
+          "source": {
+            "path": "app/workcell/operation.ts",
+            "line": 4,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "app/workcell/operation.ts",
+            "line": 6,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "branch",
+              "sink"
+            ]
+          },
+          "rationale": "External input controls the destination of a server-side outbound request."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-20-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-20-b",
+        "fixture_sha256": "12988e981d5ce9e946d9ccc4397a79b899984245e14b1bbf3c2d978267095c83",
+        "contract_sha256": "ed29179690a46bb2be06cf051ec298b07712f7b04802340cce8e83b35fe00d2a",
+        "expected": null,
+        "security_property": "A fixed HTTPS hostname policy constrains the complete outbound destination before dispatch.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-21",
+      "language": "java_script",
+      "framework": "node_js",
+      "variation": "direct",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.redirect-boundary",
+        "invariant_id": "secure-bench.invariant.redirect-destination-policy"
+      },
+      "primary_cwe": "CWE-601",
+      "rationale": "Externally influenced input directly selects the redirect destination without a trusted-location policy.",
+      "mutation": {
+        "file": "src/relay.js",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 4
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 6
+        },
+        "vulnerable_fragment_sha256": "ea87e686f7b8f236edb15f5da132f58c01ed053323d9715e16a4c202138dcc31",
+        "control_fragment_sha256": "7e0f85362b19261b4fd1030ec2ebb29258171cf63b7512c9a5ca7a11a8ba52ae",
+        "guard_property": "External input selects from a fixed set of local redirect destinations."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-21-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-21-a",
+        "fixture_sha256": "a66e2fe9d1d5dd0abdd9a9598cda263a6b35c1d87f34f6ebf6c6817e85805055",
+        "contract_sha256": "d84f3606a158a697ffdfbc52ec07f76c8846807b90183a05d7473f4656bd4c85",
+        "expected": {
+          "expectation_id": "exam-observation-21",
+          "source": {
+            "path": "src/relay.js",
+            "line": 3,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "src/relay.js",
+            "line": 4,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 2,
+            "required_kinds": [
+              "source",
+              "sink"
+            ]
+          },
+          "rationale": "Externally influenced input directly selects the redirect destination without a trusted-location policy."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-21-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-21-b",
+        "fixture_sha256": "d8d1499dd1d8a9791cc2fcbd0d90ec09b3ce6158c071ecd44e94f085736abe4c",
+        "contract_sha256": "ade2b74be04e1f8e107561321f647a799d436c202b1264835654682e10f5e625",
+        "expected": null,
+        "security_property": "External input selects from a fixed set of local redirect destinations.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-22",
+      "language": "jsx",
+      "framework": "express",
+      "variation": "helper_mediated",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.redirect-boundary",
+        "invariant_id": "secure-bench.invariant.redirect-destination-policy"
+      },
+      "primary_cwe": "CWE-601",
+      "rationale": "Externally influenced input directly selects the redirect destination without a trusted-location policy.",
+      "mutation": {
+        "file": "src/gateway.jsx",
+        "vulnerable_lines": {
+          "start": 3,
+          "end": 3
+        },
+        "control_lines": {
+          "start": 3,
+          "end": 5
+        },
+        "vulnerable_fragment_sha256": "8297a6206b8dcd806282decd82c4fbbd858e2bf880a9caaa7536c74f08572a82",
+        "control_fragment_sha256": "1d0b3bd5705aa1a4f775eeb30aea6086b9018e7ff1c438f9ad70164e2cd39075",
+        "guard_property": "External input selects from a fixed set of local redirect destinations."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-22-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-22-a",
+        "fixture_sha256": "5564b72b2305c6d1f8f2b42980496d8e5538d1352dc3a54b2347121b9bd4c1b4",
+        "contract_sha256": "b613a5fbc3f7e64e522a9218500ac3bb77820550a0643a5223e748e350a663f7",
+        "expected": {
+          "expectation_id": "exam-observation-22",
+          "source": {
+            "path": "src/gateway.jsx",
+            "line": 6,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "src/gateway.jsx",
+            "line": 3,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "propagation",
+              "sink"
+            ]
+          },
+          "rationale": "Externally influenced input directly selects the redirect destination without a trusted-location policy."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-22-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-22-b",
+        "fixture_sha256": "f5d75a43d14ae441a80bb1a1536f6753665a16b10afb08ae246e0e94e6969ea6",
+        "contract_sha256": "6783f28c0f9336768d1e8e987789020c0cf6fdbf3720a37f304d9739ab4d1ed4",
+        "expected": null,
+        "security_property": "External input selects from a fixed set of local redirect destinations.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-23",
+      "language": "type_script",
+      "framework": "next_app_router",
+      "variation": "inter_file_aliased",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.redirect-boundary",
+        "invariant_id": "secure-bench.invariant.redirect-destination-policy"
+      },
+      "primary_cwe": "CWE-601",
+      "rationale": "Externally influenced input directly selects the redirect destination without a trusted-location policy.",
+      "mutation": {
+        "file": "app/api/channel/service.ts",
+        "vulnerable_lines": {
+          "start": 3,
+          "end": 3
+        },
+        "control_lines": {
+          "start": 3,
+          "end": 5
+        },
+        "vulnerable_fragment_sha256": "65037e361aaebfbd8b340b3b71e43023b6927fa82630013d3b82b9707fc6b7dc",
+        "control_fragment_sha256": "18ee402234d24dd3200b53ef9d36e60ed40ed7062bae258faed4fbfa782801c7",
+        "guard_property": "External input selects from a fixed set of local redirect destinations."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-23-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-23-a",
+        "fixture_sha256": "741f2732e61b9f94ad64a9ebe0d53b9f5955d1740307859ef500cd221d62cc00",
+        "contract_sha256": "a4b3f5a6d484ad08b8f1b750185e61afc3670ba3f4024ab2027c5f964d9d602a",
+        "expected": {
+          "expectation_id": "exam-observation-23",
+          "source": {
+            "path": "app/api/channel/route.ts",
+            "line": 3,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "app/api/channel/service.ts",
+            "line": 3,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "propagation",
+              "sink"
+            ]
+          },
+          "rationale": "Externally influenced input directly selects the redirect destination without a trusted-location policy."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-23-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-23-b",
+        "fixture_sha256": "29c78daee11163fa4b19bf006097b481321076b7cb51a67e06110e1003a0a6bb",
+        "contract_sha256": "714232c84ca870e6244ea8fb457215480286603a044f55ff6cf322864743d19e",
+        "expected": null,
+        "security_property": "External input selects from a fixed set of local redirect destinations.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-24",
+      "language": "tsx",
+      "framework": "next_server_actions",
+      "variation": "control_flow_sensitive",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.redirect-boundary",
+        "invariant_id": "secure-bench.invariant.redirect-destination-policy"
+      },
+      "primary_cwe": "CWE-601",
+      "rationale": "Externally influenced input directly selects the redirect destination without a trusted-location policy.",
+      "mutation": {
+        "file": "app/workcell/operation.ts",
+        "vulnerable_lines": {
+          "start": 6,
+          "end": 6
+        },
+        "control_lines": {
+          "start": 6,
+          "end": 8
+        },
+        "vulnerable_fragment_sha256": "91467761c73c6d1065fcd5b5e9a617d531a4206e24b002f24ab31a0fd5580faa",
+        "control_fragment_sha256": "fc2402be54d952f2a12e983828e3ad253bac4264cfa637153c88a12ed24b038c",
+        "guard_property": "External input selects from a fixed set of local redirect destinations."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-24-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-24-a",
+        "fixture_sha256": "d9b9a1b7076a8aacb633e4ce453e753d438d36b4949f504da39fe2123a078264",
+        "contract_sha256": "32e526de14736ef2575f2117369ce71593da3bb129dfde043b28035f878190dc",
+        "expected": {
+          "expectation_id": "exam-observation-24",
+          "source": {
+            "path": "app/workcell/operation.ts",
+            "line": 4,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "app/workcell/operation.ts",
+            "line": 6,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "branch",
+              "sink"
+            ]
+          },
+          "rationale": "Externally influenced input directly selects the redirect destination without a trusted-location policy."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-24-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-24-b",
+        "fixture_sha256": "1b642408319ee7a9e9cca316bf44050d1daa119ebc405fd3781f3f1f7873e3b3",
+        "contract_sha256": "6b33ad3e14ae3fe2ec48e3b7b34559d9b5fbeb7572782b35fc08725dc5fa3244",
+        "expected": null,
+        "security_property": "External input selects from a fixed set of local redirect destinations.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-25",
+      "language": "java_script",
+      "framework": "node_js",
+      "variation": "direct",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.sql-construction",
+        "invariant_id": "secure-bench.invariant.sql-control-data-separation"
+      },
+      "primary_cwe": "CWE-89",
+      "rationale": "Externally influenced text is concatenated into SQL command structure rather than bound as a parameter.",
+      "mutation": {
+        "file": "src/relay.js",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 4
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 4
+        },
+        "vulnerable_fragment_sha256": "4ad1e4e64df2461d8e2b25b79d1c04f5162166a191312209214783e02e0578d6",
+        "control_fragment_sha256": "5e2b3ea9d84f047156bd120cbcd2f691970894666ae2b2dd50abdab2fa3ddc47",
+        "guard_property": "The SQL statement remains fixed and the externally influenced value is bound as data."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-25-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-25-a",
+        "fixture_sha256": "1510474ded9801e8796e3beeaab549cfc49f31298417bce372c45fc03417232a",
+        "contract_sha256": "d249f384b48350f62dc5c61d6eb489888106257d5723bfbee4d0ab6a6a474cb0",
+        "expected": {
+          "expectation_id": "exam-observation-25",
+          "source": {
+            "path": "src/relay.js",
+            "line": 3,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "src/relay.js",
+            "line": 4,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 2,
+            "required_kinds": [
+              "source",
+              "sink"
+            ]
+          },
+          "rationale": "Externally influenced text is concatenated into SQL command structure rather than bound as a parameter."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-25-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-25-b",
+        "fixture_sha256": "33643962983a5d75f3783f4c0fdc4dc48b93f393a556dc3ec6d8bf65f915cf71",
+        "contract_sha256": "bd72e03a282a6c75fe425cccde0adf6aeff6edb064b0096ce88ef94fdad3196d",
+        "expected": null,
+        "security_property": "The SQL statement remains fixed and the externally influenced value is bound as data.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-26",
+      "language": "jsx",
+      "framework": "express",
+      "variation": "helper_mediated",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.sql-construction",
+        "invariant_id": "secure-bench.invariant.sql-control-data-separation"
+      },
+      "primary_cwe": "CWE-89",
+      "rationale": "Externally influenced text is concatenated into SQL command structure rather than bound as a parameter.",
+      "mutation": {
+        "file": "src/gateway.jsx",
+        "vulnerable_lines": {
+          "start": 3,
+          "end": 3
+        },
+        "control_lines": {
+          "start": 3,
+          "end": 3
+        },
+        "vulnerable_fragment_sha256": "dd058b402733d37f64e632cac3d07816f0c7fc20cb0dc87a39944753973fc831",
+        "control_fragment_sha256": "3e9d1d4d151b719fc594578cb3297b51cb5ed6a434b8a3134f670af9ee90c316",
+        "guard_property": "The SQL statement remains fixed and the externally influenced value is bound as data."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-26-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-26-a",
+        "fixture_sha256": "81c05a256745b05986d604d0bad010659d6eb4c7e95bbd5d3ab807cbbd7eb92a",
+        "contract_sha256": "a7d1b9ea9e2701728594ed297e4b67d2010c5ade8a79f0f8973cf85ea601e8be",
+        "expected": {
+          "expectation_id": "exam-observation-26",
+          "source": {
+            "path": "src/gateway.jsx",
+            "line": 6,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "src/gateway.jsx",
+            "line": 3,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "propagation",
+              "sink"
+            ]
+          },
+          "rationale": "Externally influenced text is concatenated into SQL command structure rather than bound as a parameter."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-26-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-26-b",
+        "fixture_sha256": "f48b0c74b9bfbb127c30f82e54163d479d1a96632db105be0b9579141c9141d8",
+        "contract_sha256": "f2955acf0508b74ed56a00feefcf8061617d1a512d60820efea3aed7bfeb17d2",
+        "expected": null,
+        "security_property": "The SQL statement remains fixed and the externally influenced value is bound as data.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-27",
+      "language": "type_script",
+      "framework": "next_app_router",
+      "variation": "inter_file_aliased",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.sql-construction",
+        "invariant_id": "secure-bench.invariant.sql-control-data-separation"
+      },
+      "primary_cwe": "CWE-89",
+      "rationale": "Externally influenced text is concatenated into SQL command structure rather than bound as a parameter.",
+      "mutation": {
+        "file": "app/api/channel/service.ts",
+        "vulnerable_lines": {
+          "start": 3,
+          "end": 3
+        },
+        "control_lines": {
+          "start": 3,
+          "end": 3
+        },
+        "vulnerable_fragment_sha256": "0e496f47adb4a145029048ed7d22bd7da04523494ba0296ffee5433a400202e7",
+        "control_fragment_sha256": "ab743d0ee13022daa60b84553a63611a177b103fbe9c7c3a752966e806dd55a2",
+        "guard_property": "The SQL statement remains fixed and the externally influenced value is bound as data."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-27-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-27-a",
+        "fixture_sha256": "3198ef14f2a33d71804a3f6a864295296e15b32c682a6d4422bef7b5c4d1b20a",
+        "contract_sha256": "7ded6d5703b2b56ac06bf06d39652aea1ead6f40f6099d7e9c0a99bc09dde185",
+        "expected": {
+          "expectation_id": "exam-observation-27",
+          "source": {
+            "path": "app/api/channel/route.ts",
+            "line": 3,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "app/api/channel/service.ts",
+            "line": 3,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "propagation",
+              "sink"
+            ]
+          },
+          "rationale": "Externally influenced text is concatenated into SQL command structure rather than bound as a parameter."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-27-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-27-b",
+        "fixture_sha256": "d7ac983b88f2d435c829be30c3420631302d68a402adf130bc201b7121d821b0",
+        "contract_sha256": "f2c0e11593ec08cac25d7239513716e52fb653f93e14bb8540eccb689a8c0eef",
+        "expected": null,
+        "security_property": "The SQL statement remains fixed and the externally influenced value is bound as data.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    },
+    {
+      "pair_id": "exam-pair-28",
+      "language": "tsx",
+      "framework": "next_server_actions",
+      "variation": "control_flow_sensitive",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.sql-construction",
+        "invariant_id": "secure-bench.invariant.sql-control-data-separation"
+      },
+      "primary_cwe": "CWE-89",
+      "rationale": "Externally influenced text is concatenated into SQL command structure rather than bound as a parameter.",
+      "mutation": {
+        "file": "app/workcell/operation.ts",
+        "vulnerable_lines": {
+          "start": 6,
+          "end": 6
+        },
+        "control_lines": {
+          "start": 6,
+          "end": 6
+        },
+        "vulnerable_fragment_sha256": "f1f20bbe461d41d0959baab292ac0fa01073396a28197f30466de2cf81ebf9e7",
+        "control_fragment_sha256": "b0a4d22cb224a05d6060e6c07b0d180a16be383e06cf5dda7bf51afed7883db0",
+        "guard_property": "The SQL statement remains fixed and the externally influenced value is bound as data."
+      },
+      "vulnerable": {
+        "case_id": "exam-case-28-a",
+        "kind": "vulnerable",
+        "fixture_path": "holdout/phase-3/cases/unit-28-a",
+        "fixture_sha256": "2ccd1cfcdab29a36834dae2837f7cd69e97d470c4008605885c14b57eefc903e",
+        "contract_sha256": "12083e4db82aaebaaeb4786abf9d8f44d7fca103b71a607b6bf93f6e842b57e5",
+        "expected": {
+          "expectation_id": "exam-observation-28",
+          "source": {
+            "path": "app/workcell/operation.ts",
+            "line": 4,
+            "alternatives": []
+          },
+          "sink": {
+            "path": "app/workcell/operation.ts",
+            "line": 6,
+            "alternatives": []
+          },
+          "evidence": {
+            "minimum_hops": 3,
+            "required_kinds": [
+              "source",
+              "branch",
+              "sink"
+            ]
+          },
+          "rationale": "Externally influenced text is concatenated into SQL command structure rather than bound as a parameter."
+        },
+        "security_property": null,
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original vulnerable member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      },
+      "control": {
+        "case_id": "exam-case-28-b",
+        "kind": "safe_control",
+        "fixture_path": "holdout/phase-3/cases/unit-28-b",
+        "fixture_sha256": "6971b625acac64ad3c848d972f4a7650b95f7dc948fae1d06ed2b6de04ee9a2d",
+        "contract_sha256": "4be098b9d2b46a05e478d39b93be170973464eda181f75b11ea199e16b5b54cc",
+        "expected": null,
+        "security_property": "The SQL statement remains fixed and the externally influenced value is bound as data.",
+        "provenance": {
+          "origin": "Secure Bench original work",
+          "license": "Apache-2.0",
+          "revision": "phase-3",
+          "modifications": "Original safe member of a reversible Phase 3 pair.",
+          "authors": [
+            "Secure Bench maintainers"
+          ]
+        }
+      }
+    }
+  ]
+}

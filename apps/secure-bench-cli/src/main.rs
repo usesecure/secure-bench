@@ -3,6 +3,7 @@
 use clap::{Parser, Subcommand, ValueEnum};
 use secure_bench_core::adapter::fingerprint;
 use secure_bench_core::corpus::{inspect_corpus, validate_corpus};
+use secure_bench_core::holdout::{load_holdout_manifest, validate_holdout_ledger};
 use secure_bench_core::phase2::{
     NETWORK_ISOLATION_SCHEMA_V1, NetworkIsolationAttestation, Phase2EvaluationInput,
     canonical_phase2_json, evaluate_phase2, load_network_attestation, load_taxonomy_profile,
@@ -58,6 +59,11 @@ enum Command {
     Phase2 {
         #[command(subcommand)]
         command: Phase2Command,
+    },
+    /// Validate or inspect the sealed Phase 3 holdout without executing a scanner.
+    Holdout {
+        #[command(subcommand)]
+        command: HoldoutCommand,
     },
     /// Produce proof from inside the scanner's network namespace.
     Isolation {
@@ -197,6 +203,40 @@ enum Phase2Command {
 }
 
 #[derive(Debug, Subcommand)]
+enum HoldoutCommand {
+    /// Validate schemas, frozen commitments, fixtures, mutation proofs, and ledger state.
+    Validate {
+        /// Frozen Phase 3 manifest.
+        #[arg(long)]
+        manifest: PathBuf,
+        /// Frozen neutral taxonomy.
+        #[arg(long)]
+        taxonomy: PathBuf,
+        /// Append-only one-shot ledger.
+        #[arg(long)]
+        ledger: PathBuf,
+        /// Repository root used to resolve scanner-visible fixture paths.
+        #[arg(long, default_value = ".")]
+        repository_root: PathBuf,
+    },
+    /// Print aggregate coverage and commitments without disclosing case answers.
+    Inspect {
+        /// Frozen Phase 3 manifest.
+        #[arg(long)]
+        manifest: PathBuf,
+        /// Frozen neutral taxonomy.
+        #[arg(long)]
+        taxonomy: PathBuf,
+        /// Append-only one-shot ledger.
+        #[arg(long)]
+        ledger: PathBuf,
+        /// Repository root used to resolve scanner-visible fixture paths.
+        #[arg(long, default_value = ".")]
+        repository_root: PathBuf,
+    },
+}
+
+#[derive(Debug, Subcommand)]
 enum IsolationCommand {
     /// Attest that only loopback exists and outbound routing is blocked.
     Attest {
@@ -246,6 +286,7 @@ fn run(cli: Cli) -> Result<(), String> {
         Command::Corpus { command } => run_corpus_command(command),
         Command::Taxonomy { command } => run_taxonomy_command(command),
         Command::Phase2 { command } => run_phase2_command(command),
+        Command::Holdout { command } => run_holdout_command(command),
         Command::Isolation { command } => run_isolation_command(command),
         Command::Run {
             suite,
@@ -315,6 +356,56 @@ fn run(cli: Cli) -> Result<(), String> {
             println!("{}", summary_text(&parsed));
             Ok(())
         }
+    }
+}
+
+fn run_holdout_command(command: HoldoutCommand) -> Result<(), String> {
+    let (manifest_path, taxonomy_path, ledger_path, repository_root, inspect) = match command {
+        HoldoutCommand::Validate {
+            manifest,
+            taxonomy,
+            ledger,
+            repository_root,
+        } => (manifest, taxonomy, ledger, repository_root, false),
+        HoldoutCommand::Inspect {
+            manifest,
+            taxonomy,
+            ledger,
+            repository_root,
+        } => (manifest, taxonomy, ledger, repository_root, true),
+    };
+    let manifest_bytes = read_bounded(&manifest_path, MAX_MANIFEST_BYTES, "holdout manifest")?;
+    let taxonomy_bytes = read_bounded(&taxonomy_path, MAX_MANIFEST_BYTES, "taxonomy")?;
+    let ledger_bytes = read_bounded(&ledger_path, MAX_MANIFEST_BYTES, "holdout ledger")?;
+    let (manifest, validation) =
+        load_holdout_manifest(&manifest_bytes, &repository_root, &taxonomy_bytes)
+            .map_err(|error| error.to_string())?;
+    let entries =
+        validate_holdout_ledger(&ledger_bytes, &manifest).map_err(|error| error.to_string())?;
+    if inspect {
+        let output = serde_json::json!({
+            "aggregate_corpus_sha256": validation.aggregate_corpus_sha256,
+            "cases": validation.cases,
+            "contract_merkle_root": validation.contract_merkle_root,
+            "framework_cases": validation.framework_cases,
+            "ledger_entries": entries.len(),
+            "pairs": validation.pairs,
+            "safe_controls": validation.safe_controls,
+            "taxonomy_pairs": validation.taxonomy_pairs,
+            "vulnerable_cases": validation.vulnerable_cases,
+        });
+        let mut bytes = serde_json::to_vec_pretty(&output)
+            .map_err(|error| format!("could not serialize holdout inspection: {error}"))?;
+        bytes.push(b'\n');
+        io::stdout()
+            .write_all(&bytes)
+            .map_err(|error| format!("could not write holdout inspection: {error}"))
+    } else {
+        println!(
+            "Validated sealed holdout: {} pairs, {} cases, commitment {}; no scanner command was executed.",
+            validation.pairs, validation.cases, validation.contract_merkle_root
+        );
+        Ok(())
     }
 }
 

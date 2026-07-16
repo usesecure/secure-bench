@@ -83,3 +83,9 @@ The v2 result adds invalid-output, execution-failure, and cancellation counts wh
 The frozen profile binds all seven vulnerable Phase 1 expectations to exact taxonomy 1.0.0 pairs before execution. The evaluator rejects incomplete coverage, duplicates, identifier conflicts, or fingerprint drift. The isolation attestation must cover the version probe and every scanner process, expose only loopback, and record blocked outbound connectivity.
 
 The Phase 2 result preserves normalized findings, per-case criteria and outcomes, exact and diagnostic agreement metrics, safe-control outcomes, primary/repeat operational measurements, semantic stability, historical comparison, and complete hashed provenance. Raw-report byte equality is independent from semantic equality. Partial matches never count as exact detections, failures never appear clean, and the result contains no rank, leaderboard score, or superiority field.
+
+## Phase 3 holdout contracts
+
+`holdout-v1.schema.json` fixes corpus identity, taxonomy linkage, pair strata, precise expectations, safe-control properties, reversible mutations, provenance, scoring semantics, commitments, and the future one-shot policy. The manifest is canonical JSON and binds 56 fixture fingerprints into an aggregate hash and 56 complete case contracts into a domain-separated Merkle root.
+
+`holdout-ledger-entry-v1.schema.json` defines a canonical JSON Lines hash chain. The committed ledger contains only `holdout_sealed`. A future execution must append exactly one `execution_started` reservation before processing and exactly one immutable completion or explicit failure. A second reservation, replacement result, broken chain, or post-terminal append fails validation.

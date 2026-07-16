@@ -91,6 +91,10 @@ The Phase 0 and Phase 1 pipeline entry points do not invoke this API. This separ
 
 Phase 2 freezes a suite-specific taxonomy profile before scanner execution and evaluates two retained live bundles through a separate typed path. The scanner-visible boundary remains unchanged: one copied fixture and the public report command. Profile data, expectations, historical decisions, and scoring code remain outside the scan workspace.
 
+## Phase 3 holdout boundary
+
+The Phase 3 manifest and ledger are matcher-side contracts. Only one neutral fixture directory would be scanner-visible during a future evaluation; labels, expectations, taxonomy coordinates, mutations, hashes, and scoring remain outside that directory. Secure Engine development tasks and any other scanner-development work must not inspect `holdout/phase-3/`. The current CLI can validate and inspect aggregate commitments but cannot execute or evaluate the holdout.
+
 The evaluator validates every run and raw report before normalization, resolves only exact taxonomy coordinates, performs deterministic one-to-one matching, and emits per-criterion decisions. A second retained run supplies stability evidence. Volatile raw-report equality is recorded separately from content-derived finding identity, semantic finding sets, decisions, and metrics.
 
 The complete scanner lifecycle is wrapped by a caller-created network namespace attested through a strict versioned contract. This is measurement-specific provenance, not an assertion that the generic Phase 1 runner independently creates a network namespace.

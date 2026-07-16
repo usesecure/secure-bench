@@ -1,5 +1,6 @@
 //! Versioned JSON Schema validation for suite, run, and result projections.
 
+use crate::holdout::{HoldoutLedgerEntry, HoldoutManifest};
 use crate::model::{
     BenchmarkResult, BenchmarkSuite, RESULT_SCHEMA_V1, RESULT_SCHEMA_V2, RecordedRun,
     SUITE_SCHEMA_V1, SUITE_SCHEMA_V2,
@@ -22,6 +23,9 @@ const TAXONOMY_PROFILE_SCHEMA: &str =
 const NETWORK_ISOLATION_SCHEMA: &str =
     include_str!("../../../schemas/network-isolation-v1.schema.json");
 const PHASE2_RESULT_SCHEMA: &str = include_str!("../../../schemas/phase2-result-v1.schema.json");
+const HOLDOUT_SCHEMA: &str = include_str!("../../../schemas/holdout-v1.schema.json");
+const HOLDOUT_LEDGER_ENTRY_SCHEMA: &str =
+    include_str!("../../../schemas/holdout-ledger-entry-v1.schema.json");
 
 /// Schema loading or validation failure.
 #[derive(Clone, Debug, Eq, Error, PartialEq)]
@@ -150,6 +154,24 @@ pub fn validate_phase2_result(result: &Phase2Result) -> Result<(), SchemaError> 
     validate_typed("Phase 2 result", PHASE2_RESULT_SCHEMA, result)
 }
 
+/// Validates a frozen Phase 3 holdout manifest.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] for invalid committed schemas, projections, or instances.
+pub fn validate_holdout_manifest(manifest: &HoldoutManifest) -> Result<(), SchemaError> {
+    validate_typed("holdout manifest", HOLDOUT_SCHEMA, manifest)
+}
+
+/// Validates one append-only Phase 3 holdout ledger entry.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] for invalid committed schemas, projections, or instances.
+pub fn validate_holdout_ledger_entry(entry: &HoldoutLedgerEntry) -> Result<(), SchemaError> {
+    validate_typed("holdout ledger entry", HOLDOUT_LEDGER_ENTRY_SCHEMA, entry)
+}
+
 fn validate_typed<T: serde::Serialize>(
     contract: &'static str,
     schema_text: &str,
@@ -195,6 +217,8 @@ mod tests {
             ("taxonomy profile", TAXONOMY_PROFILE_SCHEMA),
             ("network isolation", NETWORK_ISOLATION_SCHEMA),
             ("Phase 2 result", PHASE2_RESULT_SCHEMA),
+            ("holdout manifest", HOLDOUT_SCHEMA),
+            ("holdout ledger entry", HOLDOUT_LEDGER_ENTRY_SCHEMA),
         ] {
             let value: Value = serde_json::from_str(schema)?;
             jsonschema::validator_for(&value)

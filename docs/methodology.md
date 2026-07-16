@@ -87,3 +87,11 @@ Exact precision, recall, and F1 use raw integer counts. Category, invariant, CWE
 Two independent retained runs are evaluated. Stable semantic finding identities, case decisions, metrics, and semantic aggregate fingerprints demonstrate deterministic evaluation even when raw public reports contain volatile metadata. All scanner invocations, including version probes, occur inside an attested network namespace with AI disabled and an empty configuration.
 
 The Phase 2 result compares prospective outcomes to the immutable Phase 1 result without rewriting it. This narrow synthetic measurement cannot support production-readiness claims, rankings, confidence intervals, broad coverage claims, or claims that Secure Engine or another analyzer is superior.
+
+## Phase 3 frozen-holdout methodology
+
+Phase 3 adds 28 original vulnerable/control pairs distributed equally across the seven frozen taxonomy families and four language, framework, and structural strata. Each pair is defined by one exact reversible source mutation. The validator proves both projections, verifies precise source and sink coordinates, checks required evidence shape, rejects answer leakage, exact duplicates, near-duplicates, and Phase 1 identifier, filename, literal, route, declaration, or implementation-shape reuse.
+
+Fixture and contract SHA-256 values, an aggregate corpus hash, and a domain-separated Merkle root freeze the examination before any scanner execution. A hash-chained append-only ledger contains only the genesis seal. Its future protocol permits one execution reservation and one terminal outcome, requires create-new result storage, and forbids replacement or re-evaluation.
+
+No scanner was run or consulted to define Phase 3. This is a deliberately neutral examination foundation, not a production benchmark, public ranking, scanner comparison, or evidence that Secure Engine or another tool is superior.

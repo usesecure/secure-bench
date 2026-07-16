@@ -5,6 +5,7 @@
 
 pub mod adapter;
 pub mod corpus;
+pub mod holdout;
 pub mod matcher;
 pub mod model;
 pub mod phase2;
