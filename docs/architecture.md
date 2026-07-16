@@ -1,0 +1,66 @@
+# Phase 0 Architecture
+
+## Purpose and boundary
+
+Phase 0 establishes a neutral contract before any scanner is installed or executed. Its only inputs are committed suite manifests, recorded-run manifests, and versioned mock reports. The recorded command is retained as provenance and is never invoked.
+
+This architecture is intentionally independent from Secure Engine and every other analyzer. The core crate imports no scanner implementation, private API, rule registry, or product-specific matcher. Secure JSON is treated as one public input format beside SARIF; it receives no scoring privilege.
+
+Phase 0 is not a production benchmark, scanner comparison, or basis for a public ranking. Synthetic mock outcomes prove the harness contracts, not analyzer quality.
+
+## Data flow and trust boundaries
+
+```text
+committed suite.toml ------------------------------+
+                                                     |
+committed recorded-run.json -> selected adapter      | expectations enter here
+                                  |                  v
+committed mock report ----------> normalized findings -> deterministic matcher
+                                                               |
+                                                               v
+                                         score card + raw decisions + provenance
+                                                               |
+                                             JSON and terminal projections
+```
+
+The adapter receives only report bytes and the report fingerprint. Its Rust trait does not accept a suite, case expectations, or scorer. Expected results are introduced only after normalization, at the matcher boundary. This makes accidental answer leakage and adapter-assigned credit structurally testable.
+
+## Components
+
+### Model
+
+The core model covers suites, cases, expected findings, recorded tool runs, normalized findings, expectation decisions, finding dispositions, score cards, structured errors, resource measurements, and provenance. Each external contract carries an explicit schema version.
+
+### Schema
+
+Committed JSON Schemas define suite, recorded-run, and result projections. Human-authored suite TOML is deserialized to the typed Rust model and validated through its JSON projection. Semantic checks add invariants that JSON Schema alone does not express cleanly, including globally unique identifiers, vulnerable/safe-control consistency, and Phase 0 network denial.
+
+### Adapters
+
+`secure-json-v1` and SARIF 2.1.0 adapters parse untrusted mock reports into the same neutral finding model. Adapter selection depends only on the declared report format, never the tool name. Unsupported formats, unsupported schema versions, malformed JSON, oversized reports, zero-based locations, absolute paths, traversal, encoded paths, and Windows-style paths fail explicitly.
+
+Native messages and source snippets are not copied into exported results. Native rule identifiers remain only for traceability and do not participate in matching.
+
+### Matcher
+
+The matcher canonicalizes category and invariant text, then requires all declared category, invariant, source, sink, and evidence-path constraints. It performs deterministic one-to-one assignment, selects the most constrained expectations first, orders ties by stable identifiers, records ambiguity, and prevents one alert from satisfying multiple expectations.
+
+Semantically duplicate alerts retain separate raw provenance but only the canonical alert can receive credit. Additional identical alerts are marked as duplicates.
+
+### Scorer
+
+The scorer has no tool-identity input and emits no composite or leaderboard score. It reports vulnerable recall, attempted vulnerable recall, safe-control false-positive rate, safe-control clean coverage, evidence accuracy, source and sink localization, severity and confidence calibration, duplicate rate, operational failures, and resource measurements separately.
+
+Rates are exact integer numerators and denominators with a deterministic integer basis-point projection. A zero denominator has no rate. This avoids floating-point drift and hidden populations.
+
+### CLI and report projections
+
+The CLI reads bounded regular files, rejects symlinks for input artifacts, confines report references to the `reports` fixture tree, and uses atomic result writes. `evaluate` produces deterministic JSON and a concise terminal summary. `summary` is a projection over the same typed result model.
+
+## Determinism
+
+Maps use stable key ordering, findings and decisions are sorted by content-derived identifiers, ratios use integer arithmetic, and JSON uses a stable pretty-printed projection. The same committed bytes produce byte-identical output. In future execution phases, measured timing and host values will legitimately vary; those fields will remain raw provenance and will not alter matching.
+
+## Future runner boundary
+
+Resource budgets and network policy are modeled now, but Phase 0 has no process runner. A later runner must invoke argument arrays without a shell, isolate process groups, enforce read-only fixture copies and resource limits, disable network access by default, bound artifacts, and detect fixture mutation. Those controls are not claimed by this phase.

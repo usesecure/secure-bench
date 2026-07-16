@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Mock SARIF Analyzer",
+          "version": "fixture-1"
+        }
+      },
+      "results": [
+        {
+          "ruleId": "mock.sarif.command-injection",
+          "level": "error",
+          "message": {
+            "text": "Mock evidence used only to test the SARIF adapter contract."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "fixtures/vulnerable/ts-command-injection/app.ts"
+                },
+                "region": {
+                  "startLine": 3,
+                  "startColumn": 10
+                }
+              }
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "fixtures/vulnerable/ts-command-injection/app.ts"
+                          },
+                          "region": {
+                            "startLine": 1,
+                            "startColumn": 29
+                          }
+                        },
+                        "properties": {
+                          "kind": "source"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "fixtures/vulnerable/ts-command-injection/app.ts"
+                          },
+                          "region": {
+                            "startLine": 2,
+                            "startColumn": 29
+                          }
+                        },
+                        "properties": {
+                          "kind": "propagation"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "fixtures/vulnerable/ts-command-injection/app.ts"
+                          },
+                          "region": {
+                            "startLine": 3,
+                            "startColumn": 10
+                          }
+                        },
+                        "properties": {
+                          "kind": "sink"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "case_id": "ts-command-injection-vulnerable",
+            "category": "command-injection",
+            "invariant": "untrusted input must not reach shell command execution",
+            "severity": "high",
+            "confidence": "high"
+          }
+        }
+      ]
+    }
+  ]
+}

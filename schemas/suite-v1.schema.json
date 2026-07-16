@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/secure-bench/schemas/suite-v1.schema.json",
+  "title": "Secure Bench Suite v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "suite_id", "title", "description", "methodology_version", "provenance", "cases"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-suite-v1" },
+    "suite_id": { "$ref": "#/$defs/identifier" },
+    "title": { "type": "string", "minLength": 1 },
+    "description": { "type": "string", "minLength": 1 },
+    "methodology_version": { "type": "string", "minLength": 1 },
+    "provenance": { "$ref": "#/$defs/provenance" },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/case" }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._-]+$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[:%\\\\]).+$"
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["origin", "license", "revision", "modifications"],
+      "properties": {
+        "origin": { "type": "string", "minLength": 1 },
+        "license": { "type": "string", "minLength": 1 },
+        "revision": { "type": "string", "minLength": 1 },
+        "modifications": { "type": "string" }
+      }
+    },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_id", "kind", "language", "framework", "category", "invariant", "fixture_path", "eligibility", "resource_budget", "expected_findings", "provenance"],
+      "properties": {
+        "case_id": { "$ref": "#/$defs/identifier" },
+        "kind": { "enum": ["vulnerable", "safe_control"] },
+        "language": { "type": "string", "minLength": 1 },
+        "framework": { "type": ["string", "null"] },
+        "category": { "type": "string", "minLength": 1 },
+        "invariant": { "type": ["string", "null"] },
+        "fixture_path": { "$ref": "#/$defs/relativePath" },
+        "eligibility": { "$ref": "#/$defs/eligibility" },
+        "resource_budget": { "$ref": "#/$defs/resourceBudget" },
+        "expected_findings": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/expectation" }
+        },
+        "provenance": { "$ref": "#/$defs/provenance" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "kind": { "const": "vulnerable" } } },
+          "then": {
+            "properties": {
+              "invariant": { "type": "string", "minLength": 1 },
+              "expected_findings": { "minItems": 1 }
+            }
+          },
+          "else": {
+            "properties": {
+              "invariant": { "type": "null" },
+              "expected_findings": { "maxItems": 0 }
+            }
+          }
+        }
+      ]
+    },
+    "eligibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_capabilities", "supported_report_formats"],
+      "properties": {
+        "required_capabilities": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "supported_report_formats": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 }, "uniqueItems": true }
+      }
+    },
+    "resourceBudget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["timeout_ms", "memory_bytes", "output_bytes", "network"],
+      "properties": {
+        "timeout_ms": { "type": "integer", "minimum": 1 },
+        "memory_bytes": { "type": "integer", "minimum": 1 },
+        "output_bytes": { "type": "integer", "minimum": 1 },
+        "network": { "const": "disabled" }
+      }
+    },
+    "expectation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["expectation_id", "invariant", "category", "severity", "confidence", "source", "sink", "evidence"],
+      "properties": {
+        "expectation_id": { "$ref": "#/$defs/identifier" },
+        "invariant": { "type": "string", "minLength": 1 },
+        "category": { "type": "string", "minLength": 1 },
+        "severity": { "enum": ["info", "low", "medium", "high", "critical"] },
+        "confidence": { "enum": ["low", "medium", "high"] },
+        "source": { "$ref": "#/$defs/locationConstraint" },
+        "sink": { "$ref": "#/$defs/locationConstraint" },
+        "evidence": { "$ref": "#/$defs/evidenceConstraint" }
+      }
+    },
+    "locationConstraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "line", "alternatives"],
+      "properties": {
+        "path": { "$ref": "#/$defs/relativePath" },
+        "line": { "type": ["integer", "null"], "minimum": 1 },
+        "alternatives": { "type": "array", "items": { "$ref": "#/$defs/locationVariant" } }
+      }
+    },
+    "locationVariant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "line"],
+      "properties": {
+        "path": { "$ref": "#/$defs/relativePath" },
+        "line": { "type": ["integer", "null"], "minimum": 1 }
+      }
+    },
+    "evidenceConstraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimum_hops", "required_kinds"],
+      "properties": {
+        "minimum_hops": { "type": "integer", "minimum": 2 },
+        "required_kinds": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    }
+  }
+}

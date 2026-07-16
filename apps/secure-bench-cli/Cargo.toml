@@ -1,0 +1,20 @@
+[package]
+name = "secure-bench-cli"
+description = "Mock-only Phase 0 command-line interface for Secure Bench"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "secure-bench"
+path = "src/main.rs"
+
+[dependencies]
+clap.workspace = true
+secure-bench-core = { version = "0.1.0", path = "../../crates/secure-bench-core" }
+serde_json.workspace = true
+
+[lints]
+workspace = true

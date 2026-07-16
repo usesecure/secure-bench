@@ -1,0 +1,23 @@
+{
+  "schema_version": "secure-bench-run-v1",
+  "run_id": "native-success",
+  "adapter": "secure-json-v1",
+  "report_path": "../secure-json-equivalent.json",
+  "tool": {
+    "name": "Mock Native Analyzer",
+    "version": "fixture-1",
+    "command": ["mock-native", "--format", "secure-json-v1"],
+    "configuration_fingerprint": "0000000000000000000000000000000000000000000000000000000000000000",
+    "report_schema": "secure-json-v1"
+  },
+  "host": {
+    "os": "mock-linux",
+    "architecture": "x86_64",
+    "logical_cpus": 4,
+    "memory_bytes": 8589934592
+  },
+  "case_executions": [
+    { "case_id": "ts-command-injection-vulnerable", "status": "success", "cold_duration_ms": 120, "warm_duration_ms": 80, "peak_memory_bytes": 104857600, "output_bytes": 2048 },
+    { "case_id": "ts-command-arguments-safe", "status": "success", "cold_duration_ms": 100, "warm_duration_ms": 70, "peak_memory_bytes": 94371840, "output_bytes": 512 }
+  ]
+}
