@@ -1,14 +1,23 @@
-//! Secure Bench Phase 0 mock-only command-line interface.
+//! Secure Bench command-line interface for neutral recorded and live evaluation.
 
-use clap::{Parser, Subcommand};
-use secure_bench_core::{
-    BenchmarkResult, EvaluationInput, evaluate, load_run_manifest, load_suite,
+use clap::{Parser, Subcommand, ValueEnum};
+use secure_bench_core::corpus::{inspect_corpus, validate_corpus};
+use secure_bench_core::runner::{
+    DEFAULT_SECURE_ENGINE_ARGUMENTS, RunnerRequest, load_live_run, run_secure_engine,
+    valid_report_path,
 };
+use secure_bench_core::{
+    BenchmarkResult, EvaluationInput, LiveEvaluationInput, RESULT_SCHEMA_V2, evaluate,
+    evaluate_live_run, load_run_manifest, load_suite,
+};
+use std::collections::{BTreeMap, BTreeSet};
 use std::ffi::OsString;
 use std::fs::{self, OpenOptions};
 use std::io::{self, Write};
-use std::path::{Path, PathBuf};
+use std::path::{Component, Path, PathBuf};
 use std::process::ExitCode;
+use std::sync::Arc;
+use std::sync::atomic::AtomicBool;
 
 const MAX_MANIFEST_BYTES: u64 = 1024 * 1024;
 const MAX_REPORT_BYTES: u64 = 10 * 1024 * 1024;
@@ -16,7 +25,7 @@ const MAX_RESULT_BYTES: u64 = 20 * 1024 * 1024;
 
 #[derive(Debug, Parser)]
 #[command(name = "secure-bench")]
-#[command(about = "Tool-neutral Secure Bench Phase 0 evaluation over committed mock reports")]
+#[command(about = "Neutral Secure Bench contracts, corpus validation, and black-box evaluation")]
 #[command(version)]
 struct Cli {
     #[command(subcommand)]
@@ -25,19 +34,54 @@ struct Cli {
 
 #[derive(Debug, Subcommand)]
 enum Command {
-    /// Normalize and score a recorded mock report without executing its command.
-    Evaluate {
-        /// TOML benchmark suite.
-        #[arg(long)]
+    /// Inspect or validate the first-party benchmark corpus.
+    Corpus {
+        #[command(subcommand)]
+        command: CorpusCommand,
+    },
+    /// Execute an explicitly supplied Secure Engine binary as a black box.
+    Run {
+        /// Phase 1 TOML benchmark suite.
         suite: PathBuf,
-        /// JSON recorded-run manifest.
+        /// External tool contract to invoke.
+        #[arg(long, value_enum)]
+        tool: Tool,
+        /// Explicit regular-file path to the user-provided binary.
         #[arg(long)]
-        run: PathBuf,
+        binary: PathBuf,
+        /// New live-run bundle directory.
+        #[arg(long)]
+        output: PathBuf,
+        /// Repository root used to resolve scanner-visible fixture paths.
+        #[arg(long, default_value = ".")]
+        repository_root: PathBuf,
+        /// Stable run identifier.
+        #[arg(long, default_value = "secure-engine-baseline")]
+        run_id: String,
+        /// Public UTF-8 configuration copied outside the scanned tree and fingerprinted.
+        #[arg(long)]
+        configuration: Option<PathBuf>,
+        /// Exact argument template item; repeat for every argument.
+        #[arg(long = "argument", allow_hyphen_values = true)]
+        arguments: Vec<String>,
+    },
+    /// Normalize and score a recorded mock report or a live-run bundle.
+    Evaluate {
+        /// TOML suite in the Phase 1 positional form.
+        suite_path: Option<PathBuf>,
+        /// Recorded-run file or live-run bundle in the Phase 1 positional form.
+        run_path: Option<PathBuf>,
+        /// TOML suite in the preserved Phase 0 option form.
+        #[arg(long = "suite", conflicts_with = "suite_path")]
+        suite_option: Option<PathBuf>,
+        /// Recorded-run file in the preserved Phase 0 option form.
+        #[arg(long = "run", conflicts_with = "run_path")]
+        run_option: Option<PathBuf>,
         /// Optional JSON result path; JSON is printed to standard output when omitted.
         #[arg(long)]
         output: Option<PathBuf>,
     },
-    /// Validate suite, run, adapter, and matching contracts without retaining a result.
+    /// Validate Phase 0 suite, run, adapter, and matching contracts.
     Validate {
         /// TOML benchmark suite.
         #[arg(long)]
@@ -48,10 +92,37 @@ enum Command {
     },
     /// Render the concise terminal projection of a machine-readable result.
     Summary {
-        /// JSON result produced by `evaluate`.
-        #[arg(long)]
-        result: PathBuf,
+        /// Result in the Phase 1 positional form.
+        result_path: Option<PathBuf>,
+        /// Result in the preserved Phase 0 option form.
+        #[arg(long = "result", conflicts_with = "result_path")]
+        result_option: Option<PathBuf>,
     },
+}
+
+#[derive(Debug, Subcommand)]
+enum CorpusCommand {
+    /// Validate schemas, semantics, leakage controls, provenance, and fingerprints.
+    Validate {
+        /// Phase 1 TOML suite.
+        suite: PathBuf,
+        /// Repository root used to resolve fixture paths.
+        #[arg(long, default_value = ".")]
+        repository_root: PathBuf,
+    },
+    /// Compute scanner-visible fingerprints without accepting manifest claims.
+    Inspect {
+        /// Phase 1 TOML suite.
+        suite: PathBuf,
+        /// Repository root used to resolve fixture paths.
+        #[arg(long, default_value = ".")]
+        repository_root: PathBuf,
+    },
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq, ValueEnum)]
+enum Tool {
+    SecureEngine,
 }
 
 fn main() -> ExitCode {
@@ -66,13 +137,41 @@ fn main() -> ExitCode {
 
 fn run(cli: Cli) -> Result<(), String> {
     match cli.command {
-        Command::Evaluate { suite, run, output } => {
-            let result = evaluate_files(&suite, &run)?;
+        Command::Corpus { command } => run_corpus_command(command),
+        Command::Run {
+            suite,
+            tool,
+            binary,
+            output,
+            repository_root,
+            run_id,
+            configuration,
+            arguments,
+        } => run_external(RunOptions {
+            suite,
+            tool,
+            binary,
+            output,
+            repository_root,
+            run_id,
+            configuration,
+            arguments,
+        }),
+        Command::Evaluate {
+            suite_path,
+            run_path,
+            suite_option,
+            run_option,
+            output,
+        } => {
+            let suite = select_path(suite_path, suite_option, "suite")?;
+            let run = select_path(run_path, run_option, "run")?;
+            let result = evaluate_any_files(&suite, &run)?;
             let json = stable_json(&result)?;
             if let Some(path) = output {
                 atomic_write(&path, &json)?;
-                println!("Wrote deterministic Phase 0 result to {}.", path.display());
-                print_summary(&result);
+                eprintln!("Wrote deterministic result to {}.", path.display());
+                eprintln!("{}", summary_text(&result));
             } else {
                 io::stdout()
                     .write_all(&json)
@@ -82,7 +181,7 @@ fn run(cli: Cli) -> Result<(), String> {
             Ok(())
         }
         Command::Validate { suite, run } => {
-            let result = evaluate_files(&suite, &run)?;
+            let result = evaluate_recorded_files(&suite, &run)?;
             if result.errors.is_empty() {
                 println!(
                     "Validated suite `{}` and recorded run `{}`; no scanner command was executed.",
@@ -96,22 +195,142 @@ fn run(cli: Cli) -> Result<(), String> {
                 ))
             }
         }
-        Command::Summary { result } => {
+        Command::Summary {
+            result_path,
+            result_option,
+        } => {
+            let result = select_path(result_path, result_option, "result")?;
             let bytes = read_bounded(&result, MAX_RESULT_BYTES, "result")?;
             let parsed: BenchmarkResult = serde_json::from_slice(&bytes)
                 .map_err(|error| format!("result JSON is invalid at line {}", error.line()))?;
-            print_summary(&parsed);
+            println!("{}", summary_text(&parsed));
             Ok(())
         }
     }
 }
 
-fn evaluate_files(suite_path: &Path, run_path: &Path) -> Result<BenchmarkResult, String> {
+fn run_corpus_command(command: CorpusCommand) -> Result<(), String> {
+    match command {
+        CorpusCommand::Validate {
+            suite,
+            repository_root,
+        } => {
+            let suite_bytes = read_bounded(&suite, MAX_MANIFEST_BYTES, "suite")?;
+            let suite = load_suite(&suite_bytes).map_err(|error| error.to_string())?;
+            let validation =
+                validate_corpus(&suite, &repository_root).map_err(|error| error.to_string())?;
+            println!(
+                "Validated {} cases: {} vulnerable, {} safe controls; corpus fingerprint {}.",
+                validation.cases,
+                validation.vulnerable_cases,
+                validation.safe_controls,
+                validation.corpus_fingerprint
+            );
+            Ok(())
+        }
+        CorpusCommand::Inspect {
+            suite,
+            repository_root,
+        } => {
+            let suite_bytes = read_bounded(&suite, MAX_MANIFEST_BYTES, "suite")?;
+            let suite = load_suite(&suite_bytes).map_err(|error| error.to_string())?;
+            let validation =
+                inspect_corpus(&suite, &repository_root).map_err(|error| error.to_string())?;
+            let output = serde_json::json!({
+                "case_fingerprints": validation.case_fingerprints,
+                "cases": validation.cases,
+                "corpus_fingerprint": validation.corpus_fingerprint,
+                "safe_controls": validation.safe_controls,
+                "vulnerable_cases": validation.vulnerable_cases,
+            });
+            let mut bytes = serde_json::to_vec_pretty(&output)
+                .map_err(|error| format!("could not serialize corpus inspection: {error}"))?;
+            bytes.push(b'\n');
+            io::stdout()
+                .write_all(&bytes)
+                .map_err(|error| format!("could not write corpus inspection: {error}"))
+        }
+    }
+}
+
+struct RunOptions {
+    suite: PathBuf,
+    tool: Tool,
+    binary: PathBuf,
+    output: PathBuf,
+    repository_root: PathBuf,
+    run_id: String,
+    configuration: Option<PathBuf>,
+    arguments: Vec<String>,
+}
+
+fn run_external(options: RunOptions) -> Result<(), String> {
+    if options.tool != Tool::SecureEngine {
+        return Err("only the public Secure Engine contract is available in Phase 1".to_owned());
+    }
+    let suite_bytes = read_bounded(&options.suite, MAX_MANIFEST_BYTES, "suite")?;
+    let suite = load_suite(&suite_bytes).map_err(|error| error.to_string())?;
+    validate_corpus(&suite, &options.repository_root).map_err(|error| error.to_string())?;
+    let configuration = options.configuration.as_deref().map_or_else(
+        || Ok(Vec::new()),
+        |path| read_bounded(path, MAX_MANIFEST_BYTES, "configuration"),
+    )?;
+    let arguments = if options.arguments.is_empty() {
+        DEFAULT_SECURE_ENGINE_ARGUMENTS
+            .iter()
+            .map(ToString::to_string)
+            .collect::<Vec<_>>()
+    } else {
+        options.arguments
+    };
+    let cancellation = Arc::new(AtomicBool::new(false));
+    let signal = Arc::clone(&cancellation);
+    ctrlc::set_handler(move || signal.store(true, std::sync::atomic::Ordering::SeqCst))
+        .map_err(|error| format!("could not install cancellation handler: {error}"))?;
+    let run = run_secure_engine(&RunnerRequest {
+        suite: &suite,
+        repository_root: &options.repository_root,
+        binary: &options.binary,
+        output: &options.output,
+        run_id: &options.run_id,
+        argument_template: &arguments,
+        configuration: &configuration,
+        cancellation,
+    })
+    .map_err(|error| error.to_string())?;
+    eprintln!(
+        "Completed black-box run `{}` with status {:?}; bundle written to {}.",
+        run.run_id,
+        run.status,
+        options.output.display()
+    );
+    Ok(())
+}
+
+fn select_path(
+    positional: Option<PathBuf>,
+    option: Option<PathBuf>,
+    label: &str,
+) -> Result<PathBuf, String> {
+    positional
+        .or(option)
+        .ok_or_else(|| format!("a {label} path is required"))
+}
+
+fn evaluate_any_files(suite_path: &Path, run_path: &Path) -> Result<BenchmarkResult, String> {
+    if fs::symlink_metadata(run_path).is_ok_and(|metadata| metadata.is_dir()) {
+        evaluate_live_files(suite_path, run_path)
+    } else {
+        evaluate_recorded_files(suite_path, run_path)
+    }
+}
+
+fn evaluate_recorded_files(suite_path: &Path, run_path: &Path) -> Result<BenchmarkResult, String> {
     let suite = read_bounded(suite_path, MAX_MANIFEST_BYTES, "suite")?;
     let run = read_bounded(run_path, MAX_MANIFEST_BYTES, "recorded run")?;
     let recorded = load_run_manifest(&run).map_err(|error| error.to_string())?;
     load_suite(&suite).map_err(|error| error.to_string())?;
-    let report_path = resolve_report_path(run_path, &recorded.report_path)?;
+    let report_path = resolve_recorded_report_path(run_path, &recorded.report_path)?;
     let report = read_bounded(&report_path, MAX_REPORT_BYTES, "mock report")?;
     evaluate(EvaluationInput {
         suite: &suite,
@@ -121,7 +340,112 @@ fn evaluate_files(suite_path: &Path, run_path: &Path) -> Result<BenchmarkResult,
     .map_err(|error| error.to_string())
 }
 
-fn resolve_report_path(run_path: &Path, relative: &str) -> Result<PathBuf, String> {
+fn evaluate_live_files(suite_path: &Path, bundle: &Path) -> Result<BenchmarkResult, String> {
+    let bundle_metadata = fs::symlink_metadata(bundle)
+        .map_err(|error| format!("could not inspect live-run bundle: {error}"))?;
+    if !bundle_metadata.is_dir() || bundle_metadata.file_type().is_symlink() {
+        return Err("live-run bundle must be a regular directory".to_owned());
+    }
+    let suite = read_bounded(suite_path, MAX_MANIFEST_BYTES, "suite")?;
+    let run_path = bundle.join("run.json");
+    let run_manifest = read_bounded(&run_path, MAX_MANIFEST_BYTES, "live run")?;
+    let run = load_live_run(&run_manifest).map_err(|error| error.to_string())?;
+    let expected = run
+        .cases
+        .iter()
+        .filter_map(|case| case.report_path.clone())
+        .collect::<BTreeSet<_>>();
+    let actual = collect_bundle_reports(bundle)?;
+    if actual != expected {
+        return Err("live-run bundle contains missing or unrelated raw reports".to_owned());
+    }
+    let mut reports = BTreeMap::new();
+    for path in expected {
+        if !valid_report_path(&path) {
+            return Err(format!("live report path `{path}` is unsafe"));
+        }
+        reports.insert(
+            path.clone(),
+            read_bounded(
+                &safe_bundle_join(bundle, &path)?,
+                MAX_REPORT_BYTES,
+                "live report",
+            )?,
+        );
+    }
+    evaluate_live_run(&LiveEvaluationInput {
+        suite: &suite,
+        run_manifest: &run_manifest,
+        reports: &reports,
+    })
+    .map_err(|error| error.to_string())
+}
+
+fn collect_bundle_reports(bundle: &Path) -> Result<BTreeSet<String>, String> {
+    let reports_root = bundle.join("reports");
+    let mut result = BTreeSet::new();
+    if fs::symlink_metadata(&reports_root).is_err() {
+        return Ok(result);
+    }
+    let mut pending = vec![reports_root];
+    while let Some(directory) = pending.pop() {
+        let metadata = fs::symlink_metadata(&directory)
+            .map_err(|error| format!("could not inspect report directory: {error}"))?;
+        if !metadata.is_dir() || metadata.file_type().is_symlink() {
+            return Err("report bundle contains an unsafe directory".to_owned());
+        }
+        for entry in fs::read_dir(&directory)
+            .map_err(|error| format!("could not read report directory: {error}"))?
+        {
+            let entry = entry.map_err(|error| format!("could not read report entry: {error}"))?;
+            let path = entry.path();
+            let metadata = fs::symlink_metadata(&path)
+                .map_err(|error| format!("could not inspect report entry: {error}"))?;
+            if metadata.file_type().is_symlink() {
+                return Err("report bundle contains a symlink".to_owned());
+            }
+            if metadata.is_dir() {
+                pending.push(path);
+            } else if metadata.is_file() {
+                let relative = path
+                    .strip_prefix(bundle)
+                    .map_err(|_| "report path escaped its bundle".to_owned())?;
+                result.insert(path_to_slashes(relative)?);
+            } else {
+                return Err("report bundle contains a non-regular entry".to_owned());
+            }
+        }
+    }
+    Ok(result)
+}
+
+fn safe_bundle_join(bundle: &Path, relative: &str) -> Result<PathBuf, String> {
+    let mut joined = bundle.to_path_buf();
+    for component in Path::new(relative).components() {
+        match component {
+            Component::Normal(segment) => joined.push(segment),
+            _ => return Err(format!("live report path `{relative}` is unsafe")),
+        }
+    }
+    Ok(joined)
+}
+
+fn path_to_slashes(path: &Path) -> Result<String, String> {
+    let mut segments = Vec::new();
+    for component in path.components() {
+        match component {
+            Component::Normal(segment) => segments.push(
+                segment
+                    .to_str()
+                    .ok_or_else(|| "report bundle path is not UTF-8".to_owned())?,
+            ),
+            _ => return Err("report bundle path is unsafe".to_owned()),
+        }
+    }
+    Ok(segments.join("/"))
+}
+
+fn resolve_recorded_report_path(run_path: &Path, relative: &str) -> Result<PathBuf, String> {
     let relative_path = Path::new(relative);
     if relative_path.is_absolute() {
         return Err("recorded report_path must remain within the reports directory".to_owned());
@@ -137,20 +461,20 @@ fn resolve_report_path(run_path: &Path, relative: &str) -> Result<PathBuf, Strin
     let mut segments = base
         .components()
         .filter_map(|component| match component {
-            std::path::Component::Normal(segment) => Some(segment.to_os_string()),
+            Component::Normal(segment) => Some(segment.to_os_string()),
             _ => None,
         })
         .collect::<Vec<_>>();
     for component in relative_path.components() {
         match component {
-            std::path::Component::Normal(segment) => segments.push(segment.to_os_string()),
-            std::path::Component::CurDir => {}
-            std::path::Component::ParentDir => {
+            Component::Normal(segment) => segments.push(segment.to_os_string()),
+            Component::CurDir => {}
+            Component::ParentDir => {
                 if segments.pop().is_none() {
                     return Err("recorded report_path escapes the reports directory".to_owned());
                 }
             }
-            std::path::Component::RootDir | std::path::Component::Prefix(_) => {
+            Component::RootDir | Component::Prefix(_) => {
                 return Err(
                     "recorded report_path must remain within the reports directory".to_owned(),
                 );
@@ -221,22 +545,25 @@ fn atomic_write(path: &Path, bytes: &[u8]) -> Result<(), String> {
     write_result
 }
 
-fn print_summary(result: &BenchmarkResult) {
-    println!("{}", summary_text(result));
-}
-
 fn summary_text(result: &BenchmarkResult) -> String {
     let score = &result.score;
+    let phase = if result.schema_version == RESULT_SCHEMA_V2 {
+        "Phase 1 live result"
+    } else {
+        "Phase 0 mock data"
+    };
     format!(
         concat!(
-            "Secure Bench Phase 0 (mock data only; no scanner comparison)\n",
+            "Secure Bench {} (neutral evaluation; no ranking)\n",
             "Suite: {} | Run: {} | Normalized findings: {}\n",
             "Vulnerable recall: {}/{} eligible; {}/{} attempted\n",
             "Safe-control false positives: {}/{} attempted; clean coverage: {}/{} eligible\n",
-            "Evidence paths: {}/{} | Duplicates: {}/{}\n",
-            "Calibration: severity {}/{}, confidence {}/{}\n",
-            "Failures: crashes {}, timeouts {}, missing {}, parse failures {}, unsupported {}"
+            "Evidence paths: {}/{} | Sources: {}/{} | Sinks: {}/{} | Duplicates: {}/{}\n",
+            "Calibration observations: severity {}/{}, confidence {}/{}\n",
+            "Failures: crashes {}, timeouts {}, missing {}, parse {}, unsupported {}, invalid {}, execution {}, cancelled {}\n",
+            "Performance: duration {} ms/{} samples; peak memory {:?} bytes/{} samples"
         ),
+        phase,
         result.suite_id,
         result.run_id,
         score.counts.normalized_findings,
@@ -250,6 +577,10 @@ fn summary_text(result: &BenchmarkResult) -> String {
         score.safe_control_clean_coverage.denominator,
         score.evidence_path_accuracy.numerator,
         score.evidence_path_accuracy.denominator,
+        score.source_localization_accuracy.numerator,
+        score.source_localization_accuracy.denominator,
+        score.sink_localization_accuracy.numerator,
+        score.sink_localization_accuracy.denominator,
         score.duplicate_rate.numerator,
         score.duplicate_rate.denominator,
         score.severity_calibration_accuracy.numerator,
@@ -261,6 +592,13 @@ fn summary_text(result: &BenchmarkResult) -> String {
         score.failures.missing,
         score.failures.parse_failures,
         score.failures.unsupported,
+        score.failures.invalid_outputs,
+        score.failures.execution_failures,
+        score.failures.cancellations,
+        score.performance.cold_duration.total,
+        score.performance.cold_duration.samples,
+        score.performance.peak_memory.maximum,
+        score.performance.peak_memory.samples,
     )
 }
 
@@ -271,12 +609,28 @@ mod tests {
     #[test]
     fn report_path_cannot_escape_manifest_directory() {
         assert!(
-            resolve_report_path(Path::new("fixtures/reports/runs/run.json"), "../../secret")
-                .is_err()
+            resolve_recorded_report_path(
+                Path::new("fixtures/reports/runs/run.json"),
+                "../../secret"
+            )
+            .is_err()
         );
         assert_eq!(
-            resolve_report_path(Path::new("fixtures/reports/runs/run.json"), "../mock.json"),
+            resolve_recorded_report_path(
+                Path::new("fixtures/reports/runs/run.json"),
+                "../mock.json"
+            ),
             Ok(PathBuf::from("fixtures/reports/mock.json"))
         );
+    }
+
+    #[test]
+    fn live_report_paths_are_portable_and_confined() {
+        assert_eq!(
+            safe_bundle_join(Path::new("bundle"), "reports/case.json"),
+            Ok(PathBuf::from("bundle/reports/case.json"))
+        );
+        assert!(safe_bundle_join(Path::new("bundle"), "../case.json").is_err());
+        assert!(safe_bundle_join(Path::new("bundle"), "/case.json").is_err());
     }
 }

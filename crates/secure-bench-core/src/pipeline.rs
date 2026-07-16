@@ -1,11 +1,15 @@
-//! Contract validation and mock-only evaluation orchestration.
+//! Contract validation and deterministic recorded or live evaluation orchestration.
 
-use crate::adapter::{AdapterError, AdapterRegistry, fingerprint};
+use crate::adapter::{AdapterError, AdapterInput, AdapterRegistry, fingerprint};
 use crate::matcher::match_findings;
 use crate::model::{
     BenchmarkError, BenchmarkResult, BenchmarkSuite, CaseExecution, CaseKind, ErrorStage,
-    ExecutionStatus, NetworkPolicy, RESULT_SCHEMA_V1, RUN_SCHEMA_V1, RecordedRun, ResultProvenance,
-    SUITE_SCHEMA_V1,
+    ExecutionStatus, NetworkPolicy, RESULT_SCHEMA_V1, RESULT_SCHEMA_V2, RUN_SCHEMA_V1, RecordedRun,
+    ReportFormat, ResultProvenance, SUITE_SCHEMA_V1, SUITE_SCHEMA_V2, ToolProvenance,
+};
+use crate::runner::{
+    LIVE_RUN_SCHEMA_V1, LiveCaseStatus, LiveRun, aggregate_status, load_live_run, render_arguments,
+    valid_report_path, validate_argument_template,
 };
 use crate::score::score;
 use std::collections::{BTreeMap, BTreeSet};
@@ -21,6 +25,17 @@ pub struct EvaluationInput<'a> {
     pub run_manifest: &'a [u8],
     /// JSON native or SARIF report.
     pub report: &'a [u8],
+}
+
+/// Raw committed inputs for one Phase 1 live-run evaluation.
+#[derive(Debug)]
+pub struct LiveEvaluationInput<'a> {
+    /// Human-authored Phase 1 TOML suite manifest.
+    pub suite: &'a [u8],
+    /// JSON live-run bundle manifest.
+    pub run_manifest: &'a [u8],
+    /// Bundle-relative raw reports keyed by their manifest paths.
+    pub reports: &'a BTreeMap<String, Vec<u8>>,
 }
 
 /// Contract errors stop evaluation before a misleading result can be emitted.
@@ -75,7 +90,7 @@ pub fn load_run_manifest(bytes: &[u8]) -> Result<RecordedRun, ContractError> {
 pub fn evaluate(input: EvaluationInput<'_>) -> Result<BenchmarkResult, ContractError> {
     let suite = load_suite(input.suite)?;
     let run = load_run_manifest(input.run_manifest)?;
-    validate_suite(&suite)?;
+    validate_suite_contract(&suite)?;
     validate_run(&suite, &run)?;
     crate::schema::validate_suite(&suite)
         .map_err(|error| ContractError::InvalidSuite(error.to_string()))?;
@@ -145,10 +160,322 @@ pub fn evaluate(input: EvaluationInput<'_>) -> Result<BenchmarkResult, ContractE
     Ok(result)
 }
 
+/// Evaluates a Phase 1 live-run bundle through the existing scoring-blind adapter and matcher.
+///
+/// # Errors
+///
+/// Returns [`ContractError`] when suite, run, report linkage, or generated result contracts are
+/// inconsistent. Process and adapter failures remain explicit inside a valid result.
+#[allow(clippy::too_many_lines)]
+pub fn evaluate_live_run(
+    input: &LiveEvaluationInput<'_>,
+) -> Result<BenchmarkResult, ContractError> {
+    let suite = load_suite(input.suite)?;
+    validate_suite_contract(&suite)?;
+    if suite.schema_version != SUITE_SCHEMA_V2 {
+        return Err(ContractError::InvalidSuite(format!(
+            "live evaluation requires `{SUITE_SCHEMA_V2}`"
+        )));
+    }
+    crate::schema::validate_suite(&suite)
+        .map_err(|error| ContractError::InvalidSuite(error.to_string()))?;
+    let run = load_live_run(input.run_manifest)
+        .map_err(|error| ContractError::InvalidRun(error.to_string()))?;
+    validate_live_run_contract(&suite, &run, input.reports)?;
+    crate::schema::validate_live_run(&run)
+        .map_err(|error| ContractError::InvalidRun(error.to_string()))?;
+
+    let case_by_id = suite
+        .cases
+        .iter()
+        .map(|case| (case.case_id.as_str(), case))
+        .collect::<BTreeMap<_, _>>();
+    let mut findings = Vec::new();
+    let mut executions = Vec::new();
+    let mut errors = Vec::new();
+    for case_run in &run.cases {
+        let case = case_by_id.get(case_run.case_id.as_str()).ok_or_else(|| {
+            ContractError::InvalidRun(format!("run contains unknown case `{}`", case_run.case_id))
+        })?;
+        let mut execution_status = live_execution_status(case_run.status);
+        if case_run.status.is_success() {
+            let report_path = case_run.report_path.as_deref().ok_or_else(|| {
+                ContractError::InvalidRun(format!(
+                    "successful case `{}` has no report path",
+                    case_run.case_id
+                ))
+            })?;
+            let report = input.reports.get(report_path).ok_or_else(|| {
+                ContractError::InvalidRun(format!(
+                    "bundle omitted report for case `{}`",
+                    case_run.case_id
+                ))
+            })?;
+            let report_fingerprint = fingerprint(report);
+            let adapter = AdapterRegistry::adapter(ReportFormat::SecureJsonV1)
+                .map_err(|error| ContractError::InvalidRun(error.to_string()))?;
+            match adapter.normalize_scoped(AdapterInput {
+                report,
+                report_fingerprint: &report_fingerprint,
+                case_id: Some(&case_run.case_id),
+                path_prefix: Some(&case.fixture_path),
+            }) {
+                Ok(mut normalized) => {
+                    let status_matches = matches!(
+                        (case_run.status, normalized.is_empty()),
+                        (LiveCaseStatus::Success, true) | (LiveCaseStatus::Findings, false)
+                    );
+                    if !status_matches {
+                        return Err(ContractError::InvalidRun(format!(
+                            "reported outcome differs from report contents for case `{}`",
+                            case_run.case_id
+                        )));
+                    }
+                    findings.append(&mut normalized);
+                }
+                Err(error) => {
+                    let unsupported = matches!(
+                        error,
+                        AdapterError::UnsupportedVersion(_) | AdapterError::UnsupportedFormat
+                    );
+                    execution_status = if unsupported {
+                        ExecutionStatus::Unsupported
+                    } else {
+                        ExecutionStatus::InvalidOutput
+                    };
+                    errors.push(BenchmarkError {
+                        code: adapter_error_code(&error).to_owned(),
+                        stage: ErrorStage::Adapter,
+                        message: error.to_string(),
+                    });
+                }
+            }
+        } else {
+            errors.push(BenchmarkError {
+                code: case_run
+                    .error_code
+                    .clone()
+                    .unwrap_or_else(|| "runner.unspecified_failure".to_owned()),
+                stage: ErrorStage::Runner,
+                message: format!(
+                    "case `{}` did not produce an eligible successful scan ({:?})",
+                    case_run.case_id, case_run.status
+                ),
+            });
+        }
+        executions.push(CaseExecution {
+            case_id: case_run.case_id.clone(),
+            status: execution_status,
+            cold_duration_ms: Some(case_run.duration_ms),
+            warm_duration_ms: None,
+            peak_memory_bytes: case_run.peak_memory_bytes,
+            output_bytes: case_run.output_bytes,
+        });
+    }
+    findings.sort_by(|left, right| left.finding_id.cmp(&right.finding_id));
+    errors.sort_by(|left, right| (&left.code, &left.message).cmp(&(&right.code, &right.message)));
+    executions.sort_by(|left, right| left.case_id.cmp(&right.case_id));
+    let matching = match_findings(&suite, &findings, &executions);
+    let score = score(&suite, &findings, &matching, &executions);
+    let aggregate_report_fingerprint = aggregate_report_fingerprint(&run);
+    let schemas = BTreeMap::from([
+        ("result".to_owned(), RESULT_SCHEMA_V2.to_owned()),
+        ("run".to_owned(), LIVE_RUN_SCHEMA_V1.to_owned()),
+        ("suite".to_owned(), SUITE_SCHEMA_V2.to_owned()),
+        ("tool_report".to_owned(), run.tool.report_schema.clone()),
+    ]);
+    let result = BenchmarkResult {
+        schema_version: RESULT_SCHEMA_V2.to_owned(),
+        suite_id: suite.suite_id,
+        run_id: run.run_id,
+        normalized_findings: findings,
+        matching,
+        score,
+        errors,
+        provenance: ResultProvenance {
+            suite_fingerprint: fingerprint(input.suite),
+            run_manifest_fingerprint: fingerprint(input.run_manifest),
+            report_fingerprint: aggregate_report_fingerprint,
+            tool: ToolProvenance {
+                name: run.tool.name,
+                version: run.tool.reported_version,
+                command: run.tool.argument_template,
+                configuration_fingerprint: run.tool.configuration_fingerprint,
+                report_schema: run.tool.report_schema,
+                binary_fingerprint: Some(run.tool.binary_fingerprint),
+            },
+            host: run.host,
+            schemas,
+        },
+    };
+    crate::schema::validate_result(&result)
+        .map_err(|error| ContractError::InvalidResult(error.to_string()))?;
+    Ok(result)
+}
+
+// Keeping manifest/report cross-field checks together makes the live contract auditable.
+#[allow(clippy::too_many_lines)]
+fn validate_live_run_contract(
+    suite: &BenchmarkSuite,
+    run: &LiveRun,
+    reports: &BTreeMap<String, Vec<u8>>,
+) -> Result<(), ContractError> {
+    if run.schema_version != LIVE_RUN_SCHEMA_V1 {
+        return Err(ContractError::InvalidRun(format!(
+            "unsupported live-run schema `{}`",
+            run.schema_version
+        )));
+    }
+    if run.finished_unix_ms < run.started_unix_ms || aggregate_status(&run.cases) != run.status {
+        return Err(ContractError::InvalidRun(
+            "live-run timestamps or aggregate status are inconsistent".to_owned(),
+        ));
+    }
+    if run.suite_id != suite.suite_id
+        || Some(run.corpus_fingerprint.as_str()) != suite.corpus_fingerprint.as_deref()
+    {
+        return Err(ContractError::InvalidRun(
+            "suite identity or corpus fingerprint does not match the run".to_owned(),
+        ));
+    }
+    if !is_sha256(&run.tool.binary_fingerprint)
+        || !is_sha256(&run.tool.configuration_fingerprint)
+        || run.tool.report_schema != "secure-json-v1"
+    {
+        return Err(ContractError::InvalidRun(
+            "live tool fingerprints or report schema are invalid".to_owned(),
+        ));
+    }
+    validate_argument_template(&run.tool.argument_template).map_err(ContractError::InvalidRun)?;
+    let configuration_placeholders = run
+        .tool
+        .argument_template
+        .iter()
+        .filter(|argument| argument.as_str() == "{configuration}")
+        .count();
+    let empty_configuration = fingerprint(&[]);
+    if (run.tool.configuration_fingerprint == empty_configuration
+        && configuration_placeholders != 0)
+        || (run.tool.configuration_fingerprint != empty_configuration
+            && configuration_placeholders != 1)
+    {
+        return Err(ContractError::InvalidRun(
+            "configuration fingerprint and argument template are inconsistent".to_owned(),
+        ));
+    }
+    let suite_cases = suite
+        .cases
+        .iter()
+        .map(|case| (case.case_id.as_str(), case))
+        .collect::<BTreeMap<_, _>>();
+    let mut seen = BTreeSet::new();
+    let mut referenced_reports = BTreeSet::new();
+    let expected_arguments = render_arguments(&run.tool.argument_template);
+    for case_run in &run.cases {
+        if !seen.insert(case_run.case_id.as_str()) {
+            return Err(ContractError::InvalidRun(format!(
+                "duplicate live case `{}`",
+                case_run.case_id
+            )));
+        }
+        let case = suite_cases.get(case_run.case_id.as_str()).ok_or_else(|| {
+            ContractError::InvalidRun(format!("unknown live case `{}`", case_run.case_id))
+        })?;
+        if case.content_fingerprint.as_deref() != Some(case_run.fixture_fingerprint.as_str()) {
+            return Err(ContractError::InvalidRun(format!(
+                "fixture fingerprint differs for case `{}`",
+                case_run.case_id
+            )));
+        }
+        if case_run.arguments != expected_arguments
+            || case_run.finished_unix_ms < case_run.started_unix_ms
+            || case_run.started_unix_ms < run.started_unix_ms
+            || case_run.finished_unix_ms > run.finished_unix_ms
+            || (case_run.status.is_success() && case_run.error_code.is_some())
+            || (!case_run.status.is_success() && case_run.error_code.is_none())
+        {
+            return Err(ContractError::InvalidRun(format!(
+                "execution provenance is inconsistent for case `{}`",
+                case_run.case_id
+            )));
+        }
+        if let Some(path) = &case_run.report_path {
+            let expected_path = format!("reports/{}.json", case_run.case_id);
+            if path != &expected_path
+                || !valid_report_path(path)
+                || !referenced_reports.insert(path.as_str())
+            {
+                return Err(ContractError::InvalidRun(format!(
+                    "case `{}` has an unsafe or duplicate report path",
+                    case_run.case_id
+                )));
+            }
+            let report = reports.get(path).ok_or_else(|| {
+                ContractError::InvalidRun(format!("report `{path}` is not present in the bundle"))
+            })?;
+            let report_size = u64::try_from(report.len()).unwrap_or(u64::MAX);
+            let report_fingerprint = fingerprint(report);
+            if report_size > case.resource_budget.output_bytes
+                || case_run.output_bytes != Some(report_size)
+                || case_run.report_fingerprint.as_deref() != Some(report_fingerprint.as_str())
+            {
+                return Err(ContractError::InvalidRun(format!(
+                    "report fingerprint or size differs for case `{}`",
+                    case_run.case_id
+                )));
+            }
+        } else if case_run.report_fingerprint.is_some() || case_run.status.is_success() {
+            return Err(ContractError::InvalidRun(format!(
+                "case `{}` has inconsistent report metadata",
+                case_run.case_id
+            )));
+        }
+    }
+    if seen.len() != suite_cases.len()
+        || reports
+            .keys()
+            .any(|path| !referenced_reports.contains(path.as_str()))
+    {
+        return Err(ContractError::InvalidRun(
+            "live run and report bundle must account for every case and no unrelated reports"
+                .to_owned(),
+        ));
+    }
+    Ok(())
+}
+
+const fn live_execution_status(status: LiveCaseStatus) -> ExecutionStatus {
+    match status {
+        LiveCaseStatus::Success | LiveCaseStatus::Findings => ExecutionStatus::Success,
+        LiveCaseStatus::Crash => ExecutionStatus::Crash,
+        LiveCaseStatus::Timeout => ExecutionStatus::Timeout,
+        LiveCaseStatus::InvalidOutput => ExecutionStatus::InvalidOutput,
+        LiveCaseStatus::UnsupportedSchema => ExecutionStatus::Unsupported,
+        LiveCaseStatus::ExecutionFailure => ExecutionStatus::ExecutionFailure,
+        LiveCaseStatus::Cancelled => ExecutionStatus::Cancelled,
+    }
+}
+
+fn aggregate_report_fingerprint(run: &LiveRun) -> String {
+    let mut bytes = Vec::new();
+    for case in &run.cases {
+        if let Some(digest) = &case.report_fingerprint {
+            bytes.extend_from_slice(case.case_id.as_bytes());
+            bytes.push(0);
+            bytes.extend_from_slice(digest.as_bytes());
+            bytes.push(0);
+        }
+    }
+    fingerprint(&bytes)
+}
+
 // Keeping the cross-field checks together makes the suite contract auditable as one gate.
 #[allow(clippy::too_many_lines)]
-fn validate_suite(suite: &BenchmarkSuite) -> Result<(), ContractError> {
-    if suite.schema_version != SUITE_SCHEMA_V1 {
+pub(crate) fn validate_suite_contract(suite: &BenchmarkSuite) -> Result<(), ContractError> {
+    if !matches!(
+        suite.schema_version.as_str(),
+        SUITE_SCHEMA_V1 | SUITE_SCHEMA_V2
+    ) {
         return Err(ContractError::InvalidSuite(format!(
             "unsupported schema version `{}`",
             suite.schema_version
@@ -208,7 +535,7 @@ fn validate_suite(suite: &BenchmarkSuite) -> Result<(), ContractError> {
         }
         if case.resource_budget.network != NetworkPolicy::Disabled {
             return Err(ContractError::InvalidSuite(format!(
-                "case `{}` must disable network access in Phase 0",
+                "case `{}` must declare disabled network access",
                 case.case_id
             )));
         }

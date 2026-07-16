@@ -25,14 +25,47 @@ pub trait Adapter: Send + Sync {
         &self,
         report: &[u8],
         report_fingerprint: &str,
+    ) -> Result<Vec<NormalizedFinding>, AdapterError> {
+        self.normalize_scoped(AdapterInput {
+            report,
+            report_fingerprint,
+            case_id: None,
+            path_prefix: None,
+        })
+    }
+
+    /// Converts a report produced for one neutral case scope.
+    ///
+    /// Scope supplies case identity and a repository-relative path prefix, but never expected
+    /// findings, categories, invariants, or scoring data.
+    ///
+    /// # Errors
+    ///
+    /// Returns a bounded, sanitized error for malformed, unsupported, or inconsistent input.
+    fn normalize_scoped(
+        &self,
+        input: AdapterInput<'_>,
     ) -> Result<Vec<NormalizedFinding>, AdapterError>;
+}
+
+/// Neutral execution scope for a report produced from one isolated case.
+#[derive(Clone, Copy, Debug)]
+pub struct AdapterInput<'a> {
+    /// Untrusted report bytes.
+    pub report: &'a [u8],
+    /// SHA-256 of the raw report.
+    pub report_fingerprint: &'a str,
+    /// Case identifier assigned before scanner execution.
+    pub case_id: Option<&'a str>,
+    /// Repository-relative prefix for paths emitted relative to the isolated case.
+    pub path_prefix: Option<&'a str>,
 }
 
 /// Adapter failures are kept distinct from successful empty reports.
 #[derive(Clone, Debug, Eq, Error, PartialEq)]
 pub enum AdapterError {
-    /// Report exceeds the Phase 0 input bound.
-    #[error("report exceeds the 10 MiB Phase 0 input limit")]
+    /// Report exceeds the adapter input bound.
+    #[error("report exceeds the 10 MiB adapter input limit")]
     ReportTooLarge,
     /// Input is not valid for the selected format.
     #[error("report is not valid {format}: {detail}")]
@@ -49,7 +82,7 @@ pub enum AdapterError {
     #[error("report contains an unsafe or non-relative source path")]
     UnsafePath,
     /// The registry deliberately has no adapter for this format.
-    #[error("the selected report format is unsupported in Phase 0")]
+    #[error("the selected report format is unsupported")]
     UnsupportedFormat,
 }
 
@@ -81,14 +114,13 @@ impl Adapter for SecureJsonAdapter {
         "secure-json-v1"
     }
 
-    fn normalize(
+    fn normalize_scoped(
         &self,
-        report: &[u8],
-        report_fingerprint: &str,
+        input: AdapterInput<'_>,
     ) -> Result<Vec<NormalizedFinding>, AdapterError> {
-        check_size(report)?;
+        check_size(input.report)?;
         let native: NativeReport =
-            serde_json::from_slice(report).map_err(|error| AdapterError::InvalidReport {
+            serde_json::from_slice(input.report).map_err(|error| AdapterError::InvalidReport {
                 format: self.id(),
                 detail: parser_detail(&error),
             })?;
@@ -97,7 +129,14 @@ impl Adapter for SecureJsonAdapter {
                 &native.schema_version,
             )));
         }
+        if native.scan.as_ref().is_some_and(|scan| !scan.complete) || !native.errors.is_empty() {
+            return Err(AdapterError::InvalidReport {
+                format: self.id(),
+                detail: "report declares an incomplete scan or scanner errors".to_owned(),
+            });
+        }
 
+        let prefix = input.path_prefix.map(normalize_path).transpose()?;
         native
             .findings
             .into_iter()
@@ -115,22 +154,20 @@ impl Adapter for SecureJsonAdapter {
                         })
                     })
                     .collect::<Result<Vec<_>, AdapterError>>()?;
-                build_finding(
-                    FindingParts {
-                        case_id: finding.case_id,
-                        native_rule_id: finding.rule_id,
-                        category: finding.category,
-                        invariant: finding.invariant,
-                        severity: finding.severity,
-                        confidence: finding.confidence,
-                        source,
-                        sink,
-                        evidence_path,
-                    },
-                    self.id(),
-                    report_fingerprint,
-                    index,
-                )
+                let case_id = scoped_case_id(finding.case_id.as_deref(), input.case_id)?;
+                let mut parts = FindingParts {
+                    case_id,
+                    native_rule_id: finding.rule_id,
+                    category: finding.category,
+                    invariant: finding.invariant,
+                    severity: finding.severity,
+                    confidence: finding.confidence,
+                    source,
+                    sink,
+                    evidence_path,
+                };
+                apply_path_prefix(&mut parts, prefix.as_deref());
+                build_finding(parts, self.id(), input.report_fingerprint, index)
             })
             .collect()
     }
@@ -145,14 +182,13 @@ impl Adapter for SarifAdapter {
         "sarif-2.1.0"
     }
 
-    fn normalize(
+    fn normalize_scoped(
         &self,
-        report: &[u8],
-        report_fingerprint: &str,
+        input: AdapterInput<'_>,
     ) -> Result<Vec<NormalizedFinding>, AdapterError> {
-        check_size(report)?;
+        check_size(input.report)?;
         let sarif: SarifLog =
-            serde_json::from_slice(report).map_err(|error| AdapterError::InvalidReport {
+            serde_json::from_slice(input.report).map_err(|error| AdapterError::InvalidReport {
                 format: self.id(),
                 detail: parser_detail(&error),
             })?;
@@ -162,16 +198,20 @@ impl Adapter for SarifAdapter {
             )));
         }
 
+        let prefix = input.path_prefix.map(normalize_path).transpose()?;
         let mut normalized = Vec::new();
         for run in sarif.runs {
             for result in run.results {
                 let raw_index = normalized.len();
-                normalized.push(normalize_sarif_result(
+                let finding = normalize_sarif_result(
                     result,
                     self.id(),
-                    report_fingerprint,
+                    input.report_fingerprint,
                     raw_index,
-                )?);
+                    input.case_id,
+                    prefix.as_deref(),
+                )?;
+                normalized.push(finding);
             }
         }
         Ok(normalized)
@@ -179,16 +219,19 @@ impl Adapter for SarifAdapter {
 }
 
 #[derive(Debug, Deserialize)]
-#[serde(deny_unknown_fields)]
 struct NativeReport {
     schema_version: String,
     findings: Vec<NativeFinding>,
+    #[serde(default)]
+    scan: Option<NativeScan>,
+    #[serde(default)]
+    errors: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Deserialize)]
-#[serde(deny_unknown_fields)]
 struct NativeFinding {
-    case_id: String,
+    #[serde(default)]
+    case_id: Option<String>,
     rule_id: String,
     category: String,
     invariant: String,
@@ -202,18 +245,32 @@ struct NativeFinding {
 }
 
 #[derive(Debug, Deserialize)]
-#[serde(deny_unknown_fields)]
 struct NativeLocation {
     path: String,
-    line: u32,
+    #[serde(default)]
+    line: Option<u32>,
+    #[serde(default)]
     column: Option<u32>,
+    #[serde(default)]
+    span: Option<NativeSpan>,
 }
 
 #[derive(Debug, Deserialize)]
-#[serde(deny_unknown_fields)]
 struct NativeHop {
     kind: String,
     location: NativeLocation,
+}
+
+#[derive(Debug, Deserialize)]
+struct NativeSpan {
+    start_line: u32,
+    #[serde(default)]
+    start_column: Option<u32>,
+}
+
+#[derive(Debug, Deserialize)]
+struct NativeScan {
+    complete: bool,
 }
 
 #[derive(Debug, Deserialize)]
@@ -245,7 +302,8 @@ struct SarifResult {
 
 #[derive(Debug, Deserialize)]
 struct SarifProperties {
-    case_id: String,
+    #[serde(default)]
+    case_id: Option<String>,
     category: String,
     invariant: String,
     #[serde(default)]
@@ -316,6 +374,8 @@ fn normalize_sarif_result(
     adapter: &str,
     report_fingerprint: &str,
     raw_index: usize,
+    scoped_case: Option<&str>,
+    path_prefix: Option<&str>,
 ) -> Result<NormalizedFinding, AdapterError> {
     let mut evidence_path = result
         .code_flows
@@ -378,22 +438,41 @@ fn normalize_sarif_result(
     )?;
     let confidence = parse_confidence(result.properties.confidence.as_deref().unwrap_or("medium"))?;
 
-    build_finding(
-        FindingParts {
-            case_id: result.properties.case_id,
-            native_rule_id: result.rule_id,
-            category: result.properties.category,
-            invariant: result.properties.invariant,
-            severity,
-            confidence,
-            source,
-            sink,
-            evidence_path,
-        },
-        adapter,
-        report_fingerprint,
-        raw_index,
-    )
+    let mut parts = FindingParts {
+        case_id: scoped_case_id(result.properties.case_id.as_deref(), scoped_case)?,
+        native_rule_id: result.rule_id,
+        category: result.properties.category,
+        invariant: result.properties.invariant,
+        severity,
+        confidence,
+        source,
+        sink,
+        evidence_path,
+    };
+    apply_path_prefix(&mut parts, path_prefix);
+    build_finding(parts, adapter, report_fingerprint, raw_index)
+}
+
+fn scoped_case_id(reported: Option<&str>, scoped: Option<&str>) -> Result<String, AdapterError> {
+    match (reported, scoped) {
+        (_, Some(scoped)) => canonical_identifier(scoped),
+        (Some(reported), None) => canonical_identifier(reported),
+        (None, None) => Err(AdapterError::InvalidReport {
+            format: "normalized finding",
+            detail: "finding has no case identifier or neutral execution scope".to_owned(),
+        }),
+    }
+}
+
+fn apply_path_prefix(finding: &mut FindingParts, prefix: Option<&str>) {
+    let Some(prefix) = prefix else {
+        return;
+    };
+    finding.source.path = format!("{prefix}/{}", finding.source.path);
+    finding.sink.path = format!("{prefix}/{}", finding.sink.path);
+    for hop in &mut finding.evidence_path {
+        hop.location.path = format!("{prefix}/{}", hop.location.path);
+    }
 }
 
 struct FindingParts {
@@ -463,10 +542,33 @@ fn build_finding(
 }
 
 fn normalize_native_location(location: &NativeLocation) -> Result<SourceLocation, AdapterError> {
+    let span_line = location.span.as_ref().map(|span| span.start_line);
+    let span_column = location.span.as_ref().and_then(|span| span.start_column);
+    if location
+        .line
+        .zip(span_line)
+        .is_some_and(|(line, span_line)| line != span_line)
+        || location
+            .column
+            .zip(span_column)
+            .is_some_and(|(column, span_column)| column != span_column)
+    {
+        return Err(AdapterError::InvalidReport {
+            format: "secure-json-v1",
+            detail: "location and span start coordinates disagree".to_owned(),
+        });
+    }
+    let line = location
+        .line
+        .or(span_line)
+        .ok_or_else(|| AdapterError::InvalidReport {
+            format: "secure-json-v1",
+            detail: "location has no one-based start line".to_owned(),
+        })?;
     Ok(SourceLocation {
         path: normalize_path(&location.path)?,
-        line: validate_line(location.line)?,
-        column: validate_column(location.column)?,
+        line: validate_line(line)?,
+        column: validate_column(location.column.or(span_column))?,
     })
 }
 
@@ -663,5 +765,85 @@ mod tests {
         let sanitized = sanitized_rule_id("source code: process.env.SECRET");
         assert!(sanitized.starts_with("rule-"));
         assert!(!sanitized.contains("SECRET"));
+    }
+
+    #[test]
+    fn live_execution_scope_is_authoritative_for_case_identity() {
+        assert_eq!(
+            scoped_case_id(Some("native-project-label"), Some("phase1-001")),
+            Ok("phase1-001".to_owned())
+        );
+    }
+
+    #[test]
+    fn accepts_public_span_locations_and_ignores_non_scoring_metadata() {
+        let report = serde_json::to_vec(&serde_json::json!({
+            "schema_version": "secure-json-v1",
+            "document_type": "scan-report",
+            "scan": {"complete": true},
+            "errors": [],
+            "inventory": {"files": 2},
+            "findings": [{
+                "rule_id": "PUBLIC1001",
+                "title": "Public report finding",
+                "category": "command-injection",
+                "invariant": "command arguments must not be untrusted",
+                "severity": "high",
+                "confidence": "high",
+                "source": {
+                    "path": "src/entry.js",
+                    "span": {"start_line": 4, "start_column": 16}
+                },
+                "sink": {
+                    "path": "src/entry.js",
+                    "span": {"start_line": 5, "start_column": 10}
+                },
+                "evidence_path": [{
+                    "node_id": "node-1",
+                    "kind": "source",
+                    "location": {
+                        "path": "src/entry.js",
+                        "span": {"start_line": 4, "start_column": 16}
+                    }
+                }, {
+                    "node_id": "node-2",
+                    "kind": "sink",
+                    "location": {
+                        "path": "src/entry.js",
+                        "span": {"start_line": 5, "start_column": 10}
+                    }
+                }]
+            }]
+        }))
+        .unwrap_or_default();
+        let findings = SecureJsonAdapter
+            .normalize_scoped(AdapterInput {
+                report: &report,
+                report_fingerprint: &fingerprint(&report),
+                case_id: Some("phase1-001"),
+                path_prefix: Some("fixtures/corpus/case-001"),
+            })
+            .unwrap_or_default();
+
+        assert_eq!(findings.len(), 1);
+        assert_eq!(findings[0].source.line, 4);
+        assert_eq!(findings[0].source.column, Some(16));
+        assert_eq!(findings[0].sink.line, 5);
+        assert_eq!(findings[0].case_id, "phase1-001");
+    }
+
+    #[test]
+    fn rejects_public_reports_that_declare_incomplete_scans() {
+        let report = br#"{
+            "schema_version":"secure-json-v1",
+            "scan":{"complete":false},
+            "errors":[],
+            "findings":[]
+        }"#;
+        assert!(
+            SecureJsonAdapter
+                .normalize(report, &fingerprint(report))
+                .is_err()
+        );
     }
 }

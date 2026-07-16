@@ -1,4 +1,4 @@
-# Phase 0 Architecture
+# Secure Bench Phase 0–1 Architecture
 
 ## Purpose and boundary
 
@@ -61,6 +61,22 @@ The CLI reads bounded regular files, rejects symlinks for input artifacts, confi
 
 Maps use stable key ordering, findings and decisions are sorted by content-derived identifiers, ratios use integer arithmetic, and JSON uses a stable pretty-printed projection. The same committed bytes produce byte-identical output. In future execution phases, measured timing and host values will legitimately vary; those fields will remain raw provenance and will not alter matching.
 
-## Future runner boundary
+## Phase 1 live boundary
 
-Resource budgets and network policy are modeled now, but Phase 0 has no process runner. A later runner must invoke argument arrays without a shell, isolate process groups, enforce read-only fixture copies and resource limits, disable network access by default, bound artifacts, and detect fixture mutation. Those controls are not claimed by this phase.
+Phase 1 preserves the Phase 0 path unchanged and adds a separate live-run path:
+
+```text
+matcher-owned suite ------------------------------+
+                                                    |
+one scanner-visible case copy -> external binary   | expectations enter here
+                                  |                 v
+bounded secure-json-v1 report -> scoped adapter -> deterministic matcher
+                                  |
+                                  +-> raw report + live provenance bundle
+```
+
+The runner accepts only an explicit regular-file binary, invokes it without a shell, clears its environment, isolates it in a fresh copied project, monitors time and direct-process memory, drains streams with bounded retained metadata, cleans its process group, and publishes artifacts atomically. It records fingerprints rather than absolute binary, repository, or temporary paths.
+
+The suite, labels, and expectations remain outside the temporary scan directory. The live adapter receives only report bytes, report fingerprint, neutral case scope, and a path prefix. It cannot inspect expectations or award credit. Every successful raw report follows the same normalized model and matcher used by recorded input.
+
+Phase 1 does not claim the kernel-enforced network and read-only filesystem sandboxing planned for Phase 3. Its declared network-disabled policy, cleared environment, copied temporary project, direct invocation, time/output bounds, observed memory termination, and process cleanup are documented precisely in [Phase 1 runner boundaries](phase-1-runner.md).

@@ -5,10 +5,14 @@ use std::collections::BTreeMap;
 
 /// The Phase 0 suite schema identifier.
 pub const SUITE_SCHEMA_V1: &str = "secure-bench-suite-v1";
+/// The Phase 1 first-party corpus schema identifier.
+pub const SUITE_SCHEMA_V2: &str = "secure-bench-suite-v2";
 /// The Phase 0 recorded run schema identifier.
 pub const RUN_SCHEMA_V1: &str = "secure-bench-run-v1";
 /// The Phase 0 result schema identifier.
 pub const RESULT_SCHEMA_V1: &str = "secure-bench-result-v1";
+/// The Phase 1 result schema identifier.
+pub const RESULT_SCHEMA_V2: &str = "secure-bench-result-v2";
 
 /// A benchmark suite loaded only by the matcher after report normalization.
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
@@ -24,6 +28,9 @@ pub struct BenchmarkSuite {
     pub description: String,
     /// Published methodology revision.
     pub methodology_version: String,
+    /// Aggregate fingerprint of all scanner-visible fixture content.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub corpus_fingerprint: Option<String>,
     /// Suite-level fixture provenance.
     pub provenance: FixtureProvenance,
     /// Vulnerable cases and safe controls.
@@ -48,9 +55,12 @@ pub struct BenchmarkCase {
     pub invariant: Option<String>,
     /// Repository-relative fixture directory.
     pub fixture_path: String,
+    /// Fingerprint of scanner-visible files in this case.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub content_fingerprint: Option<String>,
     /// Eligibility declared before evaluation.
     pub eligibility: Eligibility,
-    /// Per-case resource limits for future runners.
+    /// Per-case resource limits for black-box runners.
     pub resource_budget: ResourceBudget,
     /// Expected findings; empty for safe controls.
     #[serde(default)]
@@ -60,7 +70,7 @@ pub struct BenchmarkCase {
 }
 
 /// Case labels are never merged during scoring.
-#[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[derive(Clone, Copy, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum CaseKind {
     /// A case with at least one declared security invariant violation.
@@ -78,9 +88,12 @@ pub struct Eligibility {
     pub required_capabilities: Vec<String>,
     /// Report formats able to carry the necessary evidence.
     pub supported_report_formats: Vec<String>,
+    /// Pre-execution eligibility rationale.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub rationale: Option<String>,
 }
 
-/// Future execution bounds recorded in Phase 0 without executing a scanner.
+/// Execution bounds declared before a scanner is run.
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct ResourceBudget {
@@ -90,7 +103,7 @@ pub struct ResourceBudget {
     pub memory_bytes: u64,
     /// Maximum accepted report size.
     pub output_bytes: u64,
-    /// Network policy for future runner phases.
+    /// Declared network policy.
     pub network: NetworkPolicy,
 }
 
@@ -100,7 +113,7 @@ pub struct ResourceBudget {
 pub enum NetworkPolicy {
     /// No network access is permitted.
     Disabled,
-    /// A later suite may explicitly permit and record network access.
+    /// A future suite version may explicitly permit and record network access.
     ExplicitlyAllowed,
 }
 
@@ -172,6 +185,9 @@ pub struct FixtureProvenance {
     pub revision: String,
     /// Modifications made for this suite.
     pub modifications: String,
+    /// Fixture authors or accountable organization.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub authors: Vec<String>,
 }
 
 /// A committed description of a mock tool run; it never executes the command.
@@ -226,12 +242,15 @@ pub struct ToolProvenance {
     pub name: String,
     /// Tool version.
     pub version: String,
-    /// Explicit command and arguments, recorded but not executed in Phase 0.
+    /// Explicit command and arguments, recorded as public provenance.
     pub command: Vec<String>,
     /// SHA-256 fingerprint of public configuration.
     pub configuration_fingerprint: String,
     /// Native output schema identifier.
     pub report_schema: String,
+    /// SHA-256 of the external executable, when a live runner is used.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub binary_fingerprint: Option<String>,
 }
 
 /// Sanitized, reproducibility-oriented host metadata.
@@ -246,6 +265,9 @@ pub struct HostProvenance {
     pub logical_cpus: Option<u32>,
     /// Memory total, if recorded.
     pub memory_bytes: Option<u64>,
+    /// Kernel release, if recorded without host identity.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub kernel_release: Option<String>,
 }
 
 /// A case-level attempt and its resource measurements.
@@ -282,6 +304,12 @@ pub enum ExecutionStatus {
     Missing,
     /// The adapter could not parse or validate the report.
     ParseFailure,
+    /// A bounded report existed but failed live output validation.
+    InvalidOutput,
+    /// The binary could not be started or monitored.
+    ExecutionFailure,
+    /// The user cancelled execution.
+    Cancelled,
 }
 
 /// A normalized, tool-independent finding.
@@ -559,6 +587,15 @@ pub struct FailureCounts {
     pub unsupported: u64,
     /// Cases invalidated by adapter parse failure.
     pub parse_failures: u64,
+    /// Bounded reports that failed live output validation.
+    #[serde(default, skip_serializing_if = "is_zero")]
+    pub invalid_outputs: u64,
+    /// Cases whose external process could not be executed.
+    #[serde(default, skip_serializing_if = "is_zero")]
+    pub execution_failures: u64,
+    /// Cases cancelled by the user.
+    #[serde(default, skip_serializing_if = "is_zero")]
+    pub cancellations: u64,
 }
 
 /// Separate resource metrics with explicit sample counts.
@@ -619,6 +656,13 @@ pub enum ErrorStage {
     Matcher,
     /// Scoring.
     Scorer,
+    /// External black-box execution.
+    Runner,
+}
+
+#[allow(clippy::trivially_copy_pass_by_ref)]
+fn is_zero(value: &u64) -> bool {
+    *value == 0
 }
 
 /// Fingerprints and public execution metadata supporting reproducibility.
@@ -639,7 +683,7 @@ pub struct ResultProvenance {
     pub schemas: BTreeMap<String, String>,
 }
 
-/// Stable, machine-readable Phase 0 result.
+/// Stable, machine-readable benchmark result.
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct BenchmarkResult {

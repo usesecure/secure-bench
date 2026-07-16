@@ -1,0 +1,854 @@
+{
+  "schema_version": "secure-bench-result-v2",
+  "suite_id": "phase-1-javascript-typescript",
+  "run_id": "phase-1-secure-engine-phase6",
+  "normalized_findings": [
+    {
+      "finding_id": "finding-1d0625a4a3dee648-0001",
+      "case_id": "phase1-009",
+      "native_rule_id": "SE1007",
+      "category": "missing-authorization",
+      "invariant": "exposed server handlers must enforce authentication or authorization before sensitive operations",
+      "severity": "high",
+      "confidence": "high",
+      "source": {
+        "path": "fixtures/corpus/case-009/app/api/session/route.js",
+        "line": 3,
+        "column": 8
+      },
+      "sink": {
+        "path": "fixtures/corpus/case-009/app/api/session/route.js",
+        "line": 6,
+        "column": 3
+      },
+      "evidence_path": [
+        {
+          "kind": "handler",
+          "location": {
+            "path": "fixtures/corpus/case-009/app/api/session/route.js",
+            "line": 3,
+            "column": 8
+          }
+        },
+        {
+          "kind": "sink",
+          "location": {
+            "path": "fixtures/corpus/case-009/app/api/session/route.js",
+            "line": 6,
+            "column": 3
+          }
+        }
+      ],
+      "provenance": {
+        "adapter": "secure-json-v1",
+        "report_fingerprint": "c98fc01a986cb6c40442a6ba94fbe2e1370f3dc5e3570a423d6bfd3d015b6c12",
+        "raw_index": 1
+      }
+    },
+    {
+      "finding_id": "finding-20d71d359f46078f-0000",
+      "case_id": "phase1-010",
+      "native_rule_id": "SE1007",
+      "category": "missing-authorization",
+      "invariant": "exposed server handlers must enforce authentication or authorization before sensitive operations",
+      "severity": "high",
+      "confidence": "high",
+      "source": {
+        "path": "fixtures/corpus/case-010/app/api/session/route.ts",
+        "line": 5,
+        "column": 8
+      },
+      "sink": {
+        "path": "fixtures/corpus/case-010/app/api/session/route.ts",
+        "line": 9,
+        "column": 3
+      },
+      "evidence_path": [
+        {
+          "kind": "handler",
+          "location": {
+            "path": "fixtures/corpus/case-010/app/api/session/route.ts",
+            "line": 5,
+            "column": 8
+          }
+        },
+        {
+          "kind": "sink",
+          "location": {
+            "path": "fixtures/corpus/case-010/app/api/session/route.ts",
+            "line": 9,
+            "column": 3
+          }
+        }
+      ],
+      "provenance": {
+        "adapter": "secure-json-v1",
+        "report_fingerprint": "d5796c61b347dbad9105c9615f067118c8f800d7cfab8a472656984059c3103d",
+        "raw_index": 0
+      }
+    },
+    {
+      "finding_id": "finding-2a82d821b61ac212-0000",
+      "case_id": "phase1-011",
+      "native_rule_id": "SE1006",
+      "category": "code-injection",
+      "invariant": "dynamic code must never be constructed from untrusted input",
+      "severity": "critical",
+      "confidence": "high",
+      "source": {
+        "path": "fixtures/corpus/case-011/app/api/calculate/route.jsx",
+        "line": 2,
+        "column": 25
+      },
+      "sink": {
+        "path": "fixtures/corpus/case-011/app/api/calculate/route.jsx",
+        "line": 3,
+        "column": 19
+      },
+      "evidence_path": [
+        {
+          "kind": "source",
+          "location": {
+            "path": "fixtures/corpus/case-011/app/api/calculate/route.jsx",
+            "line": 2,
+            "column": 25
+          }
+        },
+        {
+          "kind": "assignment",
+          "location": {
+            "path": "fixtures/corpus/case-011/app/api/calculate/route.jsx",
+            "line": 2,
+            "column": 9
+          }
+        },
+        {
+          "kind": "sink",
+          "location": {
+            "path": "fixtures/corpus/case-011/app/api/calculate/route.jsx",
+            "line": 3,
+            "column": 19
+          }
+        }
+      ],
+      "provenance": {
+        "adapter": "secure-json-v1",
+        "report_fingerprint": "099564e09b145d4662e8cd67de744ff2f8dc5840040e252a7bd5d0e76a844734",
+        "raw_index": 0
+      }
+    },
+    {
+      "finding_id": "finding-673f81e33e95a32a-0001",
+      "case_id": "phase1-011",
+      "native_rule_id": "SE1007",
+      "category": "missing-authorization",
+      "invariant": "exposed server handlers must enforce authentication or authorization before sensitive operations",
+      "severity": "high",
+      "confidence": "high",
+      "source": {
+        "path": "fixtures/corpus/case-011/app/api/calculate/route.jsx",
+        "line": 1,
+        "column": 8
+      },
+      "sink": {
+        "path": "fixtures/corpus/case-011/app/api/calculate/route.jsx",
+        "line": 3,
+        "column": 19
+      },
+      "evidence_path": [
+        {
+          "kind": "handler",
+          "location": {
+            "path": "fixtures/corpus/case-011/app/api/calculate/route.jsx",
+            "line": 1,
+            "column": 8
+          }
+        },
+        {
+          "kind": "sink",
+          "location": {
+            "path": "fixtures/corpus/case-011/app/api/calculate/route.jsx",
+            "line": 3,
+            "column": 19
+          }
+        }
+      ],
+      "provenance": {
+        "adapter": "secure-json-v1",
+        "report_fingerprint": "099564e09b145d4662e8cd67de744ff2f8dc5840040e252a7bd5d0e76a844734",
+        "raw_index": 1
+      }
+    },
+    {
+      "finding_id": "finding-6f11c801897b2fcc-0000",
+      "case_id": "phase1-008",
+      "native_rule_id": "SE1004",
+      "category": "server-side-request-forgery",
+      "invariant": "outbound request destinations must be constrained by policy",
+      "severity": "high",
+      "confidence": "high",
+      "source": {
+        "path": "fixtures/corpus/case-008/src/entry.ts",
+        "line": 3,
+        "column": 35
+      },
+      "sink": {
+        "path": "fixtures/corpus/case-008/src/entry.ts",
+        "line": 9,
+        "column": 26
+      },
+      "evidence_path": [
+        {
+          "kind": "source",
+          "location": {
+            "path": "fixtures/corpus/case-008/src/entry.ts",
+            "line": 3,
+            "column": 35
+          }
+        },
+        {
+          "kind": "transformation",
+          "location": {
+            "path": "fixtures/corpus/case-008/src/entry.ts",
+            "line": 3,
+            "column": 11
+          }
+        },
+        {
+          "kind": "sink",
+          "location": {
+            "path": "fixtures/corpus/case-008/src/entry.ts",
+            "line": 9,
+            "column": 26
+          }
+        }
+      ],
+      "provenance": {
+        "adapter": "secure-json-v1",
+        "report_fingerprint": "33c38b7dd52421a726c9fe8c9200369b89e3e3b9fa9cdc0c7f30ac2ac026fbc5",
+        "raw_index": 0
+      }
+    },
+    {
+      "finding_id": "finding-9467ae7fe0d29ae3-0001",
+      "case_id": "phase1-010",
+      "native_rule_id": "SE1005",
+      "category": "open-redirect",
+      "invariant": "redirect destinations must be constrained to trusted locations",
+      "severity": "medium",
+      "confidence": "high",
+      "source": {
+        "path": "fixtures/corpus/case-010/app/api/session/route.ts",
+        "line": 6,
+        "column": 22
+      },
+      "sink": {
+        "path": "fixtures/corpus/case-010/app/api/session/route.ts",
+        "line": 9,
+        "column": 3
+      },
+      "evidence_path": [
+        {
+          "kind": "source",
+          "location": {
+            "path": "fixtures/corpus/case-010/app/api/session/route.ts",
+            "line": 6,
+            "column": 22
+          }
+        },
+        {
+          "kind": "assignment",
+          "location": {
+            "path": "fixtures/corpus/case-010/app/api/session/route.ts",
+            "line": 6,
+            "column": 9
+          }
+        },
+        {
+          "kind": "transformation",
+          "location": {
+            "path": "fixtures/corpus/case-010/app/api/session/route.ts",
+            "line": 7,
+            "column": 9
+          }
+        },
+        {
+          "kind": "transformation",
+          "location": {
+            "path": "fixtures/corpus/case-010/app/api/session/route.ts",
+            "line": 8,
+            "column": 9
+          }
+        },
+        {
+          "kind": "sink",
+          "location": {
+            "path": "fixtures/corpus/case-010/app/api/session/route.ts",
+            "line": 9,
+            "column": 3
+          }
+        }
+      ],
+      "provenance": {
+        "adapter": "secure-json-v1",
+        "report_fingerprint": "d5796c61b347dbad9105c9615f067118c8f800d7cfab8a472656984059c3103d",
+        "raw_index": 1
+      }
+    },
+    {
+      "finding_id": "finding-97c43d3418189fa8-0000",
+      "case_id": "phase1-002",
+      "native_rule_id": "SE1001",
+      "category": "command-injection",
+      "invariant": "command execution arguments must not be controlled by untrusted input",
+      "severity": "high",
+      "confidence": "high",
+      "source": {
+        "path": "fixtures/corpus/case-002/src/entry.ts",
+        "line": 4,
+        "column": 16
+      },
+      "sink": {
+        "path": "fixtures/corpus/case-002/src/entry.ts",
+        "line": 5,
+        "column": 10
+      },
+      "evidence_path": [
+        {
+          "kind": "source",
+          "location": {
+            "path": "fixtures/corpus/case-002/src/entry.ts",
+            "line": 4,
+            "column": 16
+          }
+        },
+        {
+          "kind": "assignment",
+          "location": {
+            "path": "fixtures/corpus/case-002/src/entry.ts",
+            "line": 4,
+            "column": 9
+          }
+        },
+        {
+          "kind": "sink",
+          "location": {
+            "path": "fixtures/corpus/case-002/src/entry.ts",
+            "line": 5,
+            "column": 10
+          }
+        }
+      ],
+      "provenance": {
+        "adapter": "secure-json-v1",
+        "report_fingerprint": "d49c35273dd265eef4ae673e3124905be15903bf18363c4eecaa22fe4277e938",
+        "raw_index": 0
+      }
+    },
+    {
+      "finding_id": "finding-ac4eb53742ca29c9-0000",
+      "case_id": "phase1-003",
+      "native_rule_id": "SE1002",
+      "category": "sql-injection",
+      "invariant": "raw database query text must not be controlled by untrusted input",
+      "severity": "high",
+      "confidence": "high",
+      "source": {
+        "path": "fixtures/corpus/case-003/src/entry.js",
+        "line": 3,
+        "column": 18
+      },
+      "sink": {
+        "path": "fixtures/corpus/case-003/src/entry.js",
+        "line": 4,
+        "column": 24
+      },
+      "evidence_path": [
+        {
+          "kind": "source",
+          "location": {
+            "path": "fixtures/corpus/case-003/src/entry.js",
+            "line": 3,
+            "column": 18
+          }
+        },
+        {
+          "kind": "assignment",
+          "location": {
+            "path": "fixtures/corpus/case-003/src/entry.js",
+            "line": 3,
+            "column": 11
+          }
+        },
+        {
+          "kind": "sink",
+          "location": {
+            "path": "fixtures/corpus/case-003/src/entry.js",
+            "line": 4,
+            "column": 24
+          }
+        }
+      ],
+      "provenance": {
+        "adapter": "secure-json-v1",
+        "report_fingerprint": "8e3e0f5bc6804ab3299450dbf31f9bae742c940c9ad279c8528f088c2b63f045",
+        "raw_index": 0
+      }
+    },
+    {
+      "finding_id": "finding-bef27eb985e24563-0000",
+      "case_id": "phase1-001",
+      "native_rule_id": "SE1001",
+      "category": "command-injection",
+      "invariant": "command execution arguments must not be controlled by untrusted input",
+      "severity": "high",
+      "confidence": "high",
+      "source": {
+        "path": "fixtures/corpus/case-001/src/entry.js",
+        "line": 4,
+        "column": 16
+      },
+      "sink": {
+        "path": "fixtures/corpus/case-001/src/entry.js",
+        "line": 5,
+        "column": 10
+      },
+      "evidence_path": [
+        {
+          "kind": "source",
+          "location": {
+            "path": "fixtures/corpus/case-001/src/entry.js",
+            "line": 4,
+            "column": 16
+          }
+        },
+        {
+          "kind": "assignment",
+          "location": {
+            "path": "fixtures/corpus/case-001/src/entry.js",
+            "line": 4,
+            "column": 9
+          }
+        },
+        {
+          "kind": "sink",
+          "location": {
+            "path": "fixtures/corpus/case-001/src/entry.js",
+            "line": 5,
+            "column": 10
+          }
+        }
+      ],
+      "provenance": {
+        "adapter": "secure-json-v1",
+        "report_fingerprint": "426667004d237a3b3b57ab88e6b7882cad2a297973e135021114e182861e82d0",
+        "raw_index": 0
+      }
+    },
+    {
+      "finding_id": "finding-c2234ff28caba4bc-0000",
+      "case_id": "phase1-009",
+      "native_rule_id": "SE1005",
+      "category": "open-redirect",
+      "invariant": "redirect destinations must be constrained to trusted locations",
+      "severity": "medium",
+      "confidence": "high",
+      "source": {
+        "path": "fixtures/corpus/case-009/app/api/session/route.js",
+        "line": 4,
+        "column": 22
+      },
+      "sink": {
+        "path": "fixtures/corpus/case-009/app/api/session/route.js",
+        "line": 6,
+        "column": 3
+      },
+      "evidence_path": [
+        {
+          "kind": "source",
+          "location": {
+            "path": "fixtures/corpus/case-009/app/api/session/route.js",
+            "line": 4,
+            "column": 22
+          }
+        },
+        {
+          "kind": "assignment",
+          "location": {
+            "path": "fixtures/corpus/case-009/app/api/session/route.js",
+            "line": 4,
+            "column": 9
+          }
+        },
+        {
+          "kind": "transformation",
+          "location": {
+            "path": "fixtures/corpus/case-009/app/api/session/route.js",
+            "line": 5,
+            "column": 9
+          }
+        },
+        {
+          "kind": "sink",
+          "location": {
+            "path": "fixtures/corpus/case-009/app/api/session/route.js",
+            "line": 6,
+            "column": 3
+          }
+        }
+      ],
+      "provenance": {
+        "adapter": "secure-json-v1",
+        "report_fingerprint": "c98fc01a986cb6c40442a6ba94fbe2e1370f3dc5e3570a423d6bfd3d015b6c12",
+        "raw_index": 0
+      }
+    },
+    {
+      "finding_id": "finding-d213257e77c7326a-0000",
+      "case_id": "phase1-007",
+      "native_rule_id": "SE1004",
+      "category": "server-side-request-forgery",
+      "invariant": "outbound request destinations must be constrained by policy",
+      "severity": "high",
+      "confidence": "high",
+      "source": {
+        "path": "fixtures/corpus/case-007/src/entry.ts",
+        "line": 3,
+        "column": 27
+      },
+      "sink": {
+        "path": "fixtures/corpus/case-007/src/entry.ts",
+        "line": 4,
+        "column": 26
+      },
+      "evidence_path": [
+        {
+          "kind": "source",
+          "location": {
+            "path": "fixtures/corpus/case-007/src/entry.ts",
+            "line": 3,
+            "column": 27
+          }
+        },
+        {
+          "kind": "transformation",
+          "location": {
+            "path": "fixtures/corpus/case-007/src/entry.ts",
+            "line": 3,
+            "column": 11
+          }
+        },
+        {
+          "kind": "sink",
+          "location": {
+            "path": "fixtures/corpus/case-007/src/entry.ts",
+            "line": 4,
+            "column": 26
+          }
+        }
+      ],
+      "provenance": {
+        "adapter": "secure-json-v1",
+        "report_fingerprint": "f59f1c95e32aaeb7e2b319efe2b66f11c11c177f69a872f02efa1a67bfe6f0ac",
+        "raw_index": 0
+      }
+    }
+  ],
+  "matching": {
+    "expectations": [
+      {
+        "case_id": "phase1-001",
+        "expectation_id": "phase1-expectation-001",
+        "outcome": "missed",
+        "selected_finding_id": null,
+        "ambiguous_finding_ids": [],
+        "criteria": {
+          "category": false,
+          "invariant": false,
+          "source": true,
+          "sink": true,
+          "evidence_path": true
+        }
+      },
+      {
+        "case_id": "phase1-003",
+        "expectation_id": "phase1-expectation-003",
+        "outcome": "missed",
+        "selected_finding_id": null,
+        "ambiguous_finding_ids": [],
+        "criteria": {
+          "category": false,
+          "invariant": false,
+          "source": true,
+          "sink": true,
+          "evidence_path": true
+        }
+      },
+      {
+        "case_id": "phase1-005",
+        "expectation_id": "phase1-expectation-005",
+        "outcome": "missed",
+        "selected_finding_id": null,
+        "ambiguous_finding_ids": [],
+        "criteria": {
+          "category": false,
+          "invariant": false,
+          "source": false,
+          "sink": false,
+          "evidence_path": false
+        }
+      },
+      {
+        "case_id": "phase1-007",
+        "expectation_id": "phase1-expectation-007",
+        "outcome": "missed",
+        "selected_finding_id": null,
+        "ambiguous_finding_ids": [],
+        "criteria": {
+          "category": false,
+          "invariant": false,
+          "source": true,
+          "sink": true,
+          "evidence_path": true
+        }
+      },
+      {
+        "case_id": "phase1-009",
+        "expectation_id": "phase1-expectation-009",
+        "outcome": "missed",
+        "selected_finding_id": null,
+        "ambiguous_finding_ids": [],
+        "criteria": {
+          "category": false,
+          "invariant": false,
+          "source": false,
+          "sink": true,
+          "evidence_path": true
+        }
+      },
+      {
+        "case_id": "phase1-011",
+        "expectation_id": "phase1-expectation-011",
+        "outcome": "missed",
+        "selected_finding_id": null,
+        "ambiguous_finding_ids": [],
+        "criteria": {
+          "category": false,
+          "invariant": false,
+          "source": true,
+          "sink": true,
+          "evidence_path": true
+        }
+      },
+      {
+        "case_id": "phase1-013",
+        "expectation_id": "phase1-expectation-013",
+        "outcome": "missed",
+        "selected_finding_id": null,
+        "ambiguous_finding_ids": [],
+        "criteria": {
+          "category": false,
+          "invariant": false,
+          "source": false,
+          "sink": false,
+          "evidence_path": false
+        }
+      }
+    ],
+    "findings": [
+      {
+        "finding_id": "finding-1d0625a4a3dee648-0001",
+        "case_id": "phase1-009",
+        "disposition": "unmatched",
+        "related_id": null
+      },
+      {
+        "finding_id": "finding-20d71d359f46078f-0000",
+        "case_id": "phase1-010",
+        "disposition": "safe_control_false_positive",
+        "related_id": null
+      },
+      {
+        "finding_id": "finding-2a82d821b61ac212-0000",
+        "case_id": "phase1-011",
+        "disposition": "unmatched",
+        "related_id": null
+      },
+      {
+        "finding_id": "finding-673f81e33e95a32a-0001",
+        "case_id": "phase1-011",
+        "disposition": "unmatched",
+        "related_id": null
+      },
+      {
+        "finding_id": "finding-6f11c801897b2fcc-0000",
+        "case_id": "phase1-008",
+        "disposition": "safe_control_false_positive",
+        "related_id": null
+      },
+      {
+        "finding_id": "finding-9467ae7fe0d29ae3-0001",
+        "case_id": "phase1-010",
+        "disposition": "safe_control_false_positive",
+        "related_id": null
+      },
+      {
+        "finding_id": "finding-97c43d3418189fa8-0000",
+        "case_id": "phase1-002",
+        "disposition": "safe_control_false_positive",
+        "related_id": null
+      },
+      {
+        "finding_id": "finding-ac4eb53742ca29c9-0000",
+        "case_id": "phase1-003",
+        "disposition": "unmatched",
+        "related_id": null
+      },
+      {
+        "finding_id": "finding-bef27eb985e24563-0000",
+        "case_id": "phase1-001",
+        "disposition": "unmatched",
+        "related_id": null
+      },
+      {
+        "finding_id": "finding-c2234ff28caba4bc-0000",
+        "case_id": "phase1-009",
+        "disposition": "unmatched",
+        "related_id": null
+      },
+      {
+        "finding_id": "finding-d213257e77c7326a-0000",
+        "case_id": "phase1-007",
+        "disposition": "unmatched",
+        "related_id": null
+      }
+    ]
+  },
+  "score": {
+    "vulnerable_recall": {
+      "numerator": 0,
+      "denominator": 7,
+      "basis_points": 0
+    },
+    "attempted_vulnerable_recall": {
+      "numerator": 0,
+      "denominator": 7,
+      "basis_points": 0
+    },
+    "safe_control_false_positive_rate": {
+      "numerator": 3,
+      "denominator": 7,
+      "basis_points": 4285
+    },
+    "safe_control_clean_coverage": {
+      "numerator": 4,
+      "denominator": 7,
+      "basis_points": 5714
+    },
+    "evidence_path_accuracy": {
+      "numerator": 0,
+      "denominator": 0,
+      "basis_points": null
+    },
+    "source_localization_accuracy": {
+      "numerator": 0,
+      "denominator": 0,
+      "basis_points": null
+    },
+    "sink_localization_accuracy": {
+      "numerator": 0,
+      "denominator": 0,
+      "basis_points": null
+    },
+    "severity_calibration_accuracy": {
+      "numerator": 0,
+      "denominator": 0,
+      "basis_points": null
+    },
+    "confidence_calibration_accuracy": {
+      "numerator": 0,
+      "denominator": 0,
+      "basis_points": null
+    },
+    "duplicate_rate": {
+      "numerator": 0,
+      "denominator": 11,
+      "basis_points": 0
+    },
+    "counts": {
+      "vulnerable_cases": 7,
+      "safe_control_cases": 7,
+      "attempted_vulnerable_cases": 7,
+      "attempted_safe_control_cases": 7,
+      "eligible_expectations": 7,
+      "attempted_expectations": 7,
+      "detected_expectations": 0,
+      "missed_expectations": 7,
+      "false_positive_safe_controls": 3,
+      "clean_safe_controls": 4,
+      "normalized_findings": 11,
+      "duplicate_findings": 0,
+      "unmatched_findings": 11,
+      "ambiguous_expectations": 0
+    },
+    "failures": {
+      "crashes": 0,
+      "timeouts": 0,
+      "missing": 0,
+      "unsupported": 0,
+      "parse_failures": 0
+    },
+    "performance": {
+      "cold_duration": {
+        "total": 70,
+        "samples": 14
+      },
+      "warm_duration": {
+        "total": 0,
+        "samples": 0
+      },
+      "peak_memory": {
+        "maximum": 405504,
+        "samples": 14
+      },
+      "output_size": {
+        "total": 1156570,
+        "samples": 14
+      }
+    }
+  },
+  "errors": [],
+  "provenance": {
+    "suite_fingerprint": "57d91da3dff7393b1ee8844072d3999161371403027a6d9c78df56907d61e97b",
+    "run_manifest_fingerprint": "21d707e281109630aa2cc2172d8664dad3d55439811578aa65943cb00e2f6c41",
+    "report_fingerprint": "3f7eed00c088aa4bc9f58dca3b7f508fe5c698293502e71e7886f1b481941400",
+    "tool": {
+      "name": "Secure Engine",
+      "version": "secure 0.1.0",
+      "command": [
+        "scan",
+        "{fixture}",
+        "--format",
+        "secure-json-v1",
+        "--output",
+        "{report}"
+      ],
+      "configuration_fingerprint": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "report_schema": "secure-json-v1",
+      "binary_fingerprint": "3787db2091b9e5d5e05495d8642e7fe0005cd035ee3d9d84a402f5c08dae0504"
+    },
+    "host": {
+      "os": "linux",
+      "architecture": "x86_64",
+      "logical_cpus": 16,
+      "memory_bytes": 16673931264,
+      "kernel_release": "7.1.3-200.fc44.x86_64"
+    },
+    "schemas": {
+      "result": "secure-bench-result-v2",
+      "run": "secure-bench-live-run-v1",
+      "suite": "secure-bench-suite-v2",
+      "tool_report": "secure-json-v1"
+    }
+  }
+}

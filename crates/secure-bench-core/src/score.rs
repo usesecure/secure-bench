@@ -201,6 +201,9 @@ fn count_failure(status: ExecutionStatus, failures: &mut FailureCounts) {
         ExecutionStatus::Unsupported => failures.unsupported += 1,
         ExecutionStatus::Missing => failures.missing += 1,
         ExecutionStatus::ParseFailure => failures.parse_failures += 1,
+        ExecutionStatus::InvalidOutput => failures.invalid_outputs += 1,
+        ExecutionStatus::ExecutionFailure => failures.execution_failures += 1,
+        ExecutionStatus::Cancelled => failures.cancellations += 1,
     }
 }
 

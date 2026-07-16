@@ -1,0 +1,552 @@
+schema_version = "secure-bench-suite-v2"
+suite_id = "phase-1-javascript-typescript"
+title = "Secure Bench First-Party JavaScript and TypeScript Corpus"
+description = "Original paired fixtures for a neutral Secure Engine black-box baseline. This corpus is not a cross-tool comparison or public ranking."
+methodology_version = "phase-1.0"
+corpus_fingerprint = "9a32028a28d7c0396a630db8a2698a8977e173328578b1108f14603372e77761"
+
+[provenance]
+origin = "original Secure Bench first-party corpus"
+license = "Apache-2.0"
+revision = "phase-1"
+modifications = "Created from public security invariants and normal framework behavior without external fixture content."
+authors = ["Secure Bench maintainers"]
+
+[[cases]]
+case_id = "phase1-001"
+kind = "vulnerable"
+language = "javascript"
+framework = "Node.js"
+category = "command-execution"
+invariant = "untrusted values must not reach command execution through a shell"
+fixture_path = "fixtures/corpus/case-001"
+content_fingerprint = "0d0db2563cb43c85b9ededed6fe8b8bb2f67833194d90670039122569569472c"
+
+[cases.eligibility]
+required_capabilities = ["javascript", "data-flow"]
+supported_report_formats = ["secure-json-v1"]
+rationale = "Eligible when the analyzer supports JavaScript data flow into Node.js process APIs."
+
+[cases.resource_budget]
+timeout_ms = 10000
+memory_bytes = 536870912
+output_bytes = 2097152
+network = "disabled"
+
+[cases.provenance]
+origin = "original Secure Bench fixture"
+license = "Apache-2.0"
+revision = "phase-1"
+modifications = "Original minimal Node.js handler."
+authors = ["Secure Bench maintainers"]
+
+[[cases.expected_findings]]
+expectation_id = "phase1-expectation-001"
+invariant = "untrusted values must not reach command execution through a shell"
+category = "command-execution"
+severity = "high"
+confidence = "high"
+
+[cases.expected_findings.source]
+path = "fixtures/corpus/case-001/src/entry.js"
+line = 4
+alternatives = []
+
+[cases.expected_findings.sink]
+path = "fixtures/corpus/case-001/src/entry.js"
+line = 5
+alternatives = []
+
+[cases.expected_findings.evidence]
+minimum_hops = 2
+required_kinds = ["source", "sink"]
+
+[[cases]]
+case_id = "phase1-002"
+kind = "safe_control"
+language = "typescript"
+framework = "Node.js"
+category = "command-execution"
+fixture_path = "fixtures/corpus/case-002"
+content_fingerprint = "d6736dad34d9ff2b6073af0b2aa339401cdeeb4efa4ab8b576457e572c5ceb0b"
+expected_findings = []
+
+[cases.eligibility]
+required_capabilities = ["typescript", "data-flow"]
+supported_report_formats = ["secure-json-v1"]
+rationale = "Paired control for argument-array process execution without a shell."
+
+[cases.resource_budget]
+timeout_ms = 10000
+memory_bytes = 536870912
+output_bytes = 2097152
+network = "disabled"
+
+[cases.provenance]
+origin = "original Secure Bench fixture"
+license = "Apache-2.0"
+revision = "phase-1"
+modifications = "Original paired Node.js control."
+authors = ["Secure Bench maintainers"]
+
+[[cases]]
+case_id = "phase1-003"
+kind = "vulnerable"
+language = "javascript"
+framework = "Express"
+category = "raw-sql-construction"
+invariant = "untrusted values must not be interpolated into raw SQL text"
+fixture_path = "fixtures/corpus/case-003"
+content_fingerprint = "b2498dd95bc87cdb26222e7d29c25fa0c743c772802fe3441c243d21be75cc69"
+
+[cases.eligibility]
+required_capabilities = ["javascript", "data-flow", "sql"]
+supported_report_formats = ["secure-json-v1"]
+rationale = "Eligible when the analyzer supports Express request data reaching SQL query text."
+
+[cases.resource_budget]
+timeout_ms = 10000
+memory_bytes = 536870912
+output_bytes = 2097152
+network = "disabled"
+
+[cases.provenance]
+origin = "original Secure Bench fixture"
+license = "Apache-2.0"
+revision = "phase-1"
+modifications = "Original minimal Express-style handler."
+authors = ["Secure Bench maintainers"]
+
+[[cases.expected_findings]]
+expectation_id = "phase1-expectation-003"
+invariant = "untrusted values must not be interpolated into raw SQL text"
+category = "raw-sql-construction"
+severity = "high"
+confidence = "high"
+
+[cases.expected_findings.source]
+path = "fixtures/corpus/case-003/src/entry.js"
+line = 3
+alternatives = []
+
+[cases.expected_findings.sink]
+path = "fixtures/corpus/case-003/src/entry.js"
+line = 4
+alternatives = []
+
+[cases.expected_findings.evidence]
+minimum_hops = 2
+required_kinds = ["source", "sink"]
+
+[[cases]]
+case_id = "phase1-004"
+kind = "safe_control"
+language = "typescript"
+framework = "Express"
+category = "raw-sql-construction"
+fixture_path = "fixtures/corpus/case-004"
+content_fingerprint = "4d4993621259223d9369c2a07945988757ba522e79e1baf01e1eb5f0eabb34f1"
+expected_findings = []
+
+[cases.eligibility]
+required_capabilities = ["typescript", "data-flow", "sql"]
+supported_report_formats = ["secure-json-v1"]
+rationale = "Paired control for a parameterized SQL query."
+
+[cases.resource_budget]
+timeout_ms = 10000
+memory_bytes = 536870912
+output_bytes = 2097152
+network = "disabled"
+
+[cases.provenance]
+origin = "original Secure Bench fixture"
+license = "Apache-2.0"
+revision = "phase-1"
+modifications = "Original paired Express-style control."
+authors = ["Secure Bench maintainers"]
+
+[[cases]]
+case_id = "phase1-005"
+kind = "vulnerable"
+language = "typescript"
+framework = "Next.js"
+category = "filesystem-boundary"
+invariant = "untrusted paths must remain within an approved filesystem root"
+fixture_path = "fixtures/corpus/case-005"
+content_fingerprint = "9b6cfd22eae0a5224008292a3c2684a340722bf7c45f6521d7ef1139146d8fe9"
+
+[cases.eligibility]
+required_capabilities = ["typescript", "next-app-router", "data-flow"]
+supported_report_formats = ["secure-json-v1"]
+rationale = "Eligible when the analyzer supports Next.js route inputs reaching filesystem APIs."
+
+[cases.resource_budget]
+timeout_ms = 10000
+memory_bytes = 536870912
+output_bytes = 2097152
+network = "disabled"
+
+[cases.provenance]
+origin = "original Secure Bench fixture"
+license = "Apache-2.0"
+revision = "phase-1"
+modifications = "Original minimal Next.js route handler."
+authors = ["Secure Bench maintainers"]
+
+[[cases.expected_findings]]
+expectation_id = "phase1-expectation-005"
+invariant = "untrusted paths must remain within an approved filesystem root"
+category = "filesystem-boundary"
+severity = "high"
+confidence = "high"
+
+[cases.expected_findings.source]
+path = "fixtures/corpus/case-005/app/api/items/route.ts"
+line = 5
+alternatives = []
+
+[cases.expected_findings.sink]
+path = "fixtures/corpus/case-005/app/api/items/route.ts"
+line = 6
+alternatives = []
+
+[cases.expected_findings.evidence]
+minimum_hops = 2
+required_kinds = ["source", "sink"]
+
+[[cases]]
+case_id = "phase1-006"
+kind = "safe_control"
+language = "typescript"
+framework = "Next.js"
+category = "filesystem-boundary"
+fixture_path = "fixtures/corpus/case-006"
+content_fingerprint = "86da6aa6eec7f803b7c06666c5015b684e78f61bd92bfa189f14d3c5ba30b9a0"
+expected_findings = []
+
+[cases.eligibility]
+required_capabilities = ["typescript", "next-app-router", "data-flow"]
+supported_report_formats = ["secure-json-v1"]
+rationale = "Paired control for canonicalization and approved-root containment."
+
+[cases.resource_budget]
+timeout_ms = 10000
+memory_bytes = 536870912
+output_bytes = 2097152
+network = "disabled"
+
+[cases.provenance]
+origin = "original Secure Bench fixture"
+license = "Apache-2.0"
+revision = "phase-1"
+modifications = "Original paired Next.js route control."
+authors = ["Secure Bench maintainers"]
+
+[[cases]]
+case_id = "phase1-007"
+kind = "vulnerable"
+language = "typescript"
+framework = "Express"
+category = "outbound-request-boundary"
+invariant = "untrusted URLs must not control outbound request destinations"
+fixture_path = "fixtures/corpus/case-007"
+content_fingerprint = "76ff2199853c35814ca9ca495b9f103ae096f75dba6641ab09faaa43029f822f"
+
+[cases.eligibility]
+required_capabilities = ["typescript", "data-flow", "outbound-http"]
+supported_report_formats = ["secure-json-v1"]
+rationale = "Eligible when the analyzer supports Express request values reaching Fetch."
+
+[cases.resource_budget]
+timeout_ms = 10000
+memory_bytes = 536870912
+output_bytes = 2097152
+network = "disabled"
+
+[cases.provenance]
+origin = "original Secure Bench fixture"
+license = "Apache-2.0"
+revision = "phase-1"
+modifications = "Original minimal Express-style handler."
+authors = ["Secure Bench maintainers"]
+
+[[cases.expected_findings]]
+expectation_id = "phase1-expectation-007"
+invariant = "untrusted URLs must not control outbound request destinations"
+category = "outbound-request-boundary"
+severity = "high"
+confidence = "high"
+
+[cases.expected_findings.source]
+path = "fixtures/corpus/case-007/src/entry.ts"
+line = 3
+alternatives = []
+
+[cases.expected_findings.sink]
+path = "fixtures/corpus/case-007/src/entry.ts"
+line = 4
+alternatives = []
+
+[cases.expected_findings.evidence]
+minimum_hops = 2
+required_kinds = ["source", "sink"]
+
+[[cases]]
+case_id = "phase1-008"
+kind = "safe_control"
+language = "typescript"
+framework = "Express"
+category = "outbound-request-boundary"
+fixture_path = "fixtures/corpus/case-008"
+content_fingerprint = "0f05aed07669614219a4b7e05db7058159c5e86b6aa8ea74f93c55bdde1e9666"
+expected_findings = []
+
+[cases.eligibility]
+required_capabilities = ["typescript", "data-flow", "outbound-http"]
+supported_report_formats = ["secure-json-v1"]
+rationale = "Paired control for HTTPS and fixed-host validation."
+
+[cases.resource_budget]
+timeout_ms = 10000
+memory_bytes = 536870912
+output_bytes = 2097152
+network = "disabled"
+
+[cases.provenance]
+origin = "original Secure Bench fixture"
+license = "Apache-2.0"
+revision = "phase-1"
+modifications = "Original paired Express-style control."
+authors = ["Secure Bench maintainers"]
+
+[[cases]]
+case_id = "phase1-009"
+kind = "vulnerable"
+language = "javascript"
+framework = "Next.js"
+category = "redirect-boundary"
+invariant = "untrusted destinations must not control redirects"
+fixture_path = "fixtures/corpus/case-009"
+content_fingerprint = "8f99cbfb29da8663ad95ad16ffe5605991fd4bd6aba7da94ebd1d3f5da30ea36"
+
+[cases.eligibility]
+required_capabilities = ["javascript", "next-app-router", "redirects"]
+supported_report_formats = ["secure-json-v1"]
+rationale = "Eligible when the analyzer supports Next.js form values reaching redirect APIs."
+
+[cases.resource_budget]
+timeout_ms = 10000
+memory_bytes = 536870912
+output_bytes = 2097152
+network = "disabled"
+
+[cases.provenance]
+origin = "original Secure Bench fixture"
+license = "Apache-2.0"
+revision = "phase-1"
+modifications = "Original minimal Next.js route handler."
+authors = ["Secure Bench maintainers"]
+
+[[cases.expected_findings]]
+expectation_id = "phase1-expectation-009"
+invariant = "untrusted destinations must not control redirects"
+category = "redirect-boundary"
+severity = "high"
+confidence = "high"
+
+[cases.expected_findings.source]
+path = "fixtures/corpus/case-009/app/api/session/route.js"
+line = 5
+alternatives = []
+
+[cases.expected_findings.sink]
+path = "fixtures/corpus/case-009/app/api/session/route.js"
+line = 6
+alternatives = []
+
+[cases.expected_findings.evidence]
+minimum_hops = 2
+required_kinds = ["source", "sink"]
+
+[[cases]]
+case_id = "phase1-010"
+kind = "safe_control"
+language = "typescript"
+framework = "Next.js"
+category = "redirect-boundary"
+fixture_path = "fixtures/corpus/case-010"
+content_fingerprint = "68a7f390071a1f80b4d064101e7e66f383eed105161061878c86ec24a88c9391"
+expected_findings = []
+
+[cases.eligibility]
+required_capabilities = ["typescript", "next-app-router", "redirects"]
+supported_report_formats = ["secure-json-v1"]
+rationale = "Paired control for an explicit relative-destination allowlist."
+
+[cases.resource_budget]
+timeout_ms = 10000
+memory_bytes = 536870912
+output_bytes = 2097152
+network = "disabled"
+
+[cases.provenance]
+origin = "original Secure Bench fixture"
+license = "Apache-2.0"
+revision = "phase-1"
+modifications = "Original paired Next.js route control."
+authors = ["Secure Bench maintainers"]
+
+[[cases]]
+case_id = "phase1-011"
+kind = "vulnerable"
+language = "jsx"
+framework = "Next.js"
+category = "dynamic-code-execution"
+invariant = "untrusted text must not become executable code"
+fixture_path = "fixtures/corpus/case-011"
+content_fingerprint = "901b58f9b217a2c6b26398681e31e92355a0b22d9751cfba1866d59b878ca6f0"
+
+[cases.eligibility]
+required_capabilities = ["jsx", "next-app-router", "data-flow"]
+supported_report_formats = ["secure-json-v1"]
+rationale = "Eligible when the analyzer supports JSON request values reaching JavaScript compilation APIs."
+
+[cases.resource_budget]
+timeout_ms = 10000
+memory_bytes = 536870912
+output_bytes = 2097152
+network = "disabled"
+
+[cases.provenance]
+origin = "original Secure Bench fixture"
+license = "Apache-2.0"
+revision = "phase-1"
+modifications = "Original minimal JSX route handler."
+authors = ["Secure Bench maintainers"]
+
+[[cases.expected_findings]]
+expectation_id = "phase1-expectation-011"
+invariant = "untrusted text must not become executable code"
+category = "dynamic-code-execution"
+severity = "high"
+confidence = "high"
+
+[cases.expected_findings.source]
+path = "fixtures/corpus/case-011/app/api/calculate/route.jsx"
+line = 2
+alternatives = []
+
+[cases.expected_findings.sink]
+path = "fixtures/corpus/case-011/app/api/calculate/route.jsx"
+line = 3
+alternatives = []
+
+[cases.expected_findings.evidence]
+minimum_hops = 2
+required_kinds = ["source", "sink"]
+
+[[cases]]
+case_id = "phase1-012"
+kind = "safe_control"
+language = "jsx"
+framework = "Next.js"
+category = "dynamic-code-execution"
+fixture_path = "fixtures/corpus/case-012"
+content_fingerprint = "23e8ef271a67180ac4dd91e7d337333f683b234480aa5d649c641981dd4b16b0"
+expected_findings = []
+
+[cases.eligibility]
+required_capabilities = ["jsx", "next-app-router", "data-flow"]
+supported_report_formats = ["secure-json-v1"]
+rationale = "Paired control using a fixed operation dispatch table."
+
+[cases.resource_budget]
+timeout_ms = 10000
+memory_bytes = 536870912
+output_bytes = 2097152
+network = "disabled"
+
+[cases.provenance]
+origin = "original Secure Bench fixture"
+license = "Apache-2.0"
+revision = "phase-1"
+modifications = "Original paired JSX route control."
+authors = ["Secure Bench maintainers"]
+
+[[cases]]
+case_id = "phase1-013"
+kind = "vulnerable"
+language = "tsx"
+framework = "Next.js"
+category = "authorization-dominance"
+invariant = "sensitive mutations must be dominated by an authorization guard"
+fixture_path = "fixtures/corpus/case-013"
+content_fingerprint = "87e470aac823f49c43a1e68c655de1a3b1585e567df36ab688fbfad4ab927916"
+
+[cases.eligibility]
+required_capabilities = ["tsx", "next-server-actions", "authorization"]
+supported_report_formats = ["secure-json-v1"]
+rationale = "Eligible when the analyzer supports Next.js Server Action mutation and guard analysis."
+
+[cases.resource_budget]
+timeout_ms = 10000
+memory_bytes = 536870912
+output_bytes = 2097152
+network = "disabled"
+
+[cases.provenance]
+origin = "original Secure Bench fixture"
+license = "Apache-2.0"
+revision = "phase-1"
+modifications = "Original minimal Next.js Server Action."
+authors = ["Secure Bench maintainers"]
+
+[[cases.expected_findings]]
+expectation_id = "phase1-expectation-013"
+invariant = "sensitive mutations must be dominated by an authorization guard"
+category = "authorization-dominance"
+severity = "high"
+confidence = "high"
+
+[cases.expected_findings.source]
+path = "fixtures/corpus/case-013/app/profile/actions.tsx"
+line = 6
+alternatives = []
+
+[cases.expected_findings.sink]
+path = "fixtures/corpus/case-013/app/profile/actions.tsx"
+line = 8
+alternatives = []
+
+[cases.expected_findings.evidence]
+minimum_hops = 2
+required_kinds = ["source", "sink"]
+
+[[cases]]
+case_id = "phase1-014"
+kind = "safe_control"
+language = "tsx"
+framework = "Next.js"
+category = "authorization-dominance"
+fixture_path = "fixtures/corpus/case-014"
+content_fingerprint = "d517d8882e0a1b758a24b5dd3fbef77fe08e442c9ace1575b8c535fc93b4275e"
+expected_findings = []
+
+[cases.eligibility]
+required_capabilities = ["tsx", "next-server-actions", "authorization"]
+supported_report_formats = ["secure-json-v1"]
+rationale = "Paired control with a permission guard dominating an organization-scoped mutation."
+
+[cases.resource_budget]
+timeout_ms = 10000
+memory_bytes = 536870912
+output_bytes = 2097152
+network = "disabled"
+
+[cases.provenance]
+origin = "original Secure Bench fixture"
+license = "Apache-2.0"
+revision = "phase-1"
+modifications = "Original paired Next.js Server Action control."
+authors = ["Secure Bench maintainers"]

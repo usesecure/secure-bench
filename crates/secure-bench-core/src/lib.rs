@@ -1,14 +1,22 @@
-//! Tool-neutral Phase 0 contracts and deterministic evaluation for Secure Bench.
+//! Tool-neutral contracts, corpus validation, black-box execution, and evaluation for Secure Bench.
 //!
-//! This crate intentionally contains no scanner execution or installation logic.
+//! External analyzers are invoked only through a public command-line and report boundary. This
+//! crate contains no scanner installation, discovery, private API, or product-specific scoring.
 
 pub mod adapter;
+pub mod corpus;
 pub mod matcher;
 pub mod model;
 pub mod pipeline;
+pub mod runner;
 pub mod schema;
 pub mod score;
 
-pub use adapter::{Adapter, AdapterError, AdapterRegistry, SarifAdapter, SecureJsonAdapter};
+pub use adapter::{
+    Adapter, AdapterError, AdapterInput, AdapterRegistry, SarifAdapter, SecureJsonAdapter,
+};
 pub use model::*;
-pub use pipeline::{ContractError, EvaluationInput, evaluate, load_run_manifest, load_suite};
+pub use pipeline::{
+    ContractError, EvaluationInput, LiveEvaluationInput, evaluate, evaluate_live_run,
+    load_run_manifest, load_suite,
+};

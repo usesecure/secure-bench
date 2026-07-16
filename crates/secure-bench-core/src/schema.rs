@@ -1,12 +1,19 @@
 //! Versioned JSON Schema validation for suite, run, and result projections.
 
-use crate::model::{BenchmarkResult, BenchmarkSuite, RecordedRun};
+use crate::model::{
+    BenchmarkResult, BenchmarkSuite, RESULT_SCHEMA_V1, RESULT_SCHEMA_V2, RecordedRun,
+    SUITE_SCHEMA_V1, SUITE_SCHEMA_V2,
+};
+use crate::runner::LiveRun;
 use serde_json::Value;
 use thiserror::Error;
 
 const SUITE_SCHEMA: &str = include_str!("../../../schemas/suite-v1.schema.json");
+const SUITE_SCHEMA_V2_JSON: &str = include_str!("../../../schemas/suite-v2.schema.json");
 const RUN_SCHEMA: &str = include_str!("../../../schemas/run-v1.schema.json");
+const LIVE_RUN_SCHEMA: &str = include_str!("../../../schemas/live-run-v1.schema.json");
 const RESULT_SCHEMA: &str = include_str!("../../../schemas/result-v1.schema.json");
+const RESULT_SCHEMA_V2_JSON: &str = include_str!("../../../schemas/result-v2.schema.json");
 
 /// Schema loading or validation failure.
 #[derive(Clone, Debug, Eq, Error, PartialEq)]
@@ -43,7 +50,17 @@ pub enum SchemaError {
 ///
 /// Returns [`SchemaError`] for invalid committed schemas, projections, or instances.
 pub fn validate_suite(suite: &BenchmarkSuite) -> Result<(), SchemaError> {
-    validate_typed("suite", SUITE_SCHEMA, suite)
+    let schema = match suite.schema_version.as_str() {
+        SUITE_SCHEMA_V1 => SUITE_SCHEMA,
+        SUITE_SCHEMA_V2 => SUITE_SCHEMA_V2_JSON,
+        version => {
+            return Err(SchemaError::InvalidInstance {
+                contract: "suite",
+                detail: format!("unsupported schema version `{version}`"),
+            });
+        }
+    };
+    validate_typed("suite", schema, suite)
 }
 
 /// Validates a recorded-run contract.
@@ -55,13 +72,32 @@ pub fn validate_run(run: &RecordedRun) -> Result<(), SchemaError> {
     validate_typed("run", RUN_SCHEMA, run)
 }
 
+/// Validates a Phase 1 live-run contract.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] for invalid committed schemas, projections, or instances.
+pub fn validate_live_run(run: &LiveRun) -> Result<(), SchemaError> {
+    validate_typed("live run", LIVE_RUN_SCHEMA, run)
+}
+
 /// Validates a machine-readable benchmark result.
 ///
 /// # Errors
 ///
 /// Returns [`SchemaError`] for invalid committed schemas, projections, or instances.
 pub fn validate_result(result: &BenchmarkResult) -> Result<(), SchemaError> {
-    validate_typed("result", RESULT_SCHEMA, result)
+    let schema = match result.schema_version.as_str() {
+        RESULT_SCHEMA_V1 => RESULT_SCHEMA,
+        RESULT_SCHEMA_V2 => RESULT_SCHEMA_V2_JSON,
+        version => {
+            return Err(SchemaError::InvalidInstance {
+                contract: "result",
+                detail: format!("unsupported schema version `{version}`"),
+            });
+        }
+    };
+    validate_typed("result", schema, result)
 }
 
 fn validate_typed<T: serde::Serialize>(
@@ -100,8 +136,11 @@ mod tests {
     fn committed_schemas_compile() -> Result<(), Box<dyn std::error::Error>> {
         for (name, schema) in [
             ("suite", SUITE_SCHEMA),
+            ("suite v2", SUITE_SCHEMA_V2_JSON),
             ("run", RUN_SCHEMA),
+            ("live run", LIVE_RUN_SCHEMA),
             ("result", RESULT_SCHEMA),
+            ("result v2", RESULT_SCHEMA_V2_JSON),
         ] {
             let value: Value = serde_json::from_str(schema)?;
             jsonschema::validator_for(&value)

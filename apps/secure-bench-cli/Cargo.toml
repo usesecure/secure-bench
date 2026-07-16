@@ -1,6 +1,6 @@
 [package]
 name = "secure-bench-cli"
-description = "Mock-only Phase 0 command-line interface for Secure Bench"
+description = "Neutral corpus, black-box execution, evaluation, and reporting CLI for Secure Bench"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
@@ -11,10 +11,19 @@ repository.workspace = true
 name = "secure-bench"
 path = "src/main.rs"
 
+[[bin]]
+name = "secure-bench-mock-tool"
+path = "src/bin/secure-bench-mock-tool.rs"
+doc = false
+
 [dependencies]
 clap.workspace = true
+ctrlc.workspace = true
 secure-bench-core = { version = "0.1.0", path = "../../crates/secure-bench-core" }
 serde_json.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
 
 [lints]
 workspace = true

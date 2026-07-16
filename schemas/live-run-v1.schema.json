@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/secure-bench/schemas/live-run-v1.schema.json",
+  "title": "Secure Bench Live Run v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "suite_id", "corpus_fingerprint", "tool", "host", "started_unix_ms", "finished_unix_ms", "status", "cases"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-live-run-v1" },
+    "run_id": { "$ref": "#/$defs/identifier" },
+    "suite_id": { "$ref": "#/$defs/identifier" },
+    "corpus_fingerprint": { "$ref": "#/$defs/sha256" },
+    "tool": { "$ref": "#/$defs/tool" },
+    "host": { "$ref": "#/$defs/host" },
+    "started_unix_ms": { "type": "integer", "minimum": 0 },
+    "finished_unix_ms": { "type": "integer", "minimum": 0 },
+    "status": { "enum": ["completed", "partial_failure", "failed", "cancelled"] },
+    "cases": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/case" } }
+  },
+  "$defs": {
+    "identifier": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "capture": {
+      "type": "object", "additionalProperties": false,
+      "required": ["fingerprint", "bytes", "truncated"],
+      "properties": { "fingerprint": { "$ref": "#/$defs/sha256" }, "bytes": { "type": "integer", "minimum": 0 }, "truncated": { "type": "boolean" } }
+    },
+    "tool": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "reported_version", "binary_fingerprint", "report_schema", "argument_template", "configuration_fingerprint", "version_probe_status", "version_stdout", "version_stderr"],
+      "properties": {
+        "name": { "const": "Secure Engine" },
+        "reported_version": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "binary_fingerprint": { "$ref": "#/$defs/sha256" },
+        "report_schema": { "const": "secure-json-v1" },
+        "argument_template": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "configuration_fingerprint": { "$ref": "#/$defs/sha256" },
+        "version_probe_status": { "enum": ["success", "failed", "timeout", "execution_failure"] },
+        "version_stdout": { "$ref": "#/$defs/capture" },
+        "version_stderr": { "$ref": "#/$defs/capture" }
+      }
+    },
+    "host": {
+      "type": "object", "additionalProperties": false,
+      "required": ["os", "architecture", "logical_cpus", "memory_bytes"],
+      "properties": {
+        "os": { "type": "string", "minLength": 1 },
+        "architecture": { "type": "string", "minLength": 1 },
+        "logical_cpus": { "type": ["integer", "null"], "minimum": 1 },
+        "memory_bytes": { "type": ["integer", "null"], "minimum": 1 },
+        "kernel_release": { "type": "string", "minLength": 1, "maxLength": 128 }
+      }
+    },
+    "case": {
+      "type": "object", "additionalProperties": false,
+      "required": ["case_id", "fixture_fingerprint", "status", "arguments", "report_path", "report_fingerprint", "started_unix_ms", "finished_unix_ms", "duration_ms", "process_exit_code", "peak_memory_bytes", "output_bytes", "stdout", "stderr", "error_code"],
+      "properties": {
+        "case_id": { "$ref": "#/$defs/identifier" },
+        "fixture_fingerprint": { "$ref": "#/$defs/sha256" },
+        "status": { "enum": ["success", "findings", "crash", "timeout", "invalid_output", "unsupported_schema", "execution_failure", "cancelled"] },
+        "arguments": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "report_path": { "type": ["string", "null"], "pattern": "^reports/[A-Za-z0-9._-]+\\.json$" },
+        "report_fingerprint": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] },
+        "started_unix_ms": { "type": "integer", "minimum": 0 },
+        "finished_unix_ms": { "type": "integer", "minimum": 0 },
+        "duration_ms": { "type": "integer", "minimum": 0 },
+        "process_exit_code": { "type": ["integer", "null"] },
+        "peak_memory_bytes": { "type": ["integer", "null"], "minimum": 0 },
+        "output_bytes": { "type": ["integer", "null"], "minimum": 0 },
+        "stdout": { "$ref": "#/$defs/capture" },
+        "stderr": { "$ref": "#/$defs/capture" },
+        "error_code": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-# Phase 0 Methodology
+# Secure Bench Phase 0–1 Methodology
 
 ## Neutrality statement
 
@@ -53,3 +53,17 @@ Every aggregate is reproducible from normalized findings, expectation decisions,
 ## Phase 0 limitations
 
 The corpus has one minimal vulnerable case and one paired safe control. It is intentionally too small and synthetic for statistical claims, confidence intervals, language coverage claims, severity calibration conclusions, performance comparisons, or production readiness conclusions. No external projects, scanner binaries, scanner packages, or live outputs are included.
+
+## Phase 1 corpus methodology
+
+Phase 1 adds seven original vulnerable/control pairs covering public command execution, raw SQL construction, filesystem, outbound request, redirect, dynamic code execution, and authorization-dominance invariants. The projects span JavaScript, JSX, TypeScript, and TSX across Node.js, Express-style handlers, and Next.js App Router or Server Action forms.
+
+Cases are designed from public security invariants and ordinary framework behavior. They are not derived from Secure Engine source, private rule implementations, or private fixtures. Neutral scanner-visible names are mandatory, and automated leakage checks reject answer labels, matcher categories, and invariant text in fixture paths, declarations, and comments. SHA-256 content fingerprints make fixture drift visible before execution.
+
+Eligibility, labels, constraints, evidence requirements, and resource budgets are declared before execution. Successful reports pass through the public scoring-blind adapter. The adapter receives no expectation or score data; matching remains one-to-one and exact. Live operational failures extend, rather than replace, the Phase 0 failure model.
+
+## Phase 1 limitations
+
+Fourteen synthetic cases cannot support public rankings, confidence intervals, broad framework coverage, production quality claims, or cross-tool conclusions. A single Secure Engine baseline is sensitive to the exact binary, configuration, host, and public CLI behavior. Timing and observed memory are descriptive measurements, not comparative performance claims.
+
+Phase 1 does not claim kernel-enforced network isolation, a read-only mount sandbox, descendant-inclusive memory accounting, or hard filesystem quotas. The child environment is cleared, cases are copied to temporary workspaces, direct-process memory is sampled, time and accepted report sizes are bounded, and process groups are cleaned. Stronger execution isolation remains later roadmap work.

@@ -1,4 +1,4 @@
-# Phase 0 Contracts
+# Secure Bench Phase 0–1 Contracts
 
 ## Version identifiers
 
@@ -9,6 +9,14 @@
 | Result | `secure-bench-result-v1` | `schemas/result-v1.schema.json` |
 | Native mock report | `secure-json-v1` | Strict typed adapter contract |
 | SARIF mock report | `2.1.0` | Evidence-bearing SARIF subset |
+
+Phase 1 adds these contracts without changing the Phase 0 schemas:
+
+| Contract | Identifier | Committed schema |
+|---|---|---|
+| First-party corpus suite | `secure-bench-suite-v2` | `schemas/suite-v2.schema.json` |
+| Live run bundle | `secure-bench-live-run-v1` | `schemas/live-run-v1.schema.json` |
+| Live evaluated result | `secure-bench-result-v2` | `schemas/result-v2.schema.json` |
 
 Unknown fields are rejected by the native contract and the typed benchmark contracts. The SARIF adapter tolerates unrelated standard SARIF fields while requiring the Phase 0 properties used for neutral normalization.
 
@@ -45,3 +53,11 @@ The result contains:
 - fingerprints and public provenance.
 
 No public Phase 0 field represents a leaderboard score or scanner rank.
+
+## Phase 1 live runs
+
+A live-run bundle accounts for every suite case exactly once. It links the suite and corpus fingerprints to an explicit binary hash, public version probe, schema, argument template, configuration hash, sanitized host data, per-case arguments, process exit codes, timing, observed memory, stream hashes, report sizes and hashes, and explicit statuses. Paths remain bundle-relative and raw process streams are not retained. A complete, internally error-free, adapter-valid public report is authoritative when the scanner uses a nonzero finding exit code; incomplete or errored reports remain failures.
+
+The evaluator rejects missing or unrelated report files, unsafe or duplicate paths, altered case or corpus fingerprints, mismatched argument arrays, inconsistent aggregate status, invalid timestamp ordering, report size or hash drift, outcome/report disagreement, and success records carrying failure codes. A failed status cannot be interpreted as an empty report.
+
+The v2 result adds invalid-output, execution-failure, and cancellation counts while retaining every Phase 0 metric and its explicit denominator. It still has no composite score, rank, or tool-comparison field.

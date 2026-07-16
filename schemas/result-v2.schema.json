@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/secure-bench/schemas/result-v2.schema.json",
+  "title": "Secure Bench Result v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "suite_id", "run_id", "normalized_findings", "matching", "score", "errors", "provenance"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-result-v2" },
+    "suite_id": { "$ref": "#/$defs/identifier" },
+    "run_id": { "$ref": "#/$defs/identifier" },
+    "normalized_findings": { "type": "array", "items": { "$ref": "#/$defs/finding" } },
+    "matching": { "$ref": "#/$defs/matching" },
+    "score": { "$ref": "#/$defs/score" },
+    "errors": { "type": "array", "items": { "$ref": "#/$defs/error" } },
+    "provenance": { "$ref": "#/$defs/provenance" }
+  },
+  "$defs": {
+    "identifier": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "location": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "line", "column"],
+      "properties": { "path": { "type": "string", "minLength": 1, "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[:%\\\\]).+$" }, "line": { "type": "integer", "minimum": 1 }, "column": { "type": ["integer", "null"], "minimum": 1 } }
+    },
+    "hop": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "location"],
+      "properties": { "kind": { "type": "string", "minLength": 1 }, "location": { "$ref": "#/$defs/location" } }
+    },
+    "finding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["finding_id", "case_id", "native_rule_id", "category", "invariant", "severity", "confidence", "source", "sink", "evidence_path", "provenance"],
+      "properties": {
+        "finding_id": { "type": "string", "pattern": "^finding-[0-9a-f]{16}-[0-9]{4,}$" },
+        "case_id": { "$ref": "#/$defs/identifier" },
+        "native_rule_id": { "type": "string", "minLength": 1 },
+        "category": { "type": "string", "minLength": 1 },
+        "invariant": { "type": "string", "minLength": 1 },
+        "severity": { "enum": ["info", "low", "medium", "high", "critical"] },
+        "confidence": { "enum": ["low", "medium", "high"] },
+        "source": { "$ref": "#/$defs/location" },
+        "sink": { "$ref": "#/$defs/location" },
+        "evidence_path": { "type": "array", "items": { "$ref": "#/$defs/hop" } },
+        "provenance": {
+          "type": "object", "additionalProperties": false,
+          "required": ["adapter", "report_fingerprint", "raw_index"],
+          "properties": { "adapter": { "const": "secure-json-v1" }, "report_fingerprint": { "$ref": "#/$defs/sha256" }, "raw_index": { "type": "integer", "minimum": 0 } }
+        }
+      }
+    },
+    "criteria": {
+      "type": "object", "additionalProperties": false,
+      "required": ["category", "invariant", "source", "sink", "evidence_path"],
+      "properties": { "category": { "type": "boolean" }, "invariant": { "type": "boolean" }, "source": { "type": "boolean" }, "sink": { "type": "boolean" }, "evidence_path": { "type": "boolean" } }
+    },
+    "expectationDecision": {
+      "type": "object", "additionalProperties": false,
+      "required": ["case_id", "expectation_id", "outcome", "selected_finding_id", "ambiguous_finding_ids", "criteria"],
+      "properties": { "case_id": { "$ref": "#/$defs/identifier" }, "expectation_id": { "$ref": "#/$defs/identifier" }, "outcome": { "enum": ["matched", "ambiguous", "missed", "not_attempted", "unsupported"] }, "selected_finding_id": { "type": ["string", "null"] }, "ambiguous_finding_ids": { "type": "array", "items": { "type": "string" } }, "criteria": { "$ref": "#/$defs/criteria" } }
+    },
+    "findingDecision": {
+      "type": "object", "additionalProperties": false,
+      "required": ["finding_id", "case_id", "disposition", "related_id"],
+      "properties": { "finding_id": { "type": "string" }, "case_id": { "$ref": "#/$defs/identifier" }, "disposition": { "enum": ["matched", "duplicate", "ambiguous_candidate", "safe_control_false_positive", "unmatched", "ineligible_run_output"] }, "related_id": { "type": ["string", "null"] } }
+    },
+    "matching": {
+      "type": "object", "additionalProperties": false,
+      "required": ["expectations", "findings"],
+      "properties": { "expectations": { "type": "array", "items": { "$ref": "#/$defs/expectationDecision" } }, "findings": { "type": "array", "items": { "$ref": "#/$defs/findingDecision" } } }
+    },
+    "ratio": {
+      "type": "object", "additionalProperties": false,
+      "required": ["numerator", "denominator", "basis_points"],
+      "properties": { "numerator": { "type": "integer", "minimum": 0 }, "denominator": { "type": "integer", "minimum": 0 }, "basis_points": { "type": ["integer", "null"], "minimum": 0, "maximum": 10000 } }
+    },
+    "integerMap": { "type": "object", "additionalProperties": { "type": ["integer", "null"], "minimum": 0 } },
+    "score": {
+      "type": "object", "additionalProperties": false,
+      "required": ["vulnerable_recall", "attempted_vulnerable_recall", "safe_control_false_positive_rate", "safe_control_clean_coverage", "evidence_path_accuracy", "source_localization_accuracy", "sink_localization_accuracy", "severity_calibration_accuracy", "confidence_calibration_accuracy", "duplicate_rate", "counts", "failures", "performance"],
+      "properties": {
+        "vulnerable_recall": { "$ref": "#/$defs/ratio" }, "attempted_vulnerable_recall": { "$ref": "#/$defs/ratio" }, "safe_control_false_positive_rate": { "$ref": "#/$defs/ratio" }, "safe_control_clean_coverage": { "$ref": "#/$defs/ratio" }, "evidence_path_accuracy": { "$ref": "#/$defs/ratio" }, "source_localization_accuracy": { "$ref": "#/$defs/ratio" }, "sink_localization_accuracy": { "$ref": "#/$defs/ratio" }, "severity_calibration_accuracy": { "$ref": "#/$defs/ratio" }, "confidence_calibration_accuracy": { "$ref": "#/$defs/ratio" }, "duplicate_rate": { "$ref": "#/$defs/ratio" },
+        "counts": { "$ref": "#/$defs/integerMap" }, "failures": { "$ref": "#/$defs/integerMap" },
+        "performance": { "type": "object", "required": ["cold_duration", "warm_duration", "peak_memory", "output_size"], "properties": { "cold_duration": { "$ref": "#/$defs/integerMap" }, "warm_duration": { "$ref": "#/$defs/integerMap" }, "peak_memory": { "$ref": "#/$defs/integerMap" }, "output_size": { "$ref": "#/$defs/integerMap" } }, "additionalProperties": false }
+      }
+    },
+    "error": {
+      "type": "object", "additionalProperties": false,
+      "required": ["code", "stage", "message"],
+      "properties": { "code": { "type": "string", "minLength": 1 }, "stage": { "enum": ["contract", "adapter", "matcher", "scorer", "runner"] }, "message": { "type": "string", "minLength": 1 } }
+    },
+    "tool": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "version", "command", "configuration_fingerprint", "report_schema", "binary_fingerprint"],
+      "properties": { "name": { "const": "Secure Engine" }, "version": { "type": "string", "minLength": 1 }, "command": { "type": "array", "minItems": 1, "items": { "type": "string" } }, "configuration_fingerprint": { "$ref": "#/$defs/sha256" }, "report_schema": { "const": "secure-json-v1" }, "binary_fingerprint": { "$ref": "#/$defs/sha256" } }
+    },
+    "host": {
+      "type": "object", "additionalProperties": false,
+      "required": ["os", "architecture", "logical_cpus", "memory_bytes"],
+      "properties": { "os": { "type": "string", "minLength": 1 }, "architecture": { "type": "string", "minLength": 1 }, "logical_cpus": { "type": ["integer", "null"], "minimum": 1 }, "memory_bytes": { "type": ["integer", "null"], "minimum": 1 }, "kernel_release": { "type": "string", "minLength": 1, "maxLength": 128 } }
+    },
+    "provenance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["suite_fingerprint", "run_manifest_fingerprint", "report_fingerprint", "tool", "host", "schemas"],
+      "properties": { "suite_fingerprint": { "$ref": "#/$defs/sha256" }, "run_manifest_fingerprint": { "$ref": "#/$defs/sha256" }, "report_fingerprint": { "$ref": "#/$defs/sha256" }, "tool": { "$ref": "#/$defs/tool" }, "host": { "$ref": "#/$defs/host" }, "schemas": { "type": "object", "additionalProperties": { "type": "string", "minLength": 1 } } }
+    }
+  }
+}
