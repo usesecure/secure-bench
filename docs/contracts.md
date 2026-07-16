@@ -24,6 +24,14 @@ Phase 1.5 adds one prospective contract without changing any Phase 0 or Phase 1 
 |---|---|---|
 | Frozen neutral taxonomy | `secure-bench-taxonomy-v1` / taxonomy `1.0.0` | `schemas/taxonomy-v1.schema.json` |
 
+Phase 2 adds prospective evaluation contracts without changing historical artifacts:
+
+| Contract | Identifier | Committed schema |
+|---|---|---|
+| Frozen corpus taxonomy profile | `secure-bench-taxonomy-profile-v1` | `schemas/taxonomy-profile-v1.schema.json` |
+| Network-isolation attestation | `secure-bench-network-isolation-v1` | `schemas/network-isolation-v1.schema.json` |
+| Prospective evaluation result | `secure-bench-phase2-result-v1` | `schemas/phase2-result-v1.schema.json` |
+
 Unknown fields are rejected by the native contract and the typed benchmark contracts. The SARIF adapter tolerates unrelated standard SARIF fields while requiring the Phase 0 properties used for neutral normalization.
 
 ## Recorded runs
@@ -69,3 +77,9 @@ A live-run bundle accounts for every suite case exactly once. It links the suite
 The evaluator rejects missing or unrelated report files, unsafe or duplicate paths, altered case or corpus fingerprints, mismatched argument arrays, inconsistent aggregate status, invalid timestamp ordering, report size or hash drift, outcome/report disagreement, and success records carrying failure codes. A failed status cannot be interpreted as an empty report.
 
 The v2 result adds invalid-output, execution-failure, and cancellation counts while retaining every Phase 0 metric and its explicit denominator. It still has no composite score, rank, or tool-comparison field.
+
+## Phase 2 prospective results
+
+The frozen profile binds all seven vulnerable Phase 1 expectations to exact taxonomy 1.0.0 pairs before execution. The evaluator rejects incomplete coverage, duplicates, identifier conflicts, or fingerprint drift. The isolation attestation must cover the version probe and every scanner process, expose only loopback, and record blocked outbound connectivity.
+
+The Phase 2 result preserves normalized findings, per-case criteria and outcomes, exact and diagnostic agreement metrics, safe-control outcomes, primary/repeat operational measurements, semantic stability, historical comparison, and complete hashed provenance. Raw-report byte equality is independent from semantic equality. Partial matches never count as exact detections, failures never appear clean, and the result contains no rank, leaderboard score, or superiority field.

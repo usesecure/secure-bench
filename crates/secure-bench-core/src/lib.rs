@@ -7,6 +7,7 @@ pub mod adapter;
 pub mod corpus;
 pub mod matcher;
 pub mod model;
+pub mod phase2;
 pub mod pipeline;
 pub mod runner;
 pub mod schema;

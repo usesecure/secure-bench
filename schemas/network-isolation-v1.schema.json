@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/secure-bench/schemas/network-isolation-v1.schema.json",
+  "title": "Secure Bench Network Isolation Attestation v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "mechanism",
+    "scope",
+    "interfaces",
+    "outbound_connectivity",
+    "probe_target"
+  ],
+  "properties": {
+    "schema_version": { "const": "secure-bench-network-isolation-v1" },
+    "mechanism": { "const": "bwrap-unshare-net" },
+    "scope": { "const": "version-probe-and-all-scanner-processes" },
+    "interfaces": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "uniqueItems": true,
+      "items": { "const": "lo" }
+    },
+    "outbound_connectivity": { "const": "blocked" },
+    "probe_target": { "const": "1.1.1.1:53" }
+  }
+}

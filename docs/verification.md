@@ -1,4 +1,4 @@
-# Secure Bench Phase 0–1.5 Verification
+# Secure Bench Phase 0–2 Verification
 
 ## Environment baseline
 
@@ -53,6 +53,8 @@ Phase 1 tests additionally prove:
 
 Phase 1.5 tests additionally prove strict frozen-taxonomy schema and semantic validation, canonical serialization and hashing, every explicit unmapped state, equivalent native/SARIF metadata, scanner-alias rejection, prose-independent prospective matching, and exact byte preservation of the committed Phase 1 result. The taxonomy CLI validates and inspects only committed public contract data; it does not execute a scanner.
 
+Phase 2 tests additionally prove frozen-profile completeness and drift rejection, fail-closed isolation attestations, strict result schema validation, deterministic prospective evaluation, historical Phase 1 immutability, and semantic stability when raw reports differ only in volatile metadata.
+
 ## Mock end-to-end check
 
 The mock helper is a Rust executable used only to exercise public black-box behavior. Its output is not a Secure Engine baseline and must not be represented as analyzer quality.
@@ -100,3 +102,7 @@ On the Phase 1 branch, formatting, strict Clippy, all 46 workspace tests, RustSe
 The real Phase 6 baseline used locally verified binary SHA-256 `3787db2091b9e5d5e05495d8642e7fe0005cd035ee3d9d84a402f5c08dae0504` under an outer Linux network namespace. AI validation was disabled, no configuration or credentials were supplied, and only `scan {fixture} --format secure-json-v1 --output {report}` was invoked. All 14 reports were complete, used `secure-json-v1`, and declared zero scanner errors. The evaluated result was byte-identical across two evaluations and retained zero failures, 11 normalized findings, zero exact expectation matches, three flagged controls, four clean controls, and zero duplicates. The retained JSON privacy scan found no absolute paths, secrets, prior-binary identifiers, provider data, or credentials.
 
 Phase 1.5 was created directly above the signed Phase 1 commit without modifying those baseline artifacts. Its detailed historical and taxonomy checks are recorded in [Phase 1.5 verification](phase-1-5-verification.md). No scanner was invoked for Phase 1.5.
+
+On 2026-07-16, Phase 2 executed the locally verified Secure Engine 0.1.1 binary SHA-256 `d154c427723f1a259f168d17f4974ced006ecc093d5b9150e8ef7186442aa8e2` twice under the exact public command and an outer `bwrap --unshare-net` namespace. AI remained disabled; no provider, credentials, configuration, AI subcommand, or network access was supplied. Both runs completed all 14 cases with no operational failures. Re-evaluation produced byte-identical result JSON with 4 exact detections, 2 partial matches, 1 miss, 1 flagged control, 6 clean controls, 10 normalized findings, and 0 duplicates. Semantic findings, decisions, metrics, and aggregate semantic fingerprints were identical across runs; raw reports differed only in retained volatile scan metadata.
+
+After capture, a stability-projection defect was corrected so raw report fingerprints do not participate in semantic aggregate equality. The raw-difference measure remains separate. The correction changed no profile, matcher criterion, adapter, report, case outcome, or metric and is covered by a focused regression test. Full formatting, strict Clippy, workspace tests, RustSec audit, dependency policy, schema, corpus, taxonomy, artifact-integrity, and privacy checks are required before the single Phase 2 commit.

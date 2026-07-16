@@ -4,6 +4,7 @@ use crate::model::{
     BenchmarkResult, BenchmarkSuite, RESULT_SCHEMA_V1, RESULT_SCHEMA_V2, RecordedRun,
     SUITE_SCHEMA_V1, SUITE_SCHEMA_V2,
 };
+use crate::phase2::{NetworkIsolationAttestation, Phase2Result, TaxonomyProfile};
 use crate::runner::LiveRun;
 use crate::taxonomy::FrozenTaxonomy;
 use serde_json::Value;
@@ -16,6 +17,11 @@ const LIVE_RUN_SCHEMA: &str = include_str!("../../../schemas/live-run-v1.schema.
 const RESULT_SCHEMA: &str = include_str!("../../../schemas/result-v1.schema.json");
 const RESULT_SCHEMA_V2_JSON: &str = include_str!("../../../schemas/result-v2.schema.json");
 const TAXONOMY_SCHEMA: &str = include_str!("../../../schemas/taxonomy-v1.schema.json");
+const TAXONOMY_PROFILE_SCHEMA: &str =
+    include_str!("../../../schemas/taxonomy-profile-v1.schema.json");
+const NETWORK_ISOLATION_SCHEMA: &str =
+    include_str!("../../../schemas/network-isolation-v1.schema.json");
+const PHASE2_RESULT_SCHEMA: &str = include_str!("../../../schemas/phase2-result-v1.schema.json");
 
 /// Schema loading or validation failure.
 #[derive(Clone, Debug, Eq, Error, PartialEq)]
@@ -111,6 +117,39 @@ pub fn validate_taxonomy(taxonomy: &FrozenTaxonomy) -> Result<(), SchemaError> {
     validate_typed("taxonomy", TAXONOMY_SCHEMA, taxonomy)
 }
 
+/// Validates the prospective expectation taxonomy profile.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] for invalid committed schemas, projections, or instances.
+pub fn validate_taxonomy_profile(profile: &TaxonomyProfile) -> Result<(), SchemaError> {
+    validate_typed("taxonomy profile", TAXONOMY_PROFILE_SCHEMA, profile)
+}
+
+/// Validates a network-isolation attestation.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] for invalid committed schemas, projections, or instances.
+pub fn validate_network_attestation(
+    attestation: &NetworkIsolationAttestation,
+) -> Result<(), SchemaError> {
+    validate_typed(
+        "network isolation attestation",
+        NETWORK_ISOLATION_SCHEMA,
+        attestation,
+    )
+}
+
+/// Validates a complete Phase 2 prospective result.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] for invalid committed schemas, projections, or instances.
+pub fn validate_phase2_result(result: &Phase2Result) -> Result<(), SchemaError> {
+    validate_typed("Phase 2 result", PHASE2_RESULT_SCHEMA, result)
+}
+
 fn validate_typed<T: serde::Serialize>(
     contract: &'static str,
     schema_text: &str,
@@ -153,6 +192,9 @@ mod tests {
             ("result", RESULT_SCHEMA),
             ("result v2", RESULT_SCHEMA_V2_JSON),
             ("taxonomy", TAXONOMY_SCHEMA),
+            ("taxonomy profile", TAXONOMY_PROFILE_SCHEMA),
+            ("network isolation", NETWORK_ISOLATION_SCHEMA),
+            ("Phase 2 result", PHASE2_RESULT_SCHEMA),
         ] {
             let value: Value = serde_json::from_str(schema)?;
             jsonschema::validator_for(&value)

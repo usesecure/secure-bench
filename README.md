@@ -2,13 +2,13 @@
 
 Reproducible, evidence-aware benchmarks for static security analyzers.
 
-Secure Bench is an independent, local-first Rust benchmark harness. Phase 0 established versioned contracts, scoring-blind adapters, deterministic matching, separate metrics, provenance, and explicit failure accounting using committed mock reports. Phase 1 adds an original JavaScript and TypeScript corpus and a direct black-box runner for an explicitly supplied Secure Engine binary. Phase 1.5 freezes a public neutral taxonomy for prospective reports without changing the historical Phase 1 result.
+Secure Bench is an independent, local-first Rust benchmark harness. Phase 0 established versioned contracts, scoring-blind adapters, deterministic matching, separate metrics, provenance, and explicit failure accounting using committed mock reports. Phase 1 adds an original JavaScript and TypeScript corpus and a direct black-box runner for an explicitly supplied Secure Engine binary. Phase 1.5 freezes a public neutral taxonomy for prospective reports without changing the historical Phase 1 result. Phase 2 applies that contract prospectively to two isolated, retained Secure Engine 0.1.1 runs while preserving every historical artifact.
 
 This remains an intentionally neutral foundation. It is not a production benchmark, scanner comparison, public leaderboard, or basis for claiming that Secure Engine—or any other analyzer—is superior. A Phase 1 baseline measures one explicitly identified binary on a small synthetic corpus and must be reported with its raw artifacts, denominators, environment, and limitations.
 
-The committed Phase 1 Secure Engine Phase 6 bundle is one deterministic black-box measurement with raw public reports and matching decisions. Its exact-match result is preserved without post-execution vocabulary aliases or tool-specific scoring exceptions. See [Phase 1 baseline reporting](docs/phase-1-baseline.md).
+The committed Phase 1 Secure Engine Phase 6 bundle is one deterministic black-box measurement with raw public reports and matching decisions. Its exact-match result is preserved without post-execution vocabulary aliases or tool-specific scoring exceptions. The separate Phase 2 bundle records the prospective evaluation, including raw repeat-run stability and isolation provenance. See [Phase 1 baseline reporting](docs/phase-1-baseline.md) and [Phase 2 prospective evaluation](docs/phase-2-evaluation.md).
 
-Secure Bench never downloads, installs, builds, updates, or discovers scanners. Secure Engine receives no internal API access, private fixtures, expected answers, matcher data, or product-specific scoring treatment. No other scanner is installed or executed in Phase 1.
+Secure Bench never downloads, installs, builds, updates, or discovers scanners. Secure Engine receives no internal API access, private fixtures, expected answers, matcher data, or product-specific scoring treatment. No other scanner is installed or executed in the Phase 1 or Phase 2 measurements.
 
 ## Workspace
 
@@ -85,6 +85,24 @@ cargo run --bin secure-bench -- validate \
   --run fixtures/reports/runs/native-success.json
 ```
 
+## Phase 2 prospective evaluation
+
+Phase 2 adds strict taxonomy-profile, network-attestation, and prospective-result contracts. The evaluation command consumes retained run bundles only; it does not start a scanner:
+
+```bash
+cargo run --release --bin secure-bench -- phase2 evaluate \
+  --suite fixtures/corpus-v1.toml \
+  --taxonomy taxonomy/secure-bench-taxonomy-v1.json \
+  --profile taxonomy/phase-1-corpus-taxonomy-profile-v1.json \
+  --network-attestation artifacts/network-isolation.json \
+  --phase1-result baselines/phase-1-secure-engine-phase6/result.json \
+  --primary-run artifacts/primary \
+  --repeat-run artifacts/repeat \
+  --binary-sha256 <verified-sha256> \
+  --source-rpm-sha256 <recorded-sha256> \
+  --output artifacts/phase-2-result.json
+```
+
 ## Verification
 
 ```bash
@@ -95,7 +113,7 @@ cargo audit --deny warnings
 cargo deny check
 ```
 
-See [Architecture](docs/architecture.md), [Methodology](docs/methodology.md), [Contracts](docs/contracts.md), [Frozen taxonomy](docs/neutral-taxonomy-v1.md), [Corpus provenance](docs/phase-1-corpus.md), [Runner boundaries](docs/phase-1-runner.md), and [Verification](docs/verification.md).
+See [Architecture](docs/architecture.md), [Methodology](docs/methodology.md), [Contracts](docs/contracts.md), [Frozen taxonomy](docs/neutral-taxonomy-v1.md), [Corpus provenance](docs/phase-1-corpus.md), [Runner boundaries](docs/phase-1-runner.md), [Phase 2 evaluation](docs/phase-2-evaluation.md), and [Verification](docs/verification.md).
 
 ## License
 

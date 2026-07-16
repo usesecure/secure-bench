@@ -86,3 +86,11 @@ Phase 1 does not claim the kernel-enforced network and read-only filesystem sand
 Phase 1.5 adds a frozen, typed taxonomy document and an independent prospective matcher API. Native JSON and SARIF adapters may preserve canonical version/category/invariant metadata, but cannot create it, translate scanner rule IDs, compare prose, or consult expectations. Resolution is explicit before source, sink, and evidence constraints are evaluated.
 
 The Phase 0 and Phase 1 pipeline entry points do not invoke this API. This separation prevents a newly published taxonomy from changing the bytes or interpretation of the retained Phase 1 baseline. See [Frozen neutral taxonomy v1](neutral-taxonomy-v1.md).
+
+## Phase 2 prospective evaluation boundary
+
+Phase 2 freezes a suite-specific taxonomy profile before scanner execution and evaluates two retained live bundles through a separate typed path. The scanner-visible boundary remains unchanged: one copied fixture and the public report command. Profile data, expectations, historical decisions, and scoring code remain outside the scan workspace.
+
+The evaluator validates every run and raw report before normalization, resolves only exact taxonomy coordinates, performs deterministic one-to-one matching, and emits per-criterion decisions. A second retained run supplies stability evidence. Volatile raw-report equality is recorded separately from content-derived finding identity, semantic finding sets, decisions, and metrics.
+
+The complete scanner lifecycle is wrapped by a caller-created network namespace attested through a strict versioned contract. This is measurement-specific provenance, not an assertion that the generic Phase 1 runner independently creates a network namespace.

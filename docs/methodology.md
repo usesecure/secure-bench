@@ -75,3 +75,15 @@ Taxonomy `1.0.0` freezes seven namespaced category/invariant pairs before any fu
 Prospective matching requires an exact taxonomy version, category ID, invariant ID, source constraint, sink constraint, and evidence-path constraint. Display prose, CWE associations, native rule IDs, severity, confidence, fingerprints, and tool identity cannot grant credit. Missing, incomplete, version-mismatched, unknown, and conflicting coordinates remain explicitly unmapped rather than guessed.
 
 The contract is not applied retrospectively. The Phase 1 baseline remains byte-identical and retains its original exact-match outcome. Taxonomy publication therefore cannot be used to relabel an existing measurement, add post-execution aliases, or claim that any analyzer was treated more favorably.
+
+## Phase 2 prospective evaluation methodology
+
+Phase 2 binds every vulnerable Phase 1 expectation to one taxonomy 1.0.0 category/invariant pair in a strict profile before execution. The profile fingerprints the unchanged suite and taxonomy and fails closed on incomplete, duplicate, unknown, or conflicting assignments. Secure Engine receives neither this profile nor any benchmark answer.
+
+An exact detection requires canonical taxonomy mapping plus the frozen source, sink, and evidence-path constraints. A canonically mapped observation that fails one or more localization or evidence constraints is partial and receives no detection credit. No mapped candidate is a miss. Out-of-scope, not-attempted, and operational failures remain explicit. Safe controls and vulnerable cases are still scored separately.
+
+Exact precision, recall, and F1 use raw integer counts. Category, invariant, CWE, source, sink, and evidence-path agreement are separate diagnostic measures. The primary CWE is derived from the already-selected frozen taxonomy pair; scanner prose or CWE text cannot establish mapping. No composite score is produced.
+
+Two independent retained runs are evaluated. Stable semantic finding identities, case decisions, metrics, and semantic aggregate fingerprints demonstrate deterministic evaluation even when raw public reports contain volatile metadata. All scanner invocations, including version probes, occur inside an attested network namespace with AI disabled and an empty configuration.
+
+The Phase 2 result compares prospective outcomes to the immutable Phase 1 result without rewriting it. This narrow synthetic measurement cannot support production-readiness claims, rankings, confidence intervals, broad coverage claims, or claims that Secure Engine or another analyzer is superior.

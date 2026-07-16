@@ -1,0 +1,468 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/secure-bench/schemas/phase2-result-v1.schema.json",
+  "title": "Secure Bench Phase 2 Prospective Result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "suite_id",
+    "taxonomy_version",
+    "run_ids",
+    "cases",
+    "findings",
+    "metrics",
+    "primary_measurement",
+    "repeat_measurement",
+    "stability",
+    "comparison",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase2-result-v1" },
+    "suite_id": { "const": "phase-1-javascript-typescript" },
+    "taxonomy_version": { "const": "1.0.0" },
+    "run_ids": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/identifier" }
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 14,
+      "maxItems": 14,
+      "items": { "$ref": "#/$defs/caseDecision" }
+    },
+    "findings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/findingRecord" }
+    },
+    "metrics": { "$ref": "#/$defs/metrics" },
+    "primary_measurement": { "$ref": "#/$defs/runMeasurement" },
+    "repeat_measurement": { "$ref": "#/$defs/runMeasurement" },
+    "stability": { "$ref": "#/$defs/stability" },
+    "comparison": { "$ref": "#/$defs/comparison" },
+    "provenance": { "$ref": "#/$defs/provenance" }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._-]+$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "nullableIdentifier": {
+      "oneOf": [
+        { "$ref": "#/$defs/identifier" },
+        { "type": "null" }
+      ]
+    },
+    "taxonomyCoordinates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["taxonomy_version", "category_id", "invariant_id"],
+      "properties": {
+        "taxonomy_version": { "const": "1.0.0" },
+        "category_id": {
+          "type": "string",
+          "pattern": "^secure-bench\\.category\\.[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "invariant_id": {
+          "type": "string",
+          "pattern": "^secure-bench\\.invariant\\.[a-z0-9]+(?:-[a-z0-9]+)*$"
+        }
+      }
+    },
+    "criteria": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "taxonomy_mapped",
+        "category",
+        "invariant",
+        "cwe",
+        "source",
+        "sink",
+        "evidence_path"
+      ],
+      "properties": {
+        "taxonomy_mapped": { "type": "boolean" },
+        "category": { "type": "boolean" },
+        "invariant": { "type": "boolean" },
+        "cwe": { "type": "boolean" },
+        "source": { "type": "boolean" },
+        "sink": { "type": "boolean" },
+        "evidence_path": { "type": "boolean" }
+      }
+    },
+    "caseDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "kind",
+        "expectation_id",
+        "outcome",
+        "execution_status",
+        "selected_finding_id",
+        "expected_taxonomy",
+        "primary_cwe",
+        "criteria",
+        "finding_count",
+        "duplicate_findings"
+      ],
+      "properties": {
+        "case_id": { "$ref": "#/$defs/identifier" },
+        "kind": { "enum": ["vulnerable", "safe_control"] },
+        "expectation_id": { "$ref": "#/$defs/nullableIdentifier" },
+        "outcome": {
+          "enum": [
+            "exact_canonical_detection",
+            "partial_match",
+            "missed",
+            "out_of_scope",
+            "not_attempted",
+            "safe_control_flagged",
+            "safe_control_clean"
+          ]
+        },
+        "execution_status": {
+          "enum": [
+            "success",
+            "findings",
+            "crash",
+            "timeout",
+            "invalid_output",
+            "unsupported_schema",
+            "execution_failure",
+            "cancelled"
+          ]
+        },
+        "selected_finding_id": { "type": ["string", "null"] },
+        "expected_taxonomy": {
+          "oneOf": [
+            { "$ref": "#/$defs/taxonomyCoordinates" },
+            { "type": "null" }
+          ]
+        },
+        "primary_cwe": {
+          "type": ["string", "null"],
+          "pattern": "^CWE-[1-9][0-9]*$"
+        },
+        "criteria": {
+          "oneOf": [
+            { "$ref": "#/$defs/criteria" },
+            { "type": "null" }
+          ]
+        },
+        "finding_count": { "type": "integer", "minimum": 0 },
+        "duplicate_findings": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "findingRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "finding_id",
+        "case_id",
+        "semantic_fingerprint",
+        "duplicate_of",
+        "resolved_taxonomy",
+        "unmapped_reason",
+        "report_fingerprint"
+      ],
+      "properties": {
+        "finding_id": { "type": "string", "minLength": 1 },
+        "case_id": { "$ref": "#/$defs/identifier" },
+        "semantic_fingerprint": { "$ref": "#/$defs/sha256" },
+        "duplicate_of": { "type": ["string", "null"] },
+        "resolved_taxonomy": {
+          "oneOf": [
+            { "$ref": "#/$defs/taxonomyCoordinates" },
+            { "type": "null" }
+          ]
+        },
+        "unmapped_reason": {
+          "type": ["string", "null"],
+          "enum": [
+            "missing_metadata",
+            "missing_fields",
+            "version_mismatch",
+            "unknown_category",
+            "unknown_invariant",
+            "conflicting_identifiers",
+            null
+          ]
+        },
+        "report_fingerprint": { "$ref": "#/$defs/sha256" }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "resolved_taxonomy": { "$ref": "#/$defs/taxonomyCoordinates" },
+            "unmapped_reason": { "type": "null" }
+          }
+        },
+        {
+          "properties": {
+            "resolved_taxonomy": { "type": "null" },
+            "unmapped_reason": {
+              "enum": [
+                "missing_metadata",
+                "missing_fields",
+                "version_mismatch",
+                "unknown_category",
+                "unknown_invariant",
+                "conflicting_identifiers"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "ratio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["numerator", "denominator", "basis_points"],
+      "properties": {
+        "numerator": { "type": "integer", "minimum": 0 },
+        "denominator": { "type": "integer", "minimum": 0 },
+        "basis_points": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 10000
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eligible_expectations",
+        "exact_detections",
+        "partial_matches",
+        "misses",
+        "out_of_scope",
+        "not_attempted",
+        "safe_controls_flagged",
+        "clean_safe_controls",
+        "safe_controls_not_attempted",
+        "normalized_findings",
+        "duplicate_findings",
+        "false_positive_findings"
+      ],
+      "properties": {
+        "eligible_expectations": { "type": "integer", "minimum": 0 },
+        "exact_detections": { "type": "integer", "minimum": 0 },
+        "partial_matches": { "type": "integer", "minimum": 0 },
+        "misses": { "type": "integer", "minimum": 0 },
+        "out_of_scope": { "type": "integer", "minimum": 0 },
+        "not_attempted": { "type": "integer", "minimum": 0 },
+        "safe_controls_flagged": { "type": "integer", "minimum": 0 },
+        "clean_safe_controls": { "type": "integer", "minimum": 0 },
+        "safe_controls_not_attempted": { "type": "integer", "minimum": 0 },
+        "normalized_findings": { "type": "integer", "minimum": 0 },
+        "duplicate_findings": { "type": "integer", "minimum": 0 },
+        "false_positive_findings": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "counts",
+        "precision",
+        "recall",
+        "f1",
+        "category_agreement",
+        "invariant_agreement",
+        "cwe_agreement",
+        "source_agreement",
+        "sink_agreement",
+        "evidence_path_agreement"
+      ],
+      "properties": {
+        "counts": { "$ref": "#/$defs/counts" },
+        "precision": { "$ref": "#/$defs/ratio" },
+        "recall": { "$ref": "#/$defs/ratio" },
+        "f1": { "$ref": "#/$defs/ratio" },
+        "category_agreement": { "$ref": "#/$defs/ratio" },
+        "invariant_agreement": { "$ref": "#/$defs/ratio" },
+        "cwe_agreement": { "$ref": "#/$defs/ratio" },
+        "source_agreement": { "$ref": "#/$defs/ratio" },
+        "sink_agreement": { "$ref": "#/$defs/ratio" },
+        "evidence_path_agreement": { "$ref": "#/$defs/ratio" }
+      }
+    },
+    "runMeasurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_id",
+        "status",
+        "cases",
+        "completed_cases",
+        "findings_cases",
+        "total_duration_ms",
+        "peak_rss_bytes",
+        "total_output_bytes",
+        "status_counts",
+        "exit_codes"
+      ],
+      "properties": {
+        "run_id": { "$ref": "#/$defs/identifier" },
+        "status": { "enum": ["completed", "partial_failure", "failed", "cancelled"] },
+        "cases": { "type": "integer", "minimum": 0 },
+        "completed_cases": { "type": "integer", "minimum": 0 },
+        "findings_cases": { "type": "integer", "minimum": 0 },
+        "total_duration_ms": { "type": "integer", "minimum": 0 },
+        "peak_rss_bytes": { "type": ["integer", "null"], "minimum": 0 },
+        "total_output_bytes": { "type": "integer", "minimum": 0 },
+        "status_counts": {
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        },
+        "exit_codes": {
+          "type": "object",
+          "additionalProperties": { "type": ["integer", "null"] }
+        }
+      }
+    },
+    "stability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "finding_ids_equal",
+        "semantic_findings_equal",
+        "case_decisions_equal",
+        "metrics_equal",
+        "deterministic_evaluation_equal",
+        "raw_reports_equal",
+        "raw_report_differences",
+        "fingerprint_stability",
+        "primary_semantic_fingerprint",
+        "repeat_semantic_fingerprint"
+      ],
+      "properties": {
+        "finding_ids_equal": { "type": "boolean" },
+        "semantic_findings_equal": { "type": "boolean" },
+        "case_decisions_equal": { "type": "boolean" },
+        "metrics_equal": { "type": "boolean" },
+        "deterministic_evaluation_equal": { "type": "boolean" },
+        "raw_reports_equal": { "type": "boolean" },
+        "raw_report_differences": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/identifier" }
+        },
+        "fingerprint_stability": { "$ref": "#/$defs/ratio" },
+        "primary_semantic_fingerprint": { "$ref": "#/$defs/sha256" },
+        "repeat_semantic_fingerprint": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "identifierArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/identifier" }
+    },
+    "comparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "phase1_exact_detections",
+        "phase2_exact_detections",
+        "taxonomy_alignment_improvements",
+        "newly_detected_vulnerabilities",
+        "resolved_safe_control_flags",
+        "remaining_misses",
+        "remaining_safe_control_flags",
+        "detection_regressions",
+        "false_positive_regressions"
+      ],
+      "properties": {
+        "phase1_exact_detections": { "type": "integer", "minimum": 0 },
+        "phase2_exact_detections": { "type": "integer", "minimum": 0 },
+        "taxonomy_alignment_improvements": { "$ref": "#/$defs/identifierArray" },
+        "newly_detected_vulnerabilities": { "$ref": "#/$defs/identifierArray" },
+        "resolved_safe_control_flags": { "$ref": "#/$defs/identifierArray" },
+        "remaining_misses": { "$ref": "#/$defs/identifierArray" },
+        "remaining_safe_control_flags": { "$ref": "#/$defs/identifierArray" },
+        "detection_regressions": { "$ref": "#/$defs/identifierArray" },
+        "false_positive_regressions": { "$ref": "#/$defs/identifierArray" }
+      }
+    },
+    "host": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["os", "architecture", "logical_cpus", "memory_bytes"],
+      "properties": {
+        "os": { "type": "string", "minLength": 1 },
+        "architecture": { "type": "string", "minLength": 1 },
+        "logical_cpus": { "type": ["integer", "null"], "minimum": 1 },
+        "memory_bytes": { "type": ["integer", "null"], "minimum": 1 },
+        "kernel_release": { "type": "string", "minLength": 1, "maxLength": 128 }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "binary_fingerprint",
+        "source_rpm_fingerprint",
+        "suite_fingerprint",
+        "corpus_fingerprint",
+        "taxonomy_artifact_fingerprint",
+        "taxonomy_content_hash",
+        "taxonomy_profile_fingerprint",
+        "network_attestation_fingerprint",
+        "phase1_result_fingerprint",
+        "primary_run_fingerprint",
+        "repeat_run_fingerprint",
+        "primary_report_fingerprint",
+        "repeat_report_fingerprint",
+        "tool_version",
+        "command_template",
+        "report_schema",
+        "configuration_fingerprint",
+        "ai_validation",
+        "network_isolation",
+        "primary_host",
+        "repeat_host",
+        "schemas"
+      ],
+      "properties": {
+        "binary_fingerprint": { "$ref": "#/$defs/sha256" },
+        "source_rpm_fingerprint": { "$ref": "#/$defs/sha256" },
+        "suite_fingerprint": { "$ref": "#/$defs/sha256" },
+        "corpus_fingerprint": { "$ref": "#/$defs/sha256" },
+        "taxonomy_artifact_fingerprint": { "$ref": "#/$defs/sha256" },
+        "taxonomy_content_hash": { "$ref": "#/$defs/sha256" },
+        "taxonomy_profile_fingerprint": { "$ref": "#/$defs/sha256" },
+        "network_attestation_fingerprint": { "$ref": "#/$defs/sha256" },
+        "phase1_result_fingerprint": { "$ref": "#/$defs/sha256" },
+        "primary_run_fingerprint": { "$ref": "#/$defs/sha256" },
+        "repeat_run_fingerprint": { "$ref": "#/$defs/sha256" },
+        "primary_report_fingerprint": { "$ref": "#/$defs/sha256" },
+        "repeat_report_fingerprint": { "$ref": "#/$defs/sha256" },
+        "tool_version": { "const": "secure 0.1.1" },
+        "command_template": {
+          "const": ["scan", "{fixture}", "--format", "secure-json-v1", "--output", "{report}"]
+        },
+        "report_schema": { "const": "secure-json-v1" },
+        "configuration_fingerprint": { "$ref": "#/$defs/sha256" },
+        "ai_validation": { "const": "disabled" },
+        "network_isolation": { "const": "bwrap-unshare-net" },
+        "primary_host": { "$ref": "#/$defs/host" },
+        "repeat_host": { "$ref": "#/$defs/host" },
+        "schemas": {
+          "type": "object",
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

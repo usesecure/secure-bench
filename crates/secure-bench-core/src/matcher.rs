@@ -300,6 +300,7 @@ fn duplicate_map(findings: &[&NormalizedFinding]) -> BTreeMap<String, String> {
 
 fn same_semantics(left: &NormalizedFinding, right: &NormalizedFinding) -> bool {
     left.case_id == right.case_id
+        && left.taxonomy == right.taxonomy
         && left.category == right.category
         && left.invariant == right.invariant
         && left.source == right.source

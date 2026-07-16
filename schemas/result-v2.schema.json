@@ -35,6 +35,7 @@
         "finding_id": { "type": "string", "pattern": "^finding-[0-9a-f]{16}-[0-9]{4,}$" },
         "case_id": { "$ref": "#/$defs/identifier" },
         "native_rule_id": { "type": "string", "minLength": 1 },
+        "taxonomy": { "$ref": "#/$defs/reportedTaxonomy" },
         "category": { "type": "string", "minLength": 1 },
         "invariant": { "type": "string", "minLength": 1 },
         "severity": { "enum": ["info", "low", "medium", "high", "critical"] },
@@ -47,6 +48,15 @@
           "required": ["adapter", "report_fingerprint", "raw_index"],
           "properties": { "adapter": { "const": "secure-json-v1" }, "report_fingerprint": { "$ref": "#/$defs/sha256" }, "raw_index": { "type": "integer", "minimum": 0 } }
         }
+      }
+    },
+    "reportedTaxonomy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "taxonomy_version": { "type": "string", "minLength": 1 },
+        "category_id": { "type": "string", "minLength": 1 },
+        "invariant_id": { "type": "string", "minLength": 1 }
       }
     },
     "criteria": {

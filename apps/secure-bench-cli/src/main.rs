@@ -3,6 +3,10 @@
 use clap::{Parser, Subcommand, ValueEnum};
 use secure_bench_core::adapter::fingerprint;
 use secure_bench_core::corpus::{inspect_corpus, validate_corpus};
+use secure_bench_core::phase2::{
+    NETWORK_ISOLATION_SCHEMA_V1, NetworkIsolationAttestation, Phase2EvaluationInput,
+    canonical_phase2_json, evaluate_phase2, load_network_attestation, load_taxonomy_profile,
+};
 use secure_bench_core::runner::{
     DEFAULT_SECURE_ENGINE_ARGUMENTS, RunnerRequest, load_live_run, run_secure_engine,
     valid_report_path,
@@ -18,10 +22,12 @@ use std::collections::{BTreeMap, BTreeSet};
 use std::ffi::OsString;
 use std::fs::{self, OpenOptions};
 use std::io::{self, Write};
+use std::net::{SocketAddr, TcpStream};
 use std::path::{Component, Path, PathBuf};
 use std::process::ExitCode;
 use std::sync::Arc;
 use std::sync::atomic::AtomicBool;
+use std::time::Duration;
 
 const MAX_MANIFEST_BYTES: u64 = 1024 * 1024;
 const MAX_REPORT_BYTES: u64 = 10 * 1024 * 1024;
@@ -47,6 +53,16 @@ enum Command {
     Taxonomy {
         #[command(subcommand)]
         command: TaxonomyCommand,
+    },
+    /// Validate and evaluate prospective Phase 2 taxonomy artifacts.
+    Phase2 {
+        #[command(subcommand)]
+        command: Phase2Command,
+    },
+    /// Produce proof from inside the scanner's network namespace.
+    Isolation {
+        #[command(subcommand)]
+        command: IsolationCommand,
     },
     /// Execute an explicitly supplied Secure Engine binary as a black box.
     Run {
@@ -132,6 +148,65 @@ enum TaxonomyCommand {
 }
 
 #[derive(Debug, Subcommand)]
+enum Phase2Command {
+    /// Validate the frozen pre-execution taxonomy profile.
+    ValidateProfile {
+        /// Immutable Phase 1 suite manifest.
+        #[arg(long)]
+        suite: PathBuf,
+        /// Frozen taxonomy document.
+        #[arg(long)]
+        taxonomy: PathBuf,
+        /// Prospective taxonomy profile.
+        #[arg(long)]
+        profile: PathBuf,
+    },
+    /// Evaluate primary and repeat black-box bundles under taxonomy 1.0.0.
+    Evaluate {
+        /// Immutable Phase 1 suite manifest.
+        #[arg(long)]
+        suite: PathBuf,
+        /// Frozen taxonomy document.
+        #[arg(long)]
+        taxonomy: PathBuf,
+        /// Frozen pre-execution taxonomy profile.
+        #[arg(long)]
+        profile: PathBuf,
+        /// Network-isolation attestation generated under the scanner wrapper.
+        #[arg(long)]
+        network_attestation: PathBuf,
+        /// Immutable Phase 1 result used only for comparison.
+        #[arg(long)]
+        phase1_result: PathBuf,
+        /// Primary retained live-run bundle.
+        #[arg(long)]
+        primary_run: PathBuf,
+        /// Repeat retained live-run bundle.
+        #[arg(long)]
+        repeat_run: PathBuf,
+        /// Expected external binary SHA-256.
+        #[arg(long)]
+        binary_sha256: String,
+        /// User-supplied source RPM SHA-256.
+        #[arg(long)]
+        source_rpm_sha256: String,
+        /// Deterministic Phase 2 result path.
+        #[arg(long)]
+        output: PathBuf,
+    },
+}
+
+#[derive(Debug, Subcommand)]
+enum IsolationCommand {
+    /// Attest that only loopback exists and outbound routing is blocked.
+    Attest {
+        /// Deterministic attestation output path.
+        #[arg(long)]
+        output: PathBuf,
+    },
+}
+
+#[derive(Debug, Subcommand)]
 enum CorpusCommand {
     /// Validate schemas, semantics, leakage controls, provenance, and fingerprints.
     Validate {
@@ -170,6 +245,8 @@ fn run(cli: Cli) -> Result<(), String> {
     match cli.command {
         Command::Corpus { command } => run_corpus_command(command),
         Command::Taxonomy { command } => run_taxonomy_command(command),
+        Command::Phase2 { command } => run_phase2_command(command),
+        Command::Isolation { command } => run_isolation_command(command),
         Command::Run {
             suite,
             tool,
@@ -236,6 +313,132 @@ fn run(cli: Cli) -> Result<(), String> {
             let parsed: BenchmarkResult = serde_json::from_slice(&bytes)
                 .map_err(|error| format!("result JSON is invalid at line {}", error.line()))?;
             println!("{}", summary_text(&parsed));
+            Ok(())
+        }
+    }
+}
+
+fn run_phase2_command(command: Phase2Command) -> Result<(), String> {
+    match command {
+        Phase2Command::ValidateProfile {
+            suite,
+            taxonomy,
+            profile,
+        } => {
+            let suite = read_bounded(&suite, MAX_MANIFEST_BYTES, "suite")?;
+            let taxonomy_bytes = read_bounded(&taxonomy, MAX_MANIFEST_BYTES, "taxonomy")?;
+            let taxonomy = load_taxonomy(&taxonomy_bytes).map_err(|error| error.to_string())?;
+            let profile = read_bounded(&profile, MAX_MANIFEST_BYTES, "taxonomy profile")?;
+            let profile = load_taxonomy_profile(&profile, &suite, &taxonomy)
+                .map_err(|error| error.to_string())?;
+            println!(
+                "Validated prospective taxonomy profile `{}` with {} frozen assignments.",
+                profile.profile_id,
+                profile.assignments.len()
+            );
+            Ok(())
+        }
+        Phase2Command::Evaluate {
+            suite,
+            taxonomy,
+            profile,
+            network_attestation,
+            phase1_result,
+            primary_run,
+            repeat_run,
+            binary_sha256,
+            source_rpm_sha256,
+            output,
+        } => {
+            let suite = read_bounded(&suite, MAX_MANIFEST_BYTES, "suite")?;
+            let taxonomy = read_bounded(&taxonomy, MAX_MANIFEST_BYTES, "taxonomy")?;
+            let profile = read_bounded(&profile, MAX_MANIFEST_BYTES, "taxonomy profile")?;
+            let network_attestation = read_bounded(
+                &network_attestation,
+                MAX_MANIFEST_BYTES,
+                "network isolation attestation",
+            )?;
+            let phase1_result = read_bounded(&phase1_result, MAX_RESULT_BYTES, "Phase 1 result")?;
+            let primary = load_live_bundle(&primary_run)?;
+            let repeat = load_live_bundle(&repeat_run)?;
+            let input = Phase2EvaluationInput {
+                suite: &suite,
+                taxonomy: &taxonomy,
+                profile: &profile,
+                network_attestation: &network_attestation,
+                phase1_result: &phase1_result,
+                primary_run: &primary.manifest,
+                primary_reports: &primary.reports,
+                repeat_run: &repeat.manifest,
+                repeat_reports: &repeat.reports,
+                binary_fingerprint: &binary_sha256,
+                source_rpm_fingerprint: &source_rpm_sha256,
+            };
+            let result = evaluate_phase2(&input).map_err(|error| error.to_string())?;
+            let bytes = canonical_phase2_json(&result).map_err(|error| error.to_string())?;
+            let repeated = evaluate_phase2(&input).map_err(|error| error.to_string())?;
+            let repeated_bytes =
+                canonical_phase2_json(&repeated).map_err(|error| error.to_string())?;
+            if bytes != repeated_bytes {
+                return Err("repeated Phase 2 evaluation was not byte-identical".to_owned());
+            }
+            atomic_write(&output, &bytes)?;
+            eprintln!(
+                "Wrote deterministic Phase 2 result with {} exact, {} partial, and {} missed expectations to {}.",
+                result.metrics.counts.exact_detections,
+                result.metrics.counts.partial_matches,
+                result.metrics.counts.misses,
+                output.display()
+            );
+            Ok(())
+        }
+    }
+}
+
+fn run_isolation_command(command: IsolationCommand) -> Result<(), String> {
+    match command {
+        IsolationCommand::Attest { output } => {
+            let network_devices = fs::read_to_string("/proc/net/dev")
+                .map_err(|error| format!("could not read network namespace state: {error}"))?;
+            let mut interfaces = network_devices
+                .lines()
+                .skip(2)
+                .filter_map(|line| line.split_once(':').map(|(name, _)| name.trim().to_owned()))
+                .collect::<Vec<_>>();
+            interfaces.sort();
+            interfaces.dedup();
+            let target: SocketAddr = "1.1.1.1:53"
+                .parse()
+                .map_err(|_| "fixed isolation probe target is invalid".to_owned())?;
+            match TcpStream::connect_timeout(&target, Duration::from_millis(250)) {
+                Ok(_) => {
+                    return Err(
+                        "network isolation failed: non-loopback connection succeeded".to_owned(),
+                    );
+                }
+                Err(error) if error.kind() == io::ErrorKind::NetworkUnreachable => {}
+                Err(error) => {
+                    return Err(format!(
+                        "network isolation did not fail closed with an unreachable network: {error}"
+                    ));
+                }
+            }
+            let attestation = NetworkIsolationAttestation {
+                schema_version: NETWORK_ISOLATION_SCHEMA_V1.to_owned(),
+                mechanism: "bwrap-unshare-net".to_owned(),
+                scope: "version-probe-and-all-scanner-processes".to_owned(),
+                interfaces,
+                outbound_connectivity: "blocked".to_owned(),
+                probe_target: "1.1.1.1:53".to_owned(),
+            };
+            let mut bytes = serde_json::to_vec_pretty(&attestation)
+                .map_err(|error| format!("could not serialize isolation attestation: {error}"))?;
+            bytes.push(b'\n');
+            load_network_attestation(&bytes).map_err(|error| error.to_string())?;
+            atomic_write(&output, &bytes)?;
+            println!(
+                "Attested loopback-only network namespace with blocked outbound connectivity."
+            );
             Ok(())
         }
     }
@@ -430,12 +633,27 @@ fn evaluate_recorded_files(suite_path: &Path, run_path: &Path) -> Result<Benchma
 }
 
 fn evaluate_live_files(suite_path: &Path, bundle: &Path) -> Result<BenchmarkResult, String> {
+    let loaded = load_live_bundle(bundle)?;
+    let suite = read_bounded(suite_path, MAX_MANIFEST_BYTES, "suite")?;
+    evaluate_live_run(&LiveEvaluationInput {
+        suite: &suite,
+        run_manifest: &loaded.manifest,
+        reports: &loaded.reports,
+    })
+    .map_err(|error| error.to_string())
+}
+
+struct LoadedLiveBundle {
+    manifest: Vec<u8>,
+    reports: BTreeMap<String, Vec<u8>>,
+}
+
+fn load_live_bundle(bundle: &Path) -> Result<LoadedLiveBundle, String> {
     let bundle_metadata = fs::symlink_metadata(bundle)
         .map_err(|error| format!("could not inspect live-run bundle: {error}"))?;
     if !bundle_metadata.is_dir() || bundle_metadata.file_type().is_symlink() {
         return Err("live-run bundle must be a regular directory".to_owned());
     }
-    let suite = read_bounded(suite_path, MAX_MANIFEST_BYTES, "suite")?;
     let run_path = bundle.join("run.json");
     let run_manifest = read_bounded(&run_path, MAX_MANIFEST_BYTES, "live run")?;
     let run = load_live_run(&run_manifest).map_err(|error| error.to_string())?;
@@ -462,12 +680,10 @@ fn evaluate_live_files(suite_path: &Path, bundle: &Path) -> Result<BenchmarkResu
             )?,
         );
     }
-    evaluate_live_run(&LiveEvaluationInput {
-        suite: &suite,
-        run_manifest: &run_manifest,
-        reports: &reports,
+    Ok(LoadedLiveBundle {
+        manifest: run_manifest,
+        reports,
     })
-    .map_err(|error| error.to_string())
 }
 
 fn collect_bundle_reports(bundle: &Path) -> Result<BTreeSet<String>, String> {
