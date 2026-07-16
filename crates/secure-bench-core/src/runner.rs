@@ -439,7 +439,7 @@ fn is_windows_absolute(value: &str) -> bool {
         && matches!(bytes[2], b'/' | b'\\')
 }
 
-fn validate_binary(path: &Path) -> Result<PathBuf, RunnerError> {
+pub(crate) fn validate_binary(path: &Path) -> Result<PathBuf, RunnerError> {
     let metadata = fs::symlink_metadata(path).map_err(|error| RunnerError::Io {
         path: path.display().to_string(),
         detail: error.to_string(),
@@ -641,17 +641,17 @@ pub(crate) fn render_arguments(template: &[String]) -> Vec<String> {
         .collect()
 }
 
-struct ProcessOutcome {
-    status: LiveCaseStatus,
-    exit_code: Option<i32>,
-    peak_memory_bytes: Option<u64>,
-    stdout: StreamCapture,
-    stderr: StreamCapture,
-    error_code: Option<String>,
+pub(crate) struct ProcessOutcome {
+    pub(crate) status: LiveCaseStatus,
+    pub(crate) exit_code: Option<i32>,
+    pub(crate) peak_memory_bytes: Option<u64>,
+    pub(crate) stdout: StreamCapture,
+    pub(crate) stderr: StreamCapture,
+    pub(crate) error_code: Option<String>,
 }
 
 #[allow(clippy::too_many_lines)]
-fn execute_process(
+pub(crate) fn execute_process(
     binary: &Path,
     arguments: &[String],
     current_directory: &Path,
@@ -762,7 +762,7 @@ fn execute_process(
     })
 }
 
-fn report_declares_completed_scan(report: &[u8]) -> bool {
+pub(crate) fn report_declares_completed_scan(report: &[u8]) -> bool {
     let Ok(value) = serde_json::from_slice::<serde_json::Value>(report) else {
         return false;
     };
@@ -957,7 +957,11 @@ fn sanitized_version(prefix: &[u8]) -> String {
     }
 }
 
-fn copy_fixture(source: &Path, destination: &Path, display: &str) -> Result<(), RunnerError> {
+pub(crate) fn copy_fixture(
+    source: &Path,
+    destination: &Path,
+    display: &str,
+) -> Result<(), RunnerError> {
     let mut pending = vec![(source.to_path_buf(), destination.to_path_buf())];
     while let Some((source_directory, destination_directory)) = pending.pop() {
         let entries = fs::read_dir(&source_directory).map_err(|error| RunnerError::Io {
@@ -1005,7 +1009,7 @@ fn copy_fixture(source: &Path, destination: &Path, display: &str) -> Result<(), 
     Ok(())
 }
 
-fn fingerprint_file(path: &Path) -> Result<String, RunnerError> {
+pub(crate) fn fingerprint_file(path: &Path) -> Result<String, RunnerError> {
     let mut file = fs::File::open(path).map_err(|error| RunnerError::Io {
         path: path.display().to_string(),
         detail: error.to_string(),
@@ -1025,7 +1029,7 @@ fn fingerprint_file(path: &Path) -> Result<String, RunnerError> {
     Ok(hex_digest(&hasher.finalize()))
 }
 
-fn atomic_write(path: &Path, bytes: &[u8]) -> Result<(), RunnerError> {
+pub(crate) fn atomic_write(path: &Path, bytes: &[u8]) -> Result<(), RunnerError> {
     let parent = path.parent().unwrap_or_else(|| Path::new("."));
     fs::create_dir_all(parent).map_err(|error| RunnerError::Io {
         path: parent.display().to_string(),
@@ -1068,7 +1072,7 @@ fn atomic_write(path: &Path, bytes: &[u8]) -> Result<(), RunnerError> {
     result
 }
 
-fn stable_json<T: Serialize>(value: &T) -> Result<Vec<u8>, RunnerError> {
+pub(crate) fn stable_json<T: Serialize>(value: &T) -> Result<Vec<u8>, RunnerError> {
     let mut bytes = serde_json::to_vec_pretty(value)
         .map_err(|error| RunnerError::Serialization(error.to_string()))?;
     bytes.push(b'\n');
@@ -1092,7 +1096,7 @@ pub(crate) fn aggregate_status(cases: &[LiveCaseRun]) -> LiveRunStatus {
     }
 }
 
-fn host_provenance() -> HostProvenance {
+pub(crate) fn host_provenance() -> HostProvenance {
     HostProvenance {
         os: std::env::consts::OS.to_owned(),
         architecture: std::env::consts::ARCH.to_owned(),
@@ -1129,17 +1133,17 @@ fn maximum_option(left: Option<u64>, right: Option<u64>) -> Option<u64> {
     }
 }
 
-fn unix_millis() -> u64 {
+pub(crate) fn unix_millis() -> u64 {
     SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .map_or(0, millis_u64)
 }
 
-fn millis_u64(duration: Duration) -> u64 {
+pub(crate) fn millis_u64(duration: Duration) -> u64 {
     u64::try_from(duration.as_millis()).unwrap_or(u64::MAX)
 }
 
-fn empty_capture() -> StreamCapture {
+pub(crate) fn empty_capture() -> StreamCapture {
     StreamCapture {
         fingerprint: fingerprint(&[]),
         bytes: 0,

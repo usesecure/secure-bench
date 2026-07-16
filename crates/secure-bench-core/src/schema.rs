@@ -6,6 +6,7 @@ use crate::model::{
     SUITE_SCHEMA_V1, SUITE_SCHEMA_V2,
 };
 use crate::phase2::{NetworkIsolationAttestation, Phase2Result, TaxonomyProfile};
+use crate::phase4::{Phase4Artifacts, Phase4PreExecutionContract, Phase4Result, Phase4Run};
 use crate::runner::LiveRun;
 use crate::taxonomy::FrozenTaxonomy;
 use serde_json::Value;
@@ -26,6 +27,12 @@ const PHASE2_RESULT_SCHEMA: &str = include_str!("../../../schemas/phase2-result-
 const HOLDOUT_SCHEMA: &str = include_str!("../../../schemas/holdout-v1.schema.json");
 const HOLDOUT_LEDGER_ENTRY_SCHEMA: &str =
     include_str!("../../../schemas/holdout-ledger-entry-v1.schema.json");
+const PHASE4_PRE_EXECUTION_SCHEMA: &str =
+    include_str!("../../../schemas/phase4-pre-execution-v1.schema.json");
+const PHASE4_RUN_SCHEMA: &str = include_str!("../../../schemas/phase4-run-v1.schema.json");
+const PHASE4_RESULT_SCHEMA: &str = include_str!("../../../schemas/phase4-result-v1.schema.json");
+const PHASE4_ARTIFACTS_SCHEMA: &str =
+    include_str!("../../../schemas/phase4-artifacts-v1.schema.json");
 
 /// Schema loading or validation failure.
 #[derive(Clone, Debug, Eq, Error, PartialEq)]
@@ -172,6 +179,48 @@ pub fn validate_holdout_ledger_entry(entry: &HoldoutLedgerEntry) -> Result<(), S
     validate_typed("holdout ledger entry", HOLDOUT_LEDGER_ENTRY_SCHEMA, entry)
 }
 
+/// Validates a frozen Phase 4 pre-execution contract.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] if the committed schema, projection, or instance is invalid.
+pub fn validate_phase4_pre_execution(
+    contract: &Phase4PreExecutionContract,
+) -> Result<(), SchemaError> {
+    validate_typed(
+        "Phase 4 pre-execution contract",
+        PHASE4_PRE_EXECUTION_SCHEMA,
+        contract,
+    )
+}
+
+/// Validates a retained Phase 4 run.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] if the committed schema, projection, or instance is invalid.
+pub fn validate_phase4_run(run: &Phase4Run) -> Result<(), SchemaError> {
+    validate_typed("Phase 4 run", PHASE4_RUN_SCHEMA, run)
+}
+
+/// Validates a deterministic Phase 4 result.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] if the committed schema, projection, or instance is invalid.
+pub fn validate_phase4_result(result: &Phase4Result) -> Result<(), SchemaError> {
+    validate_typed("Phase 4 result", PHASE4_RESULT_SCHEMA, result)
+}
+
+/// Validates a Phase 4 final artifact index.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] if the committed schema, projection, or instance is invalid.
+pub fn validate_phase4_artifacts(artifacts: &Phase4Artifacts) -> Result<(), SchemaError> {
+    validate_typed("Phase 4 artifact index", PHASE4_ARTIFACTS_SCHEMA, artifacts)
+}
+
 fn validate_typed<T: serde::Serialize>(
     contract: &'static str,
     schema_text: &str,
@@ -219,6 +268,10 @@ mod tests {
             ("Phase 2 result", PHASE2_RESULT_SCHEMA),
             ("holdout manifest", HOLDOUT_SCHEMA),
             ("holdout ledger entry", HOLDOUT_LEDGER_ENTRY_SCHEMA),
+            ("Phase 4 pre-execution", PHASE4_PRE_EXECUTION_SCHEMA),
+            ("Phase 4 run", PHASE4_RUN_SCHEMA),
+            ("Phase 4 result", PHASE4_RESULT_SCHEMA),
+            ("Phase 4 artifact index", PHASE4_ARTIFACTS_SCHEMA),
         ] {
             let value: Value = serde_json::from_str(schema)?;
             jsonschema::validator_for(&value)

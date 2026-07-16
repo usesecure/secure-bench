@@ -604,6 +604,139 @@ pub fn validate_holdout_ledger(
     Ok(entries)
 }
 
+/// Constructs the only permitted execution-reservation entry after validating the complete chain.
+///
+/// # Errors
+///
+/// Returns [`HoldoutError`] unless the ledger is in its genesis-only sealed state.
+pub fn execution_started_ledger_entry(
+    entries: &[HoldoutLedgerEntry],
+    manifest: &HoldoutManifest,
+    timestamp_utc: &str,
+    run_id: &str,
+    binary_sha256: &str,
+) -> Result<HoldoutLedgerEntry, HoldoutError> {
+    validate_ledger_semantics(entries, manifest)?;
+    if entries.len() != 1 || entries[0].event != HoldoutLedgerEvent::HoldoutSealed {
+        return Err(HoldoutError::InvalidContract(
+            "the one-shot execution slot is not available".to_owned(),
+        ));
+    }
+    next_ledger_entry(
+        entries,
+        manifest,
+        timestamp_utc,
+        HoldoutLedgerEvent::ExecutionStarted,
+        Some(run_id.to_owned()),
+        Some(binary_sha256.to_owned()),
+        None,
+        None,
+    )
+}
+
+/// Constructs the immutable successful terminal entry for the reserved execution.
+///
+/// # Errors
+///
+/// Returns [`HoldoutError`] unless the chain contains exactly one matching reservation.
+pub fn execution_completed_ledger_entry(
+    entries: &[HoldoutLedgerEntry],
+    manifest: &HoldoutManifest,
+    timestamp_utc: &str,
+    run_id: &str,
+    result_sha256: &str,
+) -> Result<HoldoutLedgerEntry, HoldoutError> {
+    validate_ledger_semantics(entries, manifest)?;
+    if entries.len() != 2
+        || entries[1].event != HoldoutLedgerEvent::ExecutionStarted
+        || entries[1].run_id.as_deref() != Some(run_id)
+    {
+        return Err(HoldoutError::InvalidContract(
+            "the terminal entry does not match the sole reservation".to_owned(),
+        ));
+    }
+    next_ledger_entry(
+        entries,
+        manifest,
+        timestamp_utc,
+        HoldoutLedgerEvent::ExecutionCompleted,
+        Some(run_id.to_owned()),
+        None,
+        Some(result_sha256.to_owned()),
+        None,
+    )
+}
+
+/// Constructs the immutable failed terminal entry for the reserved execution.
+///
+/// # Errors
+///
+/// Returns [`HoldoutError`] unless the chain contains exactly one matching reservation.
+pub fn execution_failed_ledger_entry(
+    entries: &[HoldoutLedgerEntry],
+    manifest: &HoldoutManifest,
+    timestamp_utc: &str,
+    run_id: &str,
+    detail_code: &str,
+) -> Result<HoldoutLedgerEntry, HoldoutError> {
+    validate_ledger_semantics(entries, manifest)?;
+    if entries.len() != 2
+        || entries[1].event != HoldoutLedgerEvent::ExecutionStarted
+        || entries[1].run_id.as_deref() != Some(run_id)
+    {
+        return Err(HoldoutError::InvalidContract(
+            "the failed entry does not match the sole reservation".to_owned(),
+        ));
+    }
+    next_ledger_entry(
+        entries,
+        manifest,
+        timestamp_utc,
+        HoldoutLedgerEvent::ExecutionFailed,
+        Some(run_id.to_owned()),
+        None,
+        None,
+        Some(detail_code.to_owned()),
+    )
+}
+
+#[allow(clippy::too_many_arguments)]
+fn next_ledger_entry(
+    entries: &[HoldoutLedgerEntry],
+    manifest: &HoldoutManifest,
+    timestamp_utc: &str,
+    event: HoldoutLedgerEvent,
+    run_id: Option<String>,
+    binary_sha256: Option<String>,
+    result_sha256: Option<String>,
+    detail_code: Option<String>,
+) -> Result<HoldoutLedgerEntry, HoldoutError> {
+    let previous = entries.last().ok_or_else(|| {
+        HoldoutError::InvalidContract("cannot append to an empty ledger".to_owned())
+    })?;
+    let mut entry = HoldoutLedgerEntry {
+        schema_version: HOLDOUT_LEDGER_SCHEMA_V1.to_owned(),
+        sequence: entries.len().try_into().unwrap_or(u64::MAX),
+        event,
+        holdout_id: manifest.holdout_id.clone(),
+        commitment_root: manifest.commitment.contract_merkle_root.clone(),
+        previous_entry_hash: previous.entry_hash.clone(),
+        timestamp_utc: timestamp_utc.to_owned(),
+        run_id,
+        binary_sha256,
+        result_sha256,
+        detail_code,
+        entry_hash: ZERO_HASH.to_owned(),
+    };
+    entry.entry_hash = ledger_entry_hash(&entry)?;
+    crate::schema::validate_holdout_ledger_entry(&entry)
+        .map_err(|error| HoldoutError::InvalidContract(error.to_string()))?;
+    let mut extended = entries.to_vec();
+    extended.push(entry.clone());
+    validate_ledger_semantics(&extended, manifest)?;
+    Ok(entry)
+}
+
 fn validate_manifest(
     manifest: &HoldoutManifest,
     repository_root: &Path,

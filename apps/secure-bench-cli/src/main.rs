@@ -8,6 +8,10 @@ use secure_bench_core::phase2::{
     NETWORK_ISOLATION_SCHEMA_V1, NetworkIsolationAttestation, Phase2EvaluationInput,
     canonical_phase2_json, evaluate_phase2, load_network_attestation, load_taxonomy_profile,
 };
+use secure_bench_core::phase4::{
+    Phase4ExecutionRequest, Phase4PrepareRequest, Phase4Result, Phase4VerificationRequest,
+    canonical_phase4_json, execute_phase4, prepare_phase4, verify_phase4_artifacts,
+};
 use secure_bench_core::runner::{
     DEFAULT_SECURE_ENGINE_ARGUMENTS, RunnerRequest, load_live_run, run_secure_engine,
     valid_report_path,
@@ -59,6 +63,11 @@ enum Command {
     Phase2 {
         #[command(subcommand)]
         command: Phase2Command,
+    },
+    /// Prepare, execute once, verify, or summarize the frozen Phase 4 evaluation.
+    Phase4 {
+        #[command(subcommand)]
+        command: Phase4Command,
     },
     /// Validate or inspect the sealed Phase 3 holdout without executing a scanner.
     Holdout {
@@ -203,6 +212,86 @@ enum Phase2Command {
 }
 
 #[derive(Debug, Subcommand)]
+enum Phase4Command {
+    /// Freeze all non-executing prerequisites; never starts the scanner.
+    Prepare {
+        #[arg(long, default_value = ".")]
+        repository_root: PathBuf,
+        #[arg(long)]
+        binary: PathBuf,
+        #[arg(long)]
+        source_rpm: PathBuf,
+        #[arg(long)]
+        benchmark_binary: PathBuf,
+        #[arg(long, default_value = "holdout/phase-3/manifest.json")]
+        manifest: PathBuf,
+        #[arg(long, default_value = "taxonomy/secure-bench-taxonomy-v1.json")]
+        taxonomy: PathBuf,
+        #[arg(long, default_value = "holdout/phase-3/execution-ledger.jsonl")]
+        ledger: PathBuf,
+        #[arg(long)]
+        frozen_at_utc: String,
+        #[arg(long)]
+        output: PathBuf,
+    },
+    /// Consume the one-shot slot inside a loopback-only network namespace.
+    Execute {
+        #[arg(long, default_value = ".")]
+        repository_root: PathBuf,
+        #[arg(long)]
+        binary: PathBuf,
+        #[arg(long)]
+        source_rpm: PathBuf,
+        #[arg(long)]
+        benchmark_binary: PathBuf,
+        #[arg(long)]
+        pre_execution_contract: PathBuf,
+        #[arg(long, default_value = "holdout/phase-3/manifest.json")]
+        manifest: PathBuf,
+        #[arg(long, default_value = "taxonomy/secure-bench-taxonomy-v1.json")]
+        taxonomy: PathBuf,
+        #[arg(long, default_value = "holdout/phase-3/execution-ledger.jsonl")]
+        ledger: PathBuf,
+        #[arg(long)]
+        run_directory: PathBuf,
+        #[arg(long)]
+        result: PathBuf,
+        #[arg(long)]
+        artifacts: PathBuf,
+    },
+    /// Verify all retained artifacts and deterministic evaluation without a scanner process.
+    Verify {
+        #[arg(long, default_value = ".")]
+        repository_root: PathBuf,
+        #[arg(long)]
+        binary: PathBuf,
+        #[arg(long)]
+        source_rpm: PathBuf,
+        #[arg(long)]
+        benchmark_binary: PathBuf,
+        #[arg(long)]
+        pre_execution_contract: PathBuf,
+        #[arg(long, default_value = "holdout/phase-3/manifest.json")]
+        manifest: PathBuf,
+        #[arg(long, default_value = "taxonomy/secure-bench-taxonomy-v1.json")]
+        taxonomy: PathBuf,
+        #[arg(long, default_value = "holdout/phase-3/execution-ledger.jsonl")]
+        ledger: PathBuf,
+        #[arg(long)]
+        run_directory: PathBuf,
+        #[arg(long)]
+        result: PathBuf,
+        #[arg(long)]
+        artifacts: PathBuf,
+    },
+    /// Print aggregate Phase 4 metrics without disclosing holdout answers.
+    Summary {
+        #[arg(long)]
+        result: PathBuf,
+    },
+}
+
+#[derive(Debug, Subcommand)]
 enum HoldoutCommand {
     /// Validate schemas, frozen commitments, fixtures, mutation proofs, and ledger state.
     Validate {
@@ -286,6 +375,7 @@ fn run(cli: Cli) -> Result<(), String> {
         Command::Corpus { command } => run_corpus_command(command),
         Command::Taxonomy { command } => run_taxonomy_command(command),
         Command::Phase2 { command } => run_phase2_command(command),
+        Command::Phase4 { command } => run_phase4_command(command),
         Command::Holdout { command } => run_holdout_command(command),
         Command::Isolation { command } => run_isolation_command(command),
         Command::Run {
@@ -407,6 +497,189 @@ fn run_holdout_command(command: HoldoutCommand) -> Result<(), String> {
         );
         Ok(())
     }
+}
+
+#[allow(clippy::too_many_lines)]
+fn run_phase4_command(command: Phase4Command) -> Result<(), String> {
+    match command {
+        Phase4Command::Prepare {
+            repository_root,
+            binary,
+            source_rpm,
+            benchmark_binary,
+            manifest,
+            taxonomy,
+            ledger,
+            frozen_at_utc,
+            output,
+        } => {
+            if fs::symlink_metadata(&output).is_ok() {
+                return Err("Phase 4 pre-execution contract output already exists".to_owned());
+            }
+            let manifest = read_bounded(&manifest, MAX_MANIFEST_BYTES, "holdout manifest")?;
+            let taxonomy = read_bounded(&taxonomy, MAX_MANIFEST_BYTES, "taxonomy")?;
+            let ledger = read_bounded(&ledger, MAX_MANIFEST_BYTES, "holdout ledger")?;
+            let contract = prepare_phase4(&Phase4PrepareRequest {
+                repository_root: &repository_root,
+                binary: &binary,
+                source_rpm: &source_rpm,
+                benchmark_binary: &benchmark_binary,
+                manifest: &manifest,
+                taxonomy: &taxonomy,
+                ledger: &ledger,
+                frozen_at_utc: &frozen_at_utc,
+            })
+            .map_err(|error| error.to_string())?;
+            atomic_write(
+                &output,
+                &canonical_phase4_json(&contract).map_err(|error| error.to_string())?,
+            )?;
+            println!("Froze the Phase 4 pre-execution contract; no scanner command was executed.");
+            Ok(())
+        }
+        Phase4Command::Execute {
+            repository_root,
+            binary,
+            source_rpm,
+            benchmark_binary,
+            pre_execution_contract,
+            manifest,
+            taxonomy,
+            ledger,
+            run_directory,
+            result,
+            artifacts,
+        } => {
+            let pre_execution_bytes = read_bounded(
+                &pre_execution_contract,
+                MAX_MANIFEST_BYTES,
+                "Phase 4 pre-execution contract",
+            )?;
+            let manifest_bytes = read_bounded(&manifest, MAX_MANIFEST_BYTES, "holdout manifest")?;
+            let taxonomy_bytes = read_bounded(&taxonomy, MAX_MANIFEST_BYTES, "taxonomy")?;
+            let cancellation = Arc::new(AtomicBool::new(false));
+            let signal = Arc::clone(&cancellation);
+            ctrlc::set_handler(move || {
+                signal.store(true, std::sync::atomic::Ordering::SeqCst);
+            })
+            .map_err(|error| format!("could not install cancellation handler: {error}"))?;
+            let pre_execution_relative =
+                repository_relative(&repository_root, &pre_execution_contract)?;
+            let run_relative =
+                repository_relative(&repository_root, &run_directory.join("run.json"))?;
+            let result_relative = repository_relative(&repository_root, &result)?;
+            let ledger_relative = repository_relative(&repository_root, &ledger)?;
+            let completed = execute_phase4(&Phase4ExecutionRequest {
+                repository_root: &repository_root,
+                binary: &binary,
+                source_rpm: &source_rpm,
+                benchmark_binary: &benchmark_binary,
+                pre_execution_contract: &pre_execution_bytes,
+                manifest: &manifest_bytes,
+                taxonomy: &taxonomy_bytes,
+                ledger_path: &ledger,
+                run_directory: &run_directory,
+                result_path: &result,
+                artifacts_path: &artifacts,
+                pre_execution_contract_path: &pre_execution_relative,
+                run_path: &run_relative,
+                result_path_relative: &result_relative,
+                ledger_path_relative: &ledger_relative,
+                cancellation,
+            })
+            .map_err(|error| error.to_string())?;
+            println!(
+                "Completed the reserved Phase 4 run and bound result {} to the append-only ledger.",
+                completed.result_sha256
+            );
+            Ok(())
+        }
+        Phase4Command::Verify {
+            repository_root,
+            binary,
+            source_rpm,
+            benchmark_binary,
+            pre_execution_contract,
+            manifest,
+            taxonomy,
+            ledger,
+            run_directory,
+            result,
+            artifacts,
+        } => {
+            let pre_execution = read_bounded(
+                &pre_execution_contract,
+                MAX_MANIFEST_BYTES,
+                "Phase 4 pre-execution contract",
+            )?;
+            let manifest = read_bounded(&manifest, MAX_MANIFEST_BYTES, "holdout manifest")?;
+            let taxonomy = read_bounded(&taxonomy, MAX_MANIFEST_BYTES, "taxonomy")?;
+            let ledger = read_bounded(&ledger, MAX_MANIFEST_BYTES, "holdout ledger")?;
+            let run = read_bounded(
+                &run_directory.join("run.json"),
+                MAX_RESULT_BYTES,
+                "Phase 4 run",
+            )?;
+            let result = read_bounded(&result, MAX_RESULT_BYTES, "Phase 4 result")?;
+            let artifacts = read_bounded(&artifacts, MAX_MANIFEST_BYTES, "Phase 4 artifact index")?;
+            let verified = verify_phase4_artifacts(&Phase4VerificationRequest {
+                repository_root: &repository_root,
+                binary: &binary,
+                source_rpm: &source_rpm,
+                benchmark_binary: &benchmark_binary,
+                pre_execution_contract: &pre_execution,
+                manifest: &manifest,
+                taxonomy: &taxonomy,
+                ledger: &ledger,
+                run: &run,
+                result: &result,
+                artifacts: &artifacts,
+                run_directory: &run_directory,
+            })
+            .map_err(|error| error.to_string())?;
+            println!(
+                "Verified Phase 4 artifacts, deterministic evaluation, and ledger binding {} without executing a scanner.",
+                verified.ledger_sha256
+            );
+            Ok(())
+        }
+        Phase4Command::Summary { result } => {
+            let bytes = read_bounded(&result, MAX_RESULT_BYTES, "Phase 4 result")?;
+            let result: Phase4Result = serde_json::from_slice(&bytes).map_err(|error| {
+                format!("Phase 4 result JSON is invalid at line {}", error.line())
+            })?;
+            let counts = &result.metrics.counts;
+            println!(
+                "Phase 4 aggregate: exact={}, partial={}, missed={}, out_of_scope={}, controls_flagged={}, controls_clean={}, failures={}, semantic_fingerprint={}",
+                counts.exact_detections,
+                counts.partial_matches,
+                counts.misses,
+                counts.out_of_scope,
+                counts.safe_controls_flagged,
+                counts.clean_safe_controls,
+                counts.not_attempted + counts.safe_controls_not_attempted,
+                result.semantic_fingerprint
+            );
+            Ok(())
+        }
+    }
+}
+
+fn repository_relative(root: &Path, path: &Path) -> Result<String, String> {
+    let root = root
+        .canonicalize()
+        .map_err(|error| format!("could not resolve repository root: {error}"))?;
+    let absolute = if path.is_absolute() {
+        path.to_path_buf()
+    } else {
+        std::env::current_dir()
+            .map_err(|error| format!("could not resolve current directory: {error}"))?
+            .join(path)
+    };
+    let relative = absolute
+        .strip_prefix(&root)
+        .map_err(|_| format!("artifact `{}` is outside the repository", path.display()))?;
+    path_to_slashes(relative)
 }
 
 fn run_phase2_command(command: Phase2Command) -> Result<(), String> {

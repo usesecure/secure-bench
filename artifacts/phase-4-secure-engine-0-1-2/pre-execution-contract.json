@@ -1,0 +1,77 @@
+{
+  "schema_version": "secure-bench-phase4-pre-execution-v1",
+  "frozen_at_utc": "2026-07-16T17:43:28Z",
+  "git_base": "74474708391b7913fa1ebe29ea8502e87ed11b0d",
+  "branch": "codex/phase-4-secure-engine-0-1-2-holdout",
+  "run_id": "secure-engine-0-1-2-holdout-once",
+  "scanner": {
+    "declared_version": "Secure Engine 0.1.2 (user-supplied artifact identity)",
+    "binary_sha256": "20e941f2f4633f0d1a62bd57d61d6969f5d251568f7abaff5a7a0fc8d5b31055",
+    "source_rpm_sha256": "8d6ed234ad87cd422a8c53de08117454423241972caa272a4bbb8bb7282c2276",
+    "command_template": [
+      "scan",
+      "{fixture}",
+      "--format",
+      "secure-json-v1",
+      "--output",
+      "{report}"
+    ],
+    "report_schema": "secure-json-v1",
+    "configuration_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ai_validation": "disabled",
+    "version_probe": "not-executed",
+    "environment_clear": true
+  },
+  "holdout": {
+    "holdout_id": "phase-3-expanded-frozen-holdout",
+    "manifest_sha256": "a7a2e47fa85c5fcda305e2c193b91216fd9df1c28fd52dd0179b588f83790da2",
+    "ledger_before_sha256": "dd8ec1fee4c1f09f06df2c9ffa652563786669d5a670cd2124b644488bbed6ed",
+    "aggregate_corpus_sha256": "28f4599c9711465a7cbbfe0ebc356e017a3bb6145bc77d57577b3b5d31790844",
+    "contract_merkle_root": "fcfbe4f8d5dc0fc871ce55c1eac3e3d2618bcc76261bfa16bd4b1f98833c96e5",
+    "taxonomy_artifact_sha256": "059fe22d7707cf8d17f2c1621fdae9819787a1958ba2ef0421eca4e4ec858452",
+    "taxonomy_content_hash": "22852bd7401020b315af11dfa2b60c0b46f78eb19f95079e6400d7b3bea3272c",
+    "pairs": 28,
+    "cases": 56
+  },
+  "resources": {
+    "timeout_ms": 60000,
+    "memory_bytes": 1073741824,
+    "output_bytes": 10485760,
+    "network": "disabled"
+  },
+  "environment": {
+    "os": "linux",
+    "architecture": "x86_64",
+    "kernel_release": "7.1.3-200.fc44.x86_64",
+    "rust_toolchain": "1.96",
+    "bwrap_sha256": "139bf12775025adf5c8523d119c5ad2950281335573708fd839c60181a3886dc",
+    "isolation": "bwrap-unshare-net-complete-runner",
+    "expected_interfaces": [
+      "lo"
+    ],
+    "probe_target": "1.1.1.1:53"
+  },
+  "benchmark_binary_sha256": "2430217dc4396395f21f7111431fcb9752d289d2b86e006d9767d0524bfce1a2",
+  "frozen_evaluator_files": {
+    "Cargo.lock": "2b9cd017c6579376f2df1ea4a19c5d595108664d11cd8bca445f311a7919c385",
+    "apps/secure-bench-cli/src/main.rs": "d0b9fba56eb623c47269d298c07b89073ba56c12dff3521f6de82d62c3c29d0a",
+    "crates/secure-bench-core/src/adapter.rs": "4d68689a00ca1dec3f94decd2e5d51bde97e5ed9281265f0252c2dd7b7964d57",
+    "crates/secure-bench-core/src/holdout.rs": "74bf10d5eb1b12bf312d3b30cb51a999675c0996263dbdd9bae1d600d59f97b3",
+    "crates/secure-bench-core/src/model.rs": "9b87facc65ef65aef7ed39e149b0f7dfd3bcf81b4fee09836a8bffd79b48e38e",
+    "crates/secure-bench-core/src/phase2.rs": "64bfc586e46af2d622fc6bc74b3f3fd3a814910d6d555fa8f2ef1f1b59de8e47",
+    "crates/secure-bench-core/src/phase4.rs": "daae955df5e2c488aa32df2e9efafe670c09ed48f170236a2a6bee646e8d3f4e",
+    "crates/secure-bench-core/src/runner.rs": "b8036631634a3ce766b09d81e51fa7d002c7469af410b46ab994ba408af4eb07",
+    "crates/secure-bench-core/src/schema.rs": "a22f7188e393ad2b18b200f2874a91969214426d09d40365bee3cbe62b9fc8b4",
+    "crates/secure-bench-core/src/taxonomy.rs": "1d51ae0b8a7d34dcdb32ac0287a12f8e073beebe23acd4d12344778fc0433a05",
+    "crates/secure-bench-core/tests/phase2.rs": "bcd9828dda22b863c20f27b0fdcd58bcaeae980df4866d98580fa6055b20e415",
+    "crates/secure-bench-core/tests/phase3_holdout.rs": "ad0733c806516b49b54f244e66eb3cf6b561230d6bb8de0e7ecd8bfd2fd35075",
+    "crates/secure-bench-core/tests/taxonomy.rs": "63773655198e2ef52556f3141fcd831ce2cf07dc7127265bc0a726dcf2d3b5d1",
+    "schemas/holdout-ledger-entry-v1.schema.json": "3c2e4181639f79128f4ab9afbcc444eeb3708a4c105972df839a39ecc2932695",
+    "schemas/holdout-v1.schema.json": "f1a0b8b82c2d9c4591a2ac411f62c940ead018e082eccad9101bd205b95363b0",
+    "schemas/phase4-artifacts-v1.schema.json": "988f859d52cab8c264384f31c58ba6f867ddb2830094c3e2aa3d36b18a79f06d",
+    "schemas/phase4-pre-execution-v1.schema.json": "8ce2d1522c15a15c78e7c37ab4160ed12e7b532e78c8ed37ab45e9765943ff3b",
+    "schemas/phase4-result-v1.schema.json": "b0079d45bb6d5a9133d357548bf4321c7cb1adf82e76119f2b0e66d2ab4c29cb",
+    "schemas/phase4-run-v1.schema.json": "0510ca4f444305f71efb1976f355b4a013a83ff1e97b4682e1caf3600efa23f8",
+    "schemas/taxonomy-v1.schema.json": "cdecd643d338aa8ae42ec7398c6c4703cb97d60ad355340c98744fc94bcb7d6f"
+  }
+}

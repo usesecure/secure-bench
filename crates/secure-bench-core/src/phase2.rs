@@ -898,6 +898,27 @@ fn evaluate_taxonomy_run(
     })
 }
 
+/// Evaluates one already-normalized run against prospective taxonomy expectations.
+///
+/// This crate-internal projection lets later phases reuse the frozen Phase 2 matching semantics
+/// without introducing aliases or a second scoring implementation.
+pub(crate) fn evaluate_taxonomy_snapshot(
+    suite: &BenchmarkSuite,
+    taxonomy: &FrozenTaxonomy,
+    findings: &[NormalizedFinding],
+    run: &LiveRun,
+) -> Result<
+    (
+        Vec<Phase2CaseDecision>,
+        Vec<Phase2FindingRecord>,
+        Phase2Metrics,
+    ),
+    Phase2Error,
+> {
+    let evaluated = evaluate_taxonomy_run(suite, taxonomy, findings, run)?;
+    Ok((evaluated.decisions, evaluated.records, evaluated.metrics))
+}
+
 fn case_outcome_for_control(status: LiveCaseStatus, findings: usize) -> Phase2Outcome {
     if status.is_success() {
         if findings == 0 {

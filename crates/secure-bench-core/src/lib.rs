@@ -9,6 +9,7 @@ pub mod holdout;
 pub mod matcher;
 pub mod model;
 pub mod phase2;
+pub mod phase4;
 pub mod pipeline;
 pub mod runner;
 pub mod schema;

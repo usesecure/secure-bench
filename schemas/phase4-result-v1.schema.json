@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/secure-bench/schemas/phase4-result-v1.schema.json",
+  "title": "Secure Bench Phase 4 Deterministic Result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "holdout_id", "taxonomy_version", "cases", "findings", "metrics", "breakdowns", "measurement", "semantic_fingerprint", "provenance"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase4-result-v1" }, "run_id": { "const": "secure-engine-0-1-2-holdout-once" }, "holdout_id": { "type": "string", "minLength": 1 }, "taxonomy_version": { "const": "1.0.0" },
+    "cases": { "type": "array", "minItems": 56, "maxItems": 56, "items": { "type": "object" } }, "findings": { "type": "array", "items": { "type": "object" } },
+    "metrics": { "type": "object" }, "breakdowns": { "type": "object" }, "measurement": { "type": "object" }, "semantic_fingerprint": { "$ref": "#/$defs/sha256" }, "provenance": { "type": "object" }
+  },
+  "$defs": { "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" } }
+}

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/secure-bench/schemas/phase4-pre-execution-v1.schema.json",
+  "title": "Secure Bench Phase 4 Pre-execution Contract v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "frozen_at_utc", "git_base", "branch", "run_id", "scanner", "holdout", "resources", "environment", "benchmark_binary_sha256", "frozen_evaluator_files"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase4-pre-execution-v1" },
+    "frozen_at_utc": { "type": "string", "format": "date-time" },
+    "git_base": { "$ref": "#/$defs/sha1" },
+    "branch": { "const": "codex/phase-4-secure-engine-0-1-2-holdout" },
+    "run_id": { "const": "secure-engine-0-1-2-holdout-once" },
+    "scanner": { "$ref": "#/$defs/scanner" },
+    "holdout": { "$ref": "#/$defs/holdout" },
+    "resources": { "$ref": "#/$defs/resources" },
+    "environment": { "$ref": "#/$defs/environment" },
+    "benchmark_binary_sha256": { "$ref": "#/$defs/sha256" },
+    "frozen_evaluator_files": {
+      "type": "object",
+      "minProperties": 20,
+      "maxProperties": 20,
+      "additionalProperties": { "$ref": "#/$defs/sha256" }
+    }
+  },
+  "$defs": {
+    "sha1": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "scanner": {
+      "type": "object", "additionalProperties": false,
+      "required": ["declared_version", "binary_sha256", "source_rpm_sha256", "command_template", "report_schema", "configuration_sha256", "ai_validation", "version_probe", "environment_clear"],
+      "properties": {
+        "declared_version": { "type": "string", "minLength": 1 },
+        "binary_sha256": { "const": "20e941f2f4633f0d1a62bd57d61d6969f5d251568f7abaff5a7a0fc8d5b31055" },
+        "source_rpm_sha256": { "const": "8d6ed234ad87cd422a8c53de08117454423241972caa272a4bbb8bb7282c2276" },
+        "command_template": { "const": ["scan", "{fixture}", "--format", "secure-json-v1", "--output", "{report}"] },
+        "report_schema": { "const": "secure-json-v1" },
+        "configuration_sha256": { "$ref": "#/$defs/sha256" },
+        "ai_validation": { "const": "disabled" },
+        "version_probe": { "const": "not-executed" },
+        "environment_clear": { "const": true }
+      }
+    },
+    "holdout": {
+      "type": "object", "additionalProperties": false,
+      "required": ["holdout_id", "manifest_sha256", "ledger_before_sha256", "aggregate_corpus_sha256", "contract_merkle_root", "taxonomy_artifact_sha256", "taxonomy_content_hash", "pairs", "cases"],
+      "properties": {
+        "holdout_id": { "type": "string", "minLength": 1 },
+        "manifest_sha256": { "$ref": "#/$defs/sha256" }, "ledger_before_sha256": { "$ref": "#/$defs/sha256" },
+        "aggregate_corpus_sha256": { "$ref": "#/$defs/sha256" }, "contract_merkle_root": { "$ref": "#/$defs/sha256" },
+        "taxonomy_artifact_sha256": { "$ref": "#/$defs/sha256" }, "taxonomy_content_hash": { "$ref": "#/$defs/sha256" },
+        "pairs": { "const": 28 }, "cases": { "const": 56 }
+      }
+    },
+    "resources": {
+      "type": "object", "additionalProperties": false,
+      "required": ["timeout_ms", "memory_bytes", "output_bytes", "network"],
+      "properties": { "timeout_ms": { "const": 60000 }, "memory_bytes": { "const": 1073741824 }, "output_bytes": { "const": 10485760 }, "network": { "const": "disabled" } }
+    },
+    "environment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["os", "architecture", "kernel_release", "rust_toolchain", "bwrap_sha256", "isolation", "expected_interfaces", "probe_target"],
+      "properties": {
+        "os": { "type": "string", "minLength": 1 }, "architecture": { "type": "string", "minLength": 1 }, "kernel_release": { "type": "string", "minLength": 1 },
+        "rust_toolchain": { "type": "string", "minLength": 1 }, "bwrap_sha256": { "$ref": "#/$defs/sha256" },
+        "isolation": { "const": "bwrap-unshare-net-complete-runner" }, "expected_interfaces": { "const": ["lo"] }, "probe_target": { "const": "1.1.1.1:53" }
+      }
+    }
+  }
+}
