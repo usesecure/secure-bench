@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/phase12-public-regression-v1.schema.json",
+  "title": "Secure Bench Phase 12 disclosed public regression corpus",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "benchmark_version",
+    "corpus_id",
+    "disclosed_development_material",
+    "unseen_holdout",
+    "taxonomy_sha256",
+    "evidence_contract_sha256",
+    "pairs",
+    "coverage",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase12-public-regression-v1" },
+    "benchmark_version": { "const": "0.2.0" },
+    "corpus_id": { "const": "phase-12-public-regression-v1" },
+    "disclosed_development_material": { "const": true },
+    "unseen_holdout": { "const": false },
+    "taxonomy_sha256": { "$ref": "#/$defs/sha256" },
+    "evidence_contract_sha256": { "$ref": "#/$defs/sha256" },
+    "pairs": {
+      "type": "array",
+      "minItems": 28,
+      "maxItems": 28,
+      "items": { "$ref": "#/$defs/pair" }
+    },
+    "coverage": { "$ref": "#/$defs/coverage" },
+    "provenance": { "type": "string", "minLength": 60 }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "factor": {
+      "type": "string",
+      "enum": [
+        "node_js",
+        "express",
+        "next_app_router",
+        "server_actions",
+        "java_script",
+        "jsx",
+        "type_script",
+        "tsx",
+        "direct",
+        "helper_mediated",
+        "inter_file_aliased",
+        "control_flow_sensitive"
+      ]
+    },
+    "span": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "start_line", "start_column", "end_line", "end_column"],
+      "properties": {
+        "file": { "type": "string", "pattern": "^cases/pair-[0-9]{3}/case-[ab]" },
+        "start_line": { "type": "integer", "minimum": 1 },
+        "start_column": { "type": "integer", "minimum": 1 },
+        "end_line": { "type": "integer", "minimum": 1 },
+        "end_column": { "type": "integer", "minimum": 2 }
+      }
+    },
+    "taxonomy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["taxonomy_version", "category_id", "invariant_id", "primary_cwe"],
+      "properties": {
+        "taxonomy_version": { "const": "1.0.0" },
+        "category_id": { "type": "string", "pattern": "^secure-bench\\.category\\." },
+        "invariant_id": { "type": "string", "pattern": "^secure-bench\\.invariant\\." },
+        "primary_cwe": { "type": "string", "pattern": "^CWE-[0-9]+$" }
+      }
+    },
+    "path_node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "effect", "value_id", "source_kind", "sink_kind", "span"],
+      "properties": {
+        "role": {
+          "enum": ["source", "propagation", "transformation", "guard", "sanitizer", "authorization", "sink"]
+        },
+        "effect": {
+          "enum": ["preserves_influence", "separates_control_and_data", "constrains_to_policy", "rejects_and_terminates", "authorizes_operation"]
+        },
+        "value_id": { "type": "string", "pattern": "^pair-[0-9]{3}-value$" },
+        "source_kind": {
+          "type": ["string", "null"],
+          "enum": ["http_query_value", "http_body_field", "form_data_value", "protected_resource_id", null]
+        },
+        "sink_kind": {
+          "type": ["string", "null"],
+          "enum": ["protected_record_mutation", "os_command_execution", "dynamic_code_evaluation", "filesystem_read", "outbound_request", "redirect_response", "sql_query_execution", null]
+        },
+        "span": { "$ref": "#/$defs/span" }
+      }
+    },
+    "barrier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["effect", "value_id", "terminating", "dominates_sink", "span"],
+      "properties": {
+        "effect": {
+          "enum": ["constrains_to_policy", "rejects_and_terminates", "authorizes_operation"]
+        },
+        "value_id": { "type": "string", "pattern": "^pair-[0-9]{3}-value$" },
+        "terminating": { "const": true },
+        "dominates_sink": { "const": true },
+        "span": { "$ref": "#/$defs/span" }
+      }
+    },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "type": "string", "pattern": "^cases/pair-[0-9]{3}/case-[ab]" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_id", "kind", "taxonomy", "path", "connected_edges", "effective_barriers", "files", "case_sha256"],
+      "properties": {
+        "case_id": { "type": "string", "pattern": "^phase12-case-[0-9]{3}-[ab]$" },
+        "kind": { "enum": ["contract_vulnerable", "contract_safe_control"] },
+        "taxonomy": { "$ref": "#/$defs/taxonomy" },
+        "path": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/path_node" } },
+        "connected_edges": { "type": "array", "minItems": 1, "items": { "const": true } },
+        "effective_barriers": { "type": "array", "maxItems": 1, "items": { "$ref": "#/$defs/barrier" } },
+        "files": { "type": "array", "minItems": 1, "maxItems": 2, "items": { "$ref": "#/$defs/file" } },
+        "case_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "mutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["forward", "inverse", "inverse_restores_sha256", "forward_produces_sha256"],
+      "properties": {
+        "forward": { "type": "string", "minLength": 30 },
+        "inverse": { "type": "string", "minLength": 30 },
+        "inverse_restores_sha256": { "$ref": "#/$defs/sha256" },
+        "forward_produces_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "pair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pair_id", "family_id", "framework", "language", "topology", "vulnerable", "control", "mutation"],
+      "properties": {
+        "pair_id": { "type": "string", "pattern": "^phase12-pair-[0-9]{3}$" },
+        "family_id": { "enum": ["SE1001", "SE1002", "SE1003", "SE1004", "SE1005", "SE1006", "SE1007"] },
+        "framework": { "$ref": "#/$defs/factor" },
+        "language": { "$ref": "#/$defs/factor" },
+        "topology": { "$ref": "#/$defs/factor" },
+        "vulnerable": { "$ref": "#/$defs/case" },
+        "control": { "$ref": "#/$defs/case" },
+        "mutation": { "$ref": "#/$defs/mutation" }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "minProperties": 4,
+      "additionalProperties": { "type": "integer", "minimum": 1 }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["families", "frameworks", "languages", "topologies"],
+      "properties": {
+        "families": { "$ref": "#/$defs/counts" },
+        "frameworks": { "$ref": "#/$defs/counts" },
+        "languages": { "$ref": "#/$defs/counts" },
+        "topologies": { "$ref": "#/$defs/counts" }
+      }
+    }
+  }
+}

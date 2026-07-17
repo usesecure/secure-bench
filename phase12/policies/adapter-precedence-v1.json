@@ -1,0 +1,33 @@
+{
+  "schema_version": "secure-bench-phase12-adapter-policy-v1",
+  "policy_version": "1.0.0",
+  "benchmark_version": "0.2.0",
+  "precedence": [
+    "A complete declared evidence_contract_v2 projection is the authoritative scoring input.",
+    "Generic report evidence, prose, rule identifiers, and scanner identities are non-authoritative.",
+    "A legacy compatibility projection is eligible only when v2 is absent and the caller explicitly selects its versioned route."
+  ],
+  "fail_closed_conditions": [
+    "Malformed, incomplete, unknown, or version-mismatched authoritative v2 projection.",
+    "Conflicting declared v2 and legacy projections.",
+    "Taxonomy version, category, invariant, or primary CWE outside the frozen canonical tuple.",
+    "Missing source or sink identity, invalid span, invalid path order, or inconsistent edge cardinality."
+  ],
+  "legacy_compatibility": [
+    "Compatibility adapters are identified by name and semantic version in provenance.",
+    "Compatibility never replaces, repairs, or overrides a present v2 projection.",
+    "No scanner-specific rule, fixture identifier, prose alias, or score exception is permitted."
+  ],
+  "preserved_semantics": [
+    "source and sink semantic identity",
+    "portable source and sink spans",
+    "ordered connected evidence path",
+    "transform and concrete value identity",
+    "guards and sanitizers",
+    "terminating barriers",
+    "authorization and dominance semantics",
+    "uncertainty and unresolved-call state",
+    "semantic duplicate fingerprint"
+  ],
+  "process_status_separation": "Process termination is adjudicated under the versioned process-status policy only after report authority and validity are established; adapter matching never infers a crash from an exit code."
+}

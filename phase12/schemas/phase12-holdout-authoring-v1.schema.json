@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/phase12-holdout-authoring-v1.schema.json",
+  "title": "Secure Bench prospective holdout-authoring contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "methodology_version",
+    "intended_phase",
+    "material_status",
+    "pre_execution_validation",
+    "immutable_commitments",
+    "counterbalancing",
+    "isolation",
+    "one_shot_execution",
+    "process_status_policy",
+    "answer_confidentiality",
+    "post_run_retirement",
+    "prohibited_artifacts_created"
+  ],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase12-holdout-authoring-v1" },
+    "methodology_version": { "const": "1.0.0" },
+    "intended_phase": { "const": "Phase 13" },
+    "material_status": { "type": "string", "minLength": 20 },
+    "pre_execution_validation": { "$ref": "#/$defs/statements" },
+    "immutable_commitments": { "$ref": "#/$defs/statements" },
+    "counterbalancing": { "$ref": "#/$defs/statements" },
+    "isolation": { "$ref": "#/$defs/statements" },
+    "one_shot_execution": { "$ref": "#/$defs/statements" },
+    "process_status_policy": { "$ref": "#/$defs/statements" },
+    "answer_confidentiality": { "$ref": "#/$defs/statements" },
+    "post_run_retirement": { "$ref": "#/$defs/statements" },
+    "prohibited_artifacts_created": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 8 }
+    }
+  },
+  "$defs": {
+    "statements": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 24 }
+    }
+  }
+}

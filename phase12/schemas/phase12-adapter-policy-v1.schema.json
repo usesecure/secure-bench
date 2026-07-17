@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/phase12-adapter-policy-v1.schema.json",
+  "title": "Secure Bench Phase 12 adapter precedence policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "policy_version",
+    "benchmark_version",
+    "precedence",
+    "fail_closed_conditions",
+    "legacy_compatibility",
+    "preserved_semantics",
+    "process_status_separation"
+  ],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase12-adapter-policy-v1" },
+    "policy_version": { "const": "1.0.0" },
+    "benchmark_version": { "const": "0.2.0" },
+    "precedence": { "$ref": "#/$defs/statements" },
+    "fail_closed_conditions": { "$ref": "#/$defs/statements" },
+    "legacy_compatibility": { "$ref": "#/$defs/statements" },
+    "preserved_semantics": { "$ref": "#/$defs/statements" },
+    "process_status_separation": { "type": "string", "minLength": 40 }
+  },
+  "$defs": {
+    "statements": {
+      "type": "array",
+      "minItems": 3,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 8 }
+    }
+  }
+}

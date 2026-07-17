@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/phase12-provenance-v1.schema.json",
+  "title": "Secure Bench Phase 12 scanner-free provenance",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "benchmark_version",
+    "base_commit",
+    "phase11_inputs",
+    "taxonomy_sha256",
+    "evidence_contract_sha256",
+    "process_status_policy_sha256",
+    "historical_payload_sha256",
+    "historical_roots",
+    "official_phase10_result_sha256",
+    "process_audit",
+    "phase13_audit",
+    "limitations"
+  ],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase12-provenance-v1" },
+    "benchmark_version": { "const": "0.2.0" },
+    "base_commit": { "const": "1f3373e6f763876fba3af136648651e6235ede61" },
+    "phase11_inputs": {
+      "type": "object",
+      "minProperties": 5,
+      "maxProperties": 5,
+      "additionalProperties": { "$ref": "#/$defs/sha256" }
+    },
+    "taxonomy_sha256": { "$ref": "#/$defs/sha256" },
+    "evidence_contract_sha256": { "$ref": "#/$defs/sha256" },
+    "process_status_policy_sha256": { "$ref": "#/$defs/sha256" },
+    "historical_payload_sha256": { "$ref": "#/$defs/sha256" },
+    "historical_roots": {
+      "type": "array",
+      "minItems": 20,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "official_phase10_result_sha256": {
+      "const": "bfb74fbc89345bcb6c8584fc8774b2347f31816bdbf1efc9628e96cab8904a7c"
+    },
+    "process_audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scanner_processes_started",
+        "external_processes_started",
+        "secure_engine_executed",
+        "secure_engine_source_inspected",
+        "phase10_rescored"
+      ],
+      "properties": {
+        "scanner_processes_started": { "const": 0 },
+        "external_processes_started": { "const": 0 },
+        "secure_engine_executed": { "const": false },
+        "secure_engine_source_inspected": { "const": false },
+        "phase10_rescored": { "const": false }
+      }
+    },
+    "phase13_audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fixtures_created", "answers_created", "manifest_created", "ledger_created"],
+      "properties": {
+        "fixtures_created": { "const": false },
+        "answers_created": { "const": false },
+        "manifest_created": { "const": false },
+        "ledger_created": { "const": false }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 3,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 30 }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}
