@@ -9,7 +9,22 @@ permissions:
 
 jobs:
   verify:
+    name: Verify ${{ matrix.workspace }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - workspace: root
+            manifest: Cargo.toml
+          - workspace: phase8
+            manifest: phase8/Cargo.toml
+          - workspace: phase9
+            manifest: phase9/Cargo.toml
+          - workspace: phase10
+            manifest: phase10/Cargo.toml
+          - workspace: phase11
+            manifest: phase11/Cargo.toml
     steps:
       - uses: actions/checkout@v5
       - uses: dtolnay/rust-toolchain@stable
@@ -19,8 +34,8 @@ jobs:
       - uses: taiki-e/install-action@v2
         with:
           tool: cargo-audit,cargo-deny
-      - run: cargo fmt --all --check
-      - run: cargo clippy --workspace --all-targets --all-features -- -D warnings
-      - run: cargo test --workspace --all-features
-      - run: cargo audit --deny warnings
-      - run: cargo deny check
+      - run: cargo fmt --manifest-path "${{ matrix.manifest }}" --all --check
+      - run: cargo clippy --manifest-path "${{ matrix.manifest }}" --workspace --all-targets --all-features -- -D warnings
+      - run: cargo test --manifest-path "${{ matrix.manifest }}" --workspace --all-features
+      - run: cargo audit --file "$(dirname '${{ matrix.manifest }}')/Cargo.lock" --deny warnings
+      - run: cargo deny --manifest-path "${{ matrix.manifest }}" check

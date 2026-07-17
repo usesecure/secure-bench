@@ -2,6 +2,12 @@
 
 Reproducible, evidence-aware benchmarks for static security analyzers.
 
+[![CI](https://github.com/usesecure/secure-bench/actions/workflows/ci.yml/badge.svg)](https://github.com/usesecure/secure-bench/actions/workflows/ci.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+
+> [!IMPORTANT]
+> Secure Bench is an experimental research harness. Its synthetic measurements are not scanner rankings, production-readiness assessments, or complete-coverage claims.
+
 Secure Bench is an independent, local-first Rust benchmark harness. Phase 0 established versioned contracts, scoring-blind adapters, deterministic matching, separate metrics, provenance, and explicit failure accounting using committed mock reports. Phase 1 adds an original JavaScript and TypeScript corpus and a direct black-box runner for an explicitly supplied Secure Engine binary. Phase 1.5 freezes a public neutral taxonomy for prospective reports without changing the historical Phase 1 result. Phase 2 applies that contract prospectively to two isolated, retained Secure Engine 0.1.1 runs while preserving every historical artifact. Phase 3 freezes a separate 56-case holdout examination. Phase 4 provides its one-shot, network-isolated Secure Engine 0.1.2 evaluation. Phase 5 independently freezes a new 112-case orthogonal holdout and tool-neutral evidence contract v2 without executing a scanner. Phase 6 retires the executed Phase 3 corpus and publishes an additive diagnostic package without changing the official Phase 4 result. Phase 7 records the one-shot, per-process network-isolated Secure Engine 0.1.3 evaluation of the frozen Phase 5 holdout, including every nonzero exit and retained report without reruns or result repair. Phase 8 corrects the exit-code adjudication protocol retrospectively from those immutable reports, preserves the original result, and introduces a prospective tool-neutral process-status policy without another scanner execution. Phase 9 freezes a new 224-case counterbalanced orthogonal holdout v3. Phase 10 records its one-shot Secure Engine 0.1.4 evaluation. Phase 11 retires and discloses that corpus, reconstructs an exhaustive offline postmortem from retained evidence, and leaves the official Phase 10 score unchanged.
 
 This remains an intentionally neutral foundation. It is not a production benchmark, scanner comparison, public leaderboard, or basis for claiming that Secure Engine—or any other analyzer—is superior. A Phase 1 baseline measures one explicitly identified binary on a small synthetic corpus and must be reported with its raw artifacts, denominators, environment, and limitations.
@@ -153,3 +159,5 @@ See [Architecture](docs/architecture.md), [Methodology](docs/methodology.md), [C
 ## License
 
 Secure Bench is licensed under the Apache License 2.0. The original synthetic fixtures use the same license and carry explicit authorship, origin, revision, and modification records in their suite manifests.
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) before proposing changes and [SECURITY.md](./SECURITY.md) for private vulnerability reporting.
