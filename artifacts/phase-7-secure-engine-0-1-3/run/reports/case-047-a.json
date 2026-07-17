@@ -1,0 +1,2450 @@
+{
+  "schema_version": "secure-json-v1",
+  "engine_version": "0.1.3",
+  "document_type": "scan-report",
+  "repository": {
+    "name": "fixture",
+    "vcs": null,
+    "revision": null,
+    "repository_kind": "directory",
+    "content_fingerprint": "18f7cda30ccf0422e7983083f2fd5cbf88bca53865bbbfc3d57c7379fd0ccb52",
+    "identity_fingerprint": "bc213f667c922de4dd7984001489a8df1ba5ddef8445622a706353ea7b088bef"
+  },
+  "configuration": {
+    "include_hidden": false,
+    "max_files": 100000,
+    "max_file_bytes": 4194304,
+    "respect_ignore_files": true,
+    "include_patterns": [],
+    "exclude_patterns": [],
+    "include_generated": false,
+    "include_vendor": false,
+    "include_nested_repositories": false,
+    "max_total_bytes": 536870912,
+    "max_depth": null,
+    "max_errors": 100,
+    "parse_cache_enabled": true,
+    "max_cache_bytes": 268435456,
+    "max_parser_diagnostics": 1000,
+    "max_facts_per_file": 10000,
+    "max_total_facts": 100000,
+    "max_graph_nodes": 250000,
+    "max_graph_edges": 500000,
+    "max_interprocedural_depth": 4,
+    "max_findings": 10000,
+    "suppressions": []
+  },
+  "scan": {
+    "started_at": "2026-07-17T04:27:16.375732892Z",
+    "finished_at": "2026-07-17T04:27:16.37644371Z",
+    "duration_ms": 0,
+    "complete": true,
+    "files_discovered": 2,
+    "files_scanned": 2
+  },
+  "inventory": {
+    "entries_seen": 5,
+    "candidate_files": 2,
+    "files_selected": 2,
+    "files_scanned": 2,
+    "text_files": 2,
+    "binary_files": 0,
+    "generated_files": 0,
+    "vendor_files": 0,
+    "bytes_scanned": 433,
+    "symlinks_skipped": 0,
+    "nested_repositories_skipped": 0,
+    "hit_file_limit": false,
+    "hit_total_byte_limit": false
+  },
+  "parsing": {
+    "files_eligible": 1,
+    "files_parsed": 1,
+    "files_with_diagnostics": 0,
+    "facts_extracted": 10,
+    "duration_ms": 0,
+    "cache_enabled": true,
+    "cache_hits": 0,
+    "cache_misses": 1,
+    "cache_writes": 1,
+    "cache_entries_ignored": 0
+  },
+  "facts": [
+    {
+      "fact_id": "sf_0f6477bbeb9f2f24ac80e4f6",
+      "kind": "function",
+      "location": {
+        "path": "app/actions/umber.js",
+        "span": {
+          "start_byte": 108,
+          "end_byte": 284,
+          "start_line": 4,
+          "start_column": 8,
+          "end_line": 8,
+          "end_column": 2
+        }
+      },
+      "name": "submitumber",
+      "relationships": [],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "0f6477bbeb9f2f24ac80e4f6478a85eca16d09e8cdb45a6a592586252f8e312c"
+    },
+    {
+      "fact_id": "sf_1cb40ec3a1a0b8645ba05039",
+      "kind": "call",
+      "location": {
+        "path": "app/actions/umber.js",
+        "span": {
+          "start_byte": 215,
+          "end_byte": 243,
+          "start_line": 6,
+          "start_column": 19,
+          "end_line": 6,
+          "end_column": 47
+        }
+      },
+      "name": "resolve",
+      "relationships": [
+        {
+          "kind": "calls",
+          "target": "resolve"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "1cb40ec3a1a0b8645ba05039929bbd4ee6ac0131044649d76287dbfbb7995844"
+    },
+    {
+      "fact_id": "sf_3d5f6f5fe6e74e2bbb13af19",
+      "kind": "call",
+      "location": {
+        "path": "app/actions/umber.js",
+        "span": {
+          "start_byte": 171,
+          "end_byte": 188,
+          "start_line": 5,
+          "start_column": 29,
+          "end_line": 5,
+          "end_column": 46
+        }
+      },
+      "name": "form.get",
+      "relationships": [
+        {
+          "kind": "calls",
+          "target": "form.get"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "3d5f6f5fe6e74e2bbb13af19b2cfe6e56d9363bc8842968db6e8284620c9c3eb"
+    },
+    {
+      "fact_id": "sf_43e9cd51b7386e4dcc586882",
+      "kind": "filesystem-operation",
+      "location": {
+        "path": "app/actions/umber.js",
+        "span": {
+          "start_byte": 206,
+          "end_byte": 252,
+          "start_line": 6,
+          "start_column": 10,
+          "end_line": 6,
+          "end_column": 56
+        }
+      },
+      "name": "readFile",
+      "relationships": [
+        {
+          "kind": "invokes",
+          "target": "readFile"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "43e9cd51b7386e4dcc5868823a4fb156ec80255d648fb74e9a520041a04e88e0"
+    },
+    {
+      "fact_id": "sf_776eddeea7677da300ccb73e",
+      "kind": "module-export",
+      "location": {
+        "path": "app/actions/umber.js",
+        "span": {
+          "start_byte": 101,
+          "end_byte": 284,
+          "start_line": 4,
+          "start_column": 1,
+          "end_line": 8,
+          "end_column": 2
+        }
+      },
+      "name": "submitumber",
+      "relationships": [
+        {
+          "kind": "exports",
+          "target": "submitumber"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "776eddeea7677da300ccb73ed9d7f550a645b91e851757323489fc7eb32f8116"
+    },
+    {
+      "fact_id": "sf_af99dd72163c87268514796f",
+      "kind": "server-action-handler",
+      "location": {
+        "path": "app/actions/umber.js",
+        "span": {
+          "start_byte": 108,
+          "end_byte": 284,
+          "start_line": 4,
+          "start_column": 8,
+          "end_line": 8,
+          "end_column": 2
+        }
+      },
+      "name": "submitumber",
+      "relationships": [
+        {
+          "kind": "exports-server-action",
+          "target": "submitumber"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "af99dd72163c87268514796f1322718b93238a2b15d0dd61d4050e7bc69971f2"
+    },
+    {
+      "fact_id": "sf_b55f38688131fd71a6688887",
+      "kind": "call",
+      "location": {
+        "path": "app/actions/umber.js",
+        "span": {
+          "start_byte": 206,
+          "end_byte": 252,
+          "start_line": 6,
+          "start_column": 10,
+          "end_line": 6,
+          "end_column": 56
+        }
+      },
+      "name": "readFile",
+      "relationships": [
+        {
+          "kind": "calls",
+          "target": "readFile"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "b55f38688131fd71a66888879fe540bc22f4b4f1187ce09696dc7e38ea7eaa5d"
+    },
+    {
+      "fact_id": "sf_bc6bd17ce08e7969ebbd47b6",
+      "kind": "call",
+      "location": {
+        "path": "app/actions/umber.js",
+        "span": {
+          "start_byte": 164,
+          "end_byte": 195,
+          "start_line": 5,
+          "start_column": 22,
+          "end_line": 5,
+          "end_column": 53
+        }
+      },
+      "name": "String",
+      "relationships": [
+        {
+          "kind": "calls",
+          "target": "String"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "bc6bd17ce08e7969ebbd47b663c97968aa7c828e1090cb5707e3ebb8c9a5d9a2"
+    },
+    {
+      "fact_id": "sf_bfc7e3c9b8f1bf87c5003645",
+      "kind": "module-import",
+      "location": {
+        "path": "app/actions/umber.js",
+        "span": {
+          "start_byte": 14,
+          "end_byte": 58,
+          "start_line": 2,
+          "start_column": 1,
+          "end_line": 2,
+          "end_column": 45
+        }
+      },
+      "name": "node:fs/promises",
+      "relationships": [
+        {
+          "kind": "imports",
+          "target": "node:fs/promises"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "bfc7e3c9b8f1bf87c500364593776320ab74cb530b6b141617786af779070a49"
+    },
+    {
+      "fact_id": "sf_d6a43502c201f074dff5ca8c",
+      "kind": "module-import",
+      "location": {
+        "path": "app/actions/umber.js",
+        "span": {
+          "start_byte": 59,
+          "end_byte": 100,
+          "start_line": 3,
+          "start_column": 1,
+          "end_line": 3,
+          "end_column": 42
+        }
+      },
+      "name": "node:path",
+      "relationships": [
+        {
+          "kind": "imports",
+          "target": "node:path"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "d6a43502c201f074dff5ca8cb2b321fc88030fe0c4e73063e794bc54e67b620d"
+    }
+  ],
+  "parser_diagnostics": [],
+  "parser_coverage": [
+    {
+      "parser_mode": "javascript",
+      "files_eligible": 1,
+      "files_parsed": 1,
+      "files_with_diagnostics": 0,
+      "facts_extracted": 10
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "node_id": "gn_00f15820bc1f09f851792dfe",
+        "kind": "syntax-fact",
+        "name": "String",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 164,
+            "end_byte": 195,
+            "start_line": 5,
+            "start_column": 22,
+            "end_line": 5,
+            "end_column": 53
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "00f15820bc1f09f851792dfe11f2daab723380b9f5d08021a1dc64f56a483366"
+      },
+      {
+        "node_id": "gn_010dbd2334e51ba55f7bb29b",
+        "kind": "module-reference",
+        "name": "resolve",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 215,
+            "end_byte": 243,
+            "start_line": 6,
+            "start_column": 19,
+            "end_line": 6,
+            "end_column": 47
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "010dbd2334e51ba55f7bb29bde67373926502239598ae1e7f72da9b5ae94c3ea"
+      },
+      {
+        "node_id": "gn_0cc85ce9407d601d7e3eb2f8",
+        "kind": "module-reference",
+        "name": "String",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 164,
+            "end_byte": 195,
+            "start_line": 5,
+            "start_column": 22,
+            "end_line": 5,
+            "end_column": 53
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "0cc85ce9407d601d7e3eb2f82240ac14b1f032733b200ec85290a70eb2a4561d"
+      },
+      {
+        "node_id": "gn_0e0383399c8f99e59fc76d71",
+        "kind": "module-reference",
+        "name": "node:path",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 59,
+            "end_byte": 100,
+            "start_line": 3,
+            "start_column": 1,
+            "end_line": 3,
+            "end_column": 42
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "0e0383399c8f99e59fc76d718784adae4cd6a8799ed01df35e6d4e63ebc54e0c"
+      },
+      {
+        "node_id": "gn_0e2538ce09f959d3c841fa51",
+        "kind": "return",
+        "name": "@return",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.return",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 256,
+            "end_byte": 282,
+            "start_line": 7,
+            "start_column": 3,
+            "end_line": 7,
+            "end_column": 29
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "0e2538ce09f959d3c841fa5182008b99eb4d971583ae09c7aa151e48379f3e35"
+      },
+      {
+        "node_id": "gn_0e2584fabb6c3cc0cd4d8831",
+        "kind": "module",
+        "name": "node:fs/promises",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 14,
+            "end_byte": 58,
+            "start_line": 2,
+            "start_column": 1,
+            "end_line": 2,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "0e2584fabb6c3cc0cd4d88310a1c71a8889776b9c3798658018b09afc93b8ebe"
+      },
+      {
+        "node_id": "gn_15665041cde1ccbc59f5d12b",
+        "kind": "module",
+        "name": "app/actions/umber.js",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "15665041cde1ccbc59f5d12b48ff1d4f061d2030602e52a89c8538fb0ed2ade9"
+      },
+      {
+        "node_id": "gn_347558d5949a093dc01ab3b4",
+        "kind": "module-reference",
+        "name": "form.get",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 171,
+            "end_byte": 188,
+            "start_line": 5,
+            "start_column": 29,
+            "end_line": 5,
+            "end_column": 46
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "347558d5949a093dc01ab3b49ddaabf26cac42a97cd2aaf9897117c6cb4aee1e"
+      },
+      {
+        "node_id": "gn_39cca5ad993f2e6efbfb8a92",
+        "kind": "call",
+        "name": "resolve",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.path-lexical-normalization",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 215,
+            "end_byte": 243,
+            "start_line": 6,
+            "start_column": 19,
+            "end_line": 6,
+            "end_column": 47
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "39cca5ad993f2e6efbfb8a925c72b3818f79ea5bd3965e0f9e2416a4f020d62c"
+      },
+      {
+        "node_id": "gn_45eddffb2672b49060143a00",
+        "kind": "sink",
+        "name": "filesystem-operation",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "sensitive-sink",
+          "identity": "sink.filesystem-operation",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 206,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 56
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "45eddffb2672b49060143a0021adf37f7163b0b5c855ef317c44affb115dc7dc"
+      },
+      {
+        "node_id": "gn_4acc001b9dce3f408e92fae9",
+        "kind": "syntax-fact",
+        "name": "form.get",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 171,
+            "end_byte": 188,
+            "start_line": 5,
+            "start_column": 29,
+            "end_line": 5,
+            "end_column": 46
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "4acc001b9dce3f408e92fae9243081a002406e5e3f8e6680196df85bb49278dd"
+      },
+      {
+        "node_id": "gn_502af22d993e77ab3775de3d",
+        "kind": "handler",
+        "name": "submitumber",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "untrusted-source",
+          "identity": "untrusted.handler-entry",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 108,
+            "end_byte": 284,
+            "start_line": 4,
+            "start_column": 8,
+            "end_line": 8,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "502af22d993e77ab3775de3d8d9a6f89150d317156d5dee933452ee1c7d08b1b"
+      },
+      {
+        "node_id": "gn_731b766302574e96f711adb1",
+        "kind": "transformation",
+        "name": "String",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.value",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 151,
+            "end_byte": 195,
+            "start_line": 5,
+            "start_column": 9,
+            "end_line": 5,
+            "end_column": 53
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "731b766302574e96f711adb129304135413b62ea1c9a83392d5826e178574a44"
+      },
+      {
+        "node_id": "gn_7cfb5f5d810551575fc8a8fe",
+        "kind": "syntax-fact",
+        "name": "resolve",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 215,
+            "end_byte": 243,
+            "start_line": 6,
+            "start_column": 19,
+            "end_line": 6,
+            "end_column": 47
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "7cfb5f5d810551575fc8a8fe4dc328de127dcdf432fa0de5e60ed9265e7d7c4c"
+      },
+      {
+        "node_id": "gn_7f32d370c91dd39b0fdeb7f0",
+        "kind": "module",
+        "name": "node:path",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 59,
+            "end_byte": 100,
+            "start_line": 3,
+            "start_column": 1,
+            "end_line": 3,
+            "end_column": 42
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "7f32d370c91dd39b0fdeb7f006499317a3cacb9c244aa91bcc408a6f369a248d"
+      },
+      {
+        "node_id": "gn_855074de3c44797a5c9d49c5",
+        "kind": "module",
+        "name": "node:fs/promises",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 14,
+            "end_byte": 58,
+            "start_line": 2,
+            "start_column": 1,
+            "end_line": 2,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "855074de3c44797a5c9d49c5fc254c15f72265bae173f6e01b1fafb74518aadb"
+      },
+      {
+        "node_id": "gn_8c55a1e48ec8bd853e50a1d3",
+        "kind": "syntax-fact",
+        "name": "readFile",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 206,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 56
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "8c55a1e48ec8bd853e50a1d30e0a020d35fa27a02299896271efe08737a1af03"
+      },
+      {
+        "node_id": "gn_8e557b760b70d825419c66af",
+        "kind": "file",
+        "name": "app/actions/umber.js",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "8e557b760b70d825419c66af34945779ee0439e5adcf402be63294319cf597e0"
+      },
+      {
+        "node_id": "gn_962ae38ebf9de336f55ac9ae",
+        "kind": "return",
+        "name": "@return",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.return",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 199,
+            "end_byte": 253,
+            "start_line": 6,
+            "start_column": 3,
+            "end_line": 6,
+            "end_column": 57
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "962ae38ebf9de336f55ac9aedf597299f9274798004a02874a2b4bfc611e1044"
+      },
+      {
+        "node_id": "gn_9d81feb62651ece4be06ef03",
+        "kind": "source",
+        "name": "server-action-parameter",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "untrusted-source",
+          "identity": "untrusted.server-action-parameter",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 135,
+            "end_byte": 139,
+            "start_line": 4,
+            "start_column": 35,
+            "end_line": 4,
+            "end_column": 39
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "9d81feb62651ece4be06ef03f4e9ec3d69e8f0a3fcaf4242054a6126d93886aa"
+      },
+      {
+        "node_id": "gn_9e8b0725dbe10118c729168b",
+        "kind": "call",
+        "name": "String",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.local-call",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 164,
+            "end_byte": 195,
+            "start_line": 5,
+            "start_column": 22,
+            "end_line": 5,
+            "end_column": 53
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "9e8b0725dbe10118c729168b5b9260cdc9bcdee05771ca8580adc13c3c1871f9"
+      },
+      {
+        "node_id": "gn_a0c53267fc904479f66845c4",
+        "kind": "module-reference",
+        "name": "submitumber",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 101,
+            "end_byte": 284,
+            "start_line": 4,
+            "start_column": 1,
+            "end_line": 8,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "a0c53267fc904479f66845c4e6e607cc614d58e481600e9cf382875c62718722"
+      },
+      {
+        "node_id": "gn_bcfade11749d500738bda050",
+        "kind": "source",
+        "name": "form-data-value",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "untrusted-source",
+          "identity": "untrusted.form-data-value",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 171,
+            "end_byte": 188,
+            "start_line": 5,
+            "start_column": 29,
+            "end_line": 5,
+            "end_column": 46
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "bcfade11749d500738bda05016568d4047ec9ace069412c2106e713cf810b487"
+      },
+      {
+        "node_id": "gn_bfde3af0bdda69f5acf72c92",
+        "kind": "handler",
+        "name": "submitumber",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 108,
+            "end_byte": 284,
+            "start_line": 4,
+            "start_column": 8,
+            "end_line": 8,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "bfde3af0bdda69f5acf72c920f03c8de9f66de82c0201334dc216715d3b1310c"
+      },
+      {
+        "node_id": "gn_c88fffdeb9c6fc9c1e4a8d8d",
+        "kind": "module-reference",
+        "name": "node:fs/promises",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 14,
+            "end_byte": 58,
+            "start_line": 2,
+            "start_column": 1,
+            "end_line": 2,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "c88fffdeb9c6fc9c1e4a8d8d84d8dc0e825c4fb0e3943698e569acb9ad3ac334"
+      },
+      {
+        "node_id": "gn_cace67025959329a1524d798",
+        "kind": "module-reference",
+        "name": "readFile",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 206,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 56
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "cace67025959329a1524d798f4db9997de9e96a4bf297ba63d508b0cc322a816"
+      },
+      {
+        "node_id": "gn_cda9d30d018950684115f0b6",
+        "kind": "module-reference",
+        "name": "submitumber",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 108,
+            "end_byte": 284,
+            "start_line": 4,
+            "start_column": 8,
+            "end_line": 8,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "cda9d30d018950684115f0b63621403728cbdab122fa8d61d0fc650aae69dc22"
+      },
+      {
+        "node_id": "gn_d78bdcd66cd4dfed5f65dd17",
+        "kind": "sink",
+        "name": "readFile",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 206,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 56
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "d78bdcd66cd4dfed5f65dd17eea570ff2ca6fd226bebaf9fb9325aa31cad48e4"
+      },
+      {
+        "node_id": "gn_e5b9fedac59a015673af4ae0",
+        "kind": "function",
+        "name": "submitumber",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 108,
+            "end_byte": 284,
+            "start_line": 4,
+            "start_column": 8,
+            "end_line": 8,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "e5b9fedac59a015673af4ae09c08ba5e4541a14b9464a10a09bf7fb2fe025d4b"
+      },
+      {
+        "node_id": "gn_f3bf939f52d2856d116d5dbb",
+        "kind": "module",
+        "name": "submitumber",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 101,
+            "end_byte": 284,
+            "start_line": 4,
+            "start_column": 1,
+            "end_line": 8,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "f3bf939f52d2856d116d5dbb097da147b852bc0fff64fd52a11af19d6061417c"
+      },
+      {
+        "node_id": "gn_fc718e4818e44dff6835f01e",
+        "kind": "module",
+        "name": "node:path",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 59,
+            "end_byte": 100,
+            "start_line": 3,
+            "start_column": 1,
+            "end_line": 3,
+            "end_column": 42
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "fc718e4818e44dff6835f01e513879b6348ec167f845697db6e57e9c94f6fbd5"
+      }
+    ],
+    "edges": [
+      {
+        "edge_id": "ge_013ca59742d2cdd1d80b6d18",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_bfde3af0bdda69f5acf72c92",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 108,
+            "end_byte": 284,
+            "start_line": 4,
+            "start_column": 8,
+            "end_line": 8,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "013ca59742d2cdd1d80b6d18f2a7b0cab6937534c5925eeb58d2cfc69bd6fce0"
+      },
+      {
+        "edge_id": "ge_038b0a4387f79cf5c15f6227",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_0e2584fabb6c3cc0cd4d8831",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 14,
+            "end_byte": 58,
+            "start_line": 2,
+            "start_column": 1,
+            "end_line": 2,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "038b0a4387f79cf5c15f6227b55b430b2deedbe3d7b579bdecd79e8606a78e47"
+      },
+      {
+        "edge_id": "ge_0498e1ae463b0f4e93bff775",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_8c55a1e48ec8bd853e50a1d3",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 206,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 56
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "0498e1ae463b0f4e93bff77564c75b0607a6e05d70b7f397e97783f4ef4e992d"
+      },
+      {
+        "edge_id": "ge_04da34e0872932f2ac942acd",
+        "kind": "calls",
+        "from_node": "gn_7cfb5f5d810551575fc8a8fe",
+        "to_node": "gn_010dbd2334e51ba55f7bb29b",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 215,
+            "end_byte": 243,
+            "start_line": 6,
+            "start_column": 19,
+            "end_line": 6,
+            "end_column": 47
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "04da34e0872932f2ac942acdbaa54ff6f13aab43569e52036ae07477b7f7c07f"
+      },
+      {
+        "edge_id": "ge_07e96d7ccfef62c300490cb8",
+        "kind": "containment",
+        "from_node": "gn_502af22d993e77ab3775de3d",
+        "to_node": "gn_502af22d993e77ab3775de3d",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 108,
+            "end_byte": 284,
+            "start_line": 4,
+            "start_column": 8,
+            "end_line": 8,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "07e96d7ccfef62c300490cb82013a413515b32750547e092d4ebbcc229ba2694"
+      },
+      {
+        "edge_id": "ge_0b8313f63d9276e6d5208ad7",
+        "kind": "control-flow",
+        "from_node": "gn_731b766302574e96f711adb1",
+        "to_node": "gn_9e8b0725dbe10118c729168b",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 164,
+            "end_byte": 195,
+            "start_line": 5,
+            "start_column": 22,
+            "end_line": 5,
+            "end_column": 53
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "0b8313f63d9276e6d5208ad729879924e5f26ef2b52e85f5437b015a6d897480"
+      },
+      {
+        "edge_id": "ge_0cb9ad890744eeffbffc33e5",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_45eddffb2672b49060143a00",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 206,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 56
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "0cb9ad890744eeffbffc33e512afa6ea13cbbecaf332f7bf7bdc3499bda25a7c"
+      },
+      {
+        "edge_id": "ge_1bb398ff326d136916936b10",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_4acc001b9dce3f408e92fae9",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 171,
+            "end_byte": 188,
+            "start_line": 5,
+            "start_column": 29,
+            "end_line": 5,
+            "end_column": 46
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "1bb398ff326d136916936b105716e4c44ac28de77a0af87d20f16c3a0dbdcb8b"
+      },
+      {
+        "edge_id": "ge_20ee1524ea79069f84c229fc",
+        "kind": "control-flow",
+        "from_node": "gn_39cca5ad993f2e6efbfb8a92",
+        "to_node": "gn_0e2538ce09f959d3c841fa51",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 256,
+            "end_byte": 282,
+            "start_line": 7,
+            "start_column": 3,
+            "end_line": 7,
+            "end_column": 29
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "20ee1524ea79069f84c229fc97e364e95100ccfa16bc4189cdf1db49397b28e9"
+      },
+      {
+        "edge_id": "ge_237b65725916cb277c346771",
+        "kind": "control-flow",
+        "from_node": "gn_45eddffb2672b49060143a00",
+        "to_node": "gn_39cca5ad993f2e6efbfb8a92",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 215,
+            "end_byte": 243,
+            "start_line": 6,
+            "start_column": 19,
+            "end_line": 6,
+            "end_column": 47
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "237b65725916cb277c3467710a168d43b048c7851d28348bf1dd7208c343823d"
+      },
+      {
+        "edge_id": "ge_2a62ed7b97bcfd6c0edfa241",
+        "kind": "containment",
+        "from_node": "gn_bfde3af0bdda69f5acf72c92",
+        "to_node": "gn_cda9d30d018950684115f0b6",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 108,
+            "end_byte": 284,
+            "start_line": 4,
+            "start_column": 8,
+            "end_line": 8,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "2a62ed7b97bcfd6c0edfa24176cdada9499d2ad6c29039281c76eebf3dbb9323"
+      },
+      {
+        "edge_id": "ge_334346b0e6d414553151373f",
+        "kind": "calls",
+        "from_node": "gn_00f15820bc1f09f851792dfe",
+        "to_node": "gn_0cc85ce9407d601d7e3eb2f8",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 164,
+            "end_byte": 195,
+            "start_line": 5,
+            "start_column": 22,
+            "end_line": 5,
+            "end_column": 53
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "334346b0e6d414553151373fae9cc706e1028256265667861dfab8a954491cd8"
+      },
+      {
+        "edge_id": "ge_3512cb8a6e25bc904420324e",
+        "kind": "containment",
+        "from_node": "gn_8e557b760b70d825419c66af",
+        "to_node": "gn_15665041cde1ccbc59f5d12b",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "3512cb8a6e25bc904420324e123871069484f3704d79b1fb8afd75c97e01412a"
+      },
+      {
+        "edge_id": "ge_3a484f564a3a58cad0799a77",
+        "kind": "calls",
+        "from_node": "gn_8c55a1e48ec8bd853e50a1d3",
+        "to_node": "gn_cace67025959329a1524d798",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 206,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 56
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "3a484f564a3a58cad0799a776c9fd84680f358620fec1fea89ed59c02cd512e8"
+      },
+      {
+        "edge_id": "ge_3cfe07a02c9ec86abecaf4e4",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_731b766302574e96f711adb1",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 151,
+            "end_byte": 195,
+            "start_line": 5,
+            "start_column": 9,
+            "end_line": 5,
+            "end_column": 53
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "3cfe07a02c9ec86abecaf4e47a050804793b6c8b6660bdddde0a6cc0b599bfd4"
+      },
+      {
+        "edge_id": "ge_440b0eebad31efbcae691c1f",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_00f15820bc1f09f851792dfe",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 164,
+            "end_byte": 195,
+            "start_line": 5,
+            "start_column": 22,
+            "end_line": 5,
+            "end_column": 53
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "440b0eebad31efbcae691c1f9109899f853cc2ff30ec4893bd7aa70b07224975"
+      },
+      {
+        "edge_id": "ge_4d8c417c1db757b4e510435f",
+        "kind": "source-to-sink-propagation",
+        "from_node": "gn_bcfade11749d500738bda050",
+        "to_node": "gn_731b766302574e96f711adb1",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 151,
+            "end_byte": 195,
+            "start_line": 5,
+            "start_column": 9,
+            "end_line": 5,
+            "end_column": 53
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "4d8c417c1db757b4e510435f087b032f70d60ff3eb61e69bbadeb1ca3a65d5bf"
+      },
+      {
+        "edge_id": "ge_4deb8dc78377f7d21553c9bd",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_39cca5ad993f2e6efbfb8a92",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 215,
+            "end_byte": 243,
+            "start_line": 6,
+            "start_column": 19,
+            "end_line": 6,
+            "end_column": 47
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "4deb8dc78377f7d21553c9bdc606e7b11b6917b0e8dcc784861700e7cc03b493"
+      },
+      {
+        "edge_id": "ge_5088781f1821fceddd6ef105",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_9d81feb62651ece4be06ef03",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 135,
+            "end_byte": 139,
+            "start_line": 4,
+            "start_column": 35,
+            "end_line": 4,
+            "end_column": 39
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "5088781f1821fceddd6ef105c46697798dfe6ae30dc07e7b44e44af5a75c4e50"
+      },
+      {
+        "edge_id": "ge_5126d964dff1f947531e2faf",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_f3bf939f52d2856d116d5dbb",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 101,
+            "end_byte": 284,
+            "start_line": 4,
+            "start_column": 1,
+            "end_line": 8,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "5126d964dff1f947531e2fafa7cd1e79eb3bd10c3ec81619b24813440b664d6b"
+      },
+      {
+        "edge_id": "ge_54688b81534838b4237d02d3",
+        "kind": "calls",
+        "from_node": "gn_d78bdcd66cd4dfed5f65dd17",
+        "to_node": "gn_cace67025959329a1524d798",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 206,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 56
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "54688b81534838b4237d02d388598c5d6bac27684ee15106ae05b878b964903b"
+      },
+      {
+        "edge_id": "ge_6cb32902c8091bf613a45380",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_fc718e4818e44dff6835f01e",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 59,
+            "end_byte": 100,
+            "start_line": 3,
+            "start_column": 1,
+            "end_line": 3,
+            "end_column": 42
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "6cb32902c8091bf613a45380dc71a2158d47b7a2d6e62babe949c4a7142123eb"
+      },
+      {
+        "edge_id": "ge_6d351e780f7bc2f32036eba6",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_962ae38ebf9de336f55ac9ae",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 199,
+            "end_byte": 253,
+            "start_line": 6,
+            "start_column": 3,
+            "end_line": 6,
+            "end_column": 57
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "6d351e780f7bc2f32036eba6cb6fcb92a9fa27cdd3734cff86d068e430653a33"
+      },
+      {
+        "edge_id": "ge_71396594f6dc7df037b12a9d",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_e5b9fedac59a015673af4ae0",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 108,
+            "end_byte": 284,
+            "start_line": 4,
+            "start_column": 8,
+            "end_line": 8,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "71396594f6dc7df037b12a9d11d743b9cff68221e02f04d6f05e5edd60af4af4"
+      },
+      {
+        "edge_id": "ge_7408f52ce95fb65c2d270c01",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_d78bdcd66cd4dfed5f65dd17",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 206,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 56
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "7408f52ce95fb65c2d270c012ebdc52d5c700ee8ff0c35d291a20d36a5e24f47"
+      },
+      {
+        "edge_id": "ge_74d9ec09bbfa01086e395209",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_7f32d370c91dd39b0fdeb7f0",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 59,
+            "end_byte": 100,
+            "start_line": 3,
+            "start_column": 1,
+            "end_line": 3,
+            "end_column": 42
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "74d9ec09bbfa01086e395209ac11f5a0c2152f3386f112c617782a7622e52986"
+      },
+      {
+        "edge_id": "ge_8a656f3dcd722f03ef3e57f7",
+        "kind": "containment",
+        "from_node": "gn_502af22d993e77ab3775de3d",
+        "to_node": "gn_45eddffb2672b49060143a00",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 206,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 56
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "8a656f3dcd722f03ef3e57f734f786e7f6d343dec6f4f1635e23c8829456662b"
+      },
+      {
+        "edge_id": "ge_8ad5a12b9a4e1dff42308025",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_bcfade11749d500738bda050",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 171,
+            "end_byte": 188,
+            "start_line": 5,
+            "start_column": 29,
+            "end_line": 5,
+            "end_column": 46
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "8ad5a12b9a4e1dff42308025ba4659c4c02230629c3e7465ed31d096e4b52ae5"
+      },
+      {
+        "edge_id": "ge_9470ba4a738d9172d000f464",
+        "kind": "containment",
+        "from_node": "gn_502af22d993e77ab3775de3d",
+        "to_node": "gn_bcfade11749d500738bda050",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 171,
+            "end_byte": 188,
+            "start_line": 5,
+            "start_column": 29,
+            "end_line": 5,
+            "end_column": 46
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "9470ba4a738d9172d000f464202c3fc03b7a28fdc1700b36d03103eddafa3cbb"
+      },
+      {
+        "edge_id": "ge_9996209b663823c5ca925816",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_0e2538ce09f959d3c841fa51",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 256,
+            "end_byte": 282,
+            "start_line": 7,
+            "start_column": 3,
+            "end_line": 7,
+            "end_column": 29
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "9996209b663823c5ca925816020a772b4d8d5899cc240dfccbaed348266ac54a"
+      },
+      {
+        "edge_id": "ge_9f404add171038e0285cac12",
+        "kind": "containment",
+        "from_node": "gn_502af22d993e77ab3775de3d",
+        "to_node": "gn_0e2538ce09f959d3c841fa51",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 256,
+            "end_byte": 282,
+            "start_line": 7,
+            "start_column": 3,
+            "end_line": 7,
+            "end_column": 29
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "9f404add171038e0285cac1289c273a06e7947252daf8104d961cbbd4cc6b23e"
+      },
+      {
+        "edge_id": "ge_ab97b0688b28b0411a8625f5",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_855074de3c44797a5c9d49c5",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 14,
+            "end_byte": 58,
+            "start_line": 2,
+            "start_column": 1,
+            "end_line": 2,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "ab97b0688b28b0411a8625f57f41fafd0b27caeb772ec6a6d3da2f7d1a35455c"
+      },
+      {
+        "edge_id": "ge_abbec22566e029b67706656e",
+        "kind": "control-flow",
+        "from_node": "gn_9e8b0725dbe10118c729168b",
+        "to_node": "gn_962ae38ebf9de336f55ac9ae",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 199,
+            "end_byte": 253,
+            "start_line": 6,
+            "start_column": 3,
+            "end_line": 6,
+            "end_column": 57
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "abbec22566e029b67706656e44e17ea35c571b91595367150f10ac2458f57cf0"
+      },
+      {
+        "edge_id": "ge_b03f4b7ac8bfaa80c5af8b9f",
+        "kind": "containment",
+        "from_node": "gn_502af22d993e77ab3775de3d",
+        "to_node": "gn_9d81feb62651ece4be06ef03",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 135,
+            "end_byte": 139,
+            "start_line": 4,
+            "start_column": 35,
+            "end_line": 4,
+            "end_column": 39
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "b03f4b7ac8bfaa80c5af8b9f77a6418b5ae8f52b1886d09332352f455d6e25a8"
+      },
+      {
+        "edge_id": "ge_b277017169f0ef8cd0175c88",
+        "kind": "containment",
+        "from_node": "gn_502af22d993e77ab3775de3d",
+        "to_node": "gn_731b766302574e96f711adb1",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 151,
+            "end_byte": 195,
+            "start_line": 5,
+            "start_column": 9,
+            "end_line": 5,
+            "end_column": 53
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "b277017169f0ef8cd0175c88ea47212f5d277eedf7487fdb20bd07befbb12443"
+      },
+      {
+        "edge_id": "ge_be03f79f07c0cb5272c32631",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_7cfb5f5d810551575fc8a8fe",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 215,
+            "end_byte": 243,
+            "start_line": 6,
+            "start_column": 19,
+            "end_line": 6,
+            "end_column": 47
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "be03f79f07c0cb5272c3263152cd18d2545e4ca20d4dc212e1f87ccdc6574457"
+      },
+      {
+        "edge_id": "ge_c391d778e2a8dde067e88086",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_502af22d993e77ab3775de3d",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 108,
+            "end_byte": 284,
+            "start_line": 4,
+            "start_column": 8,
+            "end_line": 8,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "c391d778e2a8dde067e88086e527fe3613f142dcf941f6fa988c9b7511ebe21f"
+      },
+      {
+        "edge_id": "ge_c59f313c1e2b305c55a541c7",
+        "kind": "containment",
+        "from_node": "gn_502af22d993e77ab3775de3d",
+        "to_node": "gn_962ae38ebf9de336f55ac9ae",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 199,
+            "end_byte": 253,
+            "start_line": 6,
+            "start_column": 3,
+            "end_line": 6,
+            "end_column": 57
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "c59f313c1e2b305c55a541c75090d8a0da15b14cd8b8b5eb72335eb9252c3a28"
+      },
+      {
+        "edge_id": "ge_c9c5a91f8fd09bd75cd2325d",
+        "kind": "calls",
+        "from_node": "gn_4acc001b9dce3f408e92fae9",
+        "to_node": "gn_347558d5949a093dc01ab3b4",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 171,
+            "end_byte": 188,
+            "start_line": 5,
+            "start_column": 29,
+            "end_line": 5,
+            "end_column": 46
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "c9c5a91f8fd09bd75cd2325de155f7027ead1ab3a1cf8721cb0051c9a4c331f9"
+      },
+      {
+        "edge_id": "ge_cf3ef82d51d4055948a189e7",
+        "kind": "imports",
+        "from_node": "gn_7f32d370c91dd39b0fdeb7f0",
+        "to_node": "gn_0e0383399c8f99e59fc76d71",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 59,
+            "end_byte": 100,
+            "start_line": 3,
+            "start_column": 1,
+            "end_line": 3,
+            "end_column": 42
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "cf3ef82d51d4055948a189e7da3adbd63c025e4e0284efff0d49b48bd1e03fcd"
+      },
+      {
+        "edge_id": "ge_d6f8587d5fbc0d147b04fd08",
+        "kind": "containment",
+        "from_node": "gn_502af22d993e77ab3775de3d",
+        "to_node": "gn_39cca5ad993f2e6efbfb8a92",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 215,
+            "end_byte": 243,
+            "start_line": 6,
+            "start_column": 19,
+            "end_line": 6,
+            "end_column": 47
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "d6f8587d5fbc0d147b04fd0828aa7ae04d503a496a4d8b9ad686141f8bb43734"
+      },
+      {
+        "edge_id": "ge_d812cba9d8d3b39021e8a1c0",
+        "kind": "imports",
+        "from_node": "gn_855074de3c44797a5c9d49c5",
+        "to_node": "gn_c88fffdeb9c6fc9c1e4a8d8d",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 14,
+            "end_byte": 58,
+            "start_line": 2,
+            "start_column": 1,
+            "end_line": 2,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "d812cba9d8d3b39021e8a1c0d73334a49f4c90d2e31f2be63f3c4ebce356be3a"
+      },
+      {
+        "edge_id": "ge_dd31f4f6a5cceb7679dff7b3",
+        "kind": "containment",
+        "from_node": "gn_f3bf939f52d2856d116d5dbb",
+        "to_node": "gn_a0c53267fc904479f66845c4",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 101,
+            "end_byte": 284,
+            "start_line": 4,
+            "start_column": 1,
+            "end_line": 8,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "dd31f4f6a5cceb7679dff7b381f6e2167eaa3bbc114943ad83f69af90a5867e4"
+      },
+      {
+        "edge_id": "ge_f8b9ede255df7fc9e4c77293",
+        "kind": "containment",
+        "from_node": "gn_15665041cde1ccbc59f5d12b",
+        "to_node": "gn_9e8b0725dbe10118c729168b",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 164,
+            "end_byte": 195,
+            "start_line": 5,
+            "start_column": 22,
+            "end_line": 5,
+            "end_column": 53
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "f8b9ede255df7fc9e4c77293f2cd341abffe2d5edb785e9994041c54e3e0d5dc"
+      },
+      {
+        "edge_id": "ge_fed4d670029a9a41dd955453",
+        "kind": "control-flow",
+        "from_node": "gn_962ae38ebf9de336f55ac9ae",
+        "to_node": "gn_45eddffb2672b49060143a00",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 206,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 56
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "fed4d670029a9a41dd9554535f3f1410fd57a42fa38eec5e019bd771e706586b"
+      },
+      {
+        "edge_id": "ge_ff4ad725aae22c3ec437604b",
+        "kind": "containment",
+        "from_node": "gn_502af22d993e77ab3775de3d",
+        "to_node": "gn_9e8b0725dbe10118c729168b",
+        "location": {
+          "path": "app/actions/umber.js",
+          "span": {
+            "start_byte": 164,
+            "end_byte": 195,
+            "start_line": 5,
+            "start_column": 22,
+            "end_line": 5,
+            "end_column": 53
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "ff4ad725aae22c3ec437604b416d9d342e8a9352349c870de3eb456cef7a55ee"
+      }
+    ]
+  },
+  "analysis": {
+    "nodes": 31,
+    "edges": 46,
+    "candidate_paths": 0,
+    "rules_evaluated": 7,
+    "findings": 0,
+    "findings_suppressed": 0,
+    "duration_ms": 0,
+    "truncated": false
+  },
+  "suppression_diagnostics": [],
+  "taxonomy_catalog": [
+    {
+      "taxonomy_name": "secure-bench-taxonomy-v1",
+      "taxonomy_version": "1.0.0",
+      "source_version": "CWE 4.20",
+      "source_commit": "93c0821db065de436a339c15b070e158947ad76c",
+      "schema_sha256": "cdecd643d338aa8ae42ec7398c6c4703cb97d60ad355340c98744fc94bcb7d6f",
+      "taxonomy_sha256": "059fe22d7707cf8d17f2c1621fdae9819787a1958ba2ef0421eca4e4ec858452",
+      "methodology_sha256": "eac27e5800be35c5ae77f7804e52ae90462cbda403a5484baa8fab62f02ab562",
+      "content_hash": "22852bd7401020b315af11dfa2b60c0b46f78eb19f95079e6400d7b3bea3272c"
+    }
+  ],
+  "files": [
+    {
+      "path": "app/actions/umber.js",
+      "kind": "source",
+      "size_bytes": 285,
+      "content_fingerprint": "7bfc1f45f43ef3dc8b5b728b2813c81507a1b43fd3638ef123489d9557177726",
+      "language": "JavaScript",
+      "origin": "project",
+      "is_binary": false
+    },
+    {
+      "path": "package.json",
+      "kind": "manifest",
+      "size_bytes": 148,
+      "content_fingerprint": "67188d0e5d1360964f1ef87c5a1d4c47eb58c4aa5e4b96cea7d134f0cf534703",
+      "language": null,
+      "origin": "project",
+      "is_binary": false
+    }
+  ],
+  "languages": [
+    {
+      "name": "JavaScript",
+      "file_count": 1,
+      "bytes": 285
+    }
+  ],
+  "manifests": [
+    {
+      "kind": "npm",
+      "location": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 0,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 1
+        }
+      },
+      "fingerprint": "6748a38bc87b5b19f763c5883b78fc1e6b11efffa9b16c0682221bf1b9422f2d"
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Next.js",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 26,
+          "end_byte": 32,
+          "start_line": 3,
+          "start_column": 5,
+          "end_line": 3,
+          "end_column": 11
+        }
+      },
+      "fingerprint": "ab947c3b74a997a0213d6f4e7400ab58f98892ef985417413fb54b0870052f8a"
+    }
+  ],
+  "entry_points": [],
+  "capabilities": [
+    {
+      "capability": "dependency-management",
+      "reason": "Detected npm manifest",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 0,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 1
+        }
+      },
+      "fingerprint": "cb0fd89861ca491f95e737908187cfd232f12ed2afba2ed3fbd7ba1c579a9ab2"
+    }
+  ],
+  "trust_boundaries": [
+    {
+      "kind": "dependency-supply-chain",
+      "description": "Declared third-party dependency boundary",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 0,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 1
+        }
+      },
+      "fingerprint": "72752772107d5ef650d956e907952867e651a93c7d08723f6a7fd36f0215c479"
+    },
+    {
+      "kind": "network-request",
+      "description": "Next.js may expose network request entry points",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 26,
+          "end_byte": 32,
+          "start_line": 3,
+          "start_column": 5,
+          "end_line": 3,
+          "end_column": 11
+        }
+      },
+      "fingerprint": "95eaaa9c288e6fb2c08590a93d816a59c9d5fc6351d5910465bc0af6091d4d20"
+    }
+  ],
+  "findings": [],
+  "limitations": [
+    {
+      "code": "deterministic-rules-limited",
+      "message": "Phase 3 runs only the documented high-confidence JavaScript and TypeScript rules"
+    },
+    {
+      "code": "parser-coverage-limited",
+      "message": "Language-aware parsing is limited to JavaScript, JSX, TypeScript, and TSX"
+    },
+    {
+      "code": "framework-hints-only",
+      "message": "Framework evidence is a manifest hint and not semantic proof"
+    },
+    {
+      "code": "symlinks-not-followed",
+      "message": "Symbolic links are recorded but never followed"
+    },
+    {
+      "code": "vcs-metadata-excluded",
+      "message": "Version-control metadata directories are never inventoried"
+    },
+    {
+      "code": "hidden-files-excluded",
+      "message": "Hidden files and directories were excluded by configuration"
+    },
+    {
+      "code": "ignored-files-excluded",
+      "message": "Inputs matched by repository ignore rules were excluded before reading"
+    },
+    {
+      "code": "generated-directories-excluded",
+      "message": "Common generated and build directories were excluded before reading"
+    },
+    {
+      "code": "vendor-directories-excluded",
+      "message": "Common vendored dependency directories were excluded before reading"
+    },
+    {
+      "code": "nested-repositories-excluded",
+      "message": "Nested repositories, worktrees, and submodules were excluded"
+    },
+    {
+      "code": "bounded-interprocedural-analysis",
+      "message": "Local inter-procedural propagation is bounded to 4 traversal levels"
+    },
+    {
+      "code": "dynamic-resolution-limited",
+      "message": "Dynamic imports, non-unique aliases, callbacks, recursion, and unresolved calls are not followed"
+    },
+    {
+      "code": "semantic-resolution-bounded",
+      "message": "Semantic identities, aliases, guards, and value correspondence are resolved only from deterministic local syntax within configured graph and inter-procedural bounds"
+    },
+    {
+      "code": "framework-middleware-not-modeled",
+      "message": "Authentication supplied only by external framework middleware is not proven by this phase"
+    },
+    {
+      "code": "filesystem-symlink-safety-not-proven",
+      "message": "Lexical path confinement does not prove runtime symlink, mount, junction, race, or filesystem permission safety"
+    }
+  ],
+  "skipped_files": [],
+  "exclusions": [],
+  "errors": [],
+  "report_fingerprint": "68029aeff5c44736e3c0bae60b53bed7530752ea9e5a7edf5d767fcc9cf0ab94"
+}

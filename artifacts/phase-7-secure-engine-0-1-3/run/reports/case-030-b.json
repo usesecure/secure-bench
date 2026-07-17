@@ -1,0 +1,3521 @@
+{
+  "schema_version": "secure-json-v1",
+  "engine_version": "0.1.3",
+  "document_type": "scan-report",
+  "repository": {
+    "name": "fixture",
+    "vcs": null,
+    "revision": null,
+    "repository_kind": "directory",
+    "content_fingerprint": "954e5f005eca15957a2c8d135b54bebdef6342d9d7c0bf2fb3dba25b37079af1",
+    "identity_fingerprint": "683e0c79200edfffd4b367caf6a2b27e86818fe58fb250ac498b4b00678e1f48"
+  },
+  "configuration": {
+    "include_hidden": false,
+    "max_files": 100000,
+    "max_file_bytes": 4194304,
+    "respect_ignore_files": true,
+    "include_patterns": [],
+    "exclude_patterns": [],
+    "include_generated": false,
+    "include_vendor": false,
+    "include_nested_repositories": false,
+    "max_total_bytes": 536870912,
+    "max_depth": null,
+    "max_errors": 100,
+    "parse_cache_enabled": true,
+    "max_cache_bytes": 268435456,
+    "max_parser_diagnostics": 1000,
+    "max_facts_per_file": 10000,
+    "max_total_facts": 100000,
+    "max_graph_nodes": 250000,
+    "max_graph_edges": 500000,
+    "max_interprocedural_depth": 4,
+    "max_findings": 10000,
+    "suppressions": []
+  },
+  "scan": {
+    "started_at": "2026-07-17T04:27:15.536604846Z",
+    "finished_at": "2026-07-17T04:27:15.537740659Z",
+    "duration_ms": 1,
+    "complete": true,
+    "files_discovered": 3,
+    "files_scanned": 3
+  },
+  "inventory": {
+    "entries_seen": 8,
+    "candidate_files": 3,
+    "files_selected": 3,
+    "files_scanned": 3,
+    "text_files": 3,
+    "binary_files": 0,
+    "generated_files": 0,
+    "vendor_files": 0,
+    "bytes_scanned": 668,
+    "symlinks_skipped": 0,
+    "nested_repositories_skipped": 0,
+    "hit_file_limit": false,
+    "hit_total_byte_limit": false
+  },
+  "parsing": {
+    "files_eligible": 2,
+    "files_parsed": 2,
+    "files_with_diagnostics": 0,
+    "facts_extracted": 11,
+    "duration_ms": 0,
+    "cache_enabled": true,
+    "cache_hits": 0,
+    "cache_misses": 2,
+    "cache_writes": 2,
+    "cache_entries_ignored": 0
+  },
+  "facts": [
+    {
+      "fact_id": "sf_04a92935f0aa4442c29d41a4",
+      "kind": "call",
+      "location": {
+        "path": "app/api/drift/route.js",
+        "span": {
+          "start_byte": 192,
+          "end_byte": 216,
+          "start_line": 5,
+          "start_column": 7,
+          "end_line": 5,
+          "end_column": 31
+        }
+      },
+      "name": "conductdrift",
+      "relationships": [
+        {
+          "kind": "calls",
+          "target": "conductdrift"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "04a92935f0aa4442c29d41a442acc814055e66ce074867d1a81a1b3c8bec9c9a"
+    },
+    {
+      "fact_id": "sf_04d0257772be7e3b245b7f41",
+      "kind": "http-route-handler",
+      "location": {
+        "path": "app/api/drift/route.js",
+        "span": {
+          "start_byte": 85,
+          "end_byte": 263,
+          "start_line": 3,
+          "start_column": 8,
+          "end_line": 7,
+          "end_column": 2
+        }
+      },
+      "name": "POST",
+      "relationships": [
+        {
+          "kind": "handles",
+          "target": "POST /api/drift"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "04d0257772be7e3b245b7f41d5676a6471f7fd1671667019aa13a17b7b16ac56"
+    },
+    {
+      "fact_id": "sf_0c1d1a50376f3956516ec1cf",
+      "kind": "function",
+      "location": {
+        "path": "app/lib/drift-workflow.js",
+        "span": {
+          "start_byte": 8,
+          "end_byte": 255,
+          "start_line": 2,
+          "start_column": 8,
+          "end_line": 6,
+          "end_column": 2
+        }
+      },
+      "name": "applydrift",
+      "relationships": [],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "0c1d1a50376f3956516ec1cf3b84cb2c4508271958328e0ad7542bb78d38ad85"
+    },
+    {
+      "fact_id": "sf_2e46177a06ca0652e666d636",
+      "kind": "module-export",
+      "location": {
+        "path": "app/lib/drift-workflow.js",
+        "span": {
+          "start_byte": 1,
+          "end_byte": 255,
+          "start_line": 2,
+          "start_column": 1,
+          "end_line": 6,
+          "end_column": 2
+        }
+      },
+      "name": "applydrift",
+      "relationships": [
+        {
+          "kind": "exports",
+          "target": "applydrift"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "2e46177a06ca0652e666d63630ba0b48b186a3798d334541f13118ff568783cc"
+    },
+    {
+      "fact_id": "sf_47121b3434dec66da41a37a1",
+      "kind": "function",
+      "location": {
+        "path": "app/api/drift/route.js",
+        "span": {
+          "start_byte": 85,
+          "end_byte": 263,
+          "start_line": 3,
+          "start_column": 8,
+          "end_line": 7,
+          "end_column": 2
+        }
+      },
+      "name": "POST",
+      "relationships": [],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "47121b3434dec66da41a37a177f10adb822de359ecc7385c7f0b6ba1f561ef96"
+    },
+    {
+      "fact_id": "sf_5bbd9bf911b04b2786e4b34a",
+      "kind": "redirect",
+      "location": {
+        "path": "app/lib/drift-workflow.js",
+        "span": {
+          "start_byte": 217,
+          "end_byte": 252,
+          "start_line": 5,
+          "start_column": 10,
+          "end_line": 5,
+          "end_column": 45
+        }
+      },
+      "name": "Response.redirect",
+      "relationships": [
+        {
+          "kind": "invokes",
+          "target": "Response.redirect"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "5bbd9bf911b04b2786e4b34a2b079fcc5b29ed6147cacb8baf730468a4aeb7fc"
+    },
+    {
+      "fact_id": "sf_942cae624a064770a62a3f5d",
+      "kind": "module-import",
+      "location": {
+        "path": "app/api/drift/route.js",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 76,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 77
+        }
+      },
+      "name": "../../../lib/drift-workflow.js",
+      "relationships": [
+        {
+          "kind": "imports",
+          "target": "../../../lib/drift-workflow.js"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "942cae624a064770a62a3f5d1c75e2b7863ffea847ce03c902fa1961d5ee6b5e"
+    },
+    {
+      "fact_id": "sf_bb9f403adc3965e9925d49f2",
+      "kind": "module-export",
+      "location": {
+        "path": "app/api/drift/route.js",
+        "span": {
+          "start_byte": 78,
+          "end_byte": 263,
+          "start_line": 3,
+          "start_column": 1,
+          "end_line": 7,
+          "end_column": 2
+        }
+      },
+      "name": "POST",
+      "relationships": [
+        {
+          "kind": "exports",
+          "target": "POST"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "bb9f403adc3965e9925d49f29fc01802795dba13fb80f4e8d52db32e7d5df95e"
+    },
+    {
+      "fact_id": "sf_cf6ca5a438f6683178593669",
+      "kind": "call",
+      "location": {
+        "path": "app/api/drift/route.js",
+        "span": {
+          "start_byte": 137,
+          "end_byte": 178,
+          "start_line": 4,
+          "start_column": 22,
+          "end_line": 4,
+          "end_column": 63
+        }
+      },
+      "name": "request.nextUrl.searchParams.get",
+      "relationships": [
+        {
+          "kind": "calls",
+          "target": "request.nextUrl.searchParams.get"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "cf6ca5a438f66831785936696ed682cd64aa613bcbff1e4f5c2776b53dd73295"
+    },
+    {
+      "fact_id": "sf_cfdfeda1e13228e297574550",
+      "kind": "call",
+      "location": {
+        "path": "app/api/drift/route.js",
+        "span": {
+          "start_byte": 227,
+          "end_byte": 260,
+          "start_line": 6,
+          "start_column": 10,
+          "end_line": 6,
+          "end_column": 43
+        }
+      },
+      "name": "Response.json",
+      "relationships": [
+        {
+          "kind": "calls",
+          "target": "Response.json"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "cfdfeda1e13228e297574550166e138760b4a6b484c8fb48fd3432fa20fc6438"
+    },
+    {
+      "fact_id": "sf_d2de3633a631d3cfa8cb2030",
+      "kind": "call",
+      "location": {
+        "path": "app/lib/drift-workflow.js",
+        "span": {
+          "start_byte": 217,
+          "end_byte": 252,
+          "start_line": 5,
+          "start_column": 10,
+          "end_line": 5,
+          "end_column": 45
+        }
+      },
+      "name": "Response.redirect",
+      "relationships": [
+        {
+          "kind": "calls",
+          "target": "Response.redirect"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "d2de3633a631d3cfa8cb2030f347cd06f366c6a3d2b4a60cb58543520aece0e9"
+    }
+  ],
+  "parser_diagnostics": [],
+  "parser_coverage": [
+    {
+      "parser_mode": "javascript",
+      "files_eligible": 2,
+      "files_parsed": 2,
+      "files_with_diagnostics": 0,
+      "facts_extracted": 11
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "node_id": "gn_0521dab38543c4e50b85c47e",
+        "kind": "function",
+        "name": "POST",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 85,
+            "end_byte": 263,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "0521dab38543c4e50b85c47e3942c83052751077529e3dc831601f23b00bff96"
+      },
+      {
+        "node_id": "gn_0791d59ea18748032a031a28",
+        "kind": "return",
+        "name": "@return",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.return",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 220,
+            "end_byte": 261,
+            "start_line": 6,
+            "start_column": 3,
+            "end_line": 6,
+            "end_column": 44
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "0791d59ea18748032a031a2813a5293f0cbe9a857a071363e8ab4007ce0b1966"
+      },
+      {
+        "node_id": "gn_0a11943abcd2878e7babd2ff",
+        "kind": "module",
+        "name": "app/lib/drift-workflow.js",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "0a11943abcd2878e7babd2ffcd9d9d3c97e01fd1900d412d902867214979ce46"
+      },
+      {
+        "node_id": "gn_16641f30dda3d2ad9abb4a5f",
+        "kind": "call",
+        "name": "applydrift",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.local-call",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 192,
+            "end_byte": 216,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 31
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "16641f30dda3d2ad9abb4a5f76685ed7a727401e5921210144f5f9350eb9ab9f"
+      },
+      {
+        "node_id": "gn_1bc62a53b9a43155435d2524",
+        "kind": "module",
+        "name": "../../../lib/drift-workflow.js",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 76,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 77
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "1bc62a53b9a43155435d252407f1ecc39b756fb2157090116a361d00904c0ae1"
+      },
+      {
+        "node_id": "gn_2304bde234cbc8e4f19d15d9",
+        "kind": "module-reference",
+        "name": "../../../lib/drift-workflow.js",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 76,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 77
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "2304bde234cbc8e4f19d15d9d18b2806c8d3be93fbee4a96b478fa421fcd3901"
+      },
+      {
+        "node_id": "gn_259c56ab8d51b4622250c748",
+        "kind": "syntax-fact",
+        "name": "conductdrift",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 192,
+            "end_byte": 216,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 31
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "259c56ab8d51b4622250c74831e88208e8ae1192b8149c75e96524181167a0c2"
+      },
+      {
+        "node_id": "gn_259d4c8a3a82f6e2e65691f3",
+        "kind": "module-reference",
+        "name": "POST",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 78,
+            "end_byte": 263,
+            "start_line": 3,
+            "start_column": 1,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "259d4c8a3a82f6e2e65691f35ab159a58c9b808b349f380da174979e6a37b600"
+      },
+      {
+        "node_id": "gn_287b4a198bdb0ec91ce16227",
+        "kind": "module-reference",
+        "name": "Response.json",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 227,
+            "end_byte": 260,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "287b4a198bdb0ec91ce162278b7218f78b42ea6c7d3251640fab17ad9209d7da"
+      },
+      {
+        "node_id": "gn_2cb974d2a8c97b0be0d24c6c",
+        "kind": "sink",
+        "name": "redirect",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "sensitive-sink",
+          "identity": "sink.redirect",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 217,
+            "end_byte": 252,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "2cb974d2a8c97b0be0d24c6c8ee2a582786d9b62d00f37c8998c0830a18a7514"
+      },
+      {
+        "node_id": "gn_37ec67445f106be955bf8551",
+        "kind": "transformation",
+        "name": "driftValue",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.value",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 124,
+            "end_byte": 184,
+            "start_line": 4,
+            "start_column": 9,
+            "end_line": 4,
+            "end_column": 69
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "37ec67445f106be955bf8551eca84114c7e29e70d918b8a9944018f53323b4ec"
+      },
+      {
+        "node_id": "gn_3878f546c11ec7269a1e74dc",
+        "kind": "module-reference",
+        "name": "POST /api/drift",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 85,
+            "end_byte": 263,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "3878f546c11ec7269a1e74dc12f5f7f8af07b0ecbb5250f5f05062f1d16c34ce"
+      },
+      {
+        "node_id": "gn_3b01710e8238312ac7483f79",
+        "kind": "module",
+        "name": "applydrift",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 1,
+            "end_byte": 255,
+            "start_line": 2,
+            "start_column": 1,
+            "end_line": 6,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "3b01710e8238312ac7483f79bdff9e24b560cd06559085ccafb36e54fd743bdc"
+      },
+      {
+        "node_id": "gn_3b436905ad612b0db2f98427",
+        "kind": "syntax-fact",
+        "name": "request.nextUrl.searchParams.get",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 137,
+            "end_byte": 178,
+            "start_line": 4,
+            "start_column": 22,
+            "end_line": 4,
+            "end_column": 63
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "3b436905ad612b0db2f98427ed5dbb3b0723d454a4588f77386cdd66df644f4a"
+      },
+      {
+        "node_id": "gn_4bbbed465e09fa212f980378",
+        "kind": "source",
+        "name": "http-query-value",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "untrusted-source",
+          "identity": "untrusted.http-query-value",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 137,
+            "end_byte": 178,
+            "start_line": 4,
+            "start_column": 22,
+            "end_line": 4,
+            "end_column": 63
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "4bbbed465e09fa212f980378c3092fdabadc64ba024b7c0c29254318e1f0c960"
+      },
+      {
+        "node_id": "gn_5b125f3cbbd809a4835f034b",
+        "kind": "module-reference",
+        "name": "Response.redirect",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 217,
+            "end_byte": 252,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "5b125f3cbbd809a4835f034b237110751d7076a4c2ae1e2a17b62bf1eb640eac"
+      },
+      {
+        "node_id": "gn_6a445dd8ad4ae307eb0fd871",
+        "kind": "function",
+        "name": "applydrift",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 8,
+            "end_byte": 255,
+            "start_line": 2,
+            "start_column": 8,
+            "end_line": 6,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "6a445dd8ad4ae307eb0fd8717d1d8908c0d72a76b28a3eaa68f90b340023680f"
+      },
+      {
+        "node_id": "gn_6bbfdec947605a37812325b9",
+        "kind": "module-reference",
+        "name": "applydrift",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 1,
+            "end_byte": 255,
+            "start_line": 2,
+            "start_column": 1,
+            "end_line": 6,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "6bbfdec947605a37812325b995293e77abdae18ba3b29f5576449d9dc5e9d6d4"
+      },
+      {
+        "node_id": "gn_726c56983095c54e0b9b9fc2",
+        "kind": "return",
+        "name": "@return",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.return",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 210,
+            "end_byte": 253,
+            "start_line": 5,
+            "start_column": 3,
+            "end_line": 5,
+            "end_column": 46
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "726c56983095c54e0b9b9fc284de4f7fb46972c8a8e93dc409976eda63df43af"
+      },
+      {
+        "node_id": "gn_750127264ed5fa31a225bcfe",
+        "kind": "call",
+        "name": "Response.json",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.local-call",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 227,
+            "end_byte": 260,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "750127264ed5fa31a225bcfe481cf70292825a94084d946b734c9084832e5ec1"
+      },
+      {
+        "node_id": "gn_7cc7b286eb66a13f14d1d52d",
+        "kind": "argument",
+        "name": "input",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.argument",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 34,
+            "end_byte": 39,
+            "start_line": 2,
+            "start_column": 34,
+            "end_line": 2,
+            "end_column": 39
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "7cc7b286eb66a13f14d1d52db98cd2ce3ba3d0c05232a39aa557a85114f17c45"
+      },
+      {
+        "node_id": "gn_80d9cdb14f667423a1459598",
+        "kind": "syntax-fact",
+        "name": "Response.json",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 227,
+            "end_byte": 260,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "80d9cdb14f667423a14595987df299987853cd0d572eb1925b6abd26b6c5c390"
+      },
+      {
+        "node_id": "gn_83e90f006b0f72bdf3d76b45",
+        "kind": "module-reference",
+        "name": "request.nextUrl.searchParams.get",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 137,
+            "end_byte": 178,
+            "start_line": 4,
+            "start_column": 22,
+            "end_line": 4,
+            "end_column": 63
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "83e90f006b0f72bdf3d76b4525a3a42c46739dfc6d657d5ac8235a0c3767b607"
+      },
+      {
+        "node_id": "gn_8b1a93c0a74297950c77b8c9",
+        "kind": "module",
+        "name": "POST",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 78,
+            "end_byte": 263,
+            "start_line": 3,
+            "start_column": 1,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "8b1a93c0a74297950c77b8c9656f0d6b3f2fee83b241c2c6671b939a415089e4"
+      },
+      {
+        "node_id": "gn_92d64bf8b7ddbce6367980c1",
+        "kind": "handler",
+        "name": "POST",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "untrusted-source",
+          "identity": "untrusted.handler-entry",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 85,
+            "end_byte": 263,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "92d64bf8b7ddbce6367980c18415703b2b74b631247a53f29490f079d8da8b54"
+      },
+      {
+        "node_id": "gn_95dcd3d25c15bc02db16ace9",
+        "kind": "sink",
+        "name": "Response.redirect",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 217,
+            "end_byte": 252,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "95dcd3d25c15bc02db16ace91be24160ccbd71c61de8f8dad6f505634b89f19a"
+      },
+      {
+        "node_id": "gn_a123c1af3caebdeffe508082",
+        "kind": "module",
+        "name": "app/api/drift/route.js",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "a123c1af3caebdeffe5080827f4d8108f5b1d66d5038f41b4e1bdd8bd686c6dc"
+      },
+      {
+        "node_id": "gn_c182b0b28bd122df92778ca5",
+        "kind": "return",
+        "name": "@return",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.return",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 160,
+            "end_byte": 207,
+            "start_line": 4,
+            "start_column": 55,
+            "end_line": 4,
+            "end_column": 102
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "c182b0b28bd122df92778ca505f8297f56e6f18f124a2c87e329e352b76c482e"
+      },
+      {
+        "node_id": "gn_c2fd31bb431278c91cff8af4",
+        "kind": "source",
+        "name": "request-parameter",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "untrusted-source",
+          "identity": "untrusted.request-value",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 105,
+            "end_byte": 112,
+            "start_line": 3,
+            "start_column": 28,
+            "end_line": 3,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "c2fd31bb431278c91cff8af4e00264c4618799a6680f62721ae45793ecb43522"
+      },
+      {
+        "node_id": "gn_c84cfdef40e56242efb2edc3",
+        "kind": "function",
+        "name": "applydrift",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 8,
+            "end_byte": 255,
+            "start_line": 2,
+            "start_column": 8,
+            "end_line": 6,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "c84cfdef40e56242efb2edc3a6f8d43fbd59b835b2635286c5edf8325b651b39"
+      },
+      {
+        "node_id": "gn_c8babdf9050718dc9e766260",
+        "kind": "handler",
+        "name": "POST",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 85,
+            "end_byte": 263,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "c8babdf9050718dc9e7662608e12a186cfabbf1710fb58c19aa6294f676701d9"
+      },
+      {
+        "node_id": "gn_e422abe40a4f1be00c3c6cf7",
+        "kind": "syntax-fact",
+        "name": "Response.redirect",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 217,
+            "end_byte": 252,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "e422abe40a4f1be00c3c6cf78172319e73306635399eda14915a6569dfe83d45"
+      },
+      {
+        "node_id": "gn_e8d517a4b6d2b314187c3cbf",
+        "kind": "file",
+        "name": "app/lib/drift-workflow.js",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "e8d517a4b6d2b314187c3cbf9cb11a40ae7a6fa4941c6960ea340c64a78fd95b"
+      },
+      {
+        "node_id": "gn_e8faa11a7fb4cc9a5c046251",
+        "kind": "transformation",
+        "name": "destination",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.value",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 51,
+            "end_byte": 104,
+            "start_line": 3,
+            "start_column": 9,
+            "end_line": 3,
+            "end_column": 62
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "e8faa11a7fb4cc9a5c046251ac6fd844d626b9239dc3b24b312c296e670cab63"
+      },
+      {
+        "node_id": "gn_ecb24e073b45261509672acf",
+        "kind": "file",
+        "name": "app/api/drift/route.js",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "ecb24e073b45261509672acfb4fe61de92d1adf0d5c81f8984af4e79991eca60"
+      },
+      {
+        "node_id": "gn_eccd323a38b97912ebb3c929",
+        "kind": "module",
+        "name": "../../../lib/drift-workflow.js",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 76,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 77
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "eccd323a38b97912ebb3c929d016a03b4f8cd67838fa2f17de59667419cd404d"
+      },
+      {
+        "node_id": "gn_f32b89ccf1c1ed13f0ba8aba",
+        "kind": "module-reference",
+        "name": "conductdrift",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 192,
+            "end_byte": 216,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 31
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "f32b89ccf1c1ed13f0ba8abab39764d141d30ba8750f92a740726a45faa60e35"
+      }
+    ],
+    "edges": [
+      {
+        "edge_id": "ge_014c4345239ff2ca33b7c928",
+        "kind": "argument-flow",
+        "from_node": "gn_37ec67445f106be955bf8551",
+        "to_node": "gn_16641f30dda3d2ad9abb4a5f",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 192,
+            "end_byte": 216,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 31
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "014c4345239ff2ca33b7c92829b37f665b737c1b83d3f1f10a8fa4c3db4a699b"
+      },
+      {
+        "edge_id": "ge_0467879316cd73132ccab535",
+        "kind": "calls",
+        "from_node": "gn_e422abe40a4f1be00c3c6cf7",
+        "to_node": "gn_5b125f3cbbd809a4835f034b",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 217,
+            "end_byte": 252,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "0467879316cd73132ccab535830eac27c4ff4c188c1f07efb147f73c13408870"
+      },
+      {
+        "edge_id": "ge_075265275773ae39a6b6081d",
+        "kind": "containment",
+        "from_node": "gn_0a11943abcd2878e7babd2ff",
+        "to_node": "gn_3b01710e8238312ac7483f79",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 1,
+            "end_byte": 255,
+            "start_line": 2,
+            "start_column": 1,
+            "end_line": 6,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "075265275773ae39a6b6081d761b56e9671cb7114ac9ee7ae26b2ee6ecff4a1a"
+      },
+      {
+        "edge_id": "ge_0996268727307f6dcd8fea24",
+        "kind": "containment",
+        "from_node": "gn_a123c1af3caebdeffe508082",
+        "to_node": "gn_259c56ab8d51b4622250c748",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 192,
+            "end_byte": 216,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 31
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "0996268727307f6dcd8fea24c9cbe4e78c264c74663891cee30a02d03b69977e"
+      },
+      {
+        "edge_id": "ge_11faafbea8cf56be153769e1",
+        "kind": "control-flow",
+        "from_node": "gn_37ec67445f106be955bf8551",
+        "to_node": "gn_16641f30dda3d2ad9abb4a5f",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 192,
+            "end_byte": 216,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 31
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "11faafbea8cf56be153769e1ea092d478e7a852e0fa6dbbd829592ff1305d919"
+      },
+      {
+        "edge_id": "ge_12abff1984b81ceacd0e0e7b",
+        "kind": "calls",
+        "from_node": "gn_259c56ab8d51b4622250c748",
+        "to_node": "gn_f32b89ccf1c1ed13f0ba8aba",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 192,
+            "end_byte": 216,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 31
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "12abff1984b81ceacd0e0e7bd24b4799a9f7232f16bae4959aebd0e183356378"
+      },
+      {
+        "edge_id": "ge_143c3004acc5b6eab00af95b",
+        "kind": "containment",
+        "from_node": "gn_0a11943abcd2878e7babd2ff",
+        "to_node": "gn_95dcd3d25c15bc02db16ace9",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 217,
+            "end_byte": 252,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "143c3004acc5b6eab00af95bd5466eac6fc46c468b352860e7f81a796b40a30a"
+      },
+      {
+        "edge_id": "ge_15d8c1746bb0345e1b64a7c8",
+        "kind": "control-flow",
+        "from_node": "gn_e8faa11a7fb4cc9a5c046251",
+        "to_node": "gn_c182b0b28bd122df92778ca5",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 160,
+            "end_byte": 207,
+            "start_line": 4,
+            "start_column": 55,
+            "end_line": 4,
+            "end_column": 102
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "15d8c1746bb0345e1b64a7c83614d6d2fbfa01d7a3e9ab553cfcf9657ca9d563"
+      },
+      {
+        "edge_id": "ge_1d06f399570ccfd50f182ab7",
+        "kind": "containment",
+        "from_node": "gn_0a11943abcd2878e7babd2ff",
+        "to_node": "gn_e8faa11a7fb4cc9a5c046251",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 51,
+            "end_byte": 104,
+            "start_line": 3,
+            "start_column": 9,
+            "end_line": 3,
+            "end_column": 62
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "1d06f399570ccfd50f182ab72b0c6756552a624398923131b48d9eead801c110"
+      },
+      {
+        "edge_id": "ge_20108ec97b2f319c58a64717",
+        "kind": "containment",
+        "from_node": "gn_92d64bf8b7ddbce6367980c1",
+        "to_node": "gn_37ec67445f106be955bf8551",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 124,
+            "end_byte": 184,
+            "start_line": 4,
+            "start_column": 9,
+            "end_line": 4,
+            "end_column": 69
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "20108ec97b2f319c58a6471773e765c938ebb666b81918d9d55740edd02bd422"
+      },
+      {
+        "edge_id": "ge_250991d9844254dd8ffe16d9",
+        "kind": "containment",
+        "from_node": "gn_e8d517a4b6d2b314187c3cbf",
+        "to_node": "gn_0a11943abcd2878e7babd2ff",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "250991d9844254dd8ffe16d989098cd95e8fb2febdbed0bbf181b19109f6aa84"
+      },
+      {
+        "edge_id": "ge_25ea69967d78c1b486b62819",
+        "kind": "containment",
+        "from_node": "gn_a123c1af3caebdeffe508082",
+        "to_node": "gn_c2fd31bb431278c91cff8af4",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 105,
+            "end_byte": 112,
+            "start_line": 3,
+            "start_column": 28,
+            "end_line": 3,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "25ea69967d78c1b486b62819655b9aec6522514353073013e8ec20d69b87a1e1"
+      },
+      {
+        "edge_id": "ge_27e7be0c5b4093a3e12f688d",
+        "kind": "containment",
+        "from_node": "gn_c84cfdef40e56242efb2edc3",
+        "to_node": "gn_7cc7b286eb66a13f14d1d52d",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 34,
+            "end_byte": 39,
+            "start_line": 2,
+            "start_column": 34,
+            "end_line": 2,
+            "end_column": 39
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "27e7be0c5b4093a3e12f688d41f564182f7e00cd391c91152467a0926471ef69"
+      },
+      {
+        "edge_id": "ge_2f1574ff0559d19085581598",
+        "kind": "containment",
+        "from_node": "gn_ecb24e073b45261509672acf",
+        "to_node": "gn_a123c1af3caebdeffe508082",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "2f1574ff0559d1908558159838ef8bc426bc72f18c09b8b82818757db9dd1c66"
+      },
+      {
+        "edge_id": "ge_3089528abdfe5b3040a01cbb",
+        "kind": "containment",
+        "from_node": "gn_0a11943abcd2878e7babd2ff",
+        "to_node": "gn_6a445dd8ad4ae307eb0fd871",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 8,
+            "end_byte": 255,
+            "start_line": 2,
+            "start_column": 8,
+            "end_line": 6,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "3089528abdfe5b3040a01cbbaf39b8a8c650bf8aa5988d4a2667ca7ea53e8400"
+      },
+      {
+        "edge_id": "ge_31a170fda7ce5f5033be7265",
+        "kind": "source-to-sink-propagation",
+        "from_node": "gn_e8faa11a7fb4cc9a5c046251",
+        "to_node": "gn_2cb974d2a8c97b0be0d24c6c",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 217,
+            "end_byte": 252,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "31a170fda7ce5f5033be7265398fba3652e5904d44f57826dc4fa3020f34e099"
+      },
+      {
+        "edge_id": "ge_37bc51b110c252f59a35fbc5",
+        "kind": "containment",
+        "from_node": "gn_a123c1af3caebdeffe508082",
+        "to_node": "gn_1bc62a53b9a43155435d2524",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 76,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 77
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "37bc51b110c252f59a35fbc55047531b1b8473a978f7fda4018a9a2014b086eb"
+      },
+      {
+        "edge_id": "ge_42997d876cfb97ebe5f909a5",
+        "kind": "imports",
+        "from_node": "gn_1bc62a53b9a43155435d2524",
+        "to_node": "gn_2304bde234cbc8e4f19d15d9",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 76,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 77
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "42997d876cfb97ebe5f909a5dda0fea1b93e0fab70c9b8da1d6516770d20d520"
+      },
+      {
+        "edge_id": "ge_4c5e33c20fffa9f1370dbf65",
+        "kind": "calls",
+        "from_node": "gn_95dcd3d25c15bc02db16ace9",
+        "to_node": "gn_5b125f3cbbd809a4835f034b",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 217,
+            "end_byte": 252,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "4c5e33c20fffa9f1370dbf658fd65eb502c633eea3976347ba2c1d045cb4e08f"
+      },
+      {
+        "edge_id": "ge_4d139ad0e7e8e27f151694d7",
+        "kind": "containment",
+        "from_node": "gn_a123c1af3caebdeffe508082",
+        "to_node": "gn_0791d59ea18748032a031a28",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 220,
+            "end_byte": 261,
+            "start_line": 6,
+            "start_column": 3,
+            "end_line": 6,
+            "end_column": 44
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "4d139ad0e7e8e27f151694d7f10a368b211ce5d9ed49f7d3e651fc4033c4e801"
+      },
+      {
+        "edge_id": "ge_542cf471c550a8ec87df26ef",
+        "kind": "containment",
+        "from_node": "gn_0a11943abcd2878e7babd2ff",
+        "to_node": "gn_c84cfdef40e56242efb2edc3",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 8,
+            "end_byte": 255,
+            "start_line": 2,
+            "start_column": 8,
+            "end_line": 6,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "542cf471c550a8ec87df26effa8acddf6fb1f135a34f202d0acd2364552d02be"
+      },
+      {
+        "edge_id": "ge_5599fcd74d8d4487a51d9057",
+        "kind": "containment",
+        "from_node": "gn_c84cfdef40e56242efb2edc3",
+        "to_node": "gn_2cb974d2a8c97b0be0d24c6c",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 217,
+            "end_byte": 252,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "5599fcd74d8d4487a51d905751cbb3b3575b73aad53eee4312eb5efb5c979be6"
+      },
+      {
+        "edge_id": "ge_56898a33b58160c6b7ca9e13",
+        "kind": "control-flow",
+        "from_node": "gn_c182b0b28bd122df92778ca5",
+        "to_node": "gn_726c56983095c54e0b9b9fc2",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 210,
+            "end_byte": 253,
+            "start_line": 5,
+            "start_column": 3,
+            "end_line": 5,
+            "end_column": 46
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "56898a33b58160c6b7ca9e13df4eb81e257e604ea55cf36a95f4dc5be641c11a"
+      },
+      {
+        "edge_id": "ge_5b2f82f2be7b7eb629f0aa9f",
+        "kind": "containment",
+        "from_node": "gn_92d64bf8b7ddbce6367980c1",
+        "to_node": "gn_92d64bf8b7ddbce6367980c1",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 85,
+            "end_byte": 263,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "5b2f82f2be7b7eb629f0aa9fe641f0b9890513ce1d3d5e3420f51e6a0d19652d"
+      },
+      {
+        "edge_id": "ge_5b30c78a58f5af601b3b6113",
+        "kind": "containment",
+        "from_node": "gn_92d64bf8b7ddbce6367980c1",
+        "to_node": "gn_750127264ed5fa31a225bcfe",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 227,
+            "end_byte": 260,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "5b30c78a58f5af601b3b6113033b52d5f84f54d25e20fc5a3376518430c50779"
+      },
+      {
+        "edge_id": "ge_5cd81b103139174c13922244",
+        "kind": "control-flow",
+        "from_node": "gn_92d64bf8b7ddbce6367980c1",
+        "to_node": "gn_16641f30dda3d2ad9abb4a5f",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 192,
+            "end_byte": 216,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 31
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "5cd81b103139174c13922244830c65cbfe56c0446c47b286636985bdc71d292b"
+      },
+      {
+        "edge_id": "ge_6040b6bb217f6dc4462b470a",
+        "kind": "calls",
+        "from_node": "gn_3b436905ad612b0db2f98427",
+        "to_node": "gn_83e90f006b0f72bdf3d76b45",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 137,
+            "end_byte": 178,
+            "start_line": 4,
+            "start_column": 22,
+            "end_line": 4,
+            "end_column": 63
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "6040b6bb217f6dc4462b470a310e981d799b6f8b367d857ab7af60c3b094ecae"
+      },
+      {
+        "edge_id": "ge_67a2b8eb9b9c6a4911c36730",
+        "kind": "calls",
+        "from_node": "gn_16641f30dda3d2ad9abb4a5f",
+        "to_node": "gn_c84cfdef40e56242efb2edc3",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 192,
+            "end_byte": 216,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 31
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "67a2b8eb9b9c6a4911c3673044bf17d14dcfb0a3fdc6b912b273ecbdd4eba62c"
+      },
+      {
+        "edge_id": "ge_70e85204e8cf974644b848d8",
+        "kind": "containment",
+        "from_node": "gn_c84cfdef40e56242efb2edc3",
+        "to_node": "gn_e8faa11a7fb4cc9a5c046251",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 51,
+            "end_byte": 104,
+            "start_line": 3,
+            "start_column": 9,
+            "end_line": 3,
+            "end_column": 62
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "70e85204e8cf974644b848d8e176466899b3dc4e01653bd95b85cc3be3436e19"
+      },
+      {
+        "edge_id": "ge_72f66afbf84e2ab08a5c4363",
+        "kind": "containment",
+        "from_node": "gn_0a11943abcd2878e7babd2ff",
+        "to_node": "gn_7cc7b286eb66a13f14d1d52d",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 34,
+            "end_byte": 39,
+            "start_line": 2,
+            "start_column": 34,
+            "end_line": 2,
+            "end_column": 39
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "72f66afbf84e2ab08a5c436316e02c72d8973e05515bcca3bd6e6ca3a38b9249"
+      },
+      {
+        "edge_id": "ge_755c89cacf5b9e3d081168ee",
+        "kind": "containment",
+        "from_node": "gn_a123c1af3caebdeffe508082",
+        "to_node": "gn_80d9cdb14f667423a1459598",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 227,
+            "end_byte": 260,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "755c89cacf5b9e3d081168ee0eb7e3b136d1e6afd418f815ceb9c3d882e42d91"
+      },
+      {
+        "edge_id": "ge_78228908f4d204b871e72b4a",
+        "kind": "containment",
+        "from_node": "gn_92d64bf8b7ddbce6367980c1",
+        "to_node": "gn_4bbbed465e09fa212f980378",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 137,
+            "end_byte": 178,
+            "start_line": 4,
+            "start_column": 22,
+            "end_line": 4,
+            "end_column": 63
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "78228908f4d204b871e72b4a1f8d7940350cad79b3ccb0c2b732162871a06512"
+      },
+      {
+        "edge_id": "ge_78ffb188911cb94f7add5ee6",
+        "kind": "containment",
+        "from_node": "gn_0a11943abcd2878e7babd2ff",
+        "to_node": "gn_726c56983095c54e0b9b9fc2",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 210,
+            "end_byte": 253,
+            "start_line": 5,
+            "start_column": 3,
+            "end_line": 5,
+            "end_column": 46
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "78ffb188911cb94f7add5ee69804841bb6b39ae2ef217fec84fa416f89b4a129"
+      },
+      {
+        "edge_id": "ge_7ed0ffaed279ed81967c2ba0",
+        "kind": "containment",
+        "from_node": "gn_92d64bf8b7ddbce6367980c1",
+        "to_node": "gn_16641f30dda3d2ad9abb4a5f",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 192,
+            "end_byte": 216,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 31
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "7ed0ffaed279ed81967c2ba03791ef2d6966628ca229111a1f42ea4a027d5421"
+      },
+      {
+        "edge_id": "ge_7f8b35e4d1ac2ff576e2f18b",
+        "kind": "source-to-sink-propagation",
+        "from_node": "gn_7cc7b286eb66a13f14d1d52d",
+        "to_node": "gn_e8faa11a7fb4cc9a5c046251",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 51,
+            "end_byte": 104,
+            "start_line": 3,
+            "start_column": 9,
+            "end_line": 3,
+            "end_column": 62
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "7f8b35e4d1ac2ff576e2f18b728204f719a0e7d3122beafa61b4ffd98028543b"
+      },
+      {
+        "edge_id": "ge_848d3bb69723044fe9045cfd",
+        "kind": "containment",
+        "from_node": "gn_a123c1af3caebdeffe508082",
+        "to_node": "gn_4bbbed465e09fa212f980378",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 137,
+            "end_byte": 178,
+            "start_line": 4,
+            "start_column": 22,
+            "end_line": 4,
+            "end_column": 63
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "848d3bb69723044fe9045cfd1a2f3a1246b383be33b151d253e6f138ae5fc259"
+      },
+      {
+        "edge_id": "ge_84cb21ee1db7282262bed675",
+        "kind": "containment",
+        "from_node": "gn_0a11943abcd2878e7babd2ff",
+        "to_node": "gn_e422abe40a4f1be00c3c6cf7",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 217,
+            "end_byte": 252,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "84cb21ee1db7282262bed67532edd8e1d6560899cebdefab911d6d12532b429a"
+      },
+      {
+        "edge_id": "ge_8f6b97ae767c333874e829f0",
+        "kind": "containment",
+        "from_node": "gn_c84cfdef40e56242efb2edc3",
+        "to_node": "gn_726c56983095c54e0b9b9fc2",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 210,
+            "end_byte": 253,
+            "start_line": 5,
+            "start_column": 3,
+            "end_line": 5,
+            "end_column": 46
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "8f6b97ae767c333874e829f079e67d609dd1a47748321915401d757ee74a6fba"
+      },
+      {
+        "edge_id": "ge_92bbda0dc3e1b98189b5fe2a",
+        "kind": "containment",
+        "from_node": "gn_a123c1af3caebdeffe508082",
+        "to_node": "gn_0521dab38543c4e50b85c47e",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 85,
+            "end_byte": 263,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "92bbda0dc3e1b98189b5fe2af9319b662ec8d659228a310a82aeeca8bc419733"
+      },
+      {
+        "edge_id": "ge_939202b81922fda029d677da",
+        "kind": "containment",
+        "from_node": "gn_c84cfdef40e56242efb2edc3",
+        "to_node": "gn_c182b0b28bd122df92778ca5",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 160,
+            "end_byte": 207,
+            "start_line": 4,
+            "start_column": 55,
+            "end_line": 4,
+            "end_column": 102
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "939202b81922fda029d677dafbbe09037934b5e36704706f4f4b6951d7da8a9c"
+      },
+      {
+        "edge_id": "ge_a04ca22c3075eade26468e38",
+        "kind": "containment",
+        "from_node": "gn_92d64bf8b7ddbce6367980c1",
+        "to_node": "gn_0791d59ea18748032a031a28",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 220,
+            "end_byte": 261,
+            "start_line": 6,
+            "start_column": 3,
+            "end_line": 6,
+            "end_column": 44
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "a04ca22c3075eade26468e3869f4e7692fbc9fd40cec33d36df7f712dac03bba"
+      },
+      {
+        "edge_id": "ge_a43ab686317e1891397ac34c",
+        "kind": "containment",
+        "from_node": "gn_8b1a93c0a74297950c77b8c9",
+        "to_node": "gn_259d4c8a3a82f6e2e65691f3",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 78,
+            "end_byte": 263,
+            "start_line": 3,
+            "start_column": 1,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "a43ab686317e1891397ac34c5c9265bd5e4fb49737a8f85e201e0ae44f0ae6a9"
+      },
+      {
+        "edge_id": "ge_abf4c3bee40e88f829d381bf",
+        "kind": "returns",
+        "from_node": "gn_e8faa11a7fb4cc9a5c046251",
+        "to_node": "gn_726c56983095c54e0b9b9fc2",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 210,
+            "end_byte": 253,
+            "start_line": 5,
+            "start_column": 3,
+            "end_line": 5,
+            "end_column": 46
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "abf4c3bee40e88f829d381bf2da4349a3636f0b14affaf3971786f8a653dbade"
+      },
+      {
+        "edge_id": "ge_afdaed84cc79047e02e158da",
+        "kind": "containment",
+        "from_node": "gn_a123c1af3caebdeffe508082",
+        "to_node": "gn_eccd323a38b97912ebb3c929",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 76,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 77
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "afdaed84cc79047e02e158da1998a1eff2d4a1636744cbcc757280308f3512ed"
+      },
+      {
+        "edge_id": "ge_b3213dddde04fbe9b6e76545",
+        "kind": "control-flow",
+        "from_node": "gn_16641f30dda3d2ad9abb4a5f",
+        "to_node": "gn_0791d59ea18748032a031a28",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 220,
+            "end_byte": 261,
+            "start_line": 6,
+            "start_column": 3,
+            "end_line": 6,
+            "end_column": 44
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "b3213dddde04fbe9b6e76545656c1c3325324b247c3116e94c7b809e650aa962"
+      },
+      {
+        "edge_id": "ge_b5c7e1385a7728a2552e26d5",
+        "kind": "source-to-sink-propagation",
+        "from_node": "gn_4bbbed465e09fa212f980378",
+        "to_node": "gn_37ec67445f106be955bf8551",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 124,
+            "end_byte": 184,
+            "start_line": 4,
+            "start_column": 9,
+            "end_line": 4,
+            "end_column": 69
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "b5c7e1385a7728a2552e26d58c747b02919a9fbebbf6a006d6f20641b9d7b982"
+      },
+      {
+        "edge_id": "ge_b71ed188b9fd13ddc79ad509",
+        "kind": "control-flow",
+        "from_node": "gn_0791d59ea18748032a031a28",
+        "to_node": "gn_750127264ed5fa31a225bcfe",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 227,
+            "end_byte": 260,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "b71ed188b9fd13ddc79ad50901f2a415e0a1ac84fc2b877272c77552c4f3ad0f"
+      },
+      {
+        "edge_id": "ge_ba061a85b53b6a299cbb13f0",
+        "kind": "containment",
+        "from_node": "gn_3b01710e8238312ac7483f79",
+        "to_node": "gn_6bbfdec947605a37812325b9",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 1,
+            "end_byte": 255,
+            "start_line": 2,
+            "start_column": 1,
+            "end_line": 6,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "ba061a85b53b6a299cbb13f01a57102665df120d407399695f3e65258d02ba8a"
+      },
+      {
+        "edge_id": "ge_bab243cb9ca74add96b785d9",
+        "kind": "containment",
+        "from_node": "gn_a123c1af3caebdeffe508082",
+        "to_node": "gn_92d64bf8b7ddbce6367980c1",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 85,
+            "end_byte": 263,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "bab243cb9ca74add96b785d933ccb9a1225df759fdd16cd4874b5ed594a60b72"
+      },
+      {
+        "edge_id": "ge_c5a385fb55ea14bb26714ac4",
+        "kind": "containment",
+        "from_node": "gn_0a11943abcd2878e7babd2ff",
+        "to_node": "gn_c182b0b28bd122df92778ca5",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 160,
+            "end_byte": 207,
+            "start_line": 4,
+            "start_column": 55,
+            "end_line": 4,
+            "end_column": 102
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "c5a385fb55ea14bb26714ac4fd90d95d8fa215d83426ba32fed343f68b5ef00e"
+      },
+      {
+        "edge_id": "ge_c87d4dbe320bc21bedbd4d4f",
+        "kind": "containment",
+        "from_node": "gn_c8babdf9050718dc9e766260",
+        "to_node": "gn_3878f546c11ec7269a1e74dc",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 85,
+            "end_byte": 263,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "c87d4dbe320bc21bedbd4d4f1458e748ed7364641be6a39c020f77bf933e6a3e"
+      },
+      {
+        "edge_id": "ge_caf0c54af3d628ff0dd3505e",
+        "kind": "containment",
+        "from_node": "gn_c84cfdef40e56242efb2edc3",
+        "to_node": "gn_c84cfdef40e56242efb2edc3",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 8,
+            "end_byte": 255,
+            "start_line": 2,
+            "start_column": 8,
+            "end_line": 6,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "caf0c54af3d628ff0dd3505e2e4cc56d2d3f6e0418d1969f0d8529e159b82474"
+      },
+      {
+        "edge_id": "ge_cb57d014e19781db7c3a54a7",
+        "kind": "calls",
+        "from_node": "gn_80d9cdb14f667423a1459598",
+        "to_node": "gn_287b4a198bdb0ec91ce16227",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 227,
+            "end_byte": 260,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "cb57d014e19781db7c3a54a78a454adb49bc29614350dcb2ed69cb35431327fd"
+      },
+      {
+        "edge_id": "ge_cded65851f1e3050a3d9c031",
+        "kind": "containment",
+        "from_node": "gn_a123c1af3caebdeffe508082",
+        "to_node": "gn_3b436905ad612b0db2f98427",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 137,
+            "end_byte": 178,
+            "start_line": 4,
+            "start_column": 22,
+            "end_line": 4,
+            "end_column": 63
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "cded65851f1e3050a3d9c031ffac571a562470ccc820a3a0b199433314980dbe"
+      },
+      {
+        "edge_id": "ge_d0efc2e1769b7c498220e16e",
+        "kind": "returns",
+        "from_node": "gn_726c56983095c54e0b9b9fc2",
+        "to_node": "gn_16641f30dda3d2ad9abb4a5f",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 192,
+            "end_byte": 216,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 31
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "d0efc2e1769b7c498220e16eaf75fea96a561467bcc297dd61e13685a6eb6c8f"
+      },
+      {
+        "edge_id": "ge_d4ad5d8982f7e6e2851642ad",
+        "kind": "control-flow",
+        "from_node": "gn_726c56983095c54e0b9b9fc2",
+        "to_node": "gn_2cb974d2a8c97b0be0d24c6c",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 217,
+            "end_byte": 252,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "d4ad5d8982f7e6e2851642ad1dc56eaa05e85de532f50b9af760cb392354502b"
+      },
+      {
+        "edge_id": "ge_d51e190e5008ae8ba7edd9c1",
+        "kind": "containment",
+        "from_node": "gn_a123c1af3caebdeffe508082",
+        "to_node": "gn_16641f30dda3d2ad9abb4a5f",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 192,
+            "end_byte": 216,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 31
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "d51e190e5008ae8ba7edd9c11d2b2d446a2298979645b8d9911967f7801bb8ff"
+      },
+      {
+        "edge_id": "ge_d7ed59830b6f649eda994107",
+        "kind": "argument-flow",
+        "from_node": "gn_16641f30dda3d2ad9abb4a5f",
+        "to_node": "gn_7cc7b286eb66a13f14d1d52d",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 34,
+            "end_byte": 39,
+            "start_line": 2,
+            "start_column": 34,
+            "end_line": 2,
+            "end_column": 39
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "d7ed59830b6f649eda994107dec0168738b7aecfe0f71a450abef5799359cbce"
+      },
+      {
+        "edge_id": "ge_df0b204de2230eb94cf03d10",
+        "kind": "containment",
+        "from_node": "gn_a123c1af3caebdeffe508082",
+        "to_node": "gn_c8babdf9050718dc9e766260",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 85,
+            "end_byte": 263,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "df0b204de2230eb94cf03d102ddd4cbae5f5ff16ac7fa87f264e374b89660859"
+      },
+      {
+        "edge_id": "ge_ec563f9b374248c8d2f2d88f",
+        "kind": "containment",
+        "from_node": "gn_92d64bf8b7ddbce6367980c1",
+        "to_node": "gn_c2fd31bb431278c91cff8af4",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 105,
+            "end_byte": 112,
+            "start_line": 3,
+            "start_column": 28,
+            "end_line": 3,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "ec563f9b374248c8d2f2d88ff8949bce82eafb56aab01a35f51f895a2f11b3e1"
+      },
+      {
+        "edge_id": "ge_ec69c1a02365823fd4bc10c9",
+        "kind": "containment",
+        "from_node": "gn_0a11943abcd2878e7babd2ff",
+        "to_node": "gn_2cb974d2a8c97b0be0d24c6c",
+        "location": {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 217,
+            "end_byte": 252,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "ec69c1a02365823fd4bc10c9534d34627af7536b04d23134c2c497aa0fd302a9"
+      },
+      {
+        "edge_id": "ge_f65aff1d352c157e1de90552",
+        "kind": "containment",
+        "from_node": "gn_a123c1af3caebdeffe508082",
+        "to_node": "gn_37ec67445f106be955bf8551",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 124,
+            "end_byte": 184,
+            "start_line": 4,
+            "start_column": 9,
+            "end_line": 4,
+            "end_column": 69
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "f65aff1d352c157e1de905529bb922c334eff9be2d3c6610198489bd88b7293c"
+      },
+      {
+        "edge_id": "ge_fda05b26b0ddbbd6386efb68",
+        "kind": "containment",
+        "from_node": "gn_a123c1af3caebdeffe508082",
+        "to_node": "gn_8b1a93c0a74297950c77b8c9",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 78,
+            "end_byte": 263,
+            "start_line": 3,
+            "start_column": 1,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "fda05b26b0ddbbd6386efb685fc5d3757ce2fe7b56360023aa9193469eda4c45"
+      },
+      {
+        "edge_id": "ge_fe7c4a7be63a342cbf3ea441",
+        "kind": "containment",
+        "from_node": "gn_a123c1af3caebdeffe508082",
+        "to_node": "gn_750127264ed5fa31a225bcfe",
+        "location": {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 227,
+            "end_byte": 260,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "fe7c4a7be63a342cbf3ea441f5d784582121101b2f5724af1d5f7177f22914d2"
+      }
+    ]
+  },
+  "analysis": {
+    "nodes": 37,
+    "edges": 64,
+    "candidate_paths": 1,
+    "rules_evaluated": 7,
+    "findings": 1,
+    "findings_suppressed": 0,
+    "duration_ms": 0,
+    "truncated": false
+  },
+  "suppression_diagnostics": [],
+  "taxonomy_catalog": [
+    {
+      "taxonomy_name": "secure-bench-taxonomy-v1",
+      "taxonomy_version": "1.0.0",
+      "source_version": "CWE 4.20",
+      "source_commit": "93c0821db065de436a339c15b070e158947ad76c",
+      "schema_sha256": "cdecd643d338aa8ae42ec7398c6c4703cb97d60ad355340c98744fc94bcb7d6f",
+      "taxonomy_sha256": "059fe22d7707cf8d17f2c1621fdae9819787a1958ba2ef0421eca4e4ec858452",
+      "methodology_sha256": "eac27e5800be35c5ae77f7804e52ae90462cbda403a5484baa8fab62f02ab562",
+      "content_hash": "22852bd7401020b315af11dfa2b60c0b46f78eb19f95079e6400d7b3bea3272c"
+    }
+  ],
+  "files": [
+    {
+      "path": "app/api/drift/route.js",
+      "kind": "source",
+      "size_bytes": 264,
+      "content_fingerprint": "ff2e317ae86b1fd888ce9a2b8c03c5bd2415c17f5a8e7f88afbfe79ae95de20e",
+      "language": "JavaScript",
+      "origin": "project",
+      "is_binary": false
+    },
+    {
+      "path": "app/lib/drift-workflow.js",
+      "kind": "source",
+      "size_bytes": 256,
+      "content_fingerprint": "fc475a4a319dbceb8f6d5e4a8b52529dce5542a63cfb5e50e9498407fd6f5426",
+      "language": "JavaScript",
+      "origin": "project",
+      "is_binary": false
+    },
+    {
+      "path": "package.json",
+      "kind": "manifest",
+      "size_bytes": 148,
+      "content_fingerprint": "d9a52935f959e4bf2864091a2efae3639cf04f47647a64898063f228026e07fd",
+      "language": null,
+      "origin": "project",
+      "is_binary": false
+    }
+  ],
+  "languages": [
+    {
+      "name": "JavaScript",
+      "file_count": 2,
+      "bytes": 520
+    }
+  ],
+  "manifests": [
+    {
+      "kind": "npm",
+      "location": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 0,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 1
+        }
+      },
+      "fingerprint": "6748a38bc87b5b19f763c5883b78fc1e6b11efffa9b16c0682221bf1b9422f2d"
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Next.js",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 26,
+          "end_byte": 32,
+          "start_line": 3,
+          "start_column": 5,
+          "end_line": 3,
+          "end_column": 11
+        }
+      },
+      "fingerprint": "ab947c3b74a997a0213d6f4e7400ab58f98892ef985417413fb54b0870052f8a"
+    }
+  ],
+  "entry_points": [],
+  "capabilities": [
+    {
+      "capability": "dependency-management",
+      "reason": "Detected npm manifest",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 0,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 1
+        }
+      },
+      "fingerprint": "cb0fd89861ca491f95e737908187cfd232f12ed2afba2ed3fbd7ba1c579a9ab2"
+    }
+  ],
+  "trust_boundaries": [
+    {
+      "kind": "dependency-supply-chain",
+      "description": "Declared third-party dependency boundary",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 0,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 1
+        }
+      },
+      "fingerprint": "72752772107d5ef650d956e907952867e651a93c7d08723f6a7fd36f0215c479"
+    },
+    {
+      "kind": "network-request",
+      "description": "Next.js may expose network request entry points",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 26,
+          "end_byte": 32,
+          "start_line": 3,
+          "start_column": 5,
+          "end_line": 3,
+          "end_column": 11
+        }
+      },
+      "fingerprint": "95eaaa9c288e6fb2c08590a93d816a59c9d5fc6351d5910465bc0af6091d4d20"
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "SE1005",
+      "finding_id": "fd_ec8e8ea3f90df91917887675",
+      "title": "Untrusted URL reaches a redirect",
+      "category": "open-redirect",
+      "severity": "medium",
+      "confidence": "high",
+      "evidence": [
+        {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 137,
+            "end_byte": 178,
+            "start_line": 4,
+            "start_column": 22,
+            "end_line": 4,
+            "end_column": 63
+          }
+        },
+        {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 124,
+            "end_byte": 184,
+            "start_line": 4,
+            "start_column": 9,
+            "end_line": 4,
+            "end_column": 69
+          }
+        },
+        {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 192,
+            "end_byte": 216,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 31
+          }
+        },
+        {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 34,
+            "end_byte": 39,
+            "start_line": 2,
+            "start_column": 34,
+            "end_line": 2,
+            "end_column": 39
+          }
+        },
+        {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 51,
+            "end_byte": 104,
+            "start_line": 3,
+            "start_column": 9,
+            "end_line": 3,
+            "end_column": 62
+          }
+        },
+        {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 217,
+            "end_byte": 252,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 45
+          }
+        }
+      ],
+      "source": {
+        "path": "app/api/drift/route.js",
+        "span": {
+          "start_byte": 137,
+          "end_byte": 178,
+          "start_line": 4,
+          "start_column": 22,
+          "end_line": 4,
+          "end_column": 63
+        }
+      },
+      "transformations": [
+        {
+          "path": "app/api/drift/route.js",
+          "span": {
+            "start_byte": 124,
+            "end_byte": 184,
+            "start_line": 4,
+            "start_column": 9,
+            "end_line": 4,
+            "end_column": 69
+          }
+        },
+        {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 34,
+            "end_byte": 39,
+            "start_line": 2,
+            "start_column": 34,
+            "end_line": 2,
+            "end_column": 39
+          }
+        },
+        {
+          "path": "app/lib/drift-workflow.js",
+          "span": {
+            "start_byte": 51,
+            "end_byte": 104,
+            "start_line": 3,
+            "start_column": 9,
+            "end_line": 3,
+            "end_column": 62
+          }
+        }
+      ],
+      "guards": [],
+      "sink": {
+        "path": "app/lib/drift-workflow.js",
+        "span": {
+          "start_byte": 217,
+          "end_byte": 252,
+          "start_line": 5,
+          "start_column": 10,
+          "end_line": 5,
+          "end_column": 45
+        }
+      },
+      "evidence_path": [
+        {
+          "node_id": "gn_4bbbed465e09fa212f980378",
+          "edge_id_from_previous": null,
+          "kind": "source",
+          "semantic": {
+            "semantics_version": "secure-evidence-semantics-v2",
+            "role": "untrusted-source",
+            "identity": "untrusted.http-query-value",
+            "certainty": "proven"
+          },
+          "location": {
+            "path": "app/api/drift/route.js",
+            "span": {
+              "start_byte": 137,
+              "end_byte": 178,
+              "start_line": 4,
+              "start_column": 22,
+              "end_line": 4,
+              "end_column": 63
+            }
+          },
+          "provenance": {
+            "parser": "secure-tree-sitter-adapter-v1",
+            "parser_version": "0.26.11",
+            "grammar": "tree-sitter-javascript@0.25.0:javascript",
+            "extractor_version": "secure-evidence-graph-v1"
+          },
+          "fingerprint": "13c5dd4b6836dc9e82394b214ddcca74f06d8f559d2b8aa193f40ae99d277b0b"
+        },
+        {
+          "node_id": "gn_37ec67445f106be955bf8551",
+          "edge_id_from_previous": "ge_b5c7e1385a7728a2552e26d5",
+          "kind": "transformation",
+          "semantic": {
+            "semantics_version": "secure-evidence-semantics-v2",
+            "role": "transformation",
+            "identity": "transformation.value",
+            "certainty": "proven"
+          },
+          "location": {
+            "path": "app/api/drift/route.js",
+            "span": {
+              "start_byte": 124,
+              "end_byte": 184,
+              "start_line": 4,
+              "start_column": 9,
+              "end_line": 4,
+              "end_column": 69
+            }
+          },
+          "provenance": {
+            "parser": "secure-tree-sitter-adapter-v1",
+            "parser_version": "0.26.11",
+            "grammar": "tree-sitter-javascript@0.25.0:javascript",
+            "extractor_version": "secure-evidence-graph-v1"
+          },
+          "fingerprint": "c5439b1186b89ee8870e5178b858eeab5058e5f6f1f7ebfdac977ce1e901dc18"
+        },
+        {
+          "node_id": "gn_16641f30dda3d2ad9abb4a5f",
+          "edge_id_from_previous": "ge_014c4345239ff2ca33b7c928",
+          "kind": "call",
+          "semantic": {
+            "semantics_version": "secure-evidence-semantics-v2",
+            "role": "transformation",
+            "identity": "transformation.local-call",
+            "certainty": "proven"
+          },
+          "location": {
+            "path": "app/api/drift/route.js",
+            "span": {
+              "start_byte": 192,
+              "end_byte": 216,
+              "start_line": 5,
+              "start_column": 7,
+              "end_line": 5,
+              "end_column": 31
+            }
+          },
+          "provenance": {
+            "parser": "secure-tree-sitter-adapter-v1",
+            "parser_version": "0.26.11",
+            "grammar": "tree-sitter-javascript@0.25.0:javascript",
+            "extractor_version": "secure-evidence-graph-v1"
+          },
+          "fingerprint": "15a7da73db9ddc21887fe544ae4bfcee0aa5ee816e2d2262495a23c12a7be155"
+        },
+        {
+          "node_id": "gn_7cc7b286eb66a13f14d1d52d",
+          "edge_id_from_previous": "ge_d7ed59830b6f649eda994107",
+          "kind": "argument",
+          "semantic": {
+            "semantics_version": "secure-evidence-semantics-v2",
+            "role": "transformation",
+            "identity": "transformation.argument",
+            "certainty": "proven"
+          },
+          "location": {
+            "path": "app/lib/drift-workflow.js",
+            "span": {
+              "start_byte": 34,
+              "end_byte": 39,
+              "start_line": 2,
+              "start_column": 34,
+              "end_line": 2,
+              "end_column": 39
+            }
+          },
+          "provenance": {
+            "parser": "secure-tree-sitter-adapter-v1",
+            "parser_version": "0.26.11",
+            "grammar": "tree-sitter-javascript@0.25.0:javascript",
+            "extractor_version": "secure-evidence-graph-v1"
+          },
+          "fingerprint": "7d6b4101c310c99751c7e8c4b9da9ff1f9978adf38a15544564b946528b01ee3"
+        },
+        {
+          "node_id": "gn_e8faa11a7fb4cc9a5c046251",
+          "edge_id_from_previous": "ge_7f8b35e4d1ac2ff576e2f18b",
+          "kind": "transformation",
+          "semantic": {
+            "semantics_version": "secure-evidence-semantics-v2",
+            "role": "transformation",
+            "identity": "transformation.value",
+            "certainty": "proven"
+          },
+          "location": {
+            "path": "app/lib/drift-workflow.js",
+            "span": {
+              "start_byte": 51,
+              "end_byte": 104,
+              "start_line": 3,
+              "start_column": 9,
+              "end_line": 3,
+              "end_column": 62
+            }
+          },
+          "provenance": {
+            "parser": "secure-tree-sitter-adapter-v1",
+            "parser_version": "0.26.11",
+            "grammar": "tree-sitter-javascript@0.25.0:javascript",
+            "extractor_version": "secure-evidence-graph-v1"
+          },
+          "fingerprint": "65b12811b0701af911a5427550ecc4f36e074a630e3e3c3ddec075fb20221b35"
+        },
+        {
+          "node_id": "gn_2cb974d2a8c97b0be0d24c6c",
+          "edge_id_from_previous": "ge_31a170fda7ce5f5033be7265",
+          "kind": "sink",
+          "semantic": {
+            "semantics_version": "secure-evidence-semantics-v2",
+            "role": "sensitive-sink",
+            "identity": "sink.redirect",
+            "certainty": "proven"
+          },
+          "location": {
+            "path": "app/lib/drift-workflow.js",
+            "span": {
+              "start_byte": 217,
+              "end_byte": 252,
+              "start_line": 5,
+              "start_column": 10,
+              "end_line": 5,
+              "end_column": 45
+            }
+          },
+          "provenance": {
+            "parser": "secure-tree-sitter-adapter-v1",
+            "parser_version": "0.26.11",
+            "grammar": "tree-sitter-javascript@0.25.0:javascript",
+            "extractor_version": "secure-evidence-graph-v1"
+          },
+          "fingerprint": "f2170b595ef441134af4b634d150f8df4e4b7a4dc0c6639a24ecc00e0f32e55a"
+        }
+      ],
+      "invariant": "Redirect destinations must be constrained to trusted locations",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.redirect-boundary",
+        "invariant_id": "secure-bench.invariant.redirect-destination-policy"
+      },
+      "primary_cwe": {
+        "id": "CWE-601",
+        "url": "https://cwe.mitre.org/data/definitions/601.html"
+      },
+      "taxonomy_provenance": {
+        "taxonomy_name": "secure-bench-taxonomy-v1",
+        "source_commit": "93c0821db065de436a339c15b070e158947ad76c",
+        "content_hash": "22852bd7401020b315af11dfa2b60c0b46f78eb19f95079e6400d7b3bea3272c",
+        "mapping_basis": "secure-engine-built-in-rule-family"
+      },
+      "prerequisites": [
+        "An attacker can control the demonstrated redirect target"
+      ],
+      "impact": "Phishing or trust-boundary bypass through an attacker-selected redirect",
+      "remediation": "Use relative destinations or a strict destination allowlist",
+      "verification_state": "verified-deterministic-path",
+      "limitations": [
+        "Bounded static analysis does not model runtime framework middleware"
+      ],
+      "fingerprint": "ec8e8ea3f90df91917887675ddf294f5c32384a0139da8197e93b33ca42eb345",
+      "semantic_fingerprint": "b5a0bf137e0817f9f09a56a9f65d8a7e6415e10d8418d38f95ca5228980fa662",
+      "evidence_contract_v2": {
+        "contract_version": "2.0.0",
+        "semantics_version": "secure-evidence-semantics-v2",
+        "path": [
+          {
+            "role": "source",
+            "effect": "preserves_influence",
+            "source_kind": "http_query_value",
+            "span": {
+              "path": "app/api/drift/route.js",
+              "span": {
+                "start_byte": 137,
+                "end_byte": 178,
+                "start_line": 4,
+                "start_column": 22,
+                "end_line": 4,
+                "end_column": 63
+              }
+            },
+            "summarizable": false
+          },
+          {
+            "role": "propagation",
+            "effect": "preserves_influence",
+            "span": {
+              "path": "app/api/drift/route.js",
+              "span": {
+                "start_byte": 124,
+                "end_byte": 184,
+                "start_line": 4,
+                "start_column": 9,
+                "end_line": 4,
+                "end_column": 69
+              }
+            },
+            "summarizable": true
+          },
+          {
+            "role": "propagation",
+            "effect": "preserves_influence",
+            "span": {
+              "path": "app/api/drift/route.js",
+              "span": {
+                "start_byte": 192,
+                "end_byte": 216,
+                "start_line": 5,
+                "start_column": 7,
+                "end_line": 5,
+                "end_column": 31
+              }
+            },
+            "summarizable": true
+          },
+          {
+            "role": "propagation",
+            "effect": "preserves_influence",
+            "span": {
+              "path": "app/lib/drift-workflow.js",
+              "span": {
+                "start_byte": 34,
+                "end_byte": 39,
+                "start_line": 2,
+                "start_column": 34,
+                "end_line": 2,
+                "end_column": 39
+              }
+            },
+            "summarizable": true
+          },
+          {
+            "role": "propagation",
+            "effect": "preserves_influence",
+            "span": {
+              "path": "app/lib/drift-workflow.js",
+              "span": {
+                "start_byte": 51,
+                "end_byte": 104,
+                "start_line": 3,
+                "start_column": 9,
+                "end_line": 3,
+                "end_column": 62
+              }
+            },
+            "summarizable": true
+          },
+          {
+            "role": "sink",
+            "effect": "preserves_influence",
+            "sink_kind": "redirect_response",
+            "span": {
+              "path": "app/lib/drift-workflow.js",
+              "span": {
+                "start_byte": 217,
+                "end_byte": 252,
+                "start_line": 5,
+                "start_column": 10,
+                "end_line": 5,
+                "end_column": 45
+              }
+            },
+            "summarizable": false
+          }
+        ],
+        "connected_edges": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "effective_barriers": [],
+        "unresolved_call": false,
+        "uncertain": false,
+        "fingerprint": "d30ab8499d592d87b517a13a3612cfd8304fd40fd35e2cc082e26063936f50f1",
+        "duplicate_fingerprint": "b74d632badb5a355e10734de24ab9da166f22dc22d3313a1ac2faf77fcddd147"
+      }
+    }
+  ],
+  "limitations": [
+    {
+      "code": "deterministic-rules-limited",
+      "message": "Phase 3 runs only the documented high-confidence JavaScript and TypeScript rules"
+    },
+    {
+      "code": "parser-coverage-limited",
+      "message": "Language-aware parsing is limited to JavaScript, JSX, TypeScript, and TSX"
+    },
+    {
+      "code": "framework-hints-only",
+      "message": "Framework evidence is a manifest hint and not semantic proof"
+    },
+    {
+      "code": "symlinks-not-followed",
+      "message": "Symbolic links are recorded but never followed"
+    },
+    {
+      "code": "vcs-metadata-excluded",
+      "message": "Version-control metadata directories are never inventoried"
+    },
+    {
+      "code": "hidden-files-excluded",
+      "message": "Hidden files and directories were excluded by configuration"
+    },
+    {
+      "code": "ignored-files-excluded",
+      "message": "Inputs matched by repository ignore rules were excluded before reading"
+    },
+    {
+      "code": "generated-directories-excluded",
+      "message": "Common generated and build directories were excluded before reading"
+    },
+    {
+      "code": "vendor-directories-excluded",
+      "message": "Common vendored dependency directories were excluded before reading"
+    },
+    {
+      "code": "nested-repositories-excluded",
+      "message": "Nested repositories, worktrees, and submodules were excluded"
+    },
+    {
+      "code": "bounded-interprocedural-analysis",
+      "message": "Local inter-procedural propagation is bounded to 4 traversal levels"
+    },
+    {
+      "code": "dynamic-resolution-limited",
+      "message": "Dynamic imports, non-unique aliases, callbacks, recursion, and unresolved calls are not followed"
+    },
+    {
+      "code": "semantic-resolution-bounded",
+      "message": "Semantic identities, aliases, guards, and value correspondence are resolved only from deterministic local syntax within configured graph and inter-procedural bounds"
+    },
+    {
+      "code": "framework-middleware-not-modeled",
+      "message": "Authentication supplied only by external framework middleware is not proven by this phase"
+    }
+  ],
+  "skipped_files": [],
+  "exclusions": [],
+  "errors": [],
+  "report_fingerprint": "1ee05340bb632a62cd63f9a38ef9fb54619b32970a99dc73fd81e655427fa242"
+}

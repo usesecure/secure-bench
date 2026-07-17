@@ -1,0 +1,3666 @@
+{
+  "schema_version": "secure-json-v1",
+  "engine_version": "0.1.3",
+  "document_type": "scan-report",
+  "repository": {
+    "name": "fixture",
+    "vcs": null,
+    "revision": null,
+    "repository_kind": "directory",
+    "content_fingerprint": "6356ca2126602acddb2939a515f1f7acf1cadda4a00cf4483f8c6b1e87cf3def",
+    "identity_fingerprint": "6e85250fd871ae9414437ccfa7d18ec84c0595fc1221203c00a65f8068f5d7b3"
+  },
+  "configuration": {
+    "include_hidden": false,
+    "max_files": 100000,
+    "max_file_bytes": 4194304,
+    "respect_ignore_files": true,
+    "include_patterns": [],
+    "exclude_patterns": [],
+    "include_generated": false,
+    "include_vendor": false,
+    "include_nested_repositories": false,
+    "max_total_bytes": 536870912,
+    "max_depth": null,
+    "max_errors": 100,
+    "parse_cache_enabled": true,
+    "max_cache_bytes": 268435456,
+    "max_parser_diagnostics": 1000,
+    "max_facts_per_file": 10000,
+    "max_total_facts": 100000,
+    "max_graph_nodes": 250000,
+    "max_graph_edges": 500000,
+    "max_interprocedural_depth": 4,
+    "max_findings": 10000,
+    "suppressions": []
+  },
+  "scan": {
+    "started_at": "2026-07-17T04:27:16.113617102Z",
+    "finished_at": "2026-07-17T04:27:16.114883317Z",
+    "duration_ms": 1,
+    "complete": true,
+    "files_discovered": 3,
+    "files_scanned": 3
+  },
+  "inventory": {
+    "entries_seen": 7,
+    "candidate_files": 3,
+    "files_selected": 3,
+    "files_scanned": 3,
+    "text_files": 3,
+    "binary_files": 0,
+    "generated_files": 0,
+    "vendor_files": 0,
+    "bytes_scanned": 636,
+    "symlinks_skipped": 0,
+    "nested_repositories_skipped": 0,
+    "hit_file_limit": false,
+    "hit_total_byte_limit": false
+  },
+  "parsing": {
+    "files_eligible": 2,
+    "files_parsed": 2,
+    "files_with_diagnostics": 0,
+    "facts_extracted": 12,
+    "duration_ms": 0,
+    "cache_enabled": true,
+    "cache_hits": 0,
+    "cache_misses": 2,
+    "cache_writes": 2,
+    "cache_entries_ignored": 0
+  },
+  "facts": [
+    {
+      "fact_id": "sf_0e1dce93a0dd0cad45b1597b",
+      "kind": "database-access",
+      "location": {
+        "path": "app/api/pebble/route.ts",
+        "span": {
+          "start_byte": 213,
+          "end_byte": 287,
+          "start_line": 5,
+          "start_column": 10,
+          "end_line": 5,
+          "end_column": 84
+        }
+      },
+      "name": "pebbleDatabase.query",
+      "relationships": [
+        {
+          "kind": "invokes",
+          "target": "pebbleDatabase.query"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "0e1dce93a0dd0cad45b1597b198383e6a7381e9a3bc5ec99fe42be44d8a522d0"
+    },
+    {
+      "fact_id": "sf_16485d10205a88bedf382a3d",
+      "kind": "module-export",
+      "location": {
+        "path": "app/api/pebble/route.ts",
+        "span": {
+          "start_byte": 48,
+          "end_byte": 371,
+          "start_line": 2,
+          "start_column": 1,
+          "end_line": 10,
+          "end_column": 2
+        }
+      },
+      "name": "POST",
+      "relationships": [
+        {
+          "kind": "exports",
+          "target": "POST"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "16485d10205a88bedf382a3d39cb5662629c5ad045f4f9175ab496d74e39c115"
+    },
+    {
+      "fact_id": "sf_2269c418749f208f4e47e8e4",
+      "kind": "http-route-handler",
+      "location": {
+        "path": "app/api/pebble/route.ts",
+        "span": {
+          "start_byte": 55,
+          "end_byte": 371,
+          "start_line": 2,
+          "start_column": 8,
+          "end_line": 10,
+          "end_column": 2
+        }
+      },
+      "name": "POST",
+      "relationships": [
+        {
+          "kind": "handles",
+          "target": "POST /api/pebble"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "2269c418749f208f4e47e8e43fe63c2ab4a8086c3337e9572cc442ea75ee4a8c"
+    },
+    {
+      "fact_id": "sf_3b1bd7df158fc6ea3648bf69",
+      "kind": "call",
+      "location": {
+        "path": "app/api/pebble/route.ts",
+        "span": {
+          "start_byte": 213,
+          "end_byte": 287,
+          "start_line": 5,
+          "start_column": 10,
+          "end_line": 5,
+          "end_column": 84
+        }
+      },
+      "name": "pebbleDatabase.query",
+      "relationships": [
+        {
+          "kind": "calls",
+          "target": "pebbleDatabase.query"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "3b1bd7df158fc6ea3648bf696964d67467d953b0f4cdad98a468ba79fbcdb8a8"
+    },
+    {
+      "fact_id": "sf_58d202b5f4caf608a0000d5d",
+      "kind": "function",
+      "location": {
+        "path": "app/api/pebble/route.ts",
+        "span": {
+          "start_byte": 158,
+          "end_byte": 290,
+          "start_line": 4,
+          "start_column": 1,
+          "end_line": 6,
+          "end_column": 2
+        }
+      },
+      "name": "conductpebble",
+      "relationships": [],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "58d202b5f4caf608a0000d5dbdfd190f7836acbdeb9df742f66e372d88b02335"
+    },
+    {
+      "fact_id": "sf_6f8c8027a42ffee6d834cb6b",
+      "kind": "call",
+      "location": {
+        "path": "app/api/pebble/route.ts",
+        "span": {
+          "start_byte": 335,
+          "end_byte": 368,
+          "start_line": 9,
+          "start_column": 10,
+          "end_line": 9,
+          "end_column": 43
+        }
+      },
+      "name": "Response.json",
+      "relationships": [
+        {
+          "kind": "calls",
+          "target": "Response.json"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "6f8c8027a42ffee6d834cb6b74699da38677b1ef4ebe79827cdba72b14788cc3"
+    },
+    {
+      "fact_id": "sf_78439d2b620a69cdfca5bb9e",
+      "kind": "module-import",
+      "location": {
+        "path": "app/api/pebble/route.ts",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 47,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 48
+        }
+      },
+      "name": "./services.js",
+      "relationships": [
+        {
+          "kind": "imports",
+          "target": "./services.js"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "78439d2b620a69cdfca5bb9ee5a7e49309407b84bdab68e0949f9fd715b25332"
+    },
+    {
+      "fact_id": "sf_86f35c61746d455869279250",
+      "kind": "call",
+      "location": {
+        "path": "app/api/pebble/route.ts",
+        "span": {
+          "start_byte": 108,
+          "end_byte": 150,
+          "start_line": 3,
+          "start_column": 23,
+          "end_line": 3,
+          "end_column": 65
+        }
+      },
+      "name": "request.nextUrl.searchParams.get",
+      "relationships": [
+        {
+          "kind": "calls",
+          "target": "request.nextUrl.searchParams.get"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "86f35c61746d455869279250183aa2679d24c0f759c5eae1750d8657e71a7001"
+    },
+    {
+      "fact_id": "sf_8a36e976d6b727f080376e86",
+      "kind": "method",
+      "location": {
+        "path": "app/api/pebble/services.js",
+        "span": {
+          "start_byte": 34,
+          "end_byte": 111,
+          "start_line": 2,
+          "start_column": 3,
+          "end_line": 2,
+          "end_column": 80
+        }
+      },
+      "name": "query",
+      "relationships": [],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "8a36e976d6b727f080376e8666f5230f697246e991ca2f20a5eb79a5bd4944e0"
+    },
+    {
+      "fact_id": "sf_bd7c13d685eb77b875e02fd2",
+      "kind": "function",
+      "location": {
+        "path": "app/api/pebble/route.ts",
+        "span": {
+          "start_byte": 55,
+          "end_byte": 371,
+          "start_line": 2,
+          "start_column": 8,
+          "end_line": 10,
+          "end_column": 2
+        }
+      },
+      "name": "POST",
+      "relationships": [],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "bd7c13d685eb77b875e02fd2dc56a9da6e450272ac6e299169f6e53818ccdba8"
+    },
+    {
+      "fact_id": "sf_bff9065b51fc18d2aa6a80dc",
+      "kind": "module-export",
+      "location": {
+        "path": "app/api/pebble/services.js",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 114,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 3,
+          "end_column": 3
+        }
+      },
+      "name": "pebbleDatabase",
+      "relationships": [
+        {
+          "kind": "exports",
+          "target": "pebbleDatabase"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-javascript@0.25.0:javascript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "bff9065b51fc18d2aa6a80dcdbcb8abd4ebed0045cc2a70dcf6a3a801a5209ba"
+    },
+    {
+      "fact_id": "sf_e9f830751649c11009444e22",
+      "kind": "call",
+      "location": {
+        "path": "app/api/pebble/route.ts",
+        "span": {
+          "start_byte": 298,
+          "end_byte": 324,
+          "start_line": 8,
+          "start_column": 7,
+          "end_line": 8,
+          "end_column": 33
+        }
+      },
+      "name": "conductpebble",
+      "relationships": [
+        {
+          "kind": "calls",
+          "target": "conductpebble"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "e9f830751649c11009444e224912bb4d13293670c59e5ac8c547e2feee031c04"
+    }
+  ],
+  "parser_diagnostics": [],
+  "parser_coverage": [
+    {
+      "parser_mode": "javascript",
+      "files_eligible": 1,
+      "files_parsed": 1,
+      "files_with_diagnostics": 0,
+      "facts_extracted": 2
+    },
+    {
+      "parser_mode": "typescript",
+      "files_eligible": 1,
+      "files_parsed": 1,
+      "files_with_diagnostics": 0,
+      "facts_extracted": 10
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "node_id": "gn_08632b65eb71c75742abf599",
+        "kind": "function",
+        "name": "conductpebble",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 158,
+            "end_byte": 290,
+            "start_line": 4,
+            "start_column": 1,
+            "end_line": 6,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "08632b65eb71c75742abf599c685f550f1894702efd56e25550a03e96b161089"
+      },
+      {
+        "node_id": "gn_113eadf5ce7c26aa408a74c8",
+        "kind": "module-reference",
+        "name": "request.nextUrl.searchParams.get",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 108,
+            "end_byte": 150,
+            "start_line": 3,
+            "start_column": 23,
+            "end_line": 3,
+            "end_column": 65
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "113eadf5ce7c26aa408a74c84f989d1b71d417531d596a823f943074a1bc5e62"
+      },
+      {
+        "node_id": "gn_1188c8ff1b6e8e9ba7f1d3a2",
+        "kind": "module-reference",
+        "name": "conductpebble",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 298,
+            "end_byte": 324,
+            "start_line": 8,
+            "start_column": 7,
+            "end_line": 8,
+            "end_column": 33
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "1188c8ff1b6e8e9ba7f1d3a299684970e3a88757ecad2501536310a3fe636f50"
+      },
+      {
+        "node_id": "gn_18864aba57e7ffa2bc24b74f",
+        "kind": "function",
+        "name": "query",
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 34,
+            "end_byte": 111,
+            "start_line": 2,
+            "start_column": 3,
+            "end_line": 2,
+            "end_column": 80
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "18864aba57e7ffa2bc24b74fb211952590ba421c32324ef307879c19d1f2db92"
+      },
+      {
+        "node_id": "gn_1a36932b0f9ebe26989b7cd1",
+        "kind": "function",
+        "name": "conductpebble",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 158,
+            "end_byte": 290,
+            "start_line": 4,
+            "start_column": 1,
+            "end_line": 6,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "1a36932b0f9ebe26989b7cd163a8c8f696047c7454c9efaff49c23c06687c3a6"
+      },
+      {
+        "node_id": "gn_206ddc29bfd46d25be89f583",
+        "kind": "call",
+        "name": "conductpebble",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.local-call",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 298,
+            "end_byte": 324,
+            "start_line": 8,
+            "start_column": 7,
+            "end_line": 8,
+            "end_column": 33
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "206ddc29bfd46d25be89f5839d07afa554086e139ae225e0add816a631665da6"
+      },
+      {
+        "node_id": "gn_21a9ac3d449bd905bd480a61",
+        "kind": "sink",
+        "name": "pebbleDatabase.query",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 213,
+            "end_byte": 287,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "21a9ac3d449bd905bd480a6167edec5cfc0e0855334bf5b219124f573b27220d"
+      },
+      {
+        "node_id": "gn_3449ed64f09a899ba3ec810f",
+        "kind": "module",
+        "name": "app/api/pebble/services.js",
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "3449ed64f09a899ba3ec810f3e5ec42c9aba4ad8e084ec2b0052ca9c88d5c2b7"
+      },
+      {
+        "node_id": "gn_35efedd235b30c260e5e7566",
+        "kind": "syntax-fact",
+        "name": "Response.json",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 335,
+            "end_byte": 368,
+            "start_line": 9,
+            "start_column": 10,
+            "end_line": 9,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "35efedd235b30c260e5e7566de1000426a77f44b4c0a05235bed455bb3ce3660"
+      },
+      {
+        "node_id": "gn_3818d126c44eef3f1a1f98fd",
+        "kind": "module",
+        "name": "pebbleDatabase",
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 114,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 3,
+            "end_column": 3
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "3818d126c44eef3f1a1f98fd85a3a9d8f27c61321d70205ba0f989beda148885"
+      },
+      {
+        "node_id": "gn_3d8dc3dc302bc61402ee9eb6",
+        "kind": "syntax-fact",
+        "name": "conductpebble",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 298,
+            "end_byte": 324,
+            "start_line": 8,
+            "start_column": 7,
+            "end_line": 8,
+            "end_column": 33
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "3d8dc3dc302bc61402ee9eb6939ee92729882bf116c19840042df294edd398f5"
+      },
+      {
+        "node_id": "gn_4473c13cf24bb1e9a0b14c0f",
+        "kind": "return",
+        "name": "@return",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.return",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 76,
+            "end_byte": 109,
+            "start_line": 2,
+            "start_column": 45,
+            "end_line": 2,
+            "end_column": 78
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "4473c13cf24bb1e9a0b14c0f7ae680ab8dd5cd6179b55938d85122ddfb2e6841"
+      },
+      {
+        "node_id": "gn_4b105496f8f2a1cb98e20354",
+        "kind": "module-reference",
+        "name": "POST /api/pebble",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 55,
+            "end_byte": 371,
+            "start_line": 2,
+            "start_column": 8,
+            "end_line": 10,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "4b105496f8f2a1cb98e20354f8a2ae781f75f3f0ddc769f36780023416dd696f"
+      },
+      {
+        "node_id": "gn_4d8d4b52ac4723d78b3e9e81",
+        "kind": "function",
+        "name": "POST",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 55,
+            "end_byte": 371,
+            "start_line": 2,
+            "start_column": 8,
+            "end_line": 10,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "4d8d4b52ac4723d78b3e9e81fe0463423424d28a1be042f06b317242c321d0e1"
+      },
+      {
+        "node_id": "gn_540f335c4ec95507f46b7af1",
+        "kind": "return",
+        "name": "@return",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.return",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 328,
+            "end_byte": 369,
+            "start_line": 9,
+            "start_column": 3,
+            "end_line": 9,
+            "end_column": 44
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "540f335c4ec95507f46b7af15265dd2301e31c7546564288da300c50c9675264"
+      },
+      {
+        "node_id": "gn_54151af43c6d1de42e66260b",
+        "kind": "module-reference",
+        "name": "Response.json",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 335,
+            "end_byte": 368,
+            "start_line": 9,
+            "start_column": 10,
+            "end_line": 9,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "54151af43c6d1de42e66260bb37d705622976f85cab9bcee87919fbf6c891d4b"
+      },
+      {
+        "node_id": "gn_665d204074738dee542919ff",
+        "kind": "file",
+        "name": "app/api/pebble/services.js",
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "665d204074738dee542919ff76146a29b01a866802f0b11c5302b19ea10321e9"
+      },
+      {
+        "node_id": "gn_68223461dbe0a034a1ead333",
+        "kind": "handler",
+        "name": "POST",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 55,
+            "end_byte": 371,
+            "start_line": 2,
+            "start_column": 8,
+            "end_line": 10,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "68223461dbe0a034a1ead333e00276476869b5029ac00115ca386e0fcc1d28fa"
+      },
+      {
+        "node_id": "gn_70f1ae67bcf52f49eb796960",
+        "kind": "module",
+        "name": "./services.js",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 47,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 48
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "70f1ae67bcf52f49eb7969603e9a0c328d0aa112aabd2ff80c77fab191ed6091"
+      },
+      {
+        "node_id": "gn_803cc02c6df9d313d1cdd2df",
+        "kind": "module",
+        "name": "POST",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 48,
+            "end_byte": 371,
+            "start_line": 2,
+            "start_column": 1,
+            "end_line": 10,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "803cc02c6df9d313d1cdd2dfefaadc893e3c30ec474d85dbfdf12a554e158d55"
+      },
+      {
+        "node_id": "gn_903acbbc74aeeb184564473c",
+        "kind": "sink",
+        "name": "database-access",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "sensitive-sink",
+          "identity": "sink.database-query",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 213,
+            "end_byte": 287,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "903acbbc74aeeb184564473caf3dae56cf36e57285a6a4b1aece937f6c1d4d39"
+      },
+      {
+        "node_id": "gn_99011eaa7754c4fe9418127c",
+        "kind": "method",
+        "name": "query",
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 34,
+            "end_byte": 111,
+            "start_line": 2,
+            "start_column": 3,
+            "end_line": 2,
+            "end_column": 80
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "99011eaa7754c4fe9418127cd10cc655913e241276e2f811406139bcf6020ccb"
+      },
+      {
+        "node_id": "gn_9aa8a826d1f153c76a963fa2",
+        "kind": "transformation",
+        "name": "pebbleValue",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.value",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 94,
+            "end_byte": 156,
+            "start_line": 3,
+            "start_column": 9,
+            "end_line": 3,
+            "end_column": 71
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "9aa8a826d1f153c76a963fa2aab916ed141a24c4cf4e941d6ba63621348eefff"
+      },
+      {
+        "node_id": "gn_9b93a372be844f16355c13c9",
+        "kind": "module-reference",
+        "name": "./services.js",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 47,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 48
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "9b93a372be844f16355c13c999319ffbda572424e77f44144fa03bdbfaa492d8"
+      },
+      {
+        "node_id": "gn_a1f924595ec80dfb40b59085",
+        "kind": "assignment",
+        "name": "pebbleDatabase",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.value",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 13,
+            "end_byte": 113,
+            "start_line": 1,
+            "start_column": 14,
+            "end_line": 3,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "a1f924595ec80dfb40b59085c1b954c18d4d470dad7fa5b8f205ceefdcbb212a"
+      },
+      {
+        "node_id": "gn_a967be7babe93cb2fbff0062",
+        "kind": "handler",
+        "name": "POST",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "untrusted-source",
+          "identity": "untrusted.handler-entry",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 55,
+            "end_byte": 371,
+            "start_line": 2,
+            "start_column": 8,
+            "end_line": 10,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "a967be7babe93cb2fbff006205c0cc2bb03a167fa20c0b13eb24cd3c7781e4f7"
+      },
+      {
+        "node_id": "gn_b3a3a97f8ff9fdbcafc56921",
+        "kind": "syntax-fact",
+        "name": "request.nextUrl.searchParams.get",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 108,
+            "end_byte": 150,
+            "start_line": 3,
+            "start_column": 23,
+            "end_line": 3,
+            "end_column": 65
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "b3a3a97f8ff9fdbcafc5692185b7ef5becaf171ac68a8922430ad6351e928c1e"
+      },
+      {
+        "node_id": "gn_c1b87a6a32194bba7cbe41e2",
+        "kind": "module",
+        "name": "./services.js",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 47,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 48
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "c1b87a6a32194bba7cbe41e2fc7d5772221303e20977eddd8b17ff1106a8f8e4"
+      },
+      {
+        "node_id": "gn_cd6635c2da114344c35c30fc",
+        "kind": "return",
+        "name": "@return",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.return",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 206,
+            "end_byte": 288,
+            "start_line": 5,
+            "start_column": 3,
+            "end_line": 5,
+            "end_column": 85
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "cd6635c2da114344c35c30fc2fd8859ca89303ee076e819a25d4c7a16e9a8a10"
+      },
+      {
+        "node_id": "gn_d0502c026cfeb19a513cee94",
+        "kind": "module",
+        "name": "app/api/pebble/route.ts",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "d0502c026cfeb19a513cee940c45c5e1fd972900e5369e692b774dd18129ff4d"
+      },
+      {
+        "node_id": "gn_d4f2faf5ade540344af428c4",
+        "kind": "call",
+        "name": "Response.json",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.local-call",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 335,
+            "end_byte": 368,
+            "start_line": 9,
+            "start_column": 10,
+            "end_line": 9,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "d4f2faf5ade540344af428c494e159010264892e22bd289b42ce7d638e6c7c66"
+      },
+      {
+        "node_id": "gn_daaffb2efcd88541df76a755",
+        "kind": "source",
+        "name": "http-query-value",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "untrusted-source",
+          "identity": "untrusted.http-query-value",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 108,
+            "end_byte": 150,
+            "start_line": 3,
+            "start_column": 23,
+            "end_line": 3,
+            "end_column": 65
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "daaffb2efcd88541df76a755d21b491aaa8a1025de1554ab7a849ec3ef475a00"
+      },
+      {
+        "node_id": "gn_dca114c67c877c14fb24cb00",
+        "kind": "argument",
+        "name": "parameters",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.argument",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 57,
+            "end_byte": 67,
+            "start_line": 2,
+            "start_column": 26,
+            "end_line": 2,
+            "end_column": 36
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "dca114c67c877c14fb24cb00fa678985aeacc01a81ed6a71ebbccbc15f450786"
+      },
+      {
+        "node_id": "gn_dcdab3d565d8c0f8dc6b39b2",
+        "kind": "module-reference",
+        "name": "pebbleDatabase",
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 114,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 3,
+            "end_column": 3
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "dcdab3d565d8c0f8dc6b39b2224fad8e3be9e881905c097af8b54cb5439b1382"
+      },
+      {
+        "node_id": "gn_de1f50799dd3c1ad7b6d7e8f",
+        "kind": "argument",
+        "name": "statement",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.argument",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 46,
+            "end_byte": 55,
+            "start_line": 2,
+            "start_column": 15,
+            "end_line": 2,
+            "end_column": 24
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "de1f50799dd3c1ad7b6d7e8f0507f1848e0c96a8155cf7d460c3b34a4413a911"
+      },
+      {
+        "node_id": "gn_e8f367d7a7ee3bab0ed29acc",
+        "kind": "syntax-fact",
+        "name": "pebbleDatabase.query",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 213,
+            "end_byte": 287,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "e8f367d7a7ee3bab0ed29acc67ba7911a28aa55402236b281663924728e52884"
+      },
+      {
+        "node_id": "gn_f15b23230c9fc5cf98abfdbb",
+        "kind": "source",
+        "name": "request-parameter",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "untrusted-source",
+          "identity": "untrusted.request-value",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 75,
+            "end_byte": 82,
+            "start_line": 2,
+            "start_column": 28,
+            "end_line": 2,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "f15b23230c9fc5cf98abfdbb2962ccf47eaa1554ec9f39a449dcd1ff89d09b4c"
+      },
+      {
+        "node_id": "gn_f2d2f409e9d6a841671a2c5a",
+        "kind": "file",
+        "name": "app/api/pebble/route.ts",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "f2d2f409e9d6a841671a2c5ab4d823ad1296f958040a134c749313d08d2de740"
+      },
+      {
+        "node_id": "gn_f2f65bbb6f38c26916a0a135",
+        "kind": "module-reference",
+        "name": "pebbleDatabase.query",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 213,
+            "end_byte": 287,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "f2f65bbb6f38c26916a0a135a87df0ed4664c69322fb84af584127a9ae53de84"
+      },
+      {
+        "node_id": "gn_f5dd9035f4ba4f0b695895c6",
+        "kind": "argument",
+        "name": "input",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.argument",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 187,
+            "end_byte": 192,
+            "start_line": 4,
+            "start_column": 30,
+            "end_line": 4,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "f5dd9035f4ba4f0b695895c6425e5bf6485f7814f484f8d2ef792006e4d8e780"
+      },
+      {
+        "node_id": "gn_f7b25bdeda4f7c92a41021d5",
+        "kind": "module-reference",
+        "name": "POST",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 48,
+            "end_byte": 371,
+            "start_line": 2,
+            "start_column": 1,
+            "end_line": 10,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "f7b25bdeda4f7c92a41021d5e667f69668f2e1d5a9c1c7432f7c9dd430f50e8e"
+      }
+    ],
+    "edges": [
+      {
+        "edge_id": "ge_01c2c606b6ef2c73e2c386ce",
+        "kind": "containment",
+        "from_node": "gn_a967be7babe93cb2fbff0062",
+        "to_node": "gn_206ddc29bfd46d25be89f583",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 298,
+            "end_byte": 324,
+            "start_line": 8,
+            "start_column": 7,
+            "end_line": 8,
+            "end_column": 33
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "01c2c606b6ef2c73e2c386ce0c60b537c5628c454236657b61667263275085d6"
+      },
+      {
+        "edge_id": "ge_01fead6f116230e5ad3c725b",
+        "kind": "containment",
+        "from_node": "gn_18864aba57e7ffa2bc24b74f",
+        "to_node": "gn_de1f50799dd3c1ad7b6d7e8f",
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 46,
+            "end_byte": 55,
+            "start_line": 2,
+            "start_column": 15,
+            "end_line": 2,
+            "end_column": 24
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "01fead6f116230e5ad3c725bab8819de1a5b667820cf894917db63d5232e1e58"
+      },
+      {
+        "edge_id": "ge_02553dcbf26a710c6d6ae45e",
+        "kind": "source-to-sink-propagation",
+        "from_node": "gn_daaffb2efcd88541df76a755",
+        "to_node": "gn_9aa8a826d1f153c76a963fa2",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 94,
+            "end_byte": 156,
+            "start_line": 3,
+            "start_column": 9,
+            "end_line": 3,
+            "end_column": 71
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "02553dcbf26a710c6d6ae45e1043122c2061b8c350254e1e14cbe49527363a69"
+      },
+      {
+        "edge_id": "ge_0cb4b7dcf00d17e8e57ab37f",
+        "kind": "returns",
+        "from_node": "gn_cd6635c2da114344c35c30fc",
+        "to_node": "gn_206ddc29bfd46d25be89f583",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 298,
+            "end_byte": 324,
+            "start_line": 8,
+            "start_column": 7,
+            "end_line": 8,
+            "end_column": 33
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "0cb4b7dcf00d17e8e57ab37fc9faf9cc97b87d7760db9cdd26cb5971754e4437"
+      },
+      {
+        "edge_id": "ge_0e604aec2975b954219d8a6f",
+        "kind": "containment",
+        "from_node": "gn_3449ed64f09a899ba3ec810f",
+        "to_node": "gn_99011eaa7754c4fe9418127c",
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 34,
+            "end_byte": 111,
+            "start_line": 2,
+            "start_column": 3,
+            "end_line": 2,
+            "end_column": 80
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "0e604aec2975b954219d8a6fa2c056c08a2e217c0ae2d2b8df2780d9defcd9c1"
+      },
+      {
+        "edge_id": "ge_10990d95776be47e31635d19",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_1a36932b0f9ebe26989b7cd1",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 158,
+            "end_byte": 290,
+            "start_line": 4,
+            "start_column": 1,
+            "end_line": 6,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "10990d95776be47e31635d19470452ee480fb094a74a8c4bcd3b15d4a79ef328"
+      },
+      {
+        "edge_id": "ge_1143689d5bc9e4b9c28ed633",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_d4f2faf5ade540344af428c4",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 335,
+            "end_byte": 368,
+            "start_line": 9,
+            "start_column": 10,
+            "end_line": 9,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "1143689d5bc9e4b9c28ed63349fd99b81d9a9e0cd1a6adbe05f3c9ddfa6eeac6"
+      },
+      {
+        "edge_id": "ge_18bcb8256ae7b0444f7046aa",
+        "kind": "calls",
+        "from_node": "gn_e8f367d7a7ee3bab0ed29acc",
+        "to_node": "gn_f2f65bbb6f38c26916a0a135",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 213,
+            "end_byte": 287,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "18bcb8256ae7b0444f7046aa29ea595b360c5379a8944923dfe40c189cfdb377"
+      },
+      {
+        "edge_id": "ge_19ad7bb88c7c77a3a50d7341",
+        "kind": "source-to-sink-propagation",
+        "from_node": "gn_f5dd9035f4ba4f0b695895c6",
+        "to_node": "gn_903acbbc74aeeb184564473c",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 213,
+            "end_byte": 287,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "19ad7bb88c7c77a3a50d7341b01777a6e426a3de5b54150f6d2cc67230fda9f4"
+      },
+      {
+        "edge_id": "ge_1e8b19667b8ee43db567a7a8",
+        "kind": "containment",
+        "from_node": "gn_3449ed64f09a899ba3ec810f",
+        "to_node": "gn_a1f924595ec80dfb40b59085",
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 13,
+            "end_byte": 113,
+            "start_line": 1,
+            "start_column": 14,
+            "end_line": 3,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "1e8b19667b8ee43db567a7a84596c6516270d8079c2d80cd64b144887ffbc19b"
+      },
+      {
+        "edge_id": "ge_222c0dec3162e57e986c713d",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_35efedd235b30c260e5e7566",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 335,
+            "end_byte": 368,
+            "start_line": 9,
+            "start_column": 10,
+            "end_line": 9,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "222c0dec3162e57e986c713df5740a19db47af37250a9579b9c94bf64039ef71"
+      },
+      {
+        "edge_id": "ge_25eaf34d334c0e17de19421d",
+        "kind": "calls",
+        "from_node": "gn_3d8dc3dc302bc61402ee9eb6",
+        "to_node": "gn_1188c8ff1b6e8e9ba7f1d3a2",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 298,
+            "end_byte": 324,
+            "start_line": 8,
+            "start_column": 7,
+            "end_line": 8,
+            "end_column": 33
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "25eaf34d334c0e17de19421d3138356ae0afb2b306798c26ead9a6f2b8e42fcc"
+      },
+      {
+        "edge_id": "ge_2941069f987862d341d218fb",
+        "kind": "containment",
+        "from_node": "gn_3818d126c44eef3f1a1f98fd",
+        "to_node": "gn_dcdab3d565d8c0f8dc6b39b2",
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 114,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 3,
+            "end_column": 3
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "2941069f987862d341d218fb5cbeb1f031f2e0ec7dfca01cb1bd42203fc13e85"
+      },
+      {
+        "edge_id": "ge_36596965b7e97e33c0bb7c34",
+        "kind": "containment",
+        "from_node": "gn_18864aba57e7ffa2bc24b74f",
+        "to_node": "gn_18864aba57e7ffa2bc24b74f",
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 34,
+            "end_byte": 111,
+            "start_line": 2,
+            "start_column": 3,
+            "end_line": 2,
+            "end_column": 80
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "36596965b7e97e33c0bb7c34a41d8cea00b319be107b3c48968a4bb32d4d933a"
+      },
+      {
+        "edge_id": "ge_3734bde9d0153a72dd51254f",
+        "kind": "containment",
+        "from_node": "gn_a967be7babe93cb2fbff0062",
+        "to_node": "gn_daaffb2efcd88541df76a755",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 108,
+            "end_byte": 150,
+            "start_line": 3,
+            "start_column": 23,
+            "end_line": 3,
+            "end_column": 65
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "3734bde9d0153a72dd51254f8b3d429f26a6eff27ee9a7369a39cdd6a3651d4c"
+      },
+      {
+        "edge_id": "ge_37a77180a18d06f18c8a21c7",
+        "kind": "argument-flow",
+        "from_node": "gn_9aa8a826d1f153c76a963fa2",
+        "to_node": "gn_206ddc29bfd46d25be89f583",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 298,
+            "end_byte": 324,
+            "start_line": 8,
+            "start_column": 7,
+            "end_line": 8,
+            "end_column": 33
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "37a77180a18d06f18c8a21c7bb010e879c33dc991c182e51de5c84a2d4773d79"
+      },
+      {
+        "edge_id": "ge_3a83a545d78c272c1c4876e0",
+        "kind": "containment",
+        "from_node": "gn_a967be7babe93cb2fbff0062",
+        "to_node": "gn_f15b23230c9fc5cf98abfdbb",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 75,
+            "end_byte": 82,
+            "start_line": 2,
+            "start_column": 28,
+            "end_line": 2,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "3a83a545d78c272c1c4876e06efc70c101dd11b89372312b14b0c19f0df5b13d"
+      },
+      {
+        "edge_id": "ge_4816c4d9ddb3dc341a883ad3",
+        "kind": "control-flow",
+        "from_node": "gn_9aa8a826d1f153c76a963fa2",
+        "to_node": "gn_206ddc29bfd46d25be89f583",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 298,
+            "end_byte": 324,
+            "start_line": 8,
+            "start_column": 7,
+            "end_line": 8,
+            "end_column": 33
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "4816c4d9ddb3dc341a883ad3f6ae98ff8ffeb1bfa10fcc09c26ccb38c416dbd1"
+      },
+      {
+        "edge_id": "ge_546e1a1ff7b6e692ccdf78ea",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_903acbbc74aeeb184564473c",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 213,
+            "end_byte": 287,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "546e1a1ff7b6e692ccdf78ea7f527881b39d6118c3c6369bc64f88d2c4c51aa4"
+      },
+      {
+        "edge_id": "ge_59a8ebed87efd4dff0abb752",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_f15b23230c9fc5cf98abfdbb",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 75,
+            "end_byte": 82,
+            "start_line": 2,
+            "start_column": 28,
+            "end_line": 2,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "59a8ebed87efd4dff0abb7523c54a4edf7d3ea6754f2e509730a84afa2e6167a"
+      },
+      {
+        "edge_id": "ge_5c22ba2b9d0d7b626a1eae29",
+        "kind": "containment",
+        "from_node": "gn_1a36932b0f9ebe26989b7cd1",
+        "to_node": "gn_903acbbc74aeeb184564473c",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 213,
+            "end_byte": 287,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "5c22ba2b9d0d7b626a1eae29aa7ce0c5afa637e8636b7ef61c2484059c72459d"
+      },
+      {
+        "edge_id": "ge_5d0eb9c4385cc4a656a075ab",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_08632b65eb71c75742abf599",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 158,
+            "end_byte": 290,
+            "start_line": 4,
+            "start_column": 1,
+            "end_line": 6,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "5d0eb9c4385cc4a656a075abdf36a36494db1c62461479d67cc6eef3d2fceb3f"
+      },
+      {
+        "edge_id": "ge_5e83ed6da0d8487daee8be04",
+        "kind": "containment",
+        "from_node": "gn_18864aba57e7ffa2bc24b74f",
+        "to_node": "gn_4473c13cf24bb1e9a0b14c0f",
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 76,
+            "end_byte": 109,
+            "start_line": 2,
+            "start_column": 45,
+            "end_line": 2,
+            "end_column": 78
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "5e83ed6da0d8487daee8be0478e66397d2d25a55d5ee85c474c1564230ad249b"
+      },
+      {
+        "edge_id": "ge_6b55d0fb3c98b0007ecc8763",
+        "kind": "containment",
+        "from_node": "gn_665d204074738dee542919ff",
+        "to_node": "gn_3449ed64f09a899ba3ec810f",
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "6b55d0fb3c98b0007ecc87631e1c5c3307fdc622a20c187204eeb9401120014b"
+      },
+      {
+        "edge_id": "ge_702db8017d3235ae8fbd9176",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_c1b87a6a32194bba7cbe41e2",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 47,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 48
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "702db8017d3235ae8fbd917633c29e1db51026f3168b5753d3033f977a5be2cf"
+      },
+      {
+        "edge_id": "ge_70f1ffb02eafce00065f8045",
+        "kind": "returns",
+        "from_node": "gn_f5dd9035f4ba4f0b695895c6",
+        "to_node": "gn_cd6635c2da114344c35c30fc",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 206,
+            "end_byte": 288,
+            "start_line": 5,
+            "start_column": 3,
+            "end_line": 5,
+            "end_column": 85
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "70f1ffb02eafce00065f8045545fd44d5a2725a07c686cdecf15348082f7f732"
+      },
+      {
+        "edge_id": "ge_76dcbb00a4ea453a3e8c483d",
+        "kind": "imports",
+        "from_node": "gn_c1b87a6a32194bba7cbe41e2",
+        "to_node": "gn_9b93a372be844f16355c13c9",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 47,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 48
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "76dcbb00a4ea453a3e8c483df2a315fd4a731b928141f7d7537bb6f901bd2a80"
+      },
+      {
+        "edge_id": "ge_77d63a0c89993a130cc84d24",
+        "kind": "containment",
+        "from_node": "gn_f2d2f409e9d6a841671a2c5a",
+        "to_node": "gn_d0502c026cfeb19a513cee94",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "77d63a0c89993a130cc84d24aea035abf75988708cfe4e46301fb4d095e8b977"
+      },
+      {
+        "edge_id": "ge_78ba98bad13d074b6d8c8d6f",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_f5dd9035f4ba4f0b695895c6",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 187,
+            "end_byte": 192,
+            "start_line": 4,
+            "start_column": 30,
+            "end_line": 4,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "78ba98bad13d074b6d8c8d6f0378098d3c748f933566c8e14757921e170ad855"
+      },
+      {
+        "edge_id": "ge_798a315905eb63e5cb94db6c",
+        "kind": "control-flow",
+        "from_node": "gn_206ddc29bfd46d25be89f583",
+        "to_node": "gn_540f335c4ec95507f46b7af1",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 328,
+            "end_byte": 369,
+            "start_line": 9,
+            "start_column": 3,
+            "end_line": 9,
+            "end_column": 44
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "798a315905eb63e5cb94db6ca9c4aa1201c6a3ea7be03fd43ee827c94da2a11d"
+      },
+      {
+        "edge_id": "ge_7a575464a3870c0421220473",
+        "kind": "containment",
+        "from_node": "gn_3449ed64f09a899ba3ec810f",
+        "to_node": "gn_3818d126c44eef3f1a1f98fd",
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 114,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 3,
+            "end_column": 3
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "7a575464a3870c042122047393fd890086c14319a7c34142973a1fbd7976f234"
+      },
+      {
+        "edge_id": "ge_7b8d998eb9986eb78668c647",
+        "kind": "containment",
+        "from_node": "gn_18864aba57e7ffa2bc24b74f",
+        "to_node": "gn_dca114c67c877c14fb24cb00",
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 57,
+            "end_byte": 67,
+            "start_line": 2,
+            "start_column": 26,
+            "end_line": 2,
+            "end_column": 36
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "7b8d998eb9986eb78668c64719c1580ee5659b62097bae2f5fc2b6216fb3b867"
+      },
+      {
+        "edge_id": "ge_7d3caeeb8c64e9f4b7e2f02b",
+        "kind": "containment",
+        "from_node": "gn_1a36932b0f9ebe26989b7cd1",
+        "to_node": "gn_1a36932b0f9ebe26989b7cd1",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 158,
+            "end_byte": 290,
+            "start_line": 4,
+            "start_column": 1,
+            "end_line": 6,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "7d3caeeb8c64e9f4b7e2f02b7e3a3a8465703ba66675fd0232b4c162c0ec4967"
+      },
+      {
+        "edge_id": "ge_7fafa596edc9db55026ef94b",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_4d8d4b52ac4723d78b3e9e81",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 55,
+            "end_byte": 371,
+            "start_line": 2,
+            "start_column": 8,
+            "end_line": 10,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "7fafa596edc9db55026ef94bafbaabb882cde08a24dd1de767502f7f21268c7a"
+      },
+      {
+        "edge_id": "ge_8201e77e964ed916c828bbe4",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_21a9ac3d449bd905bd480a61",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 213,
+            "end_byte": 287,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "8201e77e964ed916c828bbe41b39a72e5b0ea75ac6ef3d8b4a98fc625c856986"
+      },
+      {
+        "edge_id": "ge_88faf2c77276e3cedcf5b4cf",
+        "kind": "containment",
+        "from_node": "gn_803cc02c6df9d313d1cdd2df",
+        "to_node": "gn_f7b25bdeda4f7c92a41021d5",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 48,
+            "end_byte": 371,
+            "start_line": 2,
+            "start_column": 1,
+            "end_line": 10,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "88faf2c77276e3cedcf5b4cf6a0740583a40a2f9a9802073458ba01d3ff37951"
+      },
+      {
+        "edge_id": "ge_9348bdaf3e80dc36015cfacc",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_70f1ae67bcf52f49eb796960",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 47,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 48
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "9348bdaf3e80dc36015cfaccbc875dfc821e91f2d9d978d496f1ccb2101b2af3"
+      },
+      {
+        "edge_id": "ge_965f8621cf478f8526d2e1be",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_803cc02c6df9d313d1cdd2df",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 48,
+            "end_byte": 371,
+            "start_line": 2,
+            "start_column": 1,
+            "end_line": 10,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "965f8621cf478f8526d2e1bed69f45eeb35384684080ebc69eaf43be44123e60"
+      },
+      {
+        "edge_id": "ge_968131883c7d80a4739de627",
+        "kind": "containment",
+        "from_node": "gn_a967be7babe93cb2fbff0062",
+        "to_node": "gn_9aa8a826d1f153c76a963fa2",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 94,
+            "end_byte": 156,
+            "start_line": 3,
+            "start_column": 9,
+            "end_line": 3,
+            "end_column": 71
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "968131883c7d80a4739de62742c6a119dd79a517f032329723261e44fabbf868"
+      },
+      {
+        "edge_id": "ge_968a9b218c60ff8b2833c307",
+        "kind": "control-flow",
+        "from_node": "gn_540f335c4ec95507f46b7af1",
+        "to_node": "gn_d4f2faf5ade540344af428c4",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 335,
+            "end_byte": 368,
+            "start_line": 9,
+            "start_column": 10,
+            "end_line": 9,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "968a9b218c60ff8b2833c307f71d27e20edd2a58993eee388a633cc7ae39bae7"
+      },
+      {
+        "edge_id": "ge_a41b099d9722c904e3981e12",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_a967be7babe93cb2fbff0062",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 55,
+            "end_byte": 371,
+            "start_line": 2,
+            "start_column": 8,
+            "end_line": 10,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "a41b099d9722c904e3981e129f155443b8e81796f63bae45e3b12ad108e4c4de"
+      },
+      {
+        "edge_id": "ge_ad49b4069a764a0be064a524",
+        "kind": "containment",
+        "from_node": "gn_3449ed64f09a899ba3ec810f",
+        "to_node": "gn_dca114c67c877c14fb24cb00",
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 57,
+            "end_byte": 67,
+            "start_line": 2,
+            "start_column": 26,
+            "end_line": 2,
+            "end_column": 36
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "ad49b4069a764a0be064a5244755c73d902d16c05cabcd0afe6f043f8539abfc"
+      },
+      {
+        "edge_id": "ge_ae9d6effb28d5f68b83defec",
+        "kind": "containment",
+        "from_node": "gn_3449ed64f09a899ba3ec810f",
+        "to_node": "gn_18864aba57e7ffa2bc24b74f",
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 34,
+            "end_byte": 111,
+            "start_line": 2,
+            "start_column": 3,
+            "end_line": 2,
+            "end_column": 80
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "ae9d6effb28d5f68b83defec45e5a1a86dd91a2d383219e3993eccf3c5cc5802"
+      },
+      {
+        "edge_id": "ge_b5150a15da95f09b824dc306",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_cd6635c2da114344c35c30fc",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 206,
+            "end_byte": 288,
+            "start_line": 5,
+            "start_column": 3,
+            "end_line": 5,
+            "end_column": 85
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "b5150a15da95f09b824dc3069c8bb500a862b5d2418ae3755c9c9b40f75a1259"
+      },
+      {
+        "edge_id": "ge_b5a50c1fd3caad460d796e93",
+        "kind": "calls",
+        "from_node": "gn_206ddc29bfd46d25be89f583",
+        "to_node": "gn_1a36932b0f9ebe26989b7cd1",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 298,
+            "end_byte": 324,
+            "start_line": 8,
+            "start_column": 7,
+            "end_line": 8,
+            "end_column": 33
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "b5a50c1fd3caad460d796e93991ce518668d3b52fcbbd4ec746d18707c816ea8"
+      },
+      {
+        "edge_id": "ge_b6680a497faa88f98bfc8a8c",
+        "kind": "containment",
+        "from_node": "gn_3449ed64f09a899ba3ec810f",
+        "to_node": "gn_4473c13cf24bb1e9a0b14c0f",
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 76,
+            "end_byte": 109,
+            "start_line": 2,
+            "start_column": 45,
+            "end_line": 2,
+            "end_column": 78
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "b6680a497faa88f98bfc8a8c73b1182203d04801850f6391bbab57498dc67513"
+      },
+      {
+        "edge_id": "ge_b7786cc21f1ff214a1df1325",
+        "kind": "containment",
+        "from_node": "gn_1a36932b0f9ebe26989b7cd1",
+        "to_node": "gn_f5dd9035f4ba4f0b695895c6",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 187,
+            "end_byte": 192,
+            "start_line": 4,
+            "start_column": 30,
+            "end_line": 4,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "b7786cc21f1ff214a1df13251ea68d132d2b8f6a44a63688b3b13e20526aa827"
+      },
+      {
+        "edge_id": "ge_bf392c42745c34db20d221ce",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_e8f367d7a7ee3bab0ed29acc",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 213,
+            "end_byte": 287,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "bf392c42745c34db20d221cedd09953d09da5c053f4147017eb6d1911971213e"
+      },
+      {
+        "edge_id": "ge_c126ebdb7f2e31698210b26c",
+        "kind": "containment",
+        "from_node": "gn_1a36932b0f9ebe26989b7cd1",
+        "to_node": "gn_cd6635c2da114344c35c30fc",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 206,
+            "end_byte": 288,
+            "start_line": 5,
+            "start_column": 3,
+            "end_line": 5,
+            "end_column": 85
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "c126ebdb7f2e31698210b26c2336581b107aeac545a948e82228d5a0d22ee1bc"
+      },
+      {
+        "edge_id": "ge_c72153cc36476aa4ed8c797c",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_3d8dc3dc302bc61402ee9eb6",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 298,
+            "end_byte": 324,
+            "start_line": 8,
+            "start_column": 7,
+            "end_line": 8,
+            "end_column": 33
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "c72153cc36476aa4ed8c797cca336b76c7bb352f4c0003a28c0f4722d091e44e"
+      },
+      {
+        "edge_id": "ge_c7f3c8c5377f11866981f285",
+        "kind": "calls",
+        "from_node": "gn_35efedd235b30c260e5e7566",
+        "to_node": "gn_54151af43c6d1de42e66260b",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 335,
+            "end_byte": 368,
+            "start_line": 9,
+            "start_column": 10,
+            "end_line": 9,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "c7f3c8c5377f11866981f285b2cb36bca3adf4cf040ac751ca86ab8c4e24fb68"
+      },
+      {
+        "edge_id": "ge_d17b8ae482fd0177f01134d2",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_540f335c4ec95507f46b7af1",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 328,
+            "end_byte": 369,
+            "start_line": 9,
+            "start_column": 3,
+            "end_line": 9,
+            "end_column": 44
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "d17b8ae482fd0177f01134d28e59861e9c6ba0a55beb4675d5f261a8707bb67f"
+      },
+      {
+        "edge_id": "ge_d3c83db4191b44ff0b5cef2f",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_68223461dbe0a034a1ead333",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 55,
+            "end_byte": 371,
+            "start_line": 2,
+            "start_column": 8,
+            "end_line": 10,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "d3c83db4191b44ff0b5cef2ffb1525501dca1e20a53fe1f997eb8e922376c8a0"
+      },
+      {
+        "edge_id": "ge_d44b28ba2c80db071add0c7f",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_206ddc29bfd46d25be89f583",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 298,
+            "end_byte": 324,
+            "start_line": 8,
+            "start_column": 7,
+            "end_line": 8,
+            "end_column": 33
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "d44b28ba2c80db071add0c7ff03bf5bf8eddc10afa0edec716d62b9e621e0f8f"
+      },
+      {
+        "edge_id": "ge_d50899be00aaa4bb535f34ef",
+        "kind": "control-flow",
+        "from_node": "gn_a967be7babe93cb2fbff0062",
+        "to_node": "gn_206ddc29bfd46d25be89f583",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 298,
+            "end_byte": 324,
+            "start_line": 8,
+            "start_column": 7,
+            "end_line": 8,
+            "end_column": 33
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "d50899be00aaa4bb535f34ef7c7b54c4af2cb87b16cbd8982152435c04e9d577"
+      },
+      {
+        "edge_id": "ge_d803f517a0ef2fbb38e4ac27",
+        "kind": "containment",
+        "from_node": "gn_68223461dbe0a034a1ead333",
+        "to_node": "gn_4b105496f8f2a1cb98e20354",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 55,
+            "end_byte": 371,
+            "start_line": 2,
+            "start_column": 8,
+            "end_line": 10,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "d803f517a0ef2fbb38e4ac27c1544da8186f117b95d32891bcd67f4ce9684162"
+      },
+      {
+        "edge_id": "ge_d82345f18cc538c128220c7c",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_b3a3a97f8ff9fdbcafc56921",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 108,
+            "end_byte": 150,
+            "start_line": 3,
+            "start_column": 23,
+            "end_line": 3,
+            "end_column": 65
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "d82345f18cc538c128220c7c8ff6d8345a2c99a888cdd412102628c1d4dce0af"
+      },
+      {
+        "edge_id": "ge_d8a2472d9080f7fba6a5c125",
+        "kind": "containment",
+        "from_node": "gn_a967be7babe93cb2fbff0062",
+        "to_node": "gn_a967be7babe93cb2fbff0062",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 55,
+            "end_byte": 371,
+            "start_line": 2,
+            "start_column": 8,
+            "end_line": 10,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "d8a2472d9080f7fba6a5c1259b51cc609898b8317d6582cd5713483d917388b6"
+      },
+      {
+        "edge_id": "ge_df8a6e03b4fe81f667a3b6b6",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_9aa8a826d1f153c76a963fa2",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 94,
+            "end_byte": 156,
+            "start_line": 3,
+            "start_column": 9,
+            "end_line": 3,
+            "end_column": 71
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "df8a6e03b4fe81f667a3b6b6f1b9059ea9838de141b50151411ced5c279e4d8b"
+      },
+      {
+        "edge_id": "ge_dfb97310969fa19d4650958c",
+        "kind": "control-flow",
+        "from_node": "gn_cd6635c2da114344c35c30fc",
+        "to_node": "gn_903acbbc74aeeb184564473c",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 213,
+            "end_byte": 287,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "dfb97310969fa19d4650958cb8d07622ed0046b2622ba34fccfe09e610f2fc0f"
+      },
+      {
+        "edge_id": "ge_e155f1aead15c33459e5bc1c",
+        "kind": "containment",
+        "from_node": "gn_3449ed64f09a899ba3ec810f",
+        "to_node": "gn_de1f50799dd3c1ad7b6d7e8f",
+        "location": {
+          "path": "app/api/pebble/services.js",
+          "span": {
+            "start_byte": 46,
+            "end_byte": 55,
+            "start_line": 2,
+            "start_column": 15,
+            "end_line": 2,
+            "end_column": 24
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-javascript@0.25.0:javascript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "e155f1aead15c33459e5bc1c2a3e1d63b0dafef56387c963ce164bc54e4141e3"
+      },
+      {
+        "edge_id": "ge_e376472780d56d2b99c6f501",
+        "kind": "calls",
+        "from_node": "gn_b3a3a97f8ff9fdbcafc56921",
+        "to_node": "gn_113eadf5ce7c26aa408a74c8",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 108,
+            "end_byte": 150,
+            "start_line": 3,
+            "start_column": 23,
+            "end_line": 3,
+            "end_column": 65
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "e376472780d56d2b99c6f5017d98bd90dc220d360594b1787c55538187a27c33"
+      },
+      {
+        "edge_id": "ge_e3ffb80d463b66c8256944a9",
+        "kind": "calls",
+        "from_node": "gn_21a9ac3d449bd905bd480a61",
+        "to_node": "gn_f2f65bbb6f38c26916a0a135",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 213,
+            "end_byte": 287,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "e3ffb80d463b66c8256944a933243a2310cadd37b1dd3802670e6d8f1fc4c2a4"
+      },
+      {
+        "edge_id": "ge_e58bdd57fd3896229715ac78",
+        "kind": "containment",
+        "from_node": "gn_a967be7babe93cb2fbff0062",
+        "to_node": "gn_d4f2faf5ade540344af428c4",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 335,
+            "end_byte": 368,
+            "start_line": 9,
+            "start_column": 10,
+            "end_line": 9,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "e58bdd57fd3896229715ac787e2424593187d7ba1c04bdfdccb22dd984f085be"
+      },
+      {
+        "edge_id": "ge_f8945d143ad959e3abbf632e",
+        "kind": "containment",
+        "from_node": "gn_d0502c026cfeb19a513cee94",
+        "to_node": "gn_daaffb2efcd88541df76a755",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 108,
+            "end_byte": 150,
+            "start_line": 3,
+            "start_column": 23,
+            "end_line": 3,
+            "end_column": 65
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "f8945d143ad959e3abbf632e6037c97fdc7eb7ff718cc1d7a48a85705c2de814"
+      },
+      {
+        "edge_id": "ge_fd6c549b1a16c913e5838238",
+        "kind": "containment",
+        "from_node": "gn_a967be7babe93cb2fbff0062",
+        "to_node": "gn_540f335c4ec95507f46b7af1",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 328,
+            "end_byte": 369,
+            "start_line": 9,
+            "start_column": 3,
+            "end_line": 9,
+            "end_column": 44
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "fd6c549b1a16c913e58382381c50a183fa7403bfe69fd53c8b026d13679bd253"
+      },
+      {
+        "edge_id": "ge_fdd029d1014746426f3608cb",
+        "kind": "argument-flow",
+        "from_node": "gn_206ddc29bfd46d25be89f583",
+        "to_node": "gn_f5dd9035f4ba4f0b695895c6",
+        "location": {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 187,
+            "end_byte": 192,
+            "start_line": 4,
+            "start_column": 30,
+            "end_line": 4,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "fdd029d1014746426f3608cb4e9c09cba4145598bf3b080c73e08aef6694510d"
+      }
+    ]
+  },
+  "analysis": {
+    "nodes": 41,
+    "edges": 67,
+    "candidate_paths": 1,
+    "rules_evaluated": 7,
+    "findings": 1,
+    "findings_suppressed": 0,
+    "duration_ms": 0,
+    "truncated": false
+  },
+  "suppression_diagnostics": [],
+  "taxonomy_catalog": [
+    {
+      "taxonomy_name": "secure-bench-taxonomy-v1",
+      "taxonomy_version": "1.0.0",
+      "source_version": "CWE 4.20",
+      "source_commit": "93c0821db065de436a339c15b070e158947ad76c",
+      "schema_sha256": "cdecd643d338aa8ae42ec7398c6c4703cb97d60ad355340c98744fc94bcb7d6f",
+      "taxonomy_sha256": "059fe22d7707cf8d17f2c1621fdae9819787a1958ba2ef0421eca4e4ec858452",
+      "methodology_sha256": "eac27e5800be35c5ae77f7804e52ae90462cbda403a5484baa8fab62f02ab562",
+      "content_hash": "22852bd7401020b315af11dfa2b60c0b46f78eb19f95079e6400d7b3bea3272c"
+    }
+  ],
+  "files": [
+    {
+      "path": "app/api/pebble/route.ts",
+      "kind": "source",
+      "size_bytes": 372,
+      "content_fingerprint": "235e4a46d57602207557e852de4d3af2fdb4f4c653b58f32be373a911ffcf8aa",
+      "language": "TypeScript",
+      "origin": "project",
+      "is_binary": false
+    },
+    {
+      "path": "app/api/pebble/services.js",
+      "kind": "source",
+      "size_bytes": 115,
+      "content_fingerprint": "28af7f4c5f01d75784eb7276d97b12ca488ece0be6578cb10019846b6d10d8d8",
+      "language": "JavaScript",
+      "origin": "project",
+      "is_binary": false
+    },
+    {
+      "path": "package.json",
+      "kind": "manifest",
+      "size_bytes": 149,
+      "content_fingerprint": "237d27e148389d762947b975fc08db8b8757d3de6c4866517e1827d2ce8949e1",
+      "language": null,
+      "origin": "project",
+      "is_binary": false
+    }
+  ],
+  "languages": [
+    {
+      "name": "JavaScript",
+      "file_count": 1,
+      "bytes": 115
+    },
+    {
+      "name": "TypeScript",
+      "file_count": 1,
+      "bytes": 372
+    }
+  ],
+  "manifests": [
+    {
+      "kind": "npm",
+      "location": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 0,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 1
+        }
+      },
+      "fingerprint": "6748a38bc87b5b19f763c5883b78fc1e6b11efffa9b16c0682221bf1b9422f2d"
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Next.js",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 26,
+          "end_byte": 32,
+          "start_line": 3,
+          "start_column": 5,
+          "end_line": 3,
+          "end_column": 11
+        }
+      },
+      "fingerprint": "ab947c3b74a997a0213d6f4e7400ab58f98892ef985417413fb54b0870052f8a"
+    }
+  ],
+  "entry_points": [],
+  "capabilities": [
+    {
+      "capability": "dependency-management",
+      "reason": "Detected npm manifest",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 0,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 1
+        }
+      },
+      "fingerprint": "cb0fd89861ca491f95e737908187cfd232f12ed2afba2ed3fbd7ba1c579a9ab2"
+    }
+  ],
+  "trust_boundaries": [
+    {
+      "kind": "dependency-supply-chain",
+      "description": "Declared third-party dependency boundary",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 0,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 1
+        }
+      },
+      "fingerprint": "72752772107d5ef650d956e907952867e651a93c7d08723f6a7fd36f0215c479"
+    },
+    {
+      "kind": "network-request",
+      "description": "Next.js may expose network request entry points",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 26,
+          "end_byte": 32,
+          "start_line": 3,
+          "start_column": 5,
+          "end_line": 3,
+          "end_column": 11
+        }
+      },
+      "fingerprint": "95eaaa9c288e6fb2c08590a93d816a59c9d5fc6351d5910465bc0af6091d4d20"
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "SE1002",
+      "finding_id": "fd_3a1169a65e1f7e76bc3f1b57",
+      "title": "Untrusted input reaches a raw SQL query",
+      "category": "sql-injection",
+      "severity": "high",
+      "confidence": "high",
+      "evidence": [
+        {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 108,
+            "end_byte": 150,
+            "start_line": 3,
+            "start_column": 23,
+            "end_line": 3,
+            "end_column": 65
+          }
+        },
+        {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 94,
+            "end_byte": 156,
+            "start_line": 3,
+            "start_column": 9,
+            "end_line": 3,
+            "end_column": 71
+          }
+        },
+        {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 298,
+            "end_byte": 324,
+            "start_line": 8,
+            "start_column": 7,
+            "end_line": 8,
+            "end_column": 33
+          }
+        },
+        {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 187,
+            "end_byte": 192,
+            "start_line": 4,
+            "start_column": 30,
+            "end_line": 4,
+            "end_column": 35
+          }
+        },
+        {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 213,
+            "end_byte": 287,
+            "start_line": 5,
+            "start_column": 10,
+            "end_line": 5,
+            "end_column": 84
+          }
+        }
+      ],
+      "source": {
+        "path": "app/api/pebble/route.ts",
+        "span": {
+          "start_byte": 108,
+          "end_byte": 150,
+          "start_line": 3,
+          "start_column": 23,
+          "end_line": 3,
+          "end_column": 65
+        }
+      },
+      "transformations": [
+        {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 94,
+            "end_byte": 156,
+            "start_line": 3,
+            "start_column": 9,
+            "end_line": 3,
+            "end_column": 71
+          }
+        },
+        {
+          "path": "app/api/pebble/route.ts",
+          "span": {
+            "start_byte": 187,
+            "end_byte": 192,
+            "start_line": 4,
+            "start_column": 30,
+            "end_line": 4,
+            "end_column": 35
+          }
+        }
+      ],
+      "guards": [],
+      "sink": {
+        "path": "app/api/pebble/route.ts",
+        "span": {
+          "start_byte": 213,
+          "end_byte": 287,
+          "start_line": 5,
+          "start_column": 10,
+          "end_line": 5,
+          "end_column": 84
+        }
+      },
+      "evidence_path": [
+        {
+          "node_id": "gn_daaffb2efcd88541df76a755",
+          "edge_id_from_previous": null,
+          "kind": "source",
+          "semantic": {
+            "semantics_version": "secure-evidence-semantics-v2",
+            "role": "untrusted-source",
+            "identity": "untrusted.http-query-value",
+            "certainty": "proven"
+          },
+          "location": {
+            "path": "app/api/pebble/route.ts",
+            "span": {
+              "start_byte": 108,
+              "end_byte": 150,
+              "start_line": 3,
+              "start_column": 23,
+              "end_line": 3,
+              "end_column": 65
+            }
+          },
+          "provenance": {
+            "parser": "secure-tree-sitter-adapter-v1",
+            "parser_version": "0.26.11",
+            "grammar": "tree-sitter-typescript@0.23.2:typescript",
+            "extractor_version": "secure-evidence-graph-v1"
+          },
+          "fingerprint": "3cd8e1fa05782d32b464f11a9b54c166eced0c8678b3f3ddf100e2e7fafaaf23"
+        },
+        {
+          "node_id": "gn_9aa8a826d1f153c76a963fa2",
+          "edge_id_from_previous": "ge_02553dcbf26a710c6d6ae45e",
+          "kind": "transformation",
+          "semantic": {
+            "semantics_version": "secure-evidence-semantics-v2",
+            "role": "transformation",
+            "identity": "transformation.value",
+            "certainty": "proven"
+          },
+          "location": {
+            "path": "app/api/pebble/route.ts",
+            "span": {
+              "start_byte": 94,
+              "end_byte": 156,
+              "start_line": 3,
+              "start_column": 9,
+              "end_line": 3,
+              "end_column": 71
+            }
+          },
+          "provenance": {
+            "parser": "secure-tree-sitter-adapter-v1",
+            "parser_version": "0.26.11",
+            "grammar": "tree-sitter-typescript@0.23.2:typescript",
+            "extractor_version": "secure-evidence-graph-v1"
+          },
+          "fingerprint": "720b70d34702ded70782fc6124888afd1d0bde9423bd138b034e263aa18b0b3a"
+        },
+        {
+          "node_id": "gn_206ddc29bfd46d25be89f583",
+          "edge_id_from_previous": "ge_37a77180a18d06f18c8a21c7",
+          "kind": "call",
+          "semantic": {
+            "semantics_version": "secure-evidence-semantics-v2",
+            "role": "transformation",
+            "identity": "transformation.local-call",
+            "certainty": "proven"
+          },
+          "location": {
+            "path": "app/api/pebble/route.ts",
+            "span": {
+              "start_byte": 298,
+              "end_byte": 324,
+              "start_line": 8,
+              "start_column": 7,
+              "end_line": 8,
+              "end_column": 33
+            }
+          },
+          "provenance": {
+            "parser": "secure-tree-sitter-adapter-v1",
+            "parser_version": "0.26.11",
+            "grammar": "tree-sitter-typescript@0.23.2:typescript",
+            "extractor_version": "secure-evidence-graph-v1"
+          },
+          "fingerprint": "08daee1bc0dba8f47766aaee9aca54a36ed5da7d134fb49d42edcd99bcffdb67"
+        },
+        {
+          "node_id": "gn_f5dd9035f4ba4f0b695895c6",
+          "edge_id_from_previous": "ge_fdd029d1014746426f3608cb",
+          "kind": "argument",
+          "semantic": {
+            "semantics_version": "secure-evidence-semantics-v2",
+            "role": "transformation",
+            "identity": "transformation.argument",
+            "certainty": "proven"
+          },
+          "location": {
+            "path": "app/api/pebble/route.ts",
+            "span": {
+              "start_byte": 187,
+              "end_byte": 192,
+              "start_line": 4,
+              "start_column": 30,
+              "end_line": 4,
+              "end_column": 35
+            }
+          },
+          "provenance": {
+            "parser": "secure-tree-sitter-adapter-v1",
+            "parser_version": "0.26.11",
+            "grammar": "tree-sitter-typescript@0.23.2:typescript",
+            "extractor_version": "secure-evidence-graph-v1"
+          },
+          "fingerprint": "96f8f81d2b1b694257df9d5fa9c1452064a3a024f688d6e3e442ba806ddcab00"
+        },
+        {
+          "node_id": "gn_903acbbc74aeeb184564473c",
+          "edge_id_from_previous": "ge_19ad7bb88c7c77a3a50d7341",
+          "kind": "sink",
+          "semantic": {
+            "semantics_version": "secure-evidence-semantics-v2",
+            "role": "sensitive-sink",
+            "identity": "sink.database-query",
+            "certainty": "proven"
+          },
+          "location": {
+            "path": "app/api/pebble/route.ts",
+            "span": {
+              "start_byte": 213,
+              "end_byte": 287,
+              "start_line": 5,
+              "start_column": 10,
+              "end_line": 5,
+              "end_column": 84
+            }
+          },
+          "provenance": {
+            "parser": "secure-tree-sitter-adapter-v1",
+            "parser_version": "0.26.11",
+            "grammar": "tree-sitter-typescript@0.23.2:typescript",
+            "extractor_version": "secure-evidence-graph-v1"
+          },
+          "fingerprint": "5738cc180b4dcefd45e66dea2685a1684964c081f697900525a5f6f6edf99174"
+        }
+      ],
+      "invariant": "Raw database query text must not be controlled by untrusted input",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.sql-construction",
+        "invariant_id": "secure-bench.invariant.sql-control-data-separation"
+      },
+      "primary_cwe": {
+        "id": "CWE-89",
+        "url": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "taxonomy_provenance": {
+        "taxonomy_name": "secure-bench-taxonomy-v1",
+        "source_commit": "93c0821db065de436a339c15b070e158947ad76c",
+        "content_hash": "22852bd7401020b315af11dfa2b60c0b46f78eb19f95079e6400d7b3bea3272c",
+        "mapping_basis": "secure-engine-built-in-rule-family"
+      },
+      "prerequisites": [
+        "An attacker can control the demonstrated request value",
+        "The query reaches the configured database"
+      ],
+      "impact": "Unauthorized database reads, writes, or destructive statements",
+      "remediation": "Use parameterized queries or typed query builders and keep SQL structure constant",
+      "verification_state": "verified-deterministic-path",
+      "limitations": [
+        "Bounded static analysis does not model runtime framework middleware"
+      ],
+      "fingerprint": "3a1169a65e1f7e76bc3f1b57c80f3f0d45da980a003c8eb20f2acef79ab88de9",
+      "semantic_fingerprint": "4d8bab2cbf063e1d2f2bf732ac70c913ba876792fe1e8597fdcaba9024612e31",
+      "evidence_contract_v2": {
+        "contract_version": "2.0.0",
+        "semantics_version": "secure-evidence-semantics-v2",
+        "path": [
+          {
+            "role": "source",
+            "effect": "preserves_influence",
+            "source_kind": "http_query_value",
+            "span": {
+              "path": "app/api/pebble/route.ts",
+              "span": {
+                "start_byte": 108,
+                "end_byte": 150,
+                "start_line": 3,
+                "start_column": 23,
+                "end_line": 3,
+                "end_column": 65
+              }
+            },
+            "summarizable": false
+          },
+          {
+            "role": "propagation",
+            "effect": "preserves_influence",
+            "span": {
+              "path": "app/api/pebble/route.ts",
+              "span": {
+                "start_byte": 94,
+                "end_byte": 156,
+                "start_line": 3,
+                "start_column": 9,
+                "end_line": 3,
+                "end_column": 71
+              }
+            },
+            "summarizable": true
+          },
+          {
+            "role": "propagation",
+            "effect": "preserves_influence",
+            "span": {
+              "path": "app/api/pebble/route.ts",
+              "span": {
+                "start_byte": 298,
+                "end_byte": 324,
+                "start_line": 8,
+                "start_column": 7,
+                "end_line": 8,
+                "end_column": 33
+              }
+            },
+            "summarizable": true
+          },
+          {
+            "role": "propagation",
+            "effect": "preserves_influence",
+            "span": {
+              "path": "app/api/pebble/route.ts",
+              "span": {
+                "start_byte": 187,
+                "end_byte": 192,
+                "start_line": 4,
+                "start_column": 30,
+                "end_line": 4,
+                "end_column": 35
+              }
+            },
+            "summarizable": true
+          },
+          {
+            "role": "sink",
+            "effect": "preserves_influence",
+            "sink_kind": "sql_query_execution",
+            "span": {
+              "path": "app/api/pebble/route.ts",
+              "span": {
+                "start_byte": 213,
+                "end_byte": 287,
+                "start_line": 5,
+                "start_column": 10,
+                "end_line": 5,
+                "end_column": 84
+              }
+            },
+            "summarizable": false
+          }
+        ],
+        "connected_edges": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "effective_barriers": [],
+        "unresolved_call": false,
+        "uncertain": false,
+        "fingerprint": "208290d9732da2fcb80b115d1d58025ddc1619d819ed7b7cd1a501eff2a52405",
+        "duplicate_fingerprint": "0045b1c34425b957bf5cc5efe3cee4bfb9139870893c4a2e01d23be9009cacf0"
+      }
+    }
+  ],
+  "limitations": [
+    {
+      "code": "deterministic-rules-limited",
+      "message": "Phase 3 runs only the documented high-confidence JavaScript and TypeScript rules"
+    },
+    {
+      "code": "parser-coverage-limited",
+      "message": "Language-aware parsing is limited to JavaScript, JSX, TypeScript, and TSX"
+    },
+    {
+      "code": "framework-hints-only",
+      "message": "Framework evidence is a manifest hint and not semantic proof"
+    },
+    {
+      "code": "symlinks-not-followed",
+      "message": "Symbolic links are recorded but never followed"
+    },
+    {
+      "code": "vcs-metadata-excluded",
+      "message": "Version-control metadata directories are never inventoried"
+    },
+    {
+      "code": "hidden-files-excluded",
+      "message": "Hidden files and directories were excluded by configuration"
+    },
+    {
+      "code": "ignored-files-excluded",
+      "message": "Inputs matched by repository ignore rules were excluded before reading"
+    },
+    {
+      "code": "generated-directories-excluded",
+      "message": "Common generated and build directories were excluded before reading"
+    },
+    {
+      "code": "vendor-directories-excluded",
+      "message": "Common vendored dependency directories were excluded before reading"
+    },
+    {
+      "code": "nested-repositories-excluded",
+      "message": "Nested repositories, worktrees, and submodules were excluded"
+    },
+    {
+      "code": "bounded-interprocedural-analysis",
+      "message": "Local inter-procedural propagation is bounded to 4 traversal levels"
+    },
+    {
+      "code": "dynamic-resolution-limited",
+      "message": "Dynamic imports, non-unique aliases, callbacks, recursion, and unresolved calls are not followed"
+    },
+    {
+      "code": "semantic-resolution-bounded",
+      "message": "Semantic identities, aliases, guards, and value correspondence are resolved only from deterministic local syntax within configured graph and inter-procedural bounds"
+    },
+    {
+      "code": "framework-middleware-not-modeled",
+      "message": "Authentication supplied only by external framework middleware is not proven by this phase"
+    }
+  ],
+  "skipped_files": [],
+  "exclusions": [],
+  "errors": [],
+  "report_fingerprint": "1afdc70bc0bc0e4986c9f0946655e7c1d9597446e240b3b5e6f07d0b96363002"
+}

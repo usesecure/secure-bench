@@ -1,0 +1,3249 @@
+{
+  "schema_version": "secure-json-v1",
+  "engine_version": "0.1.3",
+  "document_type": "scan-report",
+  "repository": {
+    "name": "fixture",
+    "vcs": null,
+    "revision": null,
+    "repository_kind": "directory",
+    "content_fingerprint": "f00e60554364dcf77d0b68be82066a09460e284050f6eb5c357332720ca2faed",
+    "identity_fingerprint": "d2b5ac9898fb5ff076b9261b26487e9183ebaac4da3a72ec137ff197efedfd95"
+  },
+  "configuration": {
+    "include_hidden": false,
+    "max_files": 100000,
+    "max_file_bytes": 4194304,
+    "respect_ignore_files": true,
+    "include_patterns": [],
+    "exclude_patterns": [],
+    "include_generated": false,
+    "include_vendor": false,
+    "include_nested_repositories": false,
+    "max_total_bytes": 536870912,
+    "max_depth": null,
+    "max_errors": 100,
+    "parse_cache_enabled": true,
+    "max_cache_bytes": 268435456,
+    "max_parser_diagnostics": 1000,
+    "max_facts_per_file": 10000,
+    "max_total_facts": 100000,
+    "max_graph_nodes": 250000,
+    "max_graph_edges": 500000,
+    "max_interprocedural_depth": 4,
+    "max_findings": 10000,
+    "suppressions": []
+  },
+  "scan": {
+    "started_at": "2026-07-17T04:27:15.886210419Z",
+    "finished_at": "2026-07-17T04:27:15.887478214Z",
+    "duration_ms": 1,
+    "complete": true,
+    "files_discovered": 3,
+    "files_scanned": 3
+  },
+  "inventory": {
+    "entries_seen": 8,
+    "candidate_files": 3,
+    "files_selected": 3,
+    "files_scanned": 3,
+    "text_files": 3,
+    "binary_files": 0,
+    "generated_files": 0,
+    "vendor_files": 0,
+    "bytes_scanned": 581,
+    "symlinks_skipped": 0,
+    "nested_repositories_skipped": 0,
+    "hit_file_limit": false,
+    "hit_total_byte_limit": false
+  },
+  "parsing": {
+    "files_eligible": 2,
+    "files_parsed": 2,
+    "files_with_diagnostics": 0,
+    "facts_extracted": 12,
+    "duration_ms": 0,
+    "cache_enabled": true,
+    "cache_hits": 0,
+    "cache_misses": 2,
+    "cache_writes": 2,
+    "cache_entries_ignored": 0
+  },
+  "facts": [
+    {
+      "fact_id": "sf_25f79245a7ade41e6c74b726",
+      "kind": "function",
+      "location": {
+        "path": "app/api/kestrel/route.ts",
+        "span": {
+          "start_byte": 91,
+          "end_byte": 277,
+          "start_line": 3,
+          "start_column": 8,
+          "end_line": 7,
+          "end_column": 2
+        }
+      },
+      "name": "POST",
+      "relationships": [],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "25f79245a7ade41e6c74b726fff2ff66e03519bcfa31c9284bbe1ee4776fd379"
+    },
+    {
+      "fact_id": "sf_41a9ac48fd1837e82a772305",
+      "kind": "http-route-handler",
+      "location": {
+        "path": "app/api/kestrel/route.ts",
+        "span": {
+          "start_byte": 91,
+          "end_byte": 277,
+          "start_line": 3,
+          "start_column": 8,
+          "end_line": 7,
+          "end_column": 2
+        }
+      },
+      "name": "POST",
+      "relationships": [
+        {
+          "kind": "handles",
+          "target": "POST /api/kestrel"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "41a9ac48fd1837e82a7723056eea6c98d78f101f80aeab0e9bed49b59e362be7"
+    },
+    {
+      "fact_id": "sf_4d30953fbe6b3dd1c47a7779",
+      "kind": "module-import",
+      "location": {
+        "path": "app/api/kestrel/route.ts",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 82,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 83
+        }
+      },
+      "name": "../../../lib/kestrel-workflow.js",
+      "relationships": [
+        {
+          "kind": "imports",
+          "target": "../../../lib/kestrel-workflow.js"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "4d30953fbe6b3dd1c47a777965c811a12f5abc66ee0f778cdd260865ba7502e6"
+    },
+    {
+      "fact_id": "sf_4f7af286539e0eee789d7a5d",
+      "kind": "module-export",
+      "location": {
+        "path": "app/lib/kestrel-workflow.ts",
+        "span": {
+          "start_byte": 53,
+          "end_byte": 152,
+          "start_line": 2,
+          "start_column": 1,
+          "end_line": 4,
+          "end_column": 2
+        }
+      },
+      "name": "applykestrel",
+      "relationships": [
+        {
+          "kind": "exports",
+          "target": "applykestrel"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "4f7af286539e0eee789d7a5d1a400c0f22d7e98908df15e9d7cbf09a5fdd8e14"
+    },
+    {
+      "fact_id": "sf_5624140b66ee49ebba5a92f8",
+      "kind": "module-import",
+      "location": {
+        "path": "app/lib/kestrel-workflow.ts",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 52,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 53
+        }
+      },
+      "name": "node:child_process",
+      "relationships": [
+        {
+          "kind": "imports",
+          "target": "node:child_process"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "5624140b66ee49ebba5a92f8b069c4a00a0b8d291334c864c7c078219fdf40ee"
+    },
+    {
+      "fact_id": "sf_566b95b7ae4ad98f0e35b5a1",
+      "kind": "call",
+      "location": {
+        "path": "app/api/kestrel/route.ts",
+        "span": {
+          "start_byte": 202,
+          "end_byte": 230,
+          "start_line": 5,
+          "start_column": 7,
+          "end_line": 5,
+          "end_column": 35
+        }
+      },
+      "name": "conductkestrel",
+      "relationships": [
+        {
+          "kind": "calls",
+          "target": "conductkestrel"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "566b95b7ae4ad98f0e35b5a19b2af7f37dc97f133542dafa50a0c2e28f8e1e06"
+    },
+    {
+      "fact_id": "sf_6b95ef221699c3f2e2c8d464",
+      "kind": "module-export",
+      "location": {
+        "path": "app/api/kestrel/route.ts",
+        "span": {
+          "start_byte": 84,
+          "end_byte": 277,
+          "start_line": 3,
+          "start_column": 1,
+          "end_line": 7,
+          "end_column": 2
+        }
+      },
+      "name": "POST",
+      "relationships": [
+        {
+          "kind": "exports",
+          "target": "POST"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "6b95ef221699c3f2e2c8d464bafbcba6ccefa6693ca2c63adf20f3b0be6632b2"
+    },
+    {
+      "fact_id": "sf_9e55cae954e91ac5e6dfb457",
+      "kind": "call",
+      "location": {
+        "path": "app/api/kestrel/route.ts",
+        "span": {
+          "start_byte": 241,
+          "end_byte": 274,
+          "start_line": 6,
+          "start_column": 10,
+          "end_line": 6,
+          "end_column": 43
+        }
+      },
+      "name": "Response.json",
+      "relationships": [
+        {
+          "kind": "calls",
+          "target": "Response.json"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "9e55cae954e91ac5e6dfb457ac630d2c81c219477a0fa9a4fb8b01beae18082d"
+    },
+    {
+      "fact_id": "sf_a2a57154229f5691ca98433f",
+      "kind": "process-execution",
+      "location": {
+        "path": "app/lib/kestrel-workflow.ts",
+        "span": {
+          "start_byte": 107,
+          "end_byte": 149,
+          "start_line": 3,
+          "start_column": 3,
+          "end_line": 3,
+          "end_column": 45
+        }
+      },
+      "name": "execFile",
+      "relationships": [
+        {
+          "kind": "invokes",
+          "target": "execFile"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "a2a57154229f5691ca98433f807b6f45d146950db59820aeff8bb53455b3a1fa"
+    },
+    {
+      "fact_id": "sf_b0d41b97ee0c27a78faa0b5b",
+      "kind": "function",
+      "location": {
+        "path": "app/lib/kestrel-workflow.ts",
+        "span": {
+          "start_byte": 60,
+          "end_byte": 152,
+          "start_line": 2,
+          "start_column": 8,
+          "end_line": 4,
+          "end_column": 2
+        }
+      },
+      "name": "applykestrel",
+      "relationships": [],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "b0d41b97ee0c27a78faa0b5bf31deccbb3cd605fdd6073cf2f59e29119dc2103"
+    },
+    {
+      "fact_id": "sf_d13d67cb3067b613fae49358",
+      "kind": "call",
+      "location": {
+        "path": "app/lib/kestrel-workflow.ts",
+        "span": {
+          "start_byte": 107,
+          "end_byte": 149,
+          "start_line": 3,
+          "start_column": 3,
+          "end_line": 3,
+          "end_column": 45
+        }
+      },
+      "name": "execFile",
+      "relationships": [
+        {
+          "kind": "calls",
+          "target": "execFile"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "d13d67cb3067b613fae493589f643f46077bcc96fd00bee5bdbf9c5a6b92ee73"
+    },
+    {
+      "fact_id": "sf_e30699d462f0cb7c6b5f5d5d",
+      "kind": "call",
+      "location": {
+        "path": "app/api/kestrel/route.ts",
+        "span": {
+          "start_byte": 145,
+          "end_byte": 188,
+          "start_line": 4,
+          "start_column": 24,
+          "end_line": 4,
+          "end_column": 67
+        }
+      },
+      "name": "request.nextUrl.searchParams.get",
+      "relationships": [
+        {
+          "kind": "calls",
+          "target": "request.nextUrl.searchParams.get"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "e30699d462f0cb7c6b5f5d5d2407a7ace8514e92dbca3e62693e3cc6fcee8402"
+    }
+  ],
+  "parser_diagnostics": [],
+  "parser_coverage": [
+    {
+      "parser_mode": "typescript",
+      "files_eligible": 2,
+      "files_parsed": 2,
+      "files_with_diagnostics": 0,
+      "facts_extracted": 12
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "node_id": "gn_0c9635a0c60d00f95930bad7",
+        "kind": "module",
+        "name": "node:child_process",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 52,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 53
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "0c9635a0c60d00f95930bad74f95022537928f0a8843d5cfb612db5800a7e474"
+      },
+      {
+        "node_id": "gn_14e123744c574d4523825a9c",
+        "kind": "module-reference",
+        "name": "request.nextUrl.searchParams.get",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 145,
+            "end_byte": 188,
+            "start_line": 4,
+            "start_column": 24,
+            "end_line": 4,
+            "end_column": 67
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "14e123744c574d4523825a9cbefde63d637f98af07dda6945dbfd7f9eec39e8d"
+      },
+      {
+        "node_id": "gn_159f40404b1af92fa62edb3f",
+        "kind": "syntax-fact",
+        "name": "execFile",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 107,
+            "end_byte": 149,
+            "start_line": 3,
+            "start_column": 3,
+            "end_line": 3,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "159f40404b1af92fa62edb3f1ddc2e3ade9fddf913729abbc65dcfb6019d3a54"
+      },
+      {
+        "node_id": "gn_1f217c1a506d000853d85b99",
+        "kind": "module",
+        "name": "POST",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 84,
+            "end_byte": 277,
+            "start_line": 3,
+            "start_column": 1,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "1f217c1a506d000853d85b9991a9ce0935c1b74a520307713e6236c5b895c705"
+      },
+      {
+        "node_id": "gn_231f1584f17a59a5c204330b",
+        "kind": "module-reference",
+        "name": "../../../lib/kestrel-workflow.js",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 82,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 83
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "231f1584f17a59a5c204330b261ee45e7acefce3266954962b5b2cb0cec7b9ea"
+      },
+      {
+        "node_id": "gn_256f786c74bb9aa0363555a4",
+        "kind": "module",
+        "name": "../../../lib/kestrel-workflow.js",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 82,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 83
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "256f786c74bb9aa0363555a439ff10048feb33353598c85e7b5b5d5b066e51f1"
+      },
+      {
+        "node_id": "gn_2bcba1ce489779a45b0f169f",
+        "kind": "module-reference",
+        "name": "POST /api/kestrel",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 91,
+            "end_byte": 277,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "2bcba1ce489779a45b0f169f49de9704bd80eb5e0c8fd813ef5d6008a4c62c0e"
+      },
+      {
+        "node_id": "gn_388704df4ac9f0c56fc8ccf9",
+        "kind": "transformation",
+        "name": "kestrelValue",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.value",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 130,
+            "end_byte": 194,
+            "start_line": 4,
+            "start_column": 9,
+            "end_line": 4,
+            "end_column": 73
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "388704df4ac9f0c56fc8ccf97f827df1c4324011fb10d129ce5371a1a0e78f21"
+      },
+      {
+        "node_id": "gn_546b0a91f5b17e1424212aa4",
+        "kind": "call",
+        "name": "Response.json",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.local-call",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 241,
+            "end_byte": 274,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "546b0a91f5b17e1424212aa47ab06095258192e02fa3f21b3df1e705cb63b0e5"
+      },
+      {
+        "node_id": "gn_56c2e3c04f3f7faebb74bf3d",
+        "kind": "syntax-fact",
+        "name": "conductkestrel",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 202,
+            "end_byte": 230,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "56c2e3c04f3f7faebb74bf3daec9a4be61ea7a1002d8e25e2f192ee44183c284"
+      },
+      {
+        "node_id": "gn_5b375465700ede34f6280618",
+        "kind": "handler",
+        "name": "POST",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "untrusted-source",
+          "identity": "untrusted.handler-entry",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 91,
+            "end_byte": 277,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "5b375465700ede34f6280618570d60c97775268ea809d472c8c2c26b34dcdbe7"
+      },
+      {
+        "node_id": "gn_76d28d621c7f553755e923f7",
+        "kind": "module-reference",
+        "name": "applykestrel",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 53,
+            "end_byte": 152,
+            "start_line": 2,
+            "start_column": 1,
+            "end_line": 4,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "76d28d621c7f553755e923f7f65fe8cf73211d843db9e36856f14c1b073dca51"
+      },
+      {
+        "node_id": "gn_7b728bfb1eebc005549d47d4",
+        "kind": "file",
+        "name": "app/lib/kestrel-workflow.ts",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "7b728bfb1eebc005549d47d4da95aa687f81b2c5b811d49196df99b7ec5c0f2d"
+      },
+      {
+        "node_id": "gn_7ba1069d805663e0c2f6106f",
+        "kind": "source",
+        "name": "http-query-value",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "untrusted-source",
+          "identity": "untrusted.http-query-value",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 145,
+            "end_byte": 188,
+            "start_line": 4,
+            "start_column": 24,
+            "end_line": 4,
+            "end_column": 67
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "7ba1069d805663e0c2f6106ff073b844454da5d86cbee26615cd6160cc1769ea"
+      },
+      {
+        "node_id": "gn_7bc19abe37f08088a60c7f84",
+        "kind": "syntax-fact",
+        "name": "request.nextUrl.searchParams.get",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 145,
+            "end_byte": 188,
+            "start_line": 4,
+            "start_column": 24,
+            "end_line": 4,
+            "end_column": 67
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "7bc19abe37f08088a60c7f84f4ff80f76869dce868701b04430955743ed19076"
+      },
+      {
+        "node_id": "gn_833dbf151151e957d0faf4c6",
+        "kind": "sink",
+        "name": "process-execution",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "sensitive-sink",
+          "identity": "sink.process-execution",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 107,
+            "end_byte": 149,
+            "start_line": 3,
+            "start_column": 3,
+            "end_line": 3,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "833dbf151151e957d0faf4c691a523ce322d6884ef33da6e857301f4f648e81a"
+      },
+      {
+        "node_id": "gn_8ba4ff1281fa4f66b5cd176c",
+        "kind": "return",
+        "name": "@return",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.return",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 234,
+            "end_byte": 275,
+            "start_line": 6,
+            "start_column": 3,
+            "end_line": 6,
+            "end_column": 44
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "8ba4ff1281fa4f66b5cd176c21929928e2f1b334e3b02e9ed6acc9640b10b967"
+      },
+      {
+        "node_id": "gn_9f29e89744e70ecb67c2a78f",
+        "kind": "module",
+        "name": "node:child_process",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 52,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 53
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "9f29e89744e70ecb67c2a78fec4354fddcb58d9a0184299d79b55a9d3e835b96"
+      },
+      {
+        "node_id": "gn_a15cb7fc8193b09d31b31180",
+        "kind": "file",
+        "name": "app/api/kestrel/route.ts",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "a15cb7fc8193b09d31b31180e999771f741da7feddfb5f2a659ff07b44bccbee"
+      },
+      {
+        "node_id": "gn_a1fe997c56a5b0df273e7bc9",
+        "kind": "function",
+        "name": "applykestrel",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 60,
+            "end_byte": 152,
+            "start_line": 2,
+            "start_column": 8,
+            "end_line": 4,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "a1fe997c56a5b0df273e7bc9dbd57ef8c741265a1ac62c31ca92a4037bc3e700"
+      },
+      {
+        "node_id": "gn_a2cb0dde6b50b461932e004e",
+        "kind": "function",
+        "name": "POST",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 91,
+            "end_byte": 277,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "a2cb0dde6b50b461932e004eab101ceb474da08ca0b1640dc09a9072806f41e5"
+      },
+      {
+        "node_id": "gn_a58b128e43ff631cff76aa34",
+        "kind": "module-reference",
+        "name": "conductkestrel",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 202,
+            "end_byte": 230,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "a58b128e43ff631cff76aa348ad3f185af33c05e08c46b16394bb74c9d050a1e"
+      },
+      {
+        "node_id": "gn_a6e601b336a4846457f2ec70",
+        "kind": "module-reference",
+        "name": "node:child_process",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 52,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 53
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "a6e601b336a4846457f2ec704010ddc66609dba6dd7375c98c1aa730fe4cd721"
+      },
+      {
+        "node_id": "gn_afa0f5d2387a872fc70d142e",
+        "kind": "argument",
+        "name": "input",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.argument",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 88,
+            "end_byte": 93,
+            "start_line": 2,
+            "start_column": 36,
+            "end_line": 2,
+            "end_column": 41
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "afa0f5d2387a872fc70d142e845f622bd623284543fc86d793275e9b621915b8"
+      },
+      {
+        "node_id": "gn_b3aae2a936221e5f041f4d94",
+        "kind": "function",
+        "name": "applykestrel",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 60,
+            "end_byte": 152,
+            "start_line": 2,
+            "start_column": 8,
+            "end_line": 4,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "b3aae2a936221e5f041f4d9414ea8cdda8bf31cc2f75abafc141c3c0638e81ae"
+      },
+      {
+        "node_id": "gn_b657d94fb5c92715cf725219",
+        "kind": "syntax-fact",
+        "name": "Response.json",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 241,
+            "end_byte": 274,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "b657d94fb5c92715cf725219b905014da62c6ea4d8232abff5bfc1d390867f82"
+      },
+      {
+        "node_id": "gn_bf6d38c945e1409c0ada2c1b",
+        "kind": "module-reference",
+        "name": "Response.json",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 241,
+            "end_byte": 274,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "bf6d38c945e1409c0ada2c1baac44fdc50b0489d6ad60f0bf0d21688fda1a8ab"
+      },
+      {
+        "node_id": "gn_c5743a11f08a8cd5af5b30e9",
+        "kind": "sink",
+        "name": "execFile",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 107,
+            "end_byte": 149,
+            "start_line": 3,
+            "start_column": 3,
+            "end_line": 3,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "c5743a11f08a8cd5af5b30e9213c976cee0586f0b07ec69fa8cf9ab8c577c26f"
+      },
+      {
+        "node_id": "gn_c7168ca9a3266f002d97ae0e",
+        "kind": "handler",
+        "name": "POST",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 91,
+            "end_byte": 277,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "c7168ca9a3266f002d97ae0e77ff7abf59a02dff893d043d323a6ab7bc826d35"
+      },
+      {
+        "node_id": "gn_cc9a5dff4c4b225a431359b4",
+        "kind": "source",
+        "name": "request-parameter",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "untrusted-source",
+          "identity": "untrusted.request-value",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 111,
+            "end_byte": 118,
+            "start_line": 3,
+            "start_column": 28,
+            "end_line": 3,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "cc9a5dff4c4b225a431359b429eddd7f1daeb07223b9eee2742ebb765e30846a"
+      },
+      {
+        "node_id": "gn_d22c5a9ce253888bda9489c4",
+        "kind": "module",
+        "name": "app/lib/kestrel-workflow.ts",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "d22c5a9ce253888bda9489c4a71ca8758bd843ffafc5c72c364b4b28cf968428"
+      },
+      {
+        "node_id": "gn_d5a4b0d6c8d6cdead4a36074",
+        "kind": "module-reference",
+        "name": "execFile",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 107,
+            "end_byte": 149,
+            "start_line": 3,
+            "start_column": 3,
+            "end_line": 3,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "d5a4b0d6c8d6cdead4a36074b3080f7363ca9896165b0cca23bd231686973fdd"
+      },
+      {
+        "node_id": "gn_d9019fc53df491981d6f3d2f",
+        "kind": "module-reference",
+        "name": "POST",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 84,
+            "end_byte": 277,
+            "start_line": 3,
+            "start_column": 1,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "d9019fc53df491981d6f3d2f8bbb8f64680b88daccac971b91f8141e3c48a84d"
+      },
+      {
+        "node_id": "gn_eba667cb48bb58b82feb86c9",
+        "kind": "call",
+        "name": "applykestrel",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.local-call",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 202,
+            "end_byte": 230,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "eba667cb48bb58b82feb86c93c4032bbaa2624ad3204eb8f419750d03fda94f0"
+      },
+      {
+        "node_id": "gn_fbaed00adb6cd85c0bb996e0",
+        "kind": "module",
+        "name": "applykestrel",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 53,
+            "end_byte": 152,
+            "start_line": 2,
+            "start_column": 1,
+            "end_line": 4,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "fbaed00adb6cd85c0bb996e0089cf4dc1b5662409bdaffd117b285f25617a835"
+      },
+      {
+        "node_id": "gn_fd1451276cf04de4e5e6ec8f",
+        "kind": "module",
+        "name": "../../../lib/kestrel-workflow.js",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 82,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 83
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "fd1451276cf04de4e5e6ec8fb289730d938c33a41a00125a033fdf66e6faeb55"
+      },
+      {
+        "node_id": "gn_fec64f9714383818d13d7f87",
+        "kind": "module",
+        "name": "app/api/kestrel/route.ts",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "fec64f9714383818d13d7f879fc2841a1c77857bbd29d67f218bf6f59fb31008"
+      }
+    ],
+    "edges": [
+      {
+        "edge_id": "ge_054a7a6d0272185e6ffcf009",
+        "kind": "containment",
+        "from_node": "gn_d22c5a9ce253888bda9489c4",
+        "to_node": "gn_afa0f5d2387a872fc70d142e",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 88,
+            "end_byte": 93,
+            "start_line": 2,
+            "start_column": 36,
+            "end_line": 2,
+            "end_column": 41
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "054a7a6d0272185e6ffcf0093ad12e534ac3aeed04eb0dc468e4297f943dd00c"
+      },
+      {
+        "edge_id": "ge_082aa5aff635acf4dd5bfae8",
+        "kind": "containment",
+        "from_node": "gn_5b375465700ede34f6280618",
+        "to_node": "gn_7ba1069d805663e0c2f6106f",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 145,
+            "end_byte": 188,
+            "start_line": 4,
+            "start_column": 24,
+            "end_line": 4,
+            "end_column": 67
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "082aa5aff635acf4dd5bfae890577882b0cf7b8f593648691e162249f028cc2a"
+      },
+      {
+        "edge_id": "ge_114a01793ad64851c8182977",
+        "kind": "containment",
+        "from_node": "gn_d22c5a9ce253888bda9489c4",
+        "to_node": "gn_9f29e89744e70ecb67c2a78f",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 52,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 53
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "114a01793ad64851c81829777a7563e48c670380d813c1b3871d8d14c6699260"
+      },
+      {
+        "edge_id": "ge_130d6762a4015f761596b596",
+        "kind": "imports",
+        "from_node": "gn_256f786c74bb9aa0363555a4",
+        "to_node": "gn_231f1584f17a59a5c204330b",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 82,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 83
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "130d6762a4015f761596b596e98649d276cdaa9f0d8d69b170110432dfe6a0d5"
+      },
+      {
+        "edge_id": "ge_14ac8b394719a9608857ba9b",
+        "kind": "containment",
+        "from_node": "gn_fec64f9714383818d13d7f87",
+        "to_node": "gn_546b0a91f5b17e1424212aa4",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 241,
+            "end_byte": 274,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "14ac8b394719a9608857ba9b6f2d913dcd218208f68dfbe5fc196d815dff8011"
+      },
+      {
+        "edge_id": "ge_15274306113030aa7f306557",
+        "kind": "containment",
+        "from_node": "gn_7b728bfb1eebc005549d47d4",
+        "to_node": "gn_d22c5a9ce253888bda9489c4",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "15274306113030aa7f306557135532e294e16eb7db28462b2ea8fec29f846db7"
+      },
+      {
+        "edge_id": "ge_1a29f111f881d44abe40666f",
+        "kind": "argument-flow",
+        "from_node": "gn_eba667cb48bb58b82feb86c9",
+        "to_node": "gn_afa0f5d2387a872fc70d142e",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 88,
+            "end_byte": 93,
+            "start_line": 2,
+            "start_column": 36,
+            "end_line": 2,
+            "end_column": 41
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "1a29f111f881d44abe40666f42cd5b2237d1e4ba65eb2813f327a52249b1d505"
+      },
+      {
+        "edge_id": "ge_1a707f56e8282d2090bc152a",
+        "kind": "containment",
+        "from_node": "gn_fbaed00adb6cd85c0bb996e0",
+        "to_node": "gn_76d28d621c7f553755e923f7",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 53,
+            "end_byte": 152,
+            "start_line": 2,
+            "start_column": 1,
+            "end_line": 4,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "1a707f56e8282d2090bc152a4f97a2053b50127ce6fd22c80455cf4db0c66019"
+      },
+      {
+        "edge_id": "ge_1ce73494651c570793a1fb39",
+        "kind": "containment",
+        "from_node": "gn_fec64f9714383818d13d7f87",
+        "to_node": "gn_c7168ca9a3266f002d97ae0e",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 91,
+            "end_byte": 277,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "1ce73494651c570793a1fb3913f3cb41585bc0e74e1abe0ba4d0b5381f63e35f"
+      },
+      {
+        "edge_id": "ge_20d0641d46c361a423e64036",
+        "kind": "containment",
+        "from_node": "gn_b3aae2a936221e5f041f4d94",
+        "to_node": "gn_b3aae2a936221e5f041f4d94",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 60,
+            "end_byte": 152,
+            "start_line": 2,
+            "start_column": 8,
+            "end_line": 4,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "20d0641d46c361a423e64036b66ca9fdb33a4e9f08dbd5f3ce90e8856046a3e3"
+      },
+      {
+        "edge_id": "ge_2fb9e6517fc665fb82c9c854",
+        "kind": "source-to-sink-propagation",
+        "from_node": "gn_afa0f5d2387a872fc70d142e",
+        "to_node": "gn_833dbf151151e957d0faf4c6",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 107,
+            "end_byte": 149,
+            "start_line": 3,
+            "start_column": 3,
+            "end_line": 3,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "2fb9e6517fc665fb82c9c85472c3a58780f750e3ba9884182fec365286627527"
+      },
+      {
+        "edge_id": "ge_328e201bd8730f6d58d522ba",
+        "kind": "containment",
+        "from_node": "gn_d22c5a9ce253888bda9489c4",
+        "to_node": "gn_c5743a11f08a8cd5af5b30e9",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 107,
+            "end_byte": 149,
+            "start_line": 3,
+            "start_column": 3,
+            "end_line": 3,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "328e201bd8730f6d58d522baed4650f8385028ea87496f767ea3a505e8d2b916"
+      },
+      {
+        "edge_id": "ge_3405a4c250ba349a1925629c",
+        "kind": "containment",
+        "from_node": "gn_5b375465700ede34f6280618",
+        "to_node": "gn_8ba4ff1281fa4f66b5cd176c",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 234,
+            "end_byte": 275,
+            "start_line": 6,
+            "start_column": 3,
+            "end_line": 6,
+            "end_column": 44
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "3405a4c250ba349a1925629c1ae432e45bf3e7f4d30f5006d558d6b7511e5127"
+      },
+      {
+        "edge_id": "ge_37cb19c196d3bf5d26b80d46",
+        "kind": "control-flow",
+        "from_node": "gn_5b375465700ede34f6280618",
+        "to_node": "gn_eba667cb48bb58b82feb86c9",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 202,
+            "end_byte": 230,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "37cb19c196d3bf5d26b80d46ba7f2b1577c0f7f83cd5176e9d9eae1b8842e077"
+      },
+      {
+        "edge_id": "ge_38e5007d1f1d8f573339f30e",
+        "kind": "containment",
+        "from_node": "gn_d22c5a9ce253888bda9489c4",
+        "to_node": "gn_0c9635a0c60d00f95930bad7",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 52,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 53
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "38e5007d1f1d8f573339f30e3ee0b965c7b2b44803af96c85a6413df1a93ec26"
+      },
+      {
+        "edge_id": "ge_394432a749a39c25cca8ce98",
+        "kind": "argument-flow",
+        "from_node": "gn_388704df4ac9f0c56fc8ccf9",
+        "to_node": "gn_eba667cb48bb58b82feb86c9",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 202,
+            "end_byte": 230,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "394432a749a39c25cca8ce988185767c83d598f6c7d6ad2898e3392fcdf61d88"
+      },
+      {
+        "edge_id": "ge_3b4176427d52f90482e7a868",
+        "kind": "containment",
+        "from_node": "gn_fec64f9714383818d13d7f87",
+        "to_node": "gn_b657d94fb5c92715cf725219",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 241,
+            "end_byte": 274,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "3b4176427d52f90482e7a86840e503ef8be8e2deea0b53f2e0503ce9bf9c3ba5"
+      },
+      {
+        "edge_id": "ge_3df8b22aa5d4103d41c98321",
+        "kind": "containment",
+        "from_node": "gn_1f217c1a506d000853d85b99",
+        "to_node": "gn_d9019fc53df491981d6f3d2f",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 84,
+            "end_byte": 277,
+            "start_line": 3,
+            "start_column": 1,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "3df8b22aa5d4103d41c98321c844bfdb358263604ec0bea7a04314505ecb13be"
+      },
+      {
+        "edge_id": "ge_45d7d4f7e8c6292440b55d02",
+        "kind": "control-flow",
+        "from_node": "gn_388704df4ac9f0c56fc8ccf9",
+        "to_node": "gn_eba667cb48bb58b82feb86c9",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 202,
+            "end_byte": 230,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "45d7d4f7e8c6292440b55d0210f219b55b9cf742e4735e36f155f2f227c5a997"
+      },
+      {
+        "edge_id": "ge_51bd0f3929ca4ead250f930f",
+        "kind": "containment",
+        "from_node": "gn_d22c5a9ce253888bda9489c4",
+        "to_node": "gn_159f40404b1af92fa62edb3f",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 107,
+            "end_byte": 149,
+            "start_line": 3,
+            "start_column": 3,
+            "end_line": 3,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "51bd0f3929ca4ead250f930f16b4fa42e2324809b10965fbbb67788e8f0b0b8c"
+      },
+      {
+        "edge_id": "ge_5524d5155851a283b66d7025",
+        "kind": "containment",
+        "from_node": "gn_fec64f9714383818d13d7f87",
+        "to_node": "gn_256f786c74bb9aa0363555a4",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 82,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 83
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "5524d5155851a283b66d70258d198c49a29dfd369d25ce009e66f2bfa7dacf28"
+      },
+      {
+        "edge_id": "ge_56aac7bcd8e4a32c98cf4402",
+        "kind": "containment",
+        "from_node": "gn_fec64f9714383818d13d7f87",
+        "to_node": "gn_cc9a5dff4c4b225a431359b4",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 111,
+            "end_byte": 118,
+            "start_line": 3,
+            "start_column": 28,
+            "end_line": 3,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "56aac7bcd8e4a32c98cf4402409232f43f9e1aa0e892b1e21166ed9a05eb8784"
+      },
+      {
+        "edge_id": "ge_57527bb1552da1600c55adb1",
+        "kind": "containment",
+        "from_node": "gn_5b375465700ede34f6280618",
+        "to_node": "gn_eba667cb48bb58b82feb86c9",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 202,
+            "end_byte": 230,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "57527bb1552da1600c55adb1ebd0b96a078ddbae17854b8a149d28cac475e953"
+      },
+      {
+        "edge_id": "ge_587b198930636356f8a75bd9",
+        "kind": "containment",
+        "from_node": "gn_d22c5a9ce253888bda9489c4",
+        "to_node": "gn_a1fe997c56a5b0df273e7bc9",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 60,
+            "end_byte": 152,
+            "start_line": 2,
+            "start_column": 8,
+            "end_line": 4,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "587b198930636356f8a75bd963f3e8a07443e259315dbedbbdeed7c9e94bbffd"
+      },
+      {
+        "edge_id": "ge_6075cb34ea4cdc54020f5fa6",
+        "kind": "control-flow",
+        "from_node": "gn_eba667cb48bb58b82feb86c9",
+        "to_node": "gn_8ba4ff1281fa4f66b5cd176c",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 234,
+            "end_byte": 275,
+            "start_line": 6,
+            "start_column": 3,
+            "end_line": 6,
+            "end_column": 44
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "6075cb34ea4cdc54020f5fa67b19251f5011b941974cca8fcfbf164088558285"
+      },
+      {
+        "edge_id": "ge_61b4b6dca6368b60b96a10bb",
+        "kind": "containment",
+        "from_node": "gn_5b375465700ede34f6280618",
+        "to_node": "gn_388704df4ac9f0c56fc8ccf9",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 130,
+            "end_byte": 194,
+            "start_line": 4,
+            "start_column": 9,
+            "end_line": 4,
+            "end_column": 73
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "61b4b6dca6368b60b96a10bb0f2a911d523e557fc28a62104920562751be8f4c"
+      },
+      {
+        "edge_id": "ge_6291fcb899110fef6838a9c1",
+        "kind": "containment",
+        "from_node": "gn_5b375465700ede34f6280618",
+        "to_node": "gn_cc9a5dff4c4b225a431359b4",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 111,
+            "end_byte": 118,
+            "start_line": 3,
+            "start_column": 28,
+            "end_line": 3,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "6291fcb899110fef6838a9c181a112feb3d61367e9369debbf61475875b7eca1"
+      },
+      {
+        "edge_id": "ge_66f58aaba922018615c03438",
+        "kind": "containment",
+        "from_node": "gn_fec64f9714383818d13d7f87",
+        "to_node": "gn_7bc19abe37f08088a60c7f84",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 145,
+            "end_byte": 188,
+            "start_line": 4,
+            "start_column": 24,
+            "end_line": 4,
+            "end_column": 67
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "66f58aaba922018615c034381115158a8b9a1a85d94172e973efae1d77084a13"
+      },
+      {
+        "edge_id": "ge_6aa032ca9c39276d90a7a6ad",
+        "kind": "containment",
+        "from_node": "gn_fec64f9714383818d13d7f87",
+        "to_node": "gn_fd1451276cf04de4e5e6ec8f",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 82,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 83
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "6aa032ca9c39276d90a7a6ad13e80357f2d0e7f0b238e3c07aeedb60aecc016e"
+      },
+      {
+        "edge_id": "ge_70e072f9d48eff0004fef69d",
+        "kind": "containment",
+        "from_node": "gn_fec64f9714383818d13d7f87",
+        "to_node": "gn_a2cb0dde6b50b461932e004e",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 91,
+            "end_byte": 277,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "70e072f9d48eff0004fef69da28ecb77917c099b6b727355871db561aa2f316f"
+      },
+      {
+        "edge_id": "ge_8523ef6707c6a0dbaddbf623",
+        "kind": "containment",
+        "from_node": "gn_b3aae2a936221e5f041f4d94",
+        "to_node": "gn_afa0f5d2387a872fc70d142e",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 88,
+            "end_byte": 93,
+            "start_line": 2,
+            "start_column": 36,
+            "end_line": 2,
+            "end_column": 41
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "8523ef6707c6a0dbaddbf6235f2b74aac0c1e849dc9d52d333e6d11862671959"
+      },
+      {
+        "edge_id": "ge_87ff4583a9fe7457c656d252",
+        "kind": "control-flow",
+        "from_node": "gn_8ba4ff1281fa4f66b5cd176c",
+        "to_node": "gn_546b0a91f5b17e1424212aa4",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 241,
+            "end_byte": 274,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "87ff4583a9fe7457c656d252d174dc47e196510aeb4faf2d2293e4cbbbff8731"
+      },
+      {
+        "edge_id": "ge_8ade51365921eee141893269",
+        "kind": "containment",
+        "from_node": "gn_fec64f9714383818d13d7f87",
+        "to_node": "gn_7ba1069d805663e0c2f6106f",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 145,
+            "end_byte": 188,
+            "start_line": 4,
+            "start_column": 24,
+            "end_line": 4,
+            "end_column": 67
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "8ade51365921eee141893269106fb5cc9462ac0abf81de4037b561a344c63165"
+      },
+      {
+        "edge_id": "ge_92dcfda5b816143f3b2f0cbe",
+        "kind": "containment",
+        "from_node": "gn_a15cb7fc8193b09d31b31180",
+        "to_node": "gn_fec64f9714383818d13d7f87",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "92dcfda5b816143f3b2f0cbe59af40bea312f541beb61c0e10b1aa3166aa12b6"
+      },
+      {
+        "edge_id": "ge_a0a90882284a4e1ffc05996d",
+        "kind": "calls",
+        "from_node": "gn_7bc19abe37f08088a60c7f84",
+        "to_node": "gn_14e123744c574d4523825a9c",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 145,
+            "end_byte": 188,
+            "start_line": 4,
+            "start_column": 24,
+            "end_line": 4,
+            "end_column": 67
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "a0a90882284a4e1ffc05996dd9282159416f5e746bd8a4abf1a39ffb41a4b948"
+      },
+      {
+        "edge_id": "ge_a4c31566fd9b41362da95b96",
+        "kind": "containment",
+        "from_node": "gn_fec64f9714383818d13d7f87",
+        "to_node": "gn_5b375465700ede34f6280618",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 91,
+            "end_byte": 277,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "a4c31566fd9b41362da95b969f9f0e9ac1b70fe6682477828cf44098f395fc48"
+      },
+      {
+        "edge_id": "ge_aa43cc3479aa9417111d57ce",
+        "kind": "containment",
+        "from_node": "gn_5b375465700ede34f6280618",
+        "to_node": "gn_546b0a91f5b17e1424212aa4",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 241,
+            "end_byte": 274,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "aa43cc3479aa9417111d57ce9fa8ffeee18864f7d1642d31738406e329e7995f"
+      },
+      {
+        "edge_id": "ge_af51eaf72ce47aaf1a8960af",
+        "kind": "containment",
+        "from_node": "gn_fec64f9714383818d13d7f87",
+        "to_node": "gn_8ba4ff1281fa4f66b5cd176c",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 234,
+            "end_byte": 275,
+            "start_line": 6,
+            "start_column": 3,
+            "end_line": 6,
+            "end_column": 44
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "af51eaf72ce47aaf1a8960afe36f65fb7f54b7231bb9fdbc42022b3ab6dc847e"
+      },
+      {
+        "edge_id": "ge_b7582e9f5cb93e81e19b048b",
+        "kind": "containment",
+        "from_node": "gn_d22c5a9ce253888bda9489c4",
+        "to_node": "gn_b3aae2a936221e5f041f4d94",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 60,
+            "end_byte": 152,
+            "start_line": 2,
+            "start_column": 8,
+            "end_line": 4,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "b7582e9f5cb93e81e19b048b40cd9dd027830d92d83ef5b35579fc151777da28"
+      },
+      {
+        "edge_id": "ge_b7f8df22099e5e72da7687d5",
+        "kind": "containment",
+        "from_node": "gn_fec64f9714383818d13d7f87",
+        "to_node": "gn_56c2e3c04f3f7faebb74bf3d",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 202,
+            "end_byte": 230,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "b7f8df22099e5e72da7687d50a91a4ed299cadab16c39d672ae73241a7ac0eb4"
+      },
+      {
+        "edge_id": "ge_b97ab4033de0f8852790aa0e",
+        "kind": "calls",
+        "from_node": "gn_159f40404b1af92fa62edb3f",
+        "to_node": "gn_d5a4b0d6c8d6cdead4a36074",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 107,
+            "end_byte": 149,
+            "start_line": 3,
+            "start_column": 3,
+            "end_line": 3,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "b97ab4033de0f8852790aa0e4a984fe31dc98a0c96a7ed0adc5e4c2fa62c2413"
+      },
+      {
+        "edge_id": "ge_c6fcaadcaa50167fa50cef40",
+        "kind": "imports",
+        "from_node": "gn_9f29e89744e70ecb67c2a78f",
+        "to_node": "gn_a6e601b336a4846457f2ec70",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 52,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 53
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "c6fcaadcaa50167fa50cef40f8841aecc83f0bdd429d6190c809096a78c66360"
+      },
+      {
+        "edge_id": "ge_c8dd64186ba03aa4881c8393",
+        "kind": "source-to-sink-propagation",
+        "from_node": "gn_7ba1069d805663e0c2f6106f",
+        "to_node": "gn_388704df4ac9f0c56fc8ccf9",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 130,
+            "end_byte": 194,
+            "start_line": 4,
+            "start_column": 9,
+            "end_line": 4,
+            "end_column": 73
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "c8dd64186ba03aa4881c8393d9410a1a5d5dd50e904027f1e96d7a212cbb5600"
+      },
+      {
+        "edge_id": "ge_c97806b5ce6103428f669e73",
+        "kind": "containment",
+        "from_node": "gn_fec64f9714383818d13d7f87",
+        "to_node": "gn_388704df4ac9f0c56fc8ccf9",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 130,
+            "end_byte": 194,
+            "start_line": 4,
+            "start_column": 9,
+            "end_line": 4,
+            "end_column": 73
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "c97806b5ce6103428f669e7357ce90651111d34c0f98b4eb44b907b4f27b1671"
+      },
+      {
+        "edge_id": "ge_cd3c20b0e3912738ed4f981f",
+        "kind": "containment",
+        "from_node": "gn_d22c5a9ce253888bda9489c4",
+        "to_node": "gn_fbaed00adb6cd85c0bb996e0",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 53,
+            "end_byte": 152,
+            "start_line": 2,
+            "start_column": 1,
+            "end_line": 4,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "cd3c20b0e3912738ed4f981fce7edfc856689c5f2e8ffe12e881faa4d15b2edc"
+      },
+      {
+        "edge_id": "ge_d1d37ef73e3d684b97f412c4",
+        "kind": "containment",
+        "from_node": "gn_d22c5a9ce253888bda9489c4",
+        "to_node": "gn_833dbf151151e957d0faf4c6",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 107,
+            "end_byte": 149,
+            "start_line": 3,
+            "start_column": 3,
+            "end_line": 3,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "d1d37ef73e3d684b97f412c4616e1724a5f69321b314be9164a58f7e45c441c6"
+      },
+      {
+        "edge_id": "ge_d44006cba227e1a66eb9efc4",
+        "kind": "calls",
+        "from_node": "gn_c5743a11f08a8cd5af5b30e9",
+        "to_node": "gn_d5a4b0d6c8d6cdead4a36074",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 107,
+            "end_byte": 149,
+            "start_line": 3,
+            "start_column": 3,
+            "end_line": 3,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "d44006cba227e1a66eb9efc457066bd4b7bdc14beac9a278f1d79f0ab08d597b"
+      },
+      {
+        "edge_id": "ge_db764ac21e0fba9b3a609e50",
+        "kind": "containment",
+        "from_node": "gn_b3aae2a936221e5f041f4d94",
+        "to_node": "gn_833dbf151151e957d0faf4c6",
+        "location": {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 107,
+            "end_byte": 149,
+            "start_line": 3,
+            "start_column": 3,
+            "end_line": 3,
+            "end_column": 45
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "db764ac21e0fba9b3a609e505c3be63c171ef78f7a02b100d5dd8b3d19498be4"
+      },
+      {
+        "edge_id": "ge_de9a8600b8bd4dc446af942d",
+        "kind": "calls",
+        "from_node": "gn_56c2e3c04f3f7faebb74bf3d",
+        "to_node": "gn_a58b128e43ff631cff76aa34",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 202,
+            "end_byte": 230,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "de9a8600b8bd4dc446af942dc49c2c2c89ae97fa2f3f7081f9999c427719ab50"
+      },
+      {
+        "edge_id": "ge_df722dd9279637de10d385bd",
+        "kind": "containment",
+        "from_node": "gn_fec64f9714383818d13d7f87",
+        "to_node": "gn_eba667cb48bb58b82feb86c9",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 202,
+            "end_byte": 230,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "df722dd9279637de10d385bd198e426e55d8c4ab58e480bada251419de5a0720"
+      },
+      {
+        "edge_id": "ge_ecdd254b2770f2c4f3470f86",
+        "kind": "calls",
+        "from_node": "gn_eba667cb48bb58b82feb86c9",
+        "to_node": "gn_b3aae2a936221e5f041f4d94",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 202,
+            "end_byte": 230,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 35
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "ecdd254b2770f2c4f3470f8632b56235dc3068772e484f9e659e4926facd4de1"
+      },
+      {
+        "edge_id": "ge_f3127bbf8598c6ded965c01a",
+        "kind": "containment",
+        "from_node": "gn_5b375465700ede34f6280618",
+        "to_node": "gn_5b375465700ede34f6280618",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 91,
+            "end_byte": 277,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "f3127bbf8598c6ded965c01af6fb436954286f4ab92cd59e2c39d8591d4c1691"
+      },
+      {
+        "edge_id": "ge_f4857f1f823ed6ffe718f876",
+        "kind": "containment",
+        "from_node": "gn_c7168ca9a3266f002d97ae0e",
+        "to_node": "gn_2bcba1ce489779a45b0f169f",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 91,
+            "end_byte": 277,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "f4857f1f823ed6ffe718f876854bdb196ed456feca1b0a56f19382eed38b290e"
+      },
+      {
+        "edge_id": "ge_fb031c9e77104eac3b535cd3",
+        "kind": "calls",
+        "from_node": "gn_b657d94fb5c92715cf725219",
+        "to_node": "gn_bf6d38c945e1409c0ada2c1b",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 241,
+            "end_byte": 274,
+            "start_line": 6,
+            "start_column": 10,
+            "end_line": 6,
+            "end_column": 43
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "fb031c9e77104eac3b535cd3b072c1f022902339a8347041cc5facd9844651ea"
+      },
+      {
+        "edge_id": "ge_fc6a29541955027d4a2bfa7c",
+        "kind": "containment",
+        "from_node": "gn_fec64f9714383818d13d7f87",
+        "to_node": "gn_1f217c1a506d000853d85b99",
+        "location": {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 84,
+            "end_byte": 277,
+            "start_line": 3,
+            "start_column": 1,
+            "end_line": 7,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "fc6a29541955027d4a2bfa7c1037fc8a6e26d937b5ebb722b6a9f6d37cacef96"
+      }
+    ]
+  },
+  "analysis": {
+    "nodes": 37,
+    "edges": 55,
+    "candidate_paths": 1,
+    "rules_evaluated": 7,
+    "findings": 1,
+    "findings_suppressed": 0,
+    "duration_ms": 0,
+    "truncated": false
+  },
+  "suppression_diagnostics": [],
+  "taxonomy_catalog": [
+    {
+      "taxonomy_name": "secure-bench-taxonomy-v1",
+      "taxonomy_version": "1.0.0",
+      "source_version": "CWE 4.20",
+      "source_commit": "93c0821db065de436a339c15b070e158947ad76c",
+      "schema_sha256": "cdecd643d338aa8ae42ec7398c6c4703cb97d60ad355340c98744fc94bcb7d6f",
+      "taxonomy_sha256": "059fe22d7707cf8d17f2c1621fdae9819787a1958ba2ef0421eca4e4ec858452",
+      "methodology_sha256": "eac27e5800be35c5ae77f7804e52ae90462cbda403a5484baa8fab62f02ab562",
+      "content_hash": "22852bd7401020b315af11dfa2b60c0b46f78eb19f95079e6400d7b3bea3272c"
+    }
+  ],
+  "files": [
+    {
+      "path": "app/api/kestrel/route.ts",
+      "kind": "source",
+      "size_bytes": 278,
+      "content_fingerprint": "a8f4b806efa6a134da780fce0310208b535308d56727b47aae93ad2541c12cea",
+      "language": "TypeScript",
+      "origin": "project",
+      "is_binary": false
+    },
+    {
+      "path": "app/lib/kestrel-workflow.ts",
+      "kind": "source",
+      "size_bytes": 153,
+      "content_fingerprint": "654979bc0343dbb81c47770ebbf915ed934a95af5a8b7c5d952ca49140aa148c",
+      "language": "TypeScript",
+      "origin": "project",
+      "is_binary": false
+    },
+    {
+      "path": "package.json",
+      "kind": "manifest",
+      "size_bytes": 150,
+      "content_fingerprint": "147d8a65fada9288bec46aef123b498809fdb51215c290b86141138463ccd6cf",
+      "language": null,
+      "origin": "project",
+      "is_binary": false
+    }
+  ],
+  "languages": [
+    {
+      "name": "TypeScript",
+      "file_count": 2,
+      "bytes": 431
+    }
+  ],
+  "manifests": [
+    {
+      "kind": "npm",
+      "location": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 0,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 1
+        }
+      },
+      "fingerprint": "6748a38bc87b5b19f763c5883b78fc1e6b11efffa9b16c0682221bf1b9422f2d"
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Next.js",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 26,
+          "end_byte": 32,
+          "start_line": 3,
+          "start_column": 5,
+          "end_line": 3,
+          "end_column": 11
+        }
+      },
+      "fingerprint": "ab947c3b74a997a0213d6f4e7400ab58f98892ef985417413fb54b0870052f8a"
+    }
+  ],
+  "entry_points": [],
+  "capabilities": [
+    {
+      "capability": "dependency-management",
+      "reason": "Detected npm manifest",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 0,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 1
+        }
+      },
+      "fingerprint": "cb0fd89861ca491f95e737908187cfd232f12ed2afba2ed3fbd7ba1c579a9ab2"
+    }
+  ],
+  "trust_boundaries": [
+    {
+      "kind": "dependency-supply-chain",
+      "description": "Declared third-party dependency boundary",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 0,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 1
+        }
+      },
+      "fingerprint": "72752772107d5ef650d956e907952867e651a93c7d08723f6a7fd36f0215c479"
+    },
+    {
+      "kind": "network-request",
+      "description": "Next.js may expose network request entry points",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 26,
+          "end_byte": 32,
+          "start_line": 3,
+          "start_column": 5,
+          "end_line": 3,
+          "end_column": 11
+        }
+      },
+      "fingerprint": "95eaaa9c288e6fb2c08590a93d816a59c9d5fc6351d5910465bc0af6091d4d20"
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "SE1001",
+      "finding_id": "fd_a3998173de62b41145d10995",
+      "title": "Untrusted input reaches command execution",
+      "category": "command-injection",
+      "severity": "high",
+      "confidence": "high",
+      "evidence": [
+        {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 145,
+            "end_byte": 188,
+            "start_line": 4,
+            "start_column": 24,
+            "end_line": 4,
+            "end_column": 67
+          }
+        },
+        {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 130,
+            "end_byte": 194,
+            "start_line": 4,
+            "start_column": 9,
+            "end_line": 4,
+            "end_column": 73
+          }
+        },
+        {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 202,
+            "end_byte": 230,
+            "start_line": 5,
+            "start_column": 7,
+            "end_line": 5,
+            "end_column": 35
+          }
+        },
+        {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 88,
+            "end_byte": 93,
+            "start_line": 2,
+            "start_column": 36,
+            "end_line": 2,
+            "end_column": 41
+          }
+        },
+        {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 107,
+            "end_byte": 149,
+            "start_line": 3,
+            "start_column": 3,
+            "end_line": 3,
+            "end_column": 45
+          }
+        }
+      ],
+      "source": {
+        "path": "app/api/kestrel/route.ts",
+        "span": {
+          "start_byte": 145,
+          "end_byte": 188,
+          "start_line": 4,
+          "start_column": 24,
+          "end_line": 4,
+          "end_column": 67
+        }
+      },
+      "transformations": [
+        {
+          "path": "app/api/kestrel/route.ts",
+          "span": {
+            "start_byte": 130,
+            "end_byte": 194,
+            "start_line": 4,
+            "start_column": 9,
+            "end_line": 4,
+            "end_column": 73
+          }
+        },
+        {
+          "path": "app/lib/kestrel-workflow.ts",
+          "span": {
+            "start_byte": 88,
+            "end_byte": 93,
+            "start_line": 2,
+            "start_column": 36,
+            "end_line": 2,
+            "end_column": 41
+          }
+        }
+      ],
+      "guards": [],
+      "sink": {
+        "path": "app/lib/kestrel-workflow.ts",
+        "span": {
+          "start_byte": 107,
+          "end_byte": 149,
+          "start_line": 3,
+          "start_column": 3,
+          "end_line": 3,
+          "end_column": 45
+        }
+      },
+      "evidence_path": [
+        {
+          "node_id": "gn_7ba1069d805663e0c2f6106f",
+          "edge_id_from_previous": null,
+          "kind": "source",
+          "semantic": {
+            "semantics_version": "secure-evidence-semantics-v2",
+            "role": "untrusted-source",
+            "identity": "untrusted.http-query-value",
+            "certainty": "proven"
+          },
+          "location": {
+            "path": "app/api/kestrel/route.ts",
+            "span": {
+              "start_byte": 145,
+              "end_byte": 188,
+              "start_line": 4,
+              "start_column": 24,
+              "end_line": 4,
+              "end_column": 67
+            }
+          },
+          "provenance": {
+            "parser": "secure-tree-sitter-adapter-v1",
+            "parser_version": "0.26.11",
+            "grammar": "tree-sitter-typescript@0.23.2:typescript",
+            "extractor_version": "secure-evidence-graph-v1"
+          },
+          "fingerprint": "146da9f51b857cb8597b9ae73dfe257457f6c8235edbf393e4e76e759804d99e"
+        },
+        {
+          "node_id": "gn_388704df4ac9f0c56fc8ccf9",
+          "edge_id_from_previous": "ge_c8dd64186ba03aa4881c8393",
+          "kind": "transformation",
+          "semantic": {
+            "semantics_version": "secure-evidence-semantics-v2",
+            "role": "transformation",
+            "identity": "transformation.value",
+            "certainty": "proven"
+          },
+          "location": {
+            "path": "app/api/kestrel/route.ts",
+            "span": {
+              "start_byte": 130,
+              "end_byte": 194,
+              "start_line": 4,
+              "start_column": 9,
+              "end_line": 4,
+              "end_column": 73
+            }
+          },
+          "provenance": {
+            "parser": "secure-tree-sitter-adapter-v1",
+            "parser_version": "0.26.11",
+            "grammar": "tree-sitter-typescript@0.23.2:typescript",
+            "extractor_version": "secure-evidence-graph-v1"
+          },
+          "fingerprint": "a608082c2168aa5f244f4cab84b87649f09d0b46a3753a9fcf7bd40f04039682"
+        },
+        {
+          "node_id": "gn_eba667cb48bb58b82feb86c9",
+          "edge_id_from_previous": "ge_394432a749a39c25cca8ce98",
+          "kind": "call",
+          "semantic": {
+            "semantics_version": "secure-evidence-semantics-v2",
+            "role": "transformation",
+            "identity": "transformation.local-call",
+            "certainty": "proven"
+          },
+          "location": {
+            "path": "app/api/kestrel/route.ts",
+            "span": {
+              "start_byte": 202,
+              "end_byte": 230,
+              "start_line": 5,
+              "start_column": 7,
+              "end_line": 5,
+              "end_column": 35
+            }
+          },
+          "provenance": {
+            "parser": "secure-tree-sitter-adapter-v1",
+            "parser_version": "0.26.11",
+            "grammar": "tree-sitter-typescript@0.23.2:typescript",
+            "extractor_version": "secure-evidence-graph-v1"
+          },
+          "fingerprint": "8fddde2f33ebd7ca2938e6e46d517f4fdce72489e07fb1c9740c2780a9df8094"
+        },
+        {
+          "node_id": "gn_afa0f5d2387a872fc70d142e",
+          "edge_id_from_previous": "ge_1a29f111f881d44abe40666f",
+          "kind": "argument",
+          "semantic": {
+            "semantics_version": "secure-evidence-semantics-v2",
+            "role": "transformation",
+            "identity": "transformation.argument",
+            "certainty": "proven"
+          },
+          "location": {
+            "path": "app/lib/kestrel-workflow.ts",
+            "span": {
+              "start_byte": 88,
+              "end_byte": 93,
+              "start_line": 2,
+              "start_column": 36,
+              "end_line": 2,
+              "end_column": 41
+            }
+          },
+          "provenance": {
+            "parser": "secure-tree-sitter-adapter-v1",
+            "parser_version": "0.26.11",
+            "grammar": "tree-sitter-typescript@0.23.2:typescript",
+            "extractor_version": "secure-evidence-graph-v1"
+          },
+          "fingerprint": "08cc16e9b20a358032d4926c2987a43b1a48a5b2929d2d599023141d55cd2dee"
+        },
+        {
+          "node_id": "gn_833dbf151151e957d0faf4c6",
+          "edge_id_from_previous": "ge_2fb9e6517fc665fb82c9c854",
+          "kind": "sink",
+          "semantic": {
+            "semantics_version": "secure-evidence-semantics-v2",
+            "role": "sensitive-sink",
+            "identity": "sink.process-execution",
+            "certainty": "proven"
+          },
+          "location": {
+            "path": "app/lib/kestrel-workflow.ts",
+            "span": {
+              "start_byte": 107,
+              "end_byte": 149,
+              "start_line": 3,
+              "start_column": 3,
+              "end_line": 3,
+              "end_column": 45
+            }
+          },
+          "provenance": {
+            "parser": "secure-tree-sitter-adapter-v1",
+            "parser_version": "0.26.11",
+            "grammar": "tree-sitter-typescript@0.23.2:typescript",
+            "extractor_version": "secure-evidence-graph-v1"
+          },
+          "fingerprint": "55032ffbaf48bdf4bd450bf2f7606e66448ab850608ef3697b8043f9353eace5"
+        }
+      ],
+      "invariant": "Command execution arguments must not be controlled by untrusted input",
+      "taxonomy": {
+        "taxonomy_version": "1.0.0",
+        "category_id": "secure-bench.category.command-execution",
+        "invariant_id": "secure-bench.invariant.command-control-data-separation"
+      },
+      "primary_cwe": {
+        "id": "CWE-78",
+        "url": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "taxonomy_provenance": {
+        "taxonomy_name": "secure-bench-taxonomy-v1",
+        "source_commit": "93c0821db065de436a339c15b070e158947ad76c",
+        "content_hash": "22852bd7401020b315af11dfa2b60c0b46f78eb19f95079e6400d7b3bea3272c",
+        "mapping_basis": "secure-engine-built-in-rule-family"
+      },
+      "prerequisites": [
+        "An attacker can control the demonstrated request value",
+        "The process has permission to execute the sink"
+      ],
+      "impact": "Arbitrary command execution with the application process privileges",
+      "remediation": "Avoid shell construction; use fixed executables and allowlisted arguments",
+      "verification_state": "verified-deterministic-path",
+      "limitations": [
+        "Bounded static analysis does not model runtime framework middleware"
+      ],
+      "fingerprint": "a3998173de62b41145d10995649808c0cf7f0944a8b6a1efdf6ca2565dec4ec4",
+      "semantic_fingerprint": "1286ac9c7a590ce52bd0ca142a2d0001e7fd0723afb6bc756a8afa784c721e1a",
+      "evidence_contract_v2": {
+        "contract_version": "2.0.0",
+        "semantics_version": "secure-evidence-semantics-v2",
+        "path": [
+          {
+            "role": "source",
+            "effect": "preserves_influence",
+            "source_kind": "http_query_value",
+            "span": {
+              "path": "app/api/kestrel/route.ts",
+              "span": {
+                "start_byte": 145,
+                "end_byte": 188,
+                "start_line": 4,
+                "start_column": 24,
+                "end_line": 4,
+                "end_column": 67
+              }
+            },
+            "summarizable": false
+          },
+          {
+            "role": "propagation",
+            "effect": "preserves_influence",
+            "span": {
+              "path": "app/api/kestrel/route.ts",
+              "span": {
+                "start_byte": 130,
+                "end_byte": 194,
+                "start_line": 4,
+                "start_column": 9,
+                "end_line": 4,
+                "end_column": 73
+              }
+            },
+            "summarizable": true
+          },
+          {
+            "role": "propagation",
+            "effect": "preserves_influence",
+            "span": {
+              "path": "app/api/kestrel/route.ts",
+              "span": {
+                "start_byte": 202,
+                "end_byte": 230,
+                "start_line": 5,
+                "start_column": 7,
+                "end_line": 5,
+                "end_column": 35
+              }
+            },
+            "summarizable": true
+          },
+          {
+            "role": "propagation",
+            "effect": "preserves_influence",
+            "span": {
+              "path": "app/lib/kestrel-workflow.ts",
+              "span": {
+                "start_byte": 88,
+                "end_byte": 93,
+                "start_line": 2,
+                "start_column": 36,
+                "end_line": 2,
+                "end_column": 41
+              }
+            },
+            "summarizable": true
+          },
+          {
+            "role": "sink",
+            "effect": "preserves_influence",
+            "sink_kind": "os_command_execution",
+            "span": {
+              "path": "app/lib/kestrel-workflow.ts",
+              "span": {
+                "start_byte": 107,
+                "end_byte": 149,
+                "start_line": 3,
+                "start_column": 3,
+                "end_line": 3,
+                "end_column": 45
+              }
+            },
+            "summarizable": false
+          }
+        ],
+        "connected_edges": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "effective_barriers": [],
+        "unresolved_call": false,
+        "uncertain": false,
+        "fingerprint": "0a58db306950ae1038b00880beadb8e3f09a1e50c887339378ac685339923995",
+        "duplicate_fingerprint": "6fc585e6ccccd12d10d1f0e98f9e5004650357e15c2bd720196bbf19d456e39e"
+      }
+    }
+  ],
+  "limitations": [
+    {
+      "code": "deterministic-rules-limited",
+      "message": "Phase 3 runs only the documented high-confidence JavaScript and TypeScript rules"
+    },
+    {
+      "code": "parser-coverage-limited",
+      "message": "Language-aware parsing is limited to JavaScript, JSX, TypeScript, and TSX"
+    },
+    {
+      "code": "framework-hints-only",
+      "message": "Framework evidence is a manifest hint and not semantic proof"
+    },
+    {
+      "code": "symlinks-not-followed",
+      "message": "Symbolic links are recorded but never followed"
+    },
+    {
+      "code": "vcs-metadata-excluded",
+      "message": "Version-control metadata directories are never inventoried"
+    },
+    {
+      "code": "hidden-files-excluded",
+      "message": "Hidden files and directories were excluded by configuration"
+    },
+    {
+      "code": "ignored-files-excluded",
+      "message": "Inputs matched by repository ignore rules were excluded before reading"
+    },
+    {
+      "code": "generated-directories-excluded",
+      "message": "Common generated and build directories were excluded before reading"
+    },
+    {
+      "code": "vendor-directories-excluded",
+      "message": "Common vendored dependency directories were excluded before reading"
+    },
+    {
+      "code": "nested-repositories-excluded",
+      "message": "Nested repositories, worktrees, and submodules were excluded"
+    },
+    {
+      "code": "bounded-interprocedural-analysis",
+      "message": "Local inter-procedural propagation is bounded to 4 traversal levels"
+    },
+    {
+      "code": "dynamic-resolution-limited",
+      "message": "Dynamic imports, non-unique aliases, callbacks, recursion, and unresolved calls are not followed"
+    },
+    {
+      "code": "semantic-resolution-bounded",
+      "message": "Semantic identities, aliases, guards, and value correspondence are resolved only from deterministic local syntax within configured graph and inter-procedural bounds"
+    },
+    {
+      "code": "framework-middleware-not-modeled",
+      "message": "Authentication supplied only by external framework middleware is not proven by this phase"
+    }
+  ],
+  "skipped_files": [],
+  "exclusions": [],
+  "errors": [],
+  "report_fingerprint": "b1451647a74b12f97af9caf065addf33534bbf44113f1db97013161325646bb6"
+}

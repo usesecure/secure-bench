@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-bench.invalid/schemas/phase7-pre-execution-v1.schema.json",
+  "title": "Secure Bench Phase 7 Pre-Execution Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "frozen_at_utc", "git_base", "branch", "run_id", "git", "scanner", "holdout", "frozen_evaluator", "resources", "environment", "benchmark_binary_sha256", "phase7_evaluator_files", "historical_artifacts"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase7-pre-execution-v1" },
+    "frozen_at_utc": { "type": "string", "format": "date-time" },
+    "git_base": { "$ref": "#/$defs/git_commit" },
+    "branch": { "const": "codex/phase-7-secure-engine-0-1-3-orthogonal-holdout" },
+    "run_id": { "const": "secure-engine-0-1-3-orthogonal-holdout-once" },
+    "git": { "$ref": "#/$defs/git" },
+    "scanner": { "$ref": "#/$defs/scanner" },
+    "holdout": { "$ref": "#/$defs/holdout" },
+    "frozen_evaluator": { "$ref": "#/$defs/frozen_evaluator" },
+    "resources": { "$ref": "#/$defs/resources" },
+    "environment": { "$ref": "#/$defs/environment" },
+    "benchmark_binary_sha256": { "$ref": "#/$defs/hash" },
+    "phase7_evaluator_files": { "$ref": "#/$defs/hash_map" },
+    "historical_artifacts": {
+      "type": "object",
+      "minProperties": 4,
+      "maxProperties": 4,
+      "additionalProperties": { "$ref": "#/$defs/hash" }
+    }
+  },
+  "$defs": {
+    "hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "git_commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "hash_map": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/hash" }
+    },
+    "git": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["main_commit", "head_commit", "current_branch", "object_integrity", "signatures", "dco_signoffs"],
+      "properties": {
+        "main_commit": { "$ref": "#/$defs/git_commit" },
+        "head_commit": { "$ref": "#/$defs/git_commit" },
+        "current_branch": { "const": "codex/phase-7-secure-engine-0-1-3-orthogonal-holdout" },
+        "object_integrity": { "const": "passed" },
+        "signatures": { "$ref": "#/$defs/validation_map" },
+        "dco_signoffs": { "$ref": "#/$defs/validation_map" }
+      }
+    },
+    "validation_map": {
+      "type": "object",
+      "minProperties": 2,
+      "maxProperties": 2,
+      "propertyNames": { "$ref": "#/$defs/git_commit" },
+      "additionalProperties": { "const": "valid" }
+    },
+    "scanner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["declared_version", "binary_sha256", "source_rpm_sha256", "command_template", "report_schema", "configuration_sha256", "ai_validation", "version_probe", "environment_clear"],
+      "properties": {
+        "declared_version": { "type": "string", "minLength": 1 },
+        "binary_sha256": { "const": "8678666b532380187d38968628908363970c960078c63489d26af35d31840902" },
+        "source_rpm_sha256": { "const": "ceb9ce77feee5df9a1a5766e72fd610504f67cdd1a2a958753c75e4001501d8d" },
+        "command_template": { "const": ["scan", "{fixture}", "--format", "secure-json-v1", "--output", "{report}"] },
+        "report_schema": { "const": "secure-json-v1" },
+        "configuration_sha256": { "const": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855" },
+        "ai_validation": { "const": "disabled-without-provider-credentials-endpoints-or-commands" },
+        "version_probe": { "const": "not-executed" },
+        "environment_clear": { "const": true }
+      }
+    },
+    "holdout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["holdout_id", "manifest_sha256", "evidence_contract_sha256", "ledger_before_sha256", "aggregate_corpus_sha256", "contract_merkle_root", "taxonomy_artifact_sha256", "taxonomy_content_hash", "pairs", "cases", "vulnerable_cases", "safe_controls", "frozen_tree_sha256", "prior_execution"],
+      "properties": {
+        "holdout_id": { "const": "phase-5-orthogonal-holdout-v2" },
+        "manifest_sha256": { "const": "0bf17f093146c99bdc128fd39513b490f9774b427a252bc5fa508b4444c05827" },
+        "evidence_contract_sha256": { "const": "142c7f31c6c584cc808410130fa7db8451427e87504e72e64868c9cbc6564c42" },
+        "ledger_before_sha256": { "const": "dee6f5be204c4d4b7758c3afbbdd52997eaac090f636b6b15df7f7aabe7a1704" },
+        "aggregate_corpus_sha256": { "const": "8f5f43e497e953be79cfb23891e2d3059392c2a24b3143b136e7dc9609cc3b04" },
+        "contract_merkle_root": { "const": "f21b545b942beeb3f37232f39da7adecc1eb1f7694c24ea37a981c8ac20110cb" },
+        "taxonomy_artifact_sha256": { "const": "059fe22d7707cf8d17f2c1621fdae9819787a1958ba2ef0421eca4e4ec858452" },
+        "taxonomy_content_hash": { "$ref": "#/$defs/hash" },
+        "pairs": { "const": 56 },
+        "cases": { "const": 112 },
+        "vulnerable_cases": { "const": 56 },
+        "safe_controls": { "const": 56 },
+        "frozen_tree_sha256": { "$ref": "#/$defs/hash" },
+        "prior_execution": { "const": "absent" }
+      }
+    },
+    "frozen_evaluator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_commit", "evaluator_sha256", "files", "integration_wrapper_drift", "projection_validation"],
+      "properties": {
+        "source_commit": { "const": "ac85c6f09f48057e4bcebb7249e2487fe43e1902" },
+        "evaluator_sha256": { "const": "363db2f0201ceb681134687e87313359ad7db83bec767ac99473201fde8b2b7a" },
+        "files": { "$ref": "#/$defs/hash_map" },
+        "integration_wrapper_drift": {
+          "type": "object",
+          "minProperties": 3,
+          "maxProperties": 3,
+          "additionalProperties": { "$ref": "#/$defs/drift" }
+        },
+        "projection_validation": { "const": "passed-112-cases-and-synthetic-contract-vectors" }
+      }
+    },
+    "drift": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["frozen_sha256", "current_sha256", "classification"],
+      "properties": {
+        "frozen_sha256": { "$ref": "#/$defs/hash" },
+        "current_sha256": { "$ref": "#/$defs/hash" },
+        "classification": { "const": "integration-wrapper-only-non-scoring" }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["timeout_ms", "memory_bytes", "output_bytes", "network", "namespace_scope"],
+      "properties": {
+        "timeout_ms": { "const": 60000 },
+        "memory_bytes": { "const": 1073741824 },
+        "output_bytes": { "const": 10485760 },
+        "network": { "const": "blocked" },
+        "namespace_scope": { "const": "fresh-bwrap-unshare-net-per-scanner-process" }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["os", "architecture", "kernel_release", "rust_toolchain", "bwrap_sha256", "isolation", "expected_interfaces", "probe_target"],
+      "properties": {
+        "os": { "type": "string", "minLength": 1 },
+        "architecture": { "type": "string", "minLength": 1 },
+        "kernel_release": { "type": "string", "minLength": 1 },
+        "rust_toolchain": { "const": "1.96" },
+        "bwrap_sha256": { "$ref": "#/$defs/hash" },
+        "isolation": { "const": "bubblewrap-minimal-read-only-runtime-unshare-net" },
+        "expected_interfaces": { "const": ["lo"] },
+        "probe_target": { "const": "1.1.1.1:53" }
+      }
+    }
+  }
+}

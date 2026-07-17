@@ -12,6 +12,9 @@ use crate::phase5::{
     SyntheticContractSuiteV2,
 };
 use crate::phase6::{RetiredHoldoutDiagnosticPack, RetiredRegressionManifest};
+use crate::phase7::{
+    Phase7Artifacts, Phase7LedgerEntry, Phase7PreExecutionContract, Phase7Result, Phase7Run,
+};
 use crate::runner::LiveRun;
 use crate::taxonomy::FrozenTaxonomy;
 use serde_json::Value;
@@ -51,6 +54,14 @@ const PHASE6_DIAGNOSTIC_SCHEMA: &str =
     include_str!("../../../schemas/phase6-retired-diagnostic-v1.schema.json");
 const PHASE6_REGRESSION_SCHEMA: &str =
     include_str!("../../../schemas/phase6-regression-manifest-v1.schema.json");
+const PHASE7_PRE_EXECUTION_SCHEMA: &str =
+    include_str!("../../../schemas/phase7-pre-execution-v1.schema.json");
+const PHASE7_RUN_SCHEMA: &str = include_str!("../../../schemas/phase7-run-v1.schema.json");
+const PHASE7_RESULT_SCHEMA: &str = include_str!("../../../schemas/phase7-result-v1.schema.json");
+const PHASE7_ARTIFACTS_SCHEMA: &str =
+    include_str!("../../../schemas/phase7-artifacts-v1.schema.json");
+const PHASE7_LEDGER_SCHEMA: &str =
+    include_str!("../../../schemas/phase7-ledger-entry-v1.schema.json");
 
 /// Schema loading or validation failure.
 #[derive(Clone, Debug, Eq, Error, PartialEq)]
@@ -320,6 +331,57 @@ pub fn validate_phase6_regression(manifest: &RetiredRegressionManifest) -> Resul
     )
 }
 
+/// Validates a Phase 7 pre-execution contract.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] if the schema, projection, or instance is invalid.
+pub fn validate_phase7_pre_execution(
+    contract: &Phase7PreExecutionContract,
+) -> Result<(), SchemaError> {
+    validate_typed(
+        "Phase 7 pre-execution contract",
+        PHASE7_PRE_EXECUTION_SCHEMA,
+        contract,
+    )
+}
+
+/// Validates a retained Phase 7 run.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] if the schema, projection, or instance is invalid.
+pub fn validate_phase7_run(run: &Phase7Run) -> Result<(), SchemaError> {
+    validate_typed("Phase 7 run", PHASE7_RUN_SCHEMA, run)
+}
+
+/// Validates a deterministic Phase 7 result.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] if the schema, projection, or instance is invalid.
+pub fn validate_phase7_result(result: &Phase7Result) -> Result<(), SchemaError> {
+    validate_typed("Phase 7 result", PHASE7_RESULT_SCHEMA, result)
+}
+
+/// Validates a Phase 7 artifact index.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] if the schema, projection, or instance is invalid.
+pub fn validate_phase7_artifacts(artifacts: &Phase7Artifacts) -> Result<(), SchemaError> {
+    validate_typed("Phase 7 artifact index", PHASE7_ARTIFACTS_SCHEMA, artifacts)
+}
+
+/// Validates a Phase 7 append-only ledger entry.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] if the schema, projection, or instance is invalid.
+pub fn validate_phase7_ledger_entry(entry: &Phase7LedgerEntry) -> Result<(), SchemaError> {
+    validate_typed("Phase 7 ledger entry", PHASE7_LEDGER_SCHEMA, entry)
+}
+
 fn validate_typed<T: serde::Serialize>(
     contract: &'static str,
     schema_text: &str,
@@ -378,6 +440,11 @@ mod tests {
             ("Phase 5 contract tests", PHASE5_CONTRACT_TESTS_SCHEMA),
             ("Phase 6 retired diagnostic", PHASE6_DIAGNOSTIC_SCHEMA),
             ("Phase 6 regression manifest", PHASE6_REGRESSION_SCHEMA),
+            ("Phase 7 pre-execution", PHASE7_PRE_EXECUTION_SCHEMA),
+            ("Phase 7 run", PHASE7_RUN_SCHEMA),
+            ("Phase 7 result", PHASE7_RESULT_SCHEMA),
+            ("Phase 7 artifact index", PHASE7_ARTIFACTS_SCHEMA),
+            ("Phase 7 ledger entry", PHASE7_LEDGER_SCHEMA),
         ] {
             let value: Value = serde_json::from_str(schema)?;
             jsonschema::validator_for(&value)

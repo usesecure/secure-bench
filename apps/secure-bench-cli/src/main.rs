@@ -14,6 +14,11 @@ use secure_bench_core::phase4::{
 };
 use secure_bench_core::phase5::{generate_phase5, validate_phase5};
 use secure_bench_core::phase6::{generate_phase6, validate_phase6};
+use secure_bench_core::phase7::{
+    Phase7ExecutionRequest, Phase7PrepareRequest, Phase7Result, Phase7VerificationRequest,
+    canonical_phase7_json, execute_phase7, phase7_isolated_exec, prepare_phase7,
+    verify_phase7_artifacts,
+};
 use secure_bench_core::runner::{
     DEFAULT_SECURE_ENGINE_ARGUMENTS, RunnerRequest, load_live_run, run_secure_engine,
     valid_report_path,
@@ -81,6 +86,14 @@ enum Command {
         #[command(subcommand)]
         command: Phase6Command,
     },
+    /// Prepare, execute once, verify, or summarize the Phase 7 orthogonal holdout.
+    Phase7 {
+        #[command(subcommand)]
+        command: Phase7Command,
+    },
+    /// Internal fresh-namespace entry point; never called directly by an operator.
+    #[command(hide = true)]
+    Phase7IsolatedExec,
     /// Validate or inspect the sealed Phase 3 holdout without executing a scanner.
     Holdout {
         #[command(subcommand)]
@@ -360,6 +373,104 @@ enum Phase6Command {
 }
 
 #[derive(Debug, Subcommand)]
+enum Phase7Command {
+    /// Freeze every prerequisite without starting the scanner.
+    Prepare {
+        #[arg(long, default_value = ".")]
+        repository_root: PathBuf,
+        #[arg(long)]
+        frozen_evaluator_root: PathBuf,
+        #[arg(long)]
+        binary: PathBuf,
+        #[arg(long)]
+        source_rpm: PathBuf,
+        #[arg(long)]
+        benchmark_binary: PathBuf,
+        #[arg(long, default_value = "holdout/phase-5/manifest.json")]
+        manifest: PathBuf,
+        #[arg(long, default_value = "holdout/phase-5/evidence-contract-v2.json")]
+        evidence_contract: PathBuf,
+        #[arg(long, default_value = "taxonomy/secure-bench-taxonomy-v1.json")]
+        taxonomy: PathBuf,
+        #[arg(long, default_value = "holdout/phase-5/execution-ledger.jsonl")]
+        ledger: PathBuf,
+        #[arg(long)]
+        frozen_at_utc: String,
+        #[arg(long)]
+        run_directory: PathBuf,
+        #[arg(long)]
+        result: PathBuf,
+        #[arg(long)]
+        artifacts: PathBuf,
+        #[arg(long)]
+        output: PathBuf,
+    },
+    /// Consume the one-shot slot with one fresh network namespace per case.
+    Execute {
+        #[arg(long, default_value = ".")]
+        repository_root: PathBuf,
+        #[arg(long)]
+        frozen_evaluator_root: PathBuf,
+        #[arg(long)]
+        binary: PathBuf,
+        #[arg(long)]
+        source_rpm: PathBuf,
+        #[arg(long)]
+        benchmark_binary: PathBuf,
+        #[arg(long)]
+        pre_execution_contract: PathBuf,
+        #[arg(long, default_value = "holdout/phase-5/manifest.json")]
+        manifest: PathBuf,
+        #[arg(long, default_value = "holdout/phase-5/evidence-contract-v2.json")]
+        evidence_contract: PathBuf,
+        #[arg(long, default_value = "taxonomy/secure-bench-taxonomy-v1.json")]
+        taxonomy: PathBuf,
+        #[arg(long, default_value = "holdout/phase-5/execution-ledger.jsonl")]
+        ledger: PathBuf,
+        #[arg(long)]
+        run_directory: PathBuf,
+        #[arg(long)]
+        result: PathBuf,
+        #[arg(long)]
+        artifacts: PathBuf,
+    },
+    /// Recompute and verify all artifacts without starting a scanner.
+    Verify {
+        #[arg(long, default_value = ".")]
+        repository_root: PathBuf,
+        #[arg(long)]
+        frozen_evaluator_root: PathBuf,
+        #[arg(long)]
+        binary: PathBuf,
+        #[arg(long)]
+        source_rpm: PathBuf,
+        #[arg(long)]
+        benchmark_binary: PathBuf,
+        #[arg(long)]
+        pre_execution_contract: PathBuf,
+        #[arg(long, default_value = "holdout/phase-5/manifest.json")]
+        manifest: PathBuf,
+        #[arg(long, default_value = "holdout/phase-5/evidence-contract-v2.json")]
+        evidence_contract: PathBuf,
+        #[arg(long, default_value = "taxonomy/secure-bench-taxonomy-v1.json")]
+        taxonomy: PathBuf,
+        #[arg(long, default_value = "holdout/phase-5/execution-ledger.jsonl")]
+        ledger: PathBuf,
+        #[arg(long)]
+        run_directory: PathBuf,
+        #[arg(long)]
+        result: PathBuf,
+        #[arg(long)]
+        artifacts: PathBuf,
+    },
+    /// Print aggregate Phase 7 metrics without disclosing holdout answers.
+    Summary {
+        #[arg(long)]
+        result: PathBuf,
+    },
+}
+
+#[derive(Debug, Subcommand)]
 enum HoldoutCommand {
     /// Validate schemas, frozen commitments, fixtures, mutation proofs, and ledger state.
     Validate {
@@ -446,6 +557,8 @@ fn run(cli: Cli) -> Result<(), String> {
         Command::Phase4 { command } => run_phase4_command(command),
         Command::Phase5 { command } => run_phase5_command(command),
         Command::Phase6 { command } => run_phase6_command(command),
+        Command::Phase7 { command } => run_phase7_command(command),
+        Command::Phase7IsolatedExec => phase7_isolated_exec().map_err(|error| error.to_string()),
         Command::Holdout { command } => run_holdout_command(command),
         Command::Isolation { command } => run_isolation_command(command),
         Command::Run {
@@ -649,6 +762,215 @@ fn run_phase6_command(command: Phase6Command) -> Result<(), String> {
             validation.cases, validation.pairs
         );
         Ok(())
+    }
+}
+
+#[allow(clippy::too_many_lines)]
+fn run_phase7_command(command: Phase7Command) -> Result<(), String> {
+    match command {
+        Phase7Command::Prepare {
+            repository_root,
+            frozen_evaluator_root,
+            binary,
+            source_rpm,
+            benchmark_binary,
+            manifest,
+            evidence_contract,
+            taxonomy,
+            ledger,
+            frozen_at_utc,
+            run_directory,
+            result,
+            artifacts,
+            output,
+        } => {
+            if fs::symlink_metadata(&output).is_ok() {
+                return Err("Phase 7 pre-execution contract output already exists".to_owned());
+            }
+            let manifest = read_bounded(&manifest, MAX_MANIFEST_BYTES, "Phase 5 manifest")?;
+            let evidence_contract = read_bounded(
+                &evidence_contract,
+                MAX_MANIFEST_BYTES,
+                "evidence contract v2",
+            )?;
+            let taxonomy = read_bounded(&taxonomy, MAX_MANIFEST_BYTES, "taxonomy")?;
+            let ledger = read_bounded(&ledger, MAX_MANIFEST_BYTES, "Phase 5 ledger")?;
+            let contract = prepare_phase7(&Phase7PrepareRequest {
+                repository_root: &repository_root,
+                frozen_evaluator_root: &frozen_evaluator_root,
+                binary: &binary,
+                source_rpm: &source_rpm,
+                benchmark_binary: &benchmark_binary,
+                manifest: &manifest,
+                evidence_contract: &evidence_contract,
+                taxonomy: &taxonomy,
+                ledger: &ledger,
+                frozen_at_utc: &frozen_at_utc,
+                run_directory: &run_directory,
+                artifacts_path: &artifacts,
+                result_path: &result,
+            })
+            .map_err(|error| error.to_string())?;
+            atomic_write(
+                &output,
+                &canonical_phase7_json(&contract).map_err(|error| error.to_string())?,
+            )?;
+            println!(
+                "Froze the complete Phase 7 pre-execution contract; no scanner command was executed."
+            );
+            Ok(())
+        }
+        Phase7Command::Execute {
+            repository_root,
+            frozen_evaluator_root,
+            binary,
+            source_rpm,
+            benchmark_binary,
+            pre_execution_contract,
+            manifest,
+            evidence_contract,
+            taxonomy,
+            ledger,
+            run_directory,
+            result,
+            artifacts,
+        } => {
+            let pre_execution = read_bounded(
+                &pre_execution_contract,
+                MAX_MANIFEST_BYTES,
+                "Phase 7 pre-execution contract",
+            )?;
+            let manifest = read_bounded(&manifest, MAX_MANIFEST_BYTES, "Phase 5 manifest")?;
+            let evidence_contract_bytes = read_bounded(
+                &evidence_contract,
+                MAX_MANIFEST_BYTES,
+                "evidence contract v2",
+            )?;
+            let taxonomy = read_bounded(&taxonomy, MAX_MANIFEST_BYTES, "taxonomy")?;
+            let cancellation = Arc::new(AtomicBool::new(false));
+            let signal = Arc::clone(&cancellation);
+            ctrlc::set_handler(move || {
+                signal.store(true, std::sync::atomic::Ordering::SeqCst);
+            })
+            .map_err(|error| format!("could not install cancellation handler: {error}"))?;
+            let pre_execution_relative =
+                repository_relative(&repository_root, &pre_execution_contract)?;
+            let run_relative =
+                repository_relative(&repository_root, &run_directory.join("run.json"))?;
+            let result_relative = repository_relative(&repository_root, &result)?;
+            let ledger_relative = repository_relative(&repository_root, &ledger)?;
+            let completed = execute_phase7(&Phase7ExecutionRequest {
+                repository_root: &repository_root,
+                frozen_evaluator_root: &frozen_evaluator_root,
+                binary: &binary,
+                source_rpm: &source_rpm,
+                benchmark_binary: &benchmark_binary,
+                pre_execution_contract: &pre_execution,
+                manifest: &manifest,
+                evidence_contract: &evidence_contract_bytes,
+                taxonomy: &taxonomy,
+                ledger_path: &ledger,
+                run_directory: &run_directory,
+                result_path: &result,
+                artifacts_path: &artifacts,
+                pre_execution_contract_path: &pre_execution_relative,
+                run_path: &run_relative,
+                result_path_relative: &result_relative,
+                ledger_path_relative: &ledger_relative,
+                cancellation,
+            })
+            .map_err(|error| error.to_string())?;
+            println!(
+                "Completed the sole Phase 7 run and bound result {} to the append-only ledger.",
+                completed.result_sha256
+            );
+            Ok(())
+        }
+        Phase7Command::Verify {
+            repository_root,
+            frozen_evaluator_root,
+            binary,
+            source_rpm,
+            benchmark_binary,
+            pre_execution_contract,
+            manifest,
+            evidence_contract,
+            taxonomy,
+            ledger,
+            run_directory,
+            result,
+            artifacts,
+        } => {
+            let pre_execution = read_bounded(
+                &pre_execution_contract,
+                MAX_MANIFEST_BYTES,
+                "Phase 7 pre-execution contract",
+            )?;
+            let manifest = read_bounded(&manifest, MAX_MANIFEST_BYTES, "Phase 5 manifest")?;
+            let evidence_contract = read_bounded(
+                &evidence_contract,
+                MAX_MANIFEST_BYTES,
+                "evidence contract v2",
+            )?;
+            let taxonomy = read_bounded(&taxonomy, MAX_MANIFEST_BYTES, "taxonomy")?;
+            let ledger = read_bounded(&ledger, MAX_RESULT_BYTES, "Phase 5/7 ledger")?;
+            let run = read_bounded(
+                &run_directory.join("run.json"),
+                MAX_RESULT_BYTES,
+                "Phase 7 run",
+            )?;
+            let result = read_bounded(&result, MAX_RESULT_BYTES, "Phase 7 result")?;
+            let artifacts = read_bounded(&artifacts, MAX_MANIFEST_BYTES, "Phase 7 artifact index")?;
+            let verified = verify_phase7_artifacts(&Phase7VerificationRequest {
+                repository_root: &repository_root,
+                frozen_evaluator_root: &frozen_evaluator_root,
+                binary: &binary,
+                source_rpm: &source_rpm,
+                benchmark_binary: &benchmark_binary,
+                pre_execution_contract: &pre_execution,
+                manifest: &manifest,
+                evidence_contract: &evidence_contract,
+                taxonomy: &taxonomy,
+                ledger: &ledger,
+                run: &run,
+                result: &result,
+                artifacts: &artifacts,
+                run_directory: &run_directory,
+            })
+            .map_err(|error| error.to_string())?;
+            println!(
+                "Verified all 112 outcomes, deterministic evaluation, artifact hashes, and ledger chain {} without executing a scanner.",
+                verified.ledger_sha256
+            );
+            Ok(())
+        }
+        Phase7Command::Summary { result } => {
+            let bytes = read_bounded(&result, MAX_RESULT_BYTES, "Phase 7 result")?;
+            let result: Phase7Result = serde_json::from_slice(&bytes).map_err(|error| {
+                format!("Phase 7 result JSON is invalid at line {}", error.line())
+            })?;
+            let counts = &result.metrics.counts;
+            println!(
+                "Phase 7 aggregate: exact={}, partial={}, missed={}, out_of_scope={}, controls_flagged={}, controls_clean={}, failures={}, duplicates={}, unrelated={}, precision={}/{}, recall={}/{}, f1={}/{}, semantic_fingerprint={}",
+                counts.exact_detections,
+                counts.partial_matches,
+                counts.misses,
+                counts.out_of_scope,
+                counts.safe_controls_flagged,
+                counts.clean_safe_controls,
+                counts.not_attempted + counts.safe_controls_not_attempted,
+                counts.duplicate_findings,
+                counts.unrelated_findings,
+                result.metrics.precision.numerator,
+                result.metrics.precision.denominator,
+                result.metrics.recall.numerator,
+                result.metrics.recall.denominator,
+                result.metrics.f1.numerator,
+                result.metrics.f1.denominator,
+                result.semantic_fingerprint
+            );
+            Ok(())
+        }
     }
 }
 
