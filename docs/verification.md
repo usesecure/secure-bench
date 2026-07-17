@@ -1,5 +1,27 @@
 # Secure Bench Phase 0–2 Verification
 
+## Phase 8 retrospective adjudication
+
+Phase 8 is implemented in the separate `phase8` Rust workspace so the frozen Phase 7 evaluator
+files and root lockfile remain byte-identical. Its executable has no process-launching API and
+reads only the 112 committed Phase 7 reports and recorded execution metadata. Use `summary` for
+an in-memory recomputation and `verify` for byte comparison against the committed result and
+separate ledger:
+
+```bash
+cargo fmt --manifest-path phase8/Cargo.toml --all --check
+cargo clippy --locked --manifest-path phase8/Cargo.toml --all-targets --all-features -- -D warnings
+cargo test --locked --manifest-path phase8/Cargo.toml
+cargo run --locked --manifest-path phase8/Cargo.toml -- summary .
+cargo run --locked --manifest-path phase8/Cargo.toml -- verify .
+```
+
+These commands do not execute Secure Engine or a holdout case. Verification checks every original
+hash and report, the 79/33 exit correlation, frozen-adapter validity, deterministic repeated
+adjudication, unchanged evidence-contract-v2 matching, schemas, privacy, provenance, the separate
+114-entry adjudication chain, and a source-level no-process audit. Root-workspace gates remain
+required independently.
+
 ## Phase 6 diagnostic package
 
 Run `secure-bench phase6 validate --repository-root .` to reconstruct and verify the retired-corpus diagnostic package. This command has no scanner execution path. It validates historical hashes, retained reports, public fixture copies, record hashes, deterministic serialization, schemas, prospective contract-only audit vectors, confounding matrices, provenance, and Phase 5 non-disclosure guards.

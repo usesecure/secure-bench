@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/process-status-policy-v1.schema.json",
+  "title": "Secure Bench process-status policy v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "policy_version", "scope", "precedence", "invariants", "statuses"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-process-status-policy-v1" },
+    "policy_version": { "const": "1.0.0" },
+    "scope": { "type": "string", "minLength": 1 },
+    "precedence": { "type": "array", "minItems": 4, "items": { "type": "string", "minLength": 1 } },
+    "invariants": { "type": "array", "minItems": 4, "items": { "type": "string", "minLength": 1 } },
+    "statuses": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "clean_successful_report",
+        "successful_findings_report",
+        "policy_exit_with_valid_findings_report",
+        "genuine_crash",
+        "timeout",
+        "missing_report",
+        "malformed_report",
+        "internally_errored_report"
+      ],
+      "properties": {
+        "clean_successful_report": { "type": "string", "minLength": 1 },
+        "successful_findings_report": { "type": "string", "minLength": 1 },
+        "policy_exit_with_valid_findings_report": { "type": "string", "minLength": 1 },
+        "genuine_crash": { "type": "string", "minLength": 1 },
+        "timeout": { "type": "string", "minLength": 1 },
+        "missing_report": { "type": "string", "minLength": 1 },
+        "malformed_report": { "type": "string", "minLength": 1 },
+        "internally_errored_report": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "secure-bench-process-status-policy-v1",
+  "policy_version": "1.0.0",
+  "scope": "Tool-neutral prospective adjudication of process termination and public report authority",
+  "precedence": [
+    "timeout and forced termination remain terminal process failures",
+    "signals and execution infrastructure failures remain genuine crashes",
+    "normally exited processes are adjudicated against the current retained report",
+    "a complete internally error-free adapter-valid findings report is authoritative despite a nonzero normal exit code"
+  ],
+  "invariants": [
+    "a nonzero code alone cannot establish a crash when an authoritative findings report exists",
+    "an empty report after a nonzero exit does not erase process failure",
+    "missing malformed incomplete internally errored and adapter-invalid outputs remain distinct failures",
+    "status adjudication never receives fixtures expectations taxonomy labels or scanner identity",
+    "every report and process code remains retained as provenance"
+  ],
+  "statuses": {
+    "clean_successful_report": "Normal exit code zero with a complete internally error-free adapter-valid report containing no findings",
+    "genuine_crash": "Signal execution infrastructure failure or nonzero normal exit without an authoritative findings report",
+    "internally_errored_report": "Schema-valid report that is incomplete or declares scanner-internal errors",
+    "malformed_report": "Missing contract structure unsupported schema privacy-unsafe content or adapter-invalid output",
+    "missing_report": "No current report artifact was produced",
+    "policy_exit_with_valid_findings_report": "Nonzero normal exit with a complete internally error-free adapter-valid report containing findings",
+    "successful_findings_report": "Normal exit code zero with a complete internally error-free adapter-valid report containing findings",
+    "timeout": "Wall-clock termination before authoritative completion"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/phase8-artifacts-v1.schema.json",
+  "title": "Secure Bench Phase 8 artifact index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "adjudication_id",
+    "process_status_policy_path",
+    "process_status_policy_sha256",
+    "result_path",
+    "result_sha256",
+    "ledger_path",
+    "ledger_sha256",
+    "ledger_entries",
+    "phase7_result_sha256",
+    "phase7_ledger_sha256",
+    "phase7_report_aggregate_sha256",
+    "phase7_raw_report_set_digest",
+    "report_count",
+    "scanner_processes_launched"
+  ],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase8-artifacts-v1" },
+    "adjudication_id": { "const": "phase-8-exit-code-adjudication" },
+    "process_status_policy_path": { "const": "policies/process-status-v1.json" },
+    "process_status_policy_sha256": { "$ref": "#/$defs/sha256" },
+    "result_path": { "const": "artifacts/phase-8-exit-code-adjudication/adjudication.json" },
+    "result_sha256": { "$ref": "#/$defs/sha256" },
+    "ledger_path": { "const": "artifacts/phase-8-exit-code-adjudication/adjudication-ledger.jsonl" },
+    "ledger_sha256": { "$ref": "#/$defs/sha256" },
+    "ledger_entries": { "const": 114 },
+    "phase7_result_sha256": { "$ref": "#/$defs/sha256" },
+    "phase7_ledger_sha256": { "$ref": "#/$defs/sha256" },
+    "phase7_report_aggregate_sha256": { "$ref": "#/$defs/sha256" },
+    "phase7_raw_report_set_digest": { "$ref": "#/$defs/sha256" },
+    "report_count": { "const": 112 },
+    "scanner_processes_launched": { "const": 0 }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

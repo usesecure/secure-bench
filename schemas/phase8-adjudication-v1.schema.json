@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/phase8-adjudication-v1.schema.json",
+  "title": "Secure Bench Phase 8 retrospective adjudication",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "adjudication_id",
+    "interpretation",
+    "process_status_policy_version",
+    "process_status_policy_sha256",
+    "phase7_evidence",
+    "root_cause",
+    "correlation",
+    "cases",
+    "corrected_evaluation",
+    "original_phase7_result",
+    "corrected_run_projection_sha256",
+    "process_audit"
+  ],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase8-adjudication-v1" },
+    "adjudication_id": { "const": "phase-8-exit-code-adjudication" },
+    "interpretation": { "type": "string", "minLength": 1 },
+    "process_status_policy_version": { "const": "1.0.0" },
+    "process_status_policy_sha256": { "$ref": "#/$defs/sha256" },
+    "phase7_evidence": { "type": "object" },
+    "root_cause": { "type": "object" },
+    "correlation": { "type": "object" },
+    "cases": { "type": "array", "minItems": 112, "maxItems": 112, "items": { "type": "object" } },
+    "corrected_evaluation": { "type": "object" },
+    "original_phase7_result": { "type": "object" },
+    "corrected_run_projection_sha256": { "$ref": "#/$defs/sha256" },
+    "process_audit": { "type": "object" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

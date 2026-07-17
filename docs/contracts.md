@@ -48,6 +48,16 @@ Phase 5 adds scanner-neutral prospective contracts without changing historical a
 | Genesis/future ledger entry | `secure-bench-phase5-ledger-entry-v1` | `schemas/phase5-ledger-entry-v1.schema.json` |
 | Synthetic conformance vectors | `secure-bench-phase5-contract-tests-v1` | `schemas/phase5-contract-tests-v1.schema.json` |
 
+Phase 8 adds a prospective tool-neutral status policy and a separate retrospective adjudication
+lifecycle without changing Phase 7 evidence:
+
+| Contract | Identifier | Committed schema |
+|---|---|---|
+| Process-status policy | `secure-bench-process-status-policy-v1` / policy `1.0.0` | `schemas/process-status-policy-v1.schema.json` |
+| Retrospective adjudication | `secure-bench-phase8-adjudication-v1` | `schemas/phase8-adjudication-v1.schema.json` |
+| Separate adjudication ledger | `secure-bench-phase8-adjudication-ledger-v1` | `schemas/phase8-adjudication-ledger-v1.schema.json` |
+| Adjudication artifact index | `secure-bench-phase8-artifacts-v1` | `schemas/phase8-artifacts-v1.schema.json` |
+
 Unknown fields are rejected by the native contract and the typed benchmark contracts. The SARIF adapter tolerates unrelated standard SARIF fields while requiring the Phase 0 properties used for neutral normalization.
 
 ## Recorded runs
