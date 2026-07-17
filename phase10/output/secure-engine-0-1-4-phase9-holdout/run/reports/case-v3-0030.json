@@ -1,0 +1,1908 @@
+{
+  "schema_version": "secure-json-v1",
+  "engine_version": "0.1.4",
+  "document_type": "scan-report",
+  "repository": {
+    "name": "fixture",
+    "vcs": null,
+    "revision": null,
+    "repository_kind": "directory",
+    "content_fingerprint": "399ebd9b4341a23ff39a2e6d3404b0aa8f46ccb24a56f2c6eaf5cd1c2a073254",
+    "identity_fingerprint": "a527cc0b6f8c88dcbdb18108595a30c1858cf69f61c01a2b93b5ce070b74dcac"
+  },
+  "configuration": {
+    "include_hidden": false,
+    "max_files": 100000,
+    "max_file_bytes": 4194304,
+    "respect_ignore_files": true,
+    "include_patterns": [],
+    "exclude_patterns": [],
+    "include_generated": false,
+    "include_vendor": false,
+    "include_nested_repositories": false,
+    "max_total_bytes": 536870912,
+    "max_depth": null,
+    "max_errors": 100,
+    "parse_cache_enabled": true,
+    "max_cache_bytes": 268435456,
+    "max_parser_diagnostics": 1000,
+    "max_facts_per_file": 10000,
+    "max_total_facts": 100000,
+    "max_graph_nodes": 250000,
+    "max_graph_edges": 500000,
+    "max_interprocedural_depth": 4,
+    "max_findings": 10000,
+    "suppressions": []
+  },
+  "scan": {
+    "started_at": "2026-07-17T10:34:32.111611112Z",
+    "finished_at": "2026-07-17T10:34:32.112537024Z",
+    "duration_ms": 0,
+    "complete": true,
+    "files_discovered": 2,
+    "files_scanned": 2
+  },
+  "inventory": {
+    "entries_seen": 4,
+    "candidate_files": 2,
+    "files_selected": 2,
+    "files_scanned": 2,
+    "text_files": 2,
+    "binary_files": 0,
+    "generated_files": 0,
+    "vendor_files": 0,
+    "bytes_scanned": 615,
+    "symlinks_skipped": 0,
+    "nested_repositories_skipped": 0,
+    "hit_file_limit": false,
+    "hit_total_byte_limit": false
+  },
+  "parsing": {
+    "files_eligible": 1,
+    "files_parsed": 1,
+    "files_with_diagnostics": 0,
+    "facts_extracted": 6,
+    "duration_ms": 0,
+    "cache_enabled": true,
+    "cache_hits": 0,
+    "cache_misses": 1,
+    "cache_writes": 1,
+    "cache_entries_ignored": 0
+  },
+  "facts": [
+    {
+      "fact_id": "sf_0c0e46cdda13e5dc61ae75ce",
+      "kind": "call",
+      "location": {
+        "path": "app/actions.ts",
+        "span": {
+          "start_byte": 195,
+          "end_byte": 252,
+          "start_line": 6,
+          "start_column": 27,
+          "end_line": 6,
+          "end_column": 84
+        }
+      },
+      "name": "runtime.policy.mayChange",
+      "relationships": [
+        {
+          "kind": "calls",
+          "target": "runtime.policy.mayChange"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "0c0e46cdda13e5dc61ae75cebb5640b882706607f1f6952a5a631d75fbcd63b3"
+    },
+    {
+      "fact_id": "sf_16cc26e4468c01c97fadff32",
+      "kind": "function",
+      "location": {
+        "path": "app/actions.ts",
+        "span": {
+          "start_byte": 22,
+          "end_byte": 410,
+          "start_line": 3,
+          "start_column": 8,
+          "end_line": 12,
+          "end_column": 2
+        }
+      },
+      "name": "submit",
+      "relationships": [],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "16cc26e4468c01c97fadff3211008da25178cbdb39bb1b529ef8fd8a36478950"
+    },
+    {
+      "fact_id": "sf_670b0bfec07779d358d2db37",
+      "kind": "call",
+      "location": {
+        "path": "app/actions.ts",
+        "span": {
+          "start_byte": 327,
+          "end_byte": 379,
+          "start_line": 10,
+          "start_column": 9,
+          "end_line": 10,
+          "end_column": 61
+        }
+      },
+      "name": "runtime.records.update",
+      "relationships": [
+        {
+          "kind": "calls",
+          "target": "runtime.records.update"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "670b0bfec07779d358d2db372a70a99ad3a3ed5a2df600b7893d1b4b4b291d9a"
+    },
+    {
+      "fact_id": "sf_b480b0083d183223220f4001",
+      "kind": "server-action-handler",
+      "location": {
+        "path": "app/actions.ts",
+        "span": {
+          "start_byte": 22,
+          "end_byte": 410,
+          "start_line": 3,
+          "start_column": 8,
+          "end_line": 12,
+          "end_column": 2
+        }
+      },
+      "name": "submit",
+      "relationships": [
+        {
+          "kind": "exports-server-action",
+          "target": "submit"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "b480b0083d183223220f4001f57522b970a1ec15f6fd4480cece45fbdb0b7483"
+    },
+    {
+      "fact_id": "sf_b91dbee54f25d1dfa2657b4e",
+      "kind": "call",
+      "location": {
+        "path": "app/actions.ts",
+        "span": {
+          "start_byte": 146,
+          "end_byte": 167,
+          "start_line": 5,
+          "start_column": 21,
+          "end_line": 5,
+          "end_column": 42
+        }
+      },
+      "name": "formData.get",
+      "relationships": [
+        {
+          "kind": "calls",
+          "target": "formData.get"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "b91dbee54f25d1dfa2657b4ef50a4ff20ffa44814c697560e7a48aef96c10598"
+    },
+    {
+      "fact_id": "sf_da0f16d4a7168f0d94136bdb",
+      "kind": "module-export",
+      "location": {
+        "path": "app/actions.ts",
+        "span": {
+          "start_byte": 15,
+          "end_byte": 410,
+          "start_line": 3,
+          "start_column": 1,
+          "end_line": 12,
+          "end_column": 2
+        }
+      },
+      "name": "submit",
+      "relationships": [
+        {
+          "kind": "exports",
+          "target": "submit"
+        }
+      ],
+      "provenance": {
+        "parser": "secure-tree-sitter-adapter-v1",
+        "parser_version": "0.26.11",
+        "grammar": "tree-sitter-typescript@0.23.2:typescript",
+        "extractor_version": "normalized-js-facts-v1"
+      },
+      "fingerprint": "da0f16d4a7168f0d94136bdb56dee3a23582af7a7c38454639b106a076b2c2ad"
+    }
+  ],
+  "parser_diagnostics": [],
+  "parser_coverage": [
+    {
+      "parser_mode": "typescript",
+      "files_eligible": 1,
+      "files_parsed": 1,
+      "files_with_diagnostics": 0,
+      "facts_extracted": 6
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "node_id": "gn_234bca2b22270167a9cec664",
+        "kind": "module-reference",
+        "name": "submit",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 22,
+            "end_byte": 410,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 12,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "234bca2b22270167a9cec66461c554294c91ffc899cded7b988ebc3845cc15b4"
+      },
+      {
+        "node_id": "gn_46d9073b1fd0e3b62525142e",
+        "kind": "assignment",
+        "name": "runtime",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.value",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 74,
+            "end_byte": 124,
+            "start_line": 4,
+            "start_column": 9,
+            "end_line": 4,
+            "end_column": 59
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "46d9073b1fd0e3b62525142e6f00d97a97e49bf8752118cacb522723689a4938"
+      },
+      {
+        "node_id": "gn_5a6995c823fc315db932cfe0",
+        "kind": "syntax-fact",
+        "name": "runtime.policy.mayChange",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 195,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 27,
+            "end_line": 6,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "5a6995c823fc315db932cfe0ee0f9380a1d2d11951e5af856b0a8b01aa3f5af7"
+      },
+      {
+        "node_id": "gn_6b0396d7240e5055b3c2b24e",
+        "kind": "module-reference",
+        "name": "formData.get",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 146,
+            "end_byte": 167,
+            "start_line": 5,
+            "start_column": 21,
+            "end_line": 5,
+            "end_column": 42
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "6b0396d7240e5055b3c2b24e9b2b143b961aa0cfa8e5c2b1352ce7cb3ea68ccd"
+      },
+      {
+        "node_id": "gn_6ce014bd155f2fd3bad3c684",
+        "kind": "module",
+        "name": "submit",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 15,
+            "end_byte": 410,
+            "start_line": 3,
+            "start_column": 1,
+            "end_line": 12,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "6ce014bd155f2fd3bad3c684990c76d1997c6d455af768c0630e9751dd2be684"
+      },
+      {
+        "node_id": "gn_6ed2ded6823e7cfab3af14d4",
+        "kind": "guard",
+        "name": "authorization-before-sensitive-operation",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "authorization-check",
+          "identity": "guard.authorization.general",
+          "authorization": "general",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 195,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 27,
+            "end_line": 6,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "6ed2ded6823e7cfab3af14d4430c8e1f228e705dd584e7cd9697708c2fdfaed8"
+      },
+      {
+        "node_id": "gn_72514e697e2741760c22d493",
+        "kind": "transformation",
+        "name": "formData.get",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.value",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 134,
+            "end_byte": 167,
+            "start_line": 5,
+            "start_column": 9,
+            "end_line": 5,
+            "end_column": 42
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "72514e697e2741760c22d4936e48411805729f8e3ee4dc9fdf53d801d15d1219"
+      },
+      {
+        "node_id": "gn_74d8d5690f05884c936147dc",
+        "kind": "assignment",
+        "name": "runtime.policy.mayChange",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.value",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 177,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 9,
+            "end_line": 6,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "74d8d5690f05884c936147dcb4d27da0793996cac4899207dbb5098531986ab3"
+      },
+      {
+        "node_id": "gn_80eaa1dff494db1dbe015ed8",
+        "kind": "source",
+        "name": "server-action-parameter",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "untrusted-source",
+          "identity": "untrusted.server-action-parameter",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 44,
+            "end_byte": 52,
+            "start_line": 3,
+            "start_column": 30,
+            "end_line": 3,
+            "end_column": 38
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "80eaa1dff494db1dbe015ed8a0fc82ca9372b2e1e1ba325283c53c2fdaa75472"
+      },
+      {
+        "node_id": "gn_8a8d6c829744e50c6d462545",
+        "kind": "source",
+        "name": "form-data-value",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "untrusted-source",
+          "identity": "untrusted.form-data-value",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 146,
+            "end_byte": 167,
+            "start_line": 5,
+            "start_column": 21,
+            "end_line": 5,
+            "end_column": 42
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "8a8d6c829744e50c6d462545306b69ec1e780e22060a3b3a2fa0fee2f4389dbb"
+      },
+      {
+        "node_id": "gn_952b26677342b5f280a33d9d",
+        "kind": "handler",
+        "name": "submit",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 22,
+            "end_byte": 410,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 12,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "952b26677342b5f280a33d9d629c2e488636490b95fadb22805fc8c78fab6315"
+      },
+      {
+        "node_id": "gn_9e438a45a08068567bd952dc",
+        "kind": "syntax-fact",
+        "name": "formData.get",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 146,
+            "end_byte": 167,
+            "start_line": 5,
+            "start_column": 21,
+            "end_line": 5,
+            "end_column": 42
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "9e438a45a08068567bd952dce78e2ce87941152d64cdc70f80f0ce0f4490cc48"
+      },
+      {
+        "node_id": "gn_b3372d15acb53ad81b97316a",
+        "kind": "module-reference",
+        "name": "submit",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 15,
+            "end_byte": 410,
+            "start_line": 3,
+            "start_column": 1,
+            "end_line": 12,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "b3372d15acb53ad81b97316ad9f1131bdf12cc14030d7a076b2e95b53b156e36"
+      },
+      {
+        "node_id": "gn_bc28a9a66aa2529f84993503",
+        "kind": "file",
+        "name": "app/actions.ts",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "bc28a9a66aa2529f84993503f8fa904535665b0512c13ae80936a90ecdcecc57"
+      },
+      {
+        "node_id": "gn_c33b9f2812b1ec4741e65eb8",
+        "kind": "function",
+        "name": "submit",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 22,
+            "end_byte": 410,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 12,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "c33b9f2812b1ec4741e65eb8d12baa95de7553f7493e027051114333c86fb3e1"
+      },
+      {
+        "node_id": "gn_c701dcb787f1045ac2d06f40",
+        "kind": "module",
+        "name": "app/actions.ts",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "c701dcb787f1045ac2d06f40ee8d9abe4c1672671bf4a157495934391b3f405f"
+      },
+      {
+        "node_id": "gn_cedbb349df1fd458da1285a0",
+        "kind": "handler",
+        "name": "submit",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "untrusted-source",
+          "identity": "untrusted.handler-entry",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 22,
+            "end_byte": 410,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 12,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "cedbb349df1fd458da1285a0a065e769ef6ccf19e2017641ea43b2c2967b6d04"
+      },
+      {
+        "node_id": "gn_d8cff333b02e48dee251d6bc",
+        "kind": "module-reference",
+        "name": "runtime.records.update",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 327,
+            "end_byte": 379,
+            "start_line": 10,
+            "start_column": 9,
+            "end_line": 10,
+            "end_column": 61
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "d8cff333b02e48dee251d6bc2726434b85d53a3cf9ffafa5687292c62329f8a8"
+      },
+      {
+        "node_id": "gn_e30ccab4b09406def36b7f18",
+        "kind": "module-reference",
+        "name": "runtime.policy.mayChange",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 195,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 27,
+            "end_line": 6,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "e30ccab4b09406def36b7f181dba1c67798b6d42e68b10d81ff426e82f5aad9e"
+      },
+      {
+        "node_id": "gn_e35d0a758fab0f3b376b6383",
+        "kind": "return",
+        "name": "@return",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "transformation",
+          "identity": "transformation.return",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 383,
+            "end_byte": 408,
+            "start_line": 11,
+            "start_column": 3,
+            "end_line": 11,
+            "end_column": 28
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "e35d0a758fab0f3b376b6383b66804b2fa5a14fdd81375bf9ce5bdbc9762c9dc"
+      },
+      {
+        "node_id": "gn_e6ab77717649c5ce6ede235e",
+        "kind": "syntax-fact",
+        "name": "runtime.records.update",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 327,
+            "end_byte": 379,
+            "start_line": 10,
+            "start_column": 9,
+            "end_line": 10,
+            "end_column": 61
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "e6ab77717649c5ce6ede235e63bdb6b01c2c4cc150e17ab8a2dd3b3c8cb171ac"
+      },
+      {
+        "node_id": "gn_f0a83d6b5eb752d431f254ba",
+        "kind": "sink",
+        "name": "sensitive-mutation",
+        "semantic": {
+          "semantics_version": "secure-evidence-semantics-v2",
+          "role": "sensitive-sink",
+          "identity": "sink.sensitive-mutation",
+          "certainty": "proven"
+        },
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 327,
+            "end_byte": 379,
+            "start_line": 10,
+            "start_column": 9,
+            "end_line": 10,
+            "end_column": 61
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "f0a83d6b5eb752d431f254bab8e19ffdb61bc60ab9da2ac47b2071b86b794bd9"
+      }
+    ],
+    "edges": [
+      {
+        "edge_id": "ge_02acedc9b00f9bdaf07a0869",
+        "kind": "containment",
+        "from_node": "gn_c701dcb787f1045ac2d06f40",
+        "to_node": "gn_f0a83d6b5eb752d431f254ba",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 327,
+            "end_byte": 379,
+            "start_line": 10,
+            "start_column": 9,
+            "end_line": 10,
+            "end_column": 61
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "02acedc9b00f9bdaf07a08696000d6a044e9aab7224e8abaf08304e97b51ba7e"
+      },
+      {
+        "edge_id": "ge_0969788ccb67f15cff5f4122",
+        "kind": "containment",
+        "from_node": "gn_cedbb349df1fd458da1285a0",
+        "to_node": "gn_6ed2ded6823e7cfab3af14d4",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 195,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 27,
+            "end_line": 6,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "0969788ccb67f15cff5f412253a4bba63ccf7ace98f32d9da4fab1a35e2ea8b9"
+      },
+      {
+        "edge_id": "ge_18dcd01a95a1f73858243fe3",
+        "kind": "containment",
+        "from_node": "gn_c701dcb787f1045ac2d06f40",
+        "to_node": "gn_72514e697e2741760c22d493",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 134,
+            "end_byte": 167,
+            "start_line": 5,
+            "start_column": 9,
+            "end_line": 5,
+            "end_column": 42
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "18dcd01a95a1f73858243fe3e4f7c58e18c121d7728304a9747d3749eab8def5"
+      },
+      {
+        "edge_id": "ge_199f82abc3eed43502e51a79",
+        "kind": "guard-dominance",
+        "from_node": "gn_6ed2ded6823e7cfab3af14d4",
+        "to_node": "gn_f0a83d6b5eb752d431f254ba",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 327,
+            "end_byte": 379,
+            "start_line": 10,
+            "start_column": 9,
+            "end_line": 10,
+            "end_column": 61
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "199f82abc3eed43502e51a79c8595b48c9cb2a426153035d95c78ffccd5453f8"
+      },
+      {
+        "edge_id": "ge_22ef6b4b2660b46451a908e5",
+        "kind": "containment",
+        "from_node": "gn_c701dcb787f1045ac2d06f40",
+        "to_node": "gn_46d9073b1fd0e3b62525142e",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 74,
+            "end_byte": 124,
+            "start_line": 4,
+            "start_column": 9,
+            "end_line": 4,
+            "end_column": 59
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "22ef6b4b2660b46451a908e5c42960a762949f5209434a587d605475d6847c88"
+      },
+      {
+        "edge_id": "ge_382ed9e19e9940bb0418de79",
+        "kind": "containment",
+        "from_node": "gn_c701dcb787f1045ac2d06f40",
+        "to_node": "gn_c33b9f2812b1ec4741e65eb8",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 22,
+            "end_byte": 410,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 12,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "382ed9e19e9940bb0418de79d22161115c8df16cf298224218005c7829c9d692"
+      },
+      {
+        "edge_id": "ge_3ec07a982918592700767dd0",
+        "kind": "containment",
+        "from_node": "gn_c701dcb787f1045ac2d06f40",
+        "to_node": "gn_e6ab77717649c5ce6ede235e",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 327,
+            "end_byte": 379,
+            "start_line": 10,
+            "start_column": 9,
+            "end_line": 10,
+            "end_column": 61
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "3ec07a982918592700767dd0f960d4afc82d3fcfabf2f0b6fbd69a1df2503787"
+      },
+      {
+        "edge_id": "ge_3fe8e9068f9b662b645ec1ae",
+        "kind": "containment",
+        "from_node": "gn_c701dcb787f1045ac2d06f40",
+        "to_node": "gn_8a8d6c829744e50c6d462545",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 146,
+            "end_byte": 167,
+            "start_line": 5,
+            "start_column": 21,
+            "end_line": 5,
+            "end_column": 42
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "3fe8e9068f9b662b645ec1aea232d0591ae47a9a93e6ff676edca5872d03d79f"
+      },
+      {
+        "edge_id": "ge_62e8507d3501f66b88279369",
+        "kind": "containment",
+        "from_node": "gn_c701dcb787f1045ac2d06f40",
+        "to_node": "gn_74d8d5690f05884c936147dc",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 177,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 9,
+            "end_line": 6,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "62e8507d3501f66b882793692fecc8415dde4e7c8785916521f0f82b0cdeda40"
+      },
+      {
+        "edge_id": "ge_674b2e8d1a0564fca8444216",
+        "kind": "containment",
+        "from_node": "gn_c701dcb787f1045ac2d06f40",
+        "to_node": "gn_9e438a45a08068567bd952dc",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 146,
+            "end_byte": 167,
+            "start_line": 5,
+            "start_column": 21,
+            "end_line": 5,
+            "end_column": 42
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "674b2e8d1a0564fca8444216032272ff275eae61b8de0236b54c4f78e20623a7"
+      },
+      {
+        "edge_id": "ge_67ca8e0a4c88f0f27dc2629c",
+        "kind": "containment",
+        "from_node": "gn_c701dcb787f1045ac2d06f40",
+        "to_node": "gn_cedbb349df1fd458da1285a0",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 22,
+            "end_byte": 410,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 12,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "67ca8e0a4c88f0f27dc2629c2a760e860059a5a9658822591359daac2f5694b6"
+      },
+      {
+        "edge_id": "ge_7b9b8d240bbb12bcc16e56a3",
+        "kind": "control-flow",
+        "from_node": "gn_72514e697e2741760c22d493",
+        "to_node": "gn_74d8d5690f05884c936147dc",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 177,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 9,
+            "end_line": 6,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "7b9b8d240bbb12bcc16e56a37808d3d5938e508c7ed337d270fae11345118f71"
+      },
+      {
+        "edge_id": "ge_7c9fbac1d106960bb292977d",
+        "kind": "containment",
+        "from_node": "gn_6ce014bd155f2fd3bad3c684",
+        "to_node": "gn_b3372d15acb53ad81b97316a",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 15,
+            "end_byte": 410,
+            "start_line": 3,
+            "start_column": 1,
+            "end_line": 12,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "7c9fbac1d106960bb292977d211c7e9217d83f2bb6e20df19033360fc0feb8a7"
+      },
+      {
+        "edge_id": "ge_844ab37d1d7b5cc0d9742049",
+        "kind": "control-flow",
+        "from_node": "gn_46d9073b1fd0e3b62525142e",
+        "to_node": "gn_72514e697e2741760c22d493",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 134,
+            "end_byte": 167,
+            "start_line": 5,
+            "start_column": 9,
+            "end_line": 5,
+            "end_column": 42
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "844ab37d1d7b5cc0d97420492c2c0187aab176d63c143df78ac554b0ac388ff5"
+      },
+      {
+        "edge_id": "ge_8816b2bbedba6233462a92ae",
+        "kind": "containment",
+        "from_node": "gn_bc28a9a66aa2529f84993503",
+        "to_node": "gn_c701dcb787f1045ac2d06f40",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 0,
+            "end_byte": 0,
+            "start_line": 1,
+            "start_column": 1,
+            "end_line": 1,
+            "end_column": 1
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "8816b2bbedba6233462a92ae1a00dfc2c2e2fc62adda048ce36e565cc40f444b"
+      },
+      {
+        "edge_id": "ge_88d9d57cc7104f9b7fd27130",
+        "kind": "containment",
+        "from_node": "gn_c701dcb787f1045ac2d06f40",
+        "to_node": "gn_80eaa1dff494db1dbe015ed8",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 44,
+            "end_byte": 52,
+            "start_line": 3,
+            "start_column": 30,
+            "end_line": 3,
+            "end_column": 38
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "88d9d57cc7104f9b7fd27130994bbf9134bb6486db1cad1a94ee395fb208e07b"
+      },
+      {
+        "edge_id": "ge_97a3f09e133dff08951873b2",
+        "kind": "containment",
+        "from_node": "gn_c701dcb787f1045ac2d06f40",
+        "to_node": "gn_e35d0a758fab0f3b376b6383",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 383,
+            "end_byte": 408,
+            "start_line": 11,
+            "start_column": 3,
+            "end_line": 11,
+            "end_column": 28
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "97a3f09e133dff08951873b26ff0f941517e1c55771191e6a9aa6a97ff435201"
+      },
+      {
+        "edge_id": "ge_9a67ef25879e6c7beb6072d1",
+        "kind": "source-to-sink-propagation",
+        "from_node": "gn_8a8d6c829744e50c6d462545",
+        "to_node": "gn_72514e697e2741760c22d493",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 134,
+            "end_byte": 167,
+            "start_line": 5,
+            "start_column": 9,
+            "end_line": 5,
+            "end_column": 42
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "9a67ef25879e6c7beb6072d1d4615966ba99aff7f126db15b54f8d6d03adb22b"
+      },
+      {
+        "edge_id": "ge_a9deda94624a1a71699be460",
+        "kind": "control-flow",
+        "from_node": "gn_f0a83d6b5eb752d431f254ba",
+        "to_node": "gn_e35d0a758fab0f3b376b6383",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 383,
+            "end_byte": 408,
+            "start_line": 11,
+            "start_column": 3,
+            "end_line": 11,
+            "end_column": 28
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "a9deda94624a1a71699be4604c0660b7949b8e0f30183974db116614e4ea0f8a"
+      },
+      {
+        "edge_id": "ge_ae3b1d89bf05c681c9d3d5fa",
+        "kind": "containment",
+        "from_node": "gn_cedbb349df1fd458da1285a0",
+        "to_node": "gn_e35d0a758fab0f3b376b6383",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 383,
+            "end_byte": 408,
+            "start_line": 11,
+            "start_column": 3,
+            "end_line": 11,
+            "end_column": 28
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "ae3b1d89bf05c681c9d3d5fab22c8d4158e77dc5f8437d35256a59e2ae6a03a0"
+      },
+      {
+        "edge_id": "ge_afa7c49c6734adcb948af5e1",
+        "kind": "containment",
+        "from_node": "gn_cedbb349df1fd458da1285a0",
+        "to_node": "gn_72514e697e2741760c22d493",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 134,
+            "end_byte": 167,
+            "start_line": 5,
+            "start_column": 9,
+            "end_line": 5,
+            "end_column": 42
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "afa7c49c6734adcb948af5e14281b1262c26ddcd0b755fe24701cdd882d628a8"
+      },
+      {
+        "edge_id": "ge_b149ad82f1a9f84c745b0e47",
+        "kind": "containment",
+        "from_node": "gn_cedbb349df1fd458da1285a0",
+        "to_node": "gn_f0a83d6b5eb752d431f254ba",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 327,
+            "end_byte": 379,
+            "start_line": 10,
+            "start_column": 9,
+            "end_line": 10,
+            "end_column": 61
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "b149ad82f1a9f84c745b0e47a2820ef1412dfc86554e658bae9e2babdb2bf699"
+      },
+      {
+        "edge_id": "ge_bdd3aa59d33d525d6e28cd26",
+        "kind": "containment",
+        "from_node": "gn_cedbb349df1fd458da1285a0",
+        "to_node": "gn_cedbb349df1fd458da1285a0",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 22,
+            "end_byte": 410,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 12,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "bdd3aa59d33d525d6e28cd268bc778e9911394520febf136f5fc212596a5cf40"
+      },
+      {
+        "edge_id": "ge_c6911b5af55167faf7e9e836",
+        "kind": "containment",
+        "from_node": "gn_cedbb349df1fd458da1285a0",
+        "to_node": "gn_74d8d5690f05884c936147dc",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 177,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 9,
+            "end_line": 6,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "c6911b5af55167faf7e9e8360b818503dd0c8f3e43432ee6361a596b684b9af9"
+      },
+      {
+        "edge_id": "ge_cdc319bda5cbf275edc6641b",
+        "kind": "containment",
+        "from_node": "gn_c701dcb787f1045ac2d06f40",
+        "to_node": "gn_952b26677342b5f280a33d9d",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 22,
+            "end_byte": 410,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 12,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "cdc319bda5cbf275edc6641bdc555a3a0d194fb0602953efaab50e716fa6fab3"
+      },
+      {
+        "edge_id": "ge_d32284834e2fce4083ae609c",
+        "kind": "calls",
+        "from_node": "gn_e6ab77717649c5ce6ede235e",
+        "to_node": "gn_d8cff333b02e48dee251d6bc",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 327,
+            "end_byte": 379,
+            "start_line": 10,
+            "start_column": 9,
+            "end_line": 10,
+            "end_column": 61
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "d32284834e2fce4083ae609c60ef41bf64eaac56f47fb58246d05ba6f37660b5"
+      },
+      {
+        "edge_id": "ge_dab03fc3e5228097bd958bf4",
+        "kind": "containment",
+        "from_node": "gn_c701dcb787f1045ac2d06f40",
+        "to_node": "gn_6ce014bd155f2fd3bad3c684",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 15,
+            "end_byte": 410,
+            "start_line": 3,
+            "start_column": 1,
+            "end_line": 12,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "dab03fc3e5228097bd958bf4922853dd2a88b1ba8e5d0af913fcb211bff9ea8b"
+      },
+      {
+        "edge_id": "ge_ed4ef59bce679f3b0d2ada82",
+        "kind": "containment",
+        "from_node": "gn_952b26677342b5f280a33d9d",
+        "to_node": "gn_234bca2b22270167a9cec664",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 22,
+            "end_byte": 410,
+            "start_line": 3,
+            "start_column": 8,
+            "end_line": 12,
+            "end_column": 2
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "ed4ef59bce679f3b0d2ada82e6fe84591bcc51678077ab56a06c61b249dc1d2e"
+      },
+      {
+        "edge_id": "ge_edc1c9aad657d1607a4161ad",
+        "kind": "containment",
+        "from_node": "gn_cedbb349df1fd458da1285a0",
+        "to_node": "gn_46d9073b1fd0e3b62525142e",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 74,
+            "end_byte": 124,
+            "start_line": 4,
+            "start_column": 9,
+            "end_line": 4,
+            "end_column": 59
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "edc1c9aad657d1607a4161ad06f399979ecaba9f135105882d5e47b31e9f82be"
+      },
+      {
+        "edge_id": "ge_f3301ba0a9d96bceae3a66a3",
+        "kind": "calls",
+        "from_node": "gn_5a6995c823fc315db932cfe0",
+        "to_node": "gn_e30ccab4b09406def36b7f18",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 195,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 27,
+            "end_line": 6,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "f3301ba0a9d96bceae3a66a3f9c5fcf0de65b49b87ba815d2e01132a35bc7131"
+      },
+      {
+        "edge_id": "ge_f45a01dd82fa2a15a37dee39",
+        "kind": "calls",
+        "from_node": "gn_9e438a45a08068567bd952dc",
+        "to_node": "gn_6b0396d7240e5055b3c2b24e",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 146,
+            "end_byte": 167,
+            "start_line": 5,
+            "start_column": 21,
+            "end_line": 5,
+            "end_column": 42
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "f45a01dd82fa2a15a37dee391403ee917779a5fedfa4030262ce871d21c29947"
+      },
+      {
+        "edge_id": "ge_f8d0e7236040df344182c9d6",
+        "kind": "control-flow",
+        "from_node": "gn_74d8d5690f05884c936147dc",
+        "to_node": "gn_6ed2ded6823e7cfab3af14d4",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 195,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 27,
+            "end_line": 6,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "f8d0e7236040df344182c9d662d1a7ea5411c650567c6cbcffde77683e65df93"
+      },
+      {
+        "edge_id": "ge_fa92c40b3be211562deb3b0d",
+        "kind": "containment",
+        "from_node": "gn_c701dcb787f1045ac2d06f40",
+        "to_node": "gn_5a6995c823fc315db932cfe0",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 195,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 27,
+            "end_line": 6,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "normalized-js-facts-v1"
+        },
+        "fingerprint": "fa92c40b3be211562deb3b0d47ef2488d537e9e17b20a69277a0131c61dddc2f"
+      },
+      {
+        "edge_id": "ge_fd6f012bd0c216f4c604559a",
+        "kind": "containment",
+        "from_node": "gn_cedbb349df1fd458da1285a0",
+        "to_node": "gn_80eaa1dff494db1dbe015ed8",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 44,
+            "end_byte": 52,
+            "start_line": 3,
+            "start_column": 30,
+            "end_line": 3,
+            "end_column": 38
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "fd6f012bd0c216f4c604559a03ecb694dcd5607a21184bab8d954c54e9c8cbbb"
+      },
+      {
+        "edge_id": "ge_fdc188b10e5e82c96529cfd1",
+        "kind": "containment",
+        "from_node": "gn_c701dcb787f1045ac2d06f40",
+        "to_node": "gn_6ed2ded6823e7cfab3af14d4",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 195,
+            "end_byte": 252,
+            "start_line": 6,
+            "start_column": 27,
+            "end_line": 6,
+            "end_column": 84
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "fdc188b10e5e82c96529cfd15b77cbf1283fbce19abb895815c50e80e7c444ca"
+      },
+      {
+        "edge_id": "ge_fdf04490c235877dea1ff954",
+        "kind": "control-flow",
+        "from_node": "gn_6ed2ded6823e7cfab3af14d4",
+        "to_node": "gn_f0a83d6b5eb752d431f254ba",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 327,
+            "end_byte": 379,
+            "start_line": 10,
+            "start_column": 9,
+            "end_line": 10,
+            "end_column": 61
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "fdf04490c235877dea1ff9542410b501f630aa79370efcdd6ce04a06ae393a0e"
+      },
+      {
+        "edge_id": "ge_fe0770c750bf6b1a4251bcc7",
+        "kind": "containment",
+        "from_node": "gn_cedbb349df1fd458da1285a0",
+        "to_node": "gn_8a8d6c829744e50c6d462545",
+        "location": {
+          "path": "app/actions.ts",
+          "span": {
+            "start_byte": 146,
+            "end_byte": 167,
+            "start_line": 5,
+            "start_column": 21,
+            "end_line": 5,
+            "end_column": 42
+          }
+        },
+        "provenance": {
+          "parser": "secure-tree-sitter-adapter-v1",
+          "parser_version": "0.26.11",
+          "grammar": "tree-sitter-typescript@0.23.2:typescript",
+          "extractor_version": "secure-evidence-graph-v1"
+        },
+        "fingerprint": "fe0770c750bf6b1a4251bcc7b2afdfc8c580b43acd41bdf13f80354075b202a8"
+      }
+    ]
+  },
+  "analysis": {
+    "nodes": 22,
+    "edges": 37,
+    "candidate_paths": 0,
+    "rules_evaluated": 7,
+    "findings": 0,
+    "findings_suppressed": 0,
+    "duration_ms": 0,
+    "truncated": false
+  },
+  "suppression_diagnostics": [],
+  "taxonomy_catalog": [
+    {
+      "taxonomy_name": "secure-bench-taxonomy-v1",
+      "taxonomy_version": "1.0.0",
+      "source_version": "CWE 4.20",
+      "source_commit": "93c0821db065de436a339c15b070e158947ad76c",
+      "schema_sha256": "cdecd643d338aa8ae42ec7398c6c4703cb97d60ad355340c98744fc94bcb7d6f",
+      "taxonomy_sha256": "059fe22d7707cf8d17f2c1621fdae9819787a1958ba2ef0421eca4e4ec858452",
+      "methodology_sha256": "eac27e5800be35c5ae77f7804e52ae90462cbda403a5484baa8fab62f02ab562",
+      "content_hash": "22852bd7401020b315af11dfa2b60c0b46f78eb19f95079e6400d7b3bea3272c"
+    }
+  ],
+  "files": [
+    {
+      "path": "app/actions.ts",
+      "kind": "source",
+      "size_bytes": 411,
+      "content_fingerprint": "01e00866f87889f5b4271b609c41102ba465bf026c7b0ca50535e514346cde39",
+      "language": "TypeScript",
+      "origin": "project",
+      "is_binary": false
+    },
+    {
+      "path": "package.json",
+      "kind": "manifest",
+      "size_bytes": 204,
+      "content_fingerprint": "1951b7e1b7f309a66cca93c229b2644ba3c04d3368d1c2882ed363f54d6b2537",
+      "language": null,
+      "origin": "project",
+      "is_binary": false
+    }
+  ],
+  "languages": [
+    {
+      "name": "TypeScript",
+      "file_count": 1,
+      "bytes": 411
+    }
+  ],
+  "manifests": [
+    {
+      "kind": "npm",
+      "location": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 0,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 1
+        }
+      },
+      "fingerprint": "6748a38bc87b5b19f763c5883b78fc1e6b11efffa9b16c0682221bf1b9422f2d"
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Next.js",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 26,
+          "end_byte": 32,
+          "start_line": 3,
+          "start_column": 5,
+          "end_line": 3,
+          "end_column": 11
+        }
+      },
+      "fingerprint": "ab947c3b74a997a0213d6f4e7400ab58f98892ef985417413fb54b0870052f8a"
+    }
+  ],
+  "entry_points": [],
+  "capabilities": [
+    {
+      "capability": "dependency-management",
+      "reason": "Detected npm manifest",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 0,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 1
+        }
+      },
+      "fingerprint": "cb0fd89861ca491f95e737908187cfd232f12ed2afba2ed3fbd7ba1c579a9ab2"
+    }
+  ],
+  "trust_boundaries": [
+    {
+      "kind": "dependency-supply-chain",
+      "description": "Declared third-party dependency boundary",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 0,
+          "end_byte": 0,
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 1
+        }
+      },
+      "fingerprint": "72752772107d5ef650d956e907952867e651a93c7d08723f6a7fd36f0215c479"
+    },
+    {
+      "kind": "network-request",
+      "description": "Next.js may expose network request entry points",
+      "evidence": {
+        "path": "package.json",
+        "span": {
+          "start_byte": 26,
+          "end_byte": 32,
+          "start_line": 3,
+          "start_column": 5,
+          "end_line": 3,
+          "end_column": 11
+        }
+      },
+      "fingerprint": "95eaaa9c288e6fb2c08590a93d816a59c9d5fc6351d5910465bc0af6091d4d20"
+    }
+  ],
+  "findings": [],
+  "limitations": [
+    {
+      "code": "deterministic-rules-limited",
+      "message": "Phase 3 runs only the documented high-confidence JavaScript and TypeScript rules"
+    },
+    {
+      "code": "parser-coverage-limited",
+      "message": "Language-aware parsing is limited to JavaScript, JSX, TypeScript, and TSX"
+    },
+    {
+      "code": "framework-hints-only",
+      "message": "Framework evidence is a manifest hint and not semantic proof"
+    },
+    {
+      "code": "symlinks-not-followed",
+      "message": "Symbolic links are recorded but never followed"
+    },
+    {
+      "code": "vcs-metadata-excluded",
+      "message": "Version-control metadata directories are never inventoried"
+    },
+    {
+      "code": "hidden-files-excluded",
+      "message": "Hidden files and directories were excluded by configuration"
+    },
+    {
+      "code": "ignored-files-excluded",
+      "message": "Inputs matched by repository ignore rules were excluded before reading"
+    },
+    {
+      "code": "generated-directories-excluded",
+      "message": "Common generated and build directories were excluded before reading"
+    },
+    {
+      "code": "vendor-directories-excluded",
+      "message": "Common vendored dependency directories were excluded before reading"
+    },
+    {
+      "code": "nested-repositories-excluded",
+      "message": "Nested repositories, worktrees, and submodules were excluded"
+    },
+    {
+      "code": "bounded-interprocedural-analysis",
+      "message": "Local inter-procedural propagation is bounded to 4 traversal levels"
+    },
+    {
+      "code": "dynamic-resolution-limited",
+      "message": "Dynamic imports, non-unique aliases, callbacks, recursion, and unresolved calls are not followed"
+    },
+    {
+      "code": "semantic-resolution-bounded",
+      "message": "Semantic identities, aliases, guards, and value correspondence are resolved only from deterministic local syntax within configured graph and inter-procedural bounds"
+    },
+    {
+      "code": "framework-middleware-not-modeled",
+      "message": "Authentication supplied only by external framework middleware is not proven by this phase"
+    }
+  ],
+  "skipped_files": [],
+  "exclusions": [],
+  "errors": [],
+  "report_fingerprint": "55f4a12f4988cb5c3fd066c501508a92901a8baf0732bd799c19159fc2e8cc85"
+}

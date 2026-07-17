@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/phase10-artifacts-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "pre_execution_contract_path", "pre_execution_contract_sha256", "run_path", "run_sha256", "result_path", "result_sha256", "completed_ledger_path", "completed_ledger_sha256", "genesis_ledger_sha256", "case_journal_sha256", "reports_sha256", "streams_sha256", "isolation_attestations_sha256", "process_audit_path", "process_audit_sha256", "case_records", "report_count", "stdout_records", "stderr_records", "isolation_attestations", "ledger_entries"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase10-artifacts-v1" },
+    "run_id": { "const": "secure-engine-0-1-4-phase9-holdout-once" },
+    "pre_execution_contract_path": { "type": "string" },
+    "pre_execution_contract_sha256": { "$ref": "#/$defs/sha256" },
+    "run_path": { "type": "string" },
+    "run_sha256": { "$ref": "#/$defs/sha256" },
+    "result_path": { "type": "string" },
+    "result_sha256": { "$ref": "#/$defs/sha256" },
+    "completed_ledger_path": { "type": "string" },
+    "completed_ledger_sha256": { "$ref": "#/$defs/sha256" },
+    "genesis_ledger_sha256": { "$ref": "#/$defs/sha256" },
+    "case_journal_sha256": { "$ref": "#/$defs/sha256" },
+    "reports_sha256": { "$ref": "#/$defs/sha256" },
+    "streams_sha256": { "$ref": "#/$defs/sha256" },
+    "isolation_attestations_sha256": { "$ref": "#/$defs/sha256" },
+    "process_audit_path": { "type": "string" },
+    "process_audit_sha256": { "$ref": "#/$defs/sha256" },
+    "case_records": { "const": 224 },
+    "report_count": { "type": "integer", "minimum": 0, "maximum": 224 },
+    "stdout_records": { "const": 224 },
+    "stderr_records": { "const": 224 },
+    "isolation_attestations": { "type": "integer", "minimum": 0, "maximum": 224 },
+    "ledger_entries": { "const": 227 }
+  },
+  "$defs": { "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" } }
+}

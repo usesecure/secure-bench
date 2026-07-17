@@ -1,0 +1,123 @@
+{
+  "schema_version": "secure-bench-phase10-pre-execution-v1",
+  "frozen_at_utc": "2026-07-17T10:34:21Z",
+  "run_id": "secure-engine-0-1-4-phase9-holdout-once",
+  "git": {
+    "main_commit": "8c35a7fec6b26da0057370f9d67391791bfe889c",
+    "head_commit": "8c35a7fec6b26da0057370f9d67391791bfe889c",
+    "branch": "codex/phase-10-secure-engine-0-1-4-evaluation",
+    "signature": "valid-ed25519",
+    "dco": "valid-exact-author-signoff",
+    "object_integrity": "passed",
+    "starting_tree_clean": true,
+    "prospective_changes_phase10_only": true,
+    "prospective_status_sha256": "0b6e063518bb2fae02e5ae62ee639e70e497943068ee6941655c9116e230d3a3"
+  },
+  "scanner": {
+    "declared_version": "Secure Engine 0.1.4 (user-supplied artifact identity)",
+    "binary_sha256": "fe15135e878a768d452eaae2c014da4bd1e61f6ca0dca45d7ada54fd69a6c075",
+    "source_rpm_sha256": "c470f8bab478c937d6924f4d1bf7f6328da564cc392624622b4cc234130c0aef",
+    "command_template": [
+      "scan",
+      "{fixture}",
+      "--format",
+      "secure-json-v1",
+      "--output",
+      "{report}"
+    ],
+    "report_schema": "secure-json-v1",
+    "configuration_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ai_validation": "disabled-without-providers-credentials-endpoints-environment-or-commands",
+    "version_probe": "not-executed",
+    "environment_clear": true,
+    "integration_boundary": "external-black-box-process-only"
+  },
+  "holdout": {
+    "holdout_id": "phase-9-orthogonal-holdout-v3",
+    "manifest_sha256": "136f92a3bbe324d8f0e3c49438b93aa4ef6eb09731998784feed0b6f75553a9f",
+    "commitments_sha256": "31c83b443c889e8f3dbc0ddea358f27d4ec990dae11a4138373ea9a6fb6e13b0",
+    "genesis_ledger_sha256": "edd48b4b70115db7c43d93d987003b62b025b5943c17d96b3dfd0262dbc69841",
+    "evidence_contract_sha256": "142c7f31c6c584cc808410130fa7db8451427e87504e72e64868c9cbc6564c42",
+    "taxonomy_sha256": "059fe22d7707cf8d17f2c1621fdae9819787a1958ba2ef0421eca4e4ec858452",
+    "taxonomy_content_hash": "22852bd7401020b315af11dfa2b60c0b46f78eb19f95079e6400d7b3bea3272c",
+    "aggregate_corpus_sha256": "30f51f643da6d27c8c94758289ee77c937104d372b97f0de90d4d40ced56dbe2",
+    "contract_merkle_root": "7c41259cb2bc36cdab2582ac9867df6a95c1fd59686315118f70c07fe5eedf6a",
+    "schedule_sha256": "43bd18316e56914d8ad3b43d1cbff7ce00414506aca5e6229636ba4ef28db498",
+    "pairs": 112,
+    "cases": 224,
+    "vulnerable_cases": 112,
+    "safe_controls": 112,
+    "phase9_validation": "passed-deterministic-224-case-validation",
+    "prior_execution": "absent"
+  },
+  "evaluator": {
+    "evidence_contract_schema": "secure-bench-evidence-contract-v2",
+    "evidence_contract_version": "2.0.0",
+    "process_status_policy_version": "1.0.0",
+    "process_status_policy_sha256": "8b5ff33690828dc97afa8be24ef14dc66bf44d6da913e2621d92208e513f26ac",
+    "files": {
+      "crates/secure-bench-core/src/lib.rs": "4abdae1dfd6fb8a6c701bea67b60defbabc070ddc2db3639454937739b94e8cf",
+      "crates/secure-bench-core/src/model.rs": "9b87facc65ef65aef7ed39e149b0f7dfd3bcf81b4fee09836a8bffd79b48e38e",
+      "crates/secure-bench-core/src/phase5.rs": "a38cc94991e6ec3b15596f45157b8eb40d9a18fbe7f82cbcdd3a1b80aa67aad9",
+      "crates/secure-bench-core/src/taxonomy.rs": "1d51ae0b8a7d34dcdb32ac0287a12f8e073beebe23acd4d12344778fc0433a05",
+      "holdout/phase-5/evidence-contract-v2.json": "142c7f31c6c584cc808410130fa7db8451427e87504e72e64868c9cbc6564c42",
+      "phase10/Cargo.lock": "37d290522f4c10ff830aae0c5273a89b4a0057cd2a17c86d2f276b2f95b10506",
+      "phase10/Cargo.toml": "d12bb5b446e42ef7caae85e1510db555d9676cf447871550374cf38a0c6315cb",
+      "phase10/schemas/phase10-artifacts-v1.schema.json": "bf016a07a3289c4bf49f774622866c2c921da6c6352bc565b3cd0efb9c8cb731",
+      "phase10/schemas/phase10-isolation-v1.schema.json": "96df02a516a2135098cfe846652dfaa737d8e5915f66f5d71ccfc483e74726e0",
+      "phase10/schemas/phase10-ledger-entry-v1.schema.json": "385c2201261793b8de22595308bef6156fce411dba85bc16563f59f040097718",
+      "phase10/schemas/phase10-pre-execution-v1.schema.json": "873de329121b1f9f09f8212241dd81548cf5b2f49cf91cb138d3db90f2beb185",
+      "phase10/schemas/phase10-process-audit-v1.schema.json": "b43067a37c17b1b535bfc709f1970473b9f089155ab5ef8f7999a7b69c7a0365",
+      "phase10/schemas/phase10-result-v1.schema.json": "ed297cf7c4278250a499634cab5e5d1369876dfe5c4548dc0df70d2214ad2fc5",
+      "phase10/schemas/phase10-run-v1.schema.json": "224930fac070a9d8b4ded00db06c940d761edc053c3e91dadb425c28e5f74526",
+      "phase10/src/lib.rs": "d248faf93f7020418246db9fcc5d4d4c46e7bdff85282b957672075160bf4c8b",
+      "phase10/src/main.rs": "4cc0f86d2c8c12aa5df84b259fe3a3de954efcda850b0c4e9e27b688ecbe432b",
+      "phase8/src/lib.rs": "3aa19923afb9fc3fafb4ffa59e81a0b19737c51670b0d9a787fba7c9d0e4b4e2",
+      "policies/process-status-v1.json": "8b5ff33690828dc97afa8be24ef14dc66bf44d6da913e2621d92208e513f26ac",
+      "schemas/evidence-contract-v2.schema.json": "c0298b4a2ceb3d176e5773ea72a057d1929807711560255e0ea6645713bfc4b6",
+      "taxonomy/secure-bench-taxonomy-v1.json": "059fe22d7707cf8d17f2c1621fdae9819787a1958ba2ef0421eca4e4ec858452"
+    },
+    "aggregate_sha256": "fe90f41b15c68f3835e741d9962cd1c3f1098aca13eca83a1805ee8586e6392a",
+    "schemas": {
+      "artifacts": "bf016a07a3289c4bf49f774622866c2c921da6c6352bc565b3cd0efb9c8cb731",
+      "isolation": "96df02a516a2135098cfe846652dfaa737d8e5915f66f5d71ccfc483e74726e0",
+      "ledger": "385c2201261793b8de22595308bef6156fce411dba85bc16563f59f040097718",
+      "pre_execution": "873de329121b1f9f09f8212241dd81548cf5b2f49cf91cb138d3db90f2beb185",
+      "process_audit": "b43067a37c17b1b535bfc709f1970473b9f089155ab5ef8f7999a7b69c7a0365",
+      "result": "ed297cf7c4278250a499634cab5e5d1369876dfe5c4548dc0df70d2214ad2fc5",
+      "run": "224930fac070a9d8b4ded00db06c940d761edc053c3e91dadb425c28e5f74526"
+    },
+    "matcher": "frozen-evidence-contract-v2-without-post-execution-modification"
+  },
+  "resources": {
+    "timeout_ms": 60000,
+    "memory_bytes": 1073741824,
+    "report_bytes": 10485760,
+    "network": "blocked",
+    "namespace_scope": "fresh-bwrap-unshare-net-per-case",
+    "process_scope": "one-fresh-scanner-process-per-frozen-case"
+  },
+  "environment": {
+    "os": "linux",
+    "architecture": "x86_64",
+    "kernel_release": "7.1.3-200.fc44.x86_64",
+    "rust_version": "1.96",
+    "bwrap_sha256": "139bf12775025adf5c8523d119c5ad2950281335573708fd839c60181a3886dc",
+    "isolation": "bubblewrap-minimal-read-only-runtime-unshare-net",
+    "expected_interfaces": [
+      "lo"
+    ],
+    "probe_target": "1.1.1.1:53"
+  },
+  "benchmark_binary_sha256": "20c565fe13672a37cab9f213c16fe68e7b69d3885d0d480415c45f14cf54b7f0",
+  "historical_integrity": {
+    "artifacts": "9dd993bf951c4c1816963d9d4c9a9f4b90e08ae5dd38f60a7572bfed8d18b811",
+    "baselines": "810fc4d48ce444dd09637b22b73651d83b83bd7af7e8411c66fb46a75c67bf87",
+    "fixtures": "19f34f14a2f76a06cc681531254b350a91ef168e8314598901054a67f62bba8b",
+    "holdout/phase-3": "47afef0b414b953eef4cf19c3ef6ea44de529cacf0058725edd42f2b4548d6e3",
+    "holdout/phase-5": "9972dba15ee17cd48d553fb7b534d5d5b8fd72a8b5dde62996513e11fa7cecc5",
+    "taxonomy": "ec0c76707cf65d1ddce1afd83dae2b4862c0aba91643667766eb0f3a6bcb127f"
+  },
+  "evidence_lifecycle": "completed-ledger-is-an-exact-byte-prefix-extension-of-the-immutable-phase9-genesis",
+  "interpretation": "one-shot-synthetic-holdout-evaluation-not-a-ranking-superiority-production-readiness-or-complete-coverage-claim"
+}

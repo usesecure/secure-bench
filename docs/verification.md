@@ -1,5 +1,29 @@
 # Secure Bench Phase 0–2 Verification
 
+## Phase 10 one-shot evaluation
+
+Phase 10 is implemented in a separate Rust workspace. Its `prepare` command validates and freezes
+the complete pre-execution contract without launching a scanner. Its `execute` command was invoked
+once for the frozen 224-case Phase 9 holdout and must never be invoked again for this evidence
+bundle. All subsequent verification uses only the retained reports and metadata:
+
+```bash
+cargo fmt --manifest-path phase10/Cargo.toml --all --check
+cargo clippy --locked --manifest-path phase10/Cargo.toml --all-targets --all-features -- -D warnings
+cargo test --locked --manifest-path phase10/Cargo.toml --all-targets --all-features
+cargo run --locked --release --manifest-path phase10/Cargo.toml -- verify . \
+  /explicit/user-provided/path/to/secure \
+  /explicit/user-provided/path/to/secure-engine.rpm
+```
+
+The offline verifier checks all frozen Phase 9 commitments and historical Phase 8 evidence, the
+external artifact hashes, evaluator and schema hashes, all 224 retained report and stream hashes,
+adapter validity, the Phase 8 process-status policy, fresh namespace attestations, privacy,
+one-attempt process auditing, the genesis-prefix ledger chain, all primary and pairwise strata,
+and two independent in-memory Evidence Contract v2 evaluations. It has no scanner-launch path.
+The recorded results and limitations are documented in
+[Phase 10 one-shot evaluation](phase-10-evaluation.md).
+
 ## Phase 9 frozen holdout v3
 
 Phase 9 uses a separate Rust workspace and has no process-launching or network API. Its validator
