@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/secure-bench-phase11-evidence-conformance-v1.json",
+  "title": "Secure Bench Phase 11 Evidence Contract v2 conformance vectors",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "evidence_contract_version", "synthetic_only", "scanner_reports_used", "vectors", "mutation_inverse_policy"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase11-evidence-conformance-v1" },
+    "evidence_contract_version": { "const": "2.0.0" },
+    "synthetic_only": { "const": true },
+    "scanner_reports_used": { "const": false },
+    "vectors": {
+      "type": "array",
+      "minItems": 19,
+      "maxItems": 19,
+      "items": {
+        "type": "object",
+        "required": ["vector_id", "mismatch_family", "expectation", "finding", "contract_match", "diagnostic_outcome", "expected_outcome", "inverse"]
+      }
+    },
+    "mutation_inverse_policy": { "type": "string", "minLength": 1 }
+  }
+}

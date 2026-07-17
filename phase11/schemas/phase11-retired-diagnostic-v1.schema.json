@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/secure-bench-phase11-retired-diagnostic-v1.json",
+  "title": "Secure Bench Phase 11 retired diagnostic package",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "phase",
+    "method",
+    "retired_corpus",
+    "historical_phase10_score_unchanged",
+    "root_cause_counts",
+    "defect_counts",
+    "agreement_matrices",
+    "breakdowns",
+    "cases",
+    "rejected_findings",
+    "provenance",
+    "limitations"
+  ],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase11-retired-diagnostic-v1" },
+    "phase": { "const": 11 },
+    "method": { "const": "retrospective-offline-reconstruction-from-immutable-retained-evidence" },
+    "retired_corpus": {
+      "type": "object",
+      "required": ["holdout_id", "cases", "vulnerable", "safe_controls", "disclosed"],
+      "properties": {
+        "holdout_id": { "const": "phase-9-orthogonal-holdout-v3" },
+        "cases": { "const": 224 },
+        "vulnerable": { "const": 112 },
+        "safe_controls": { "const": 112 },
+        "disclosed": { "const": true }
+      }
+    },
+    "historical_phase10_score_unchanged": {
+      "type": "object",
+      "required": ["exact", "partial", "missed", "flagged_controls", "clean_controls", "distinct_unrelated_findings", "rescored"],
+      "properties": {
+        "exact": { "const": 0 },
+        "partial": { "const": 0 },
+        "missed": { "const": 112 },
+        "flagged_controls": { "const": 24 },
+        "clean_controls": { "const": 88 },
+        "distinct_unrelated_findings": { "const": 48 },
+        "semantic_fingerprint": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "rescored": { "const": false }
+      }
+    },
+    "root_cause_counts": { "type": "object" },
+    "defect_counts": { "type": "object" },
+    "agreement_matrices": { "type": "object" },
+    "breakdowns": { "type": "object", "minProperties": 10 },
+    "cases": {
+      "type": "array",
+      "minItems": 224,
+      "maxItems": 224,
+      "items": {
+        "type": "object",
+        "required": ["case_id", "pair_id", "kind", "fixture_validation", "official_phase10", "diagnostic_only"],
+        "properties": {
+          "case_id": { "type": "string", "pattern": "^case-v3-[0-9]{4}$" },
+          "pair_id": { "type": "string", "pattern": "^pair-v3-[0-9]{3}$" },
+          "kind": { "enum": ["vulnerable", "safe_control"] },
+          "fixture_validation": { "type": "object" },
+          "official_phase10": { "type": "object" },
+          "diagnostic_only": { "type": "object" }
+        }
+      }
+    },
+    "rejected_findings": {
+      "type": "array",
+      "minItems": 48,
+      "maxItems": 48,
+      "items": {
+        "type": "object",
+        "required": ["official_finding_id", "case_id", "semantically_related_expected_case", "official_rejection_reasons", "normalization"]
+      }
+    },
+    "provenance": { "type": "object" },
+    "limitations": { "type": "array", "minItems": 4, "items": { "type": "string" } }
+  }
+}

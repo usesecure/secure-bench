@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/secure-bench-phase11-regression-manifest-v1.json",
+  "title": "Secure Bench Phase 11 public regression manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source", "purpose", "cases", "counts", "constraints"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase11-regression-manifest-v1" },
+    "source": { "const": "retired-public-phase9-corpus" },
+    "purpose": { "type": "string" },
+    "cases": {
+      "type": "array",
+      "minItems": 224,
+      "maxItems": 224,
+      "items": {
+        "type": "object",
+        "required": ["case_id", "pair_id", "fixture_path", "kind", "family_id", "framework", "language", "topology", "eligible_for_future_regression", "retirement_disposition", "historical_score_immutable"]
+      }
+    },
+    "counts": {
+      "type": "object",
+      "required": ["total", "eligible", "excluded_direct_fixture_defects"],
+      "properties": {
+        "total": { "const": 224 },
+        "eligible": { "const": 168 },
+        "excluded_direct_fixture_defects": { "const": 56 }
+      }
+    },
+    "constraints": { "type": "array", "minItems": 3, "items": { "type": "string" } }
+  }
+}

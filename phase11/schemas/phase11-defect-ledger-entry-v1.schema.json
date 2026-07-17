@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/secure-bench-phase11-defect-ledger-entry-v1.json",
+  "title": "Secure Bench Phase 11 chained defect ledger entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "sequence", "defect_id", "class", "status", "title", "affected_ids", "affected_count", "historical_phase10_score_changed", "previous_entry_hash", "entry_hash"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase11-defect-ledger-entry-v1" },
+    "sequence": { "type": "integer", "minimum": 1, "maximum": 9 },
+    "defect_id": { "type": "string", "pattern": "^P11-(SCANNER|BENCHMARK|ADAPTER|CONTRACT|UNRESOLVED)-[0-9]{3}$" },
+    "class": { "enum": ["confirmed_scanner_defect", "confirmed_benchmark_defect", "confirmed_adapter_matcher_defect", "contract_ambiguity", "unresolved_attribution"] },
+    "status": { "enum": ["confirmed", "none_confirmed"] },
+    "title": { "type": "string", "minLength": 1 },
+    "affected_ids": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "affected_count": { "type": "integer", "minimum": 0 },
+    "historical_phase10_score_changed": { "const": false },
+    "previous_entry_hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "entry_hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

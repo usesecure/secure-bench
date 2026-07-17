@@ -71,6 +71,21 @@ Evidence contract v3 was deliberately not created. Evidence contract v2 already 
 Phase 9 source kind, sink kind, location rule, connected path rule, barrier, partial outcome, and
 duplicate rule. A new version without changed semantics would weaken version meaning.
 
+Phase 11 adds only public, retrospective diagnostic contracts. They reconstruct from immutable
+Phase 9 and Phase 10 evidence and cannot alter the official score:
+
+| Contract | Identifier | Committed schema |
+|---|---|---|
+| Retired case diagnostic | `secure-bench-phase11-retired-diagnostic-v1` | `phase11/schemas/phase11-retired-diagnostic-v1.schema.json` |
+| Public regression manifest | `secure-bench-phase11-regression-manifest-v1` | `phase11/schemas/phase11-regression-manifest-v1.schema.json` |
+| Chained defect ledger entry | `secure-bench-phase11-defect-ledger-entry-v1` | `phase11/schemas/phase11-defect-ledger-entry-v1.schema.json` |
+| Evidence Contract v2 vectors | `secure-bench-phase11-evidence-conformance-v1` | `phase11/schemas/phase11-evidence-conformance-v1.schema.json` |
+
+The Phase 11 adapter audit may parse an already-declared `evidence_contract_v2` object from a
+retained report. It may not infer semantics from scanner prose or grant retrospective score credit.
+Every analytical comparison is labeled as diagnostic-only and the Phase 10 result remains the
+preregistered result.
+
 Unknown fields are rejected by the native contract and the typed benchmark contracts. The SARIF adapter tolerates unrelated standard SARIF fields while requiring the Phase 0 properties used for neutral normalization.
 
 ## Recorded runs
