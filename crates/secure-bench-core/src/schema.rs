@@ -11,6 +11,7 @@ use crate::phase5::{
     EvidenceContractV2, Phase5CommitmentIndex, Phase5LedgerEntry, Phase5Manifest,
     SyntheticContractSuiteV2,
 };
+use crate::phase6::{RetiredHoldoutDiagnosticPack, RetiredRegressionManifest};
 use crate::runner::LiveRun;
 use crate::taxonomy::FrozenTaxonomy;
 use serde_json::Value;
@@ -46,6 +47,10 @@ const PHASE5_LEDGER_SCHEMA: &str =
     include_str!("../../../schemas/phase5-ledger-entry-v1.schema.json");
 const PHASE5_CONTRACT_TESTS_SCHEMA: &str =
     include_str!("../../../schemas/phase5-contract-tests-v1.schema.json");
+const PHASE6_DIAGNOSTIC_SCHEMA: &str =
+    include_str!("../../../schemas/phase6-retired-diagnostic-v1.schema.json");
+const PHASE6_REGRESSION_SCHEMA: &str =
+    include_str!("../../../schemas/phase6-regression-manifest-v1.schema.json");
 
 /// Schema loading or validation failure.
 #[derive(Clone, Debug, Eq, Error, PartialEq)]
@@ -287,6 +292,34 @@ pub fn validate_phase5_contract_tests(suite: &SyntheticContractSuiteV2) -> Resul
     )
 }
 
+/// Validates the public retired-holdout diagnostic package.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] if the committed schema, projection, or instance is invalid.
+pub fn validate_phase6_diagnostic(
+    package: &RetiredHoldoutDiagnosticPack,
+) -> Result<(), SchemaError> {
+    validate_typed(
+        "Phase 6 retired diagnostic",
+        PHASE6_DIAGNOSTIC_SCHEMA,
+        package,
+    )
+}
+
+/// Validates the engine-consumable retired regression manifest.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] if the committed schema, projection, or instance is invalid.
+pub fn validate_phase6_regression(manifest: &RetiredRegressionManifest) -> Result<(), SchemaError> {
+    validate_typed(
+        "Phase 6 regression manifest",
+        PHASE6_REGRESSION_SCHEMA,
+        manifest,
+    )
+}
+
 fn validate_typed<T: serde::Serialize>(
     contract: &'static str,
     schema_text: &str,
@@ -343,6 +376,8 @@ mod tests {
             ("Phase 5 commitments", PHASE5_COMMITMENTS_SCHEMA),
             ("Phase 5 ledger", PHASE5_LEDGER_SCHEMA),
             ("Phase 5 contract tests", PHASE5_CONTRACT_TESTS_SCHEMA),
+            ("Phase 6 retired diagnostic", PHASE6_DIAGNOSTIC_SCHEMA),
+            ("Phase 6 regression manifest", PHASE6_REGRESSION_SCHEMA),
         ] {
             let value: Value = serde_json::from_str(schema)?;
             jsonschema::validator_for(&value)

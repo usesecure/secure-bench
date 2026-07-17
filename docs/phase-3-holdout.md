@@ -1,5 +1,7 @@
 # Phase 3 Expanded Frozen Holdout
 
+> **Retired in Phase 6:** This corpus completed its one-shot Phase 4 evaluation and is now disclosed as a public development and diagnostic corpus. It is no longer unseen and must not be used for future unbiased evaluation. The commitments and historical artifacts below remain immutable.
+
 Phase 3 freezes an independent examination corpus before any scanner sees it. It contains 56 new cases: 28 vulnerable cases and 28 paired safe controls. Each of the seven taxonomy families has four pairs, with balanced JavaScript, JSX, TypeScript, and TSX coverage across Node.js, Express, Next.js App Router, and Next.js Server Action forms. The four structural strata are direct, helper-mediated, inter-file aliased, and control-flow-sensitive.
 
 The cases were authored from the frozen neutral taxonomy, official MITRE CWE records, and public Node.js, Express, and Next.js platform contracts. Secure Engine source, binaries, rules, reports, aliases, and prior outcomes were excluded. Framework-mandated names and public API strings are the only syntax-level reuse exemptions; case identities, project names, routes, application declarations, application literals, and implementation shapes are independently checked against Phase 1.

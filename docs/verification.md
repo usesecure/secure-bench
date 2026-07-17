@@ -1,5 +1,9 @@
 # Secure Bench Phase 0–2 Verification
 
+## Phase 6 diagnostic package
+
+Run `secure-bench phase6 validate --repository-root .` to reconstruct and verify the retired-corpus diagnostic package. This command has no scanner execution path. It validates historical hashes, retained reports, public fixture copies, record hashes, deterministic serialization, schemas, prospective contract-only audit vectors, confounding matrices, provenance, and Phase 5 non-disclosure guards.
+
 ## Environment baseline
 
 Phase 0 and Phase 1 are verified on Fedora 44 with Rust and Cargo 1.96.1. `Cargo.lock` pins the dependency graph. Direct dependencies remain current Rust 1.96-compatible releases:

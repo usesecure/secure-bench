@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-bench.invalid/schemas/phase6-regression-manifest-v1.schema.json",
+  "title": "Secure Bench retired regression manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "package_version", "diagnostic_content_sha256", "status",
+    "unbiased_holdout_use_prohibited", "cases", "content_sha256"
+  ],
+  "properties": {
+    "schema_version": { "const": "secure-bench-retired-holdout-regression-v1" },
+    "package_version": { "const": "1.0.0" },
+    "diagnostic_content_sha256": { "$ref": "#/$defs/sha256" },
+    "status": { "const": "public_development_regression_corpus" },
+    "unbiased_holdout_use_prohibited": { "const": true },
+    "cases": {
+      "type": "array", "minItems": 56, "maxItems": 56,
+      "items": {
+        "type": "object",
+        "required": [
+          "case_id", "kind", "fixture_path", "fixture_sha256", "taxonomy",
+          "primary_cwe", "semantics", "historical_outcome", "mismatch_categories",
+          "retained_report_sha256"
+        ],
+        "properties": {
+          "case_id": { "type": "string", "minLength": 1 },
+          "kind": { "enum": ["vulnerable", "safe_control"] },
+          "fixture_path": { "type": "string", "pattern": "^diagnostics/phase-6/fixtures/" },
+          "fixture_sha256": { "$ref": "#/$defs/sha256" },
+          "taxonomy": { "type": "object" },
+          "primary_cwe": { "type": "string", "pattern": "^CWE-[0-9]+$" },
+          "semantics": { "type": "object" },
+          "expected_source": { "type": ["object", "null"] },
+          "expected_sink": { "type": ["object", "null"] },
+          "expected_evidence": { "type": ["object", "null"] },
+          "security_property": { "type": ["string", "null"] },
+          "historical_outcome": { "type": "string" },
+          "mismatch_categories": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+          "retained_report_sha256": { "$ref": "#/$defs/sha256" }
+        }
+      }
+    },
+    "content_sha256": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

@@ -1,5 +1,11 @@
 # Secure Bench Phase 0–1.5 Methodology
 
+## Retired holdout policy
+
+After its one-shot Phase 4 execution, the Phase 3 holdout is retired and disclosed by Phase 6. It is now a public development and diagnostic corpus. Results obtained from it after disclosure are not unbiased benchmark results and must not be presented as rankings, production-readiness evidence, superiority evidence, or complete coverage.
+
+Phase 6 preserves the historical score and records observation-level diagnostics across scanner behavior, evaluator behavior, and experimental-design limitations. It does not infer scanner internals or remediate findings.
+
 ## Neutrality statement
 
 Secure Bench is designed to remain useful when any particular analyzer performs poorly. Phase 0 deliberately uses synthetic, committed mock reports so the harness can be audited before real tools or corpora introduce product and environment effects.

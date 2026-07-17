@@ -1,5 +1,7 @@
 # Phase 4 One-Shot Holdout Evaluation
 
+Phase 6 preserves this result unchanged and retires the executed Phase 3 cases as a public diagnostic corpus. Post-disclosure runs on those cases are development tests, not unbiased repetitions of Phase 4.
+
 Phase 4 applies the frozen Secure Bench evaluator to the sealed 56-case Phase 3 holdout exactly once. It evaluates a user-supplied Secure Engine 0.1.2 executable strictly through its public command and `secure-json-v1` report boundary. Secure Engine remains an external black box: Secure Bench does not inspect, build, install, import, update, modify, or debug it.
 
 This phase is an intentionally neutral research foundation. It is not a production benchmark, a scanner comparison, a public ranking, a complete security assessment, or evidence that Secure Engine or any other tool is superior. Results describe only this artifact, frozen corpus, command, environment, and evaluator contract.

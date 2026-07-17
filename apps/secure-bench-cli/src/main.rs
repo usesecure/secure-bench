@@ -13,6 +13,7 @@ use secure_bench_core::phase4::{
     canonical_phase4_json, execute_phase4, prepare_phase4, verify_phase4_artifacts,
 };
 use secure_bench_core::phase5::{generate_phase5, validate_phase5};
+use secure_bench_core::phase6::{generate_phase6, validate_phase6};
 use secure_bench_core::runner::{
     DEFAULT_SECURE_ENGINE_ARGUMENTS, RunnerRequest, load_live_run, run_secure_engine,
     valid_report_path,
@@ -74,6 +75,11 @@ enum Command {
     Phase5 {
         #[command(subcommand)]
         command: Phase5Command,
+    },
+    /// Generate, validate, or inspect the Phase 6 retired-corpus diagnostics.
+    Phase6 {
+        #[command(subcommand)]
+        command: Phase6Command,
     },
     /// Validate or inspect the sealed Phase 3 holdout without executing a scanner.
     Holdout {
@@ -332,6 +338,28 @@ enum Phase5Command {
 }
 
 #[derive(Debug, Subcommand)]
+enum Phase6Command {
+    /// Generate the additive public diagnostic package without launching a scanner.
+    Generate {
+        #[arg(long, default_value = ".")]
+        repository_root: PathBuf,
+        /// Stable UTC publication timestamp embedded in the deterministic package.
+        #[arg(long)]
+        published_at_utc: String,
+    },
+    /// Validate the package against immutable Phase 3 and Phase 4 artifacts.
+    Validate {
+        #[arg(long, default_value = ".")]
+        repository_root: PathBuf,
+    },
+    /// Print the aggregate validation projection without source text.
+    Inspect {
+        #[arg(long, default_value = ".")]
+        repository_root: PathBuf,
+    },
+}
+
+#[derive(Debug, Subcommand)]
 enum HoldoutCommand {
     /// Validate schemas, frozen commitments, fixtures, mutation proofs, and ledger state.
     Validate {
@@ -417,6 +445,7 @@ fn run(cli: Cli) -> Result<(), String> {
         Command::Phase2 { command } => run_phase2_command(command),
         Command::Phase4 { command } => run_phase4_command(command),
         Command::Phase5 { command } => run_phase5_command(command),
+        Command::Phase6 { command } => run_phase6_command(command),
         Command::Holdout { command } => run_holdout_command(command),
         Command::Isolation { command } => run_isolation_command(command),
         Command::Run {
@@ -586,6 +615,41 @@ fn run_phase5_command(command: Phase5Command) -> Result<(), String> {
         );
     }
     Ok(())
+}
+
+fn run_phase6_command(command: Phase6Command) -> Result<(), String> {
+    let (validation, inspect) = match command {
+        Phase6Command::Generate {
+            repository_root,
+            published_at_utc,
+        } => (
+            generate_phase6(&repository_root, &published_at_utc)
+                .map_err(|error| error.to_string())?,
+            false,
+        ),
+        Phase6Command::Validate { repository_root } => (
+            validate_phase6(&repository_root).map_err(|error| error.to_string())?,
+            false,
+        ),
+        Phase6Command::Inspect { repository_root } => (
+            validate_phase6(&repository_root).map_err(|error| error.to_string())?,
+            true,
+        ),
+    };
+    if inspect {
+        let mut bytes = serde_json::to_vec_pretty(&validation)
+            .map_err(|error| format!("could not serialize Phase 6 inspection: {error}"))?;
+        bytes.push(b'\n');
+        io::stdout()
+            .write_all(&bytes)
+            .map_err(|error| format!("could not write Phase 6 inspection: {error}"))
+    } else {
+        println!(
+            "Validated retired Phase 3 diagnostic corpus: {} cases and {} pairs; no scanner command was executed and the official Phase 4 result is unchanged.",
+            validation.cases, validation.pairs
+        );
+        Ok(())
+    }
 }
 
 #[allow(clippy::too_many_lines)]

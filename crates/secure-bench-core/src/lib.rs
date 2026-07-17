@@ -11,6 +11,7 @@ pub mod model;
 pub mod phase2;
 pub mod phase4;
 pub mod phase5;
+pub mod phase6;
 pub mod pipeline;
 pub mod runner;
 pub mod schema;

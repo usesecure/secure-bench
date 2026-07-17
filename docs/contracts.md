@@ -1,5 +1,11 @@
 # Secure Bench Phase 0–1 Contracts
 
+## Phase 6 retired-corpus contracts
+
+`secure-bench-retired-holdout-diagnostic-v1` is the deterministic public diagnostic package for the retired Phase 3 corpus. `secure-bench-retired-holdout-regression-v1` is its engine-consumable regression projection. Both are additive: they bind immutable Phase 3 and Phase 4 hashes and cannot modify the official Phase 4 result.
+
+The committed schemas are `schemas/phase6-retired-diagnostic-v1.schema.json` and `schemas/phase6-regression-manifest-v1.schema.json`. The Rust validator reconstructs both artifacts from historical source contracts, validates every copied fixture, and rejects Phase 5 holdout references.
+
 ## Version identifiers
 
 | Contract | Identifier | Committed schema |

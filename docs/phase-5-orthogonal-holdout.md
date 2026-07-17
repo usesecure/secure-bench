@@ -2,7 +2,7 @@
 
 Phase 5 freezes a new, first-party synthetic examination independently of all scanner outcomes. It is an intentionally neutral foundation for a future one-shot evaluation. It is not a production benchmark, scanner comparison, public ranking, coverage guarantee, or evidence that Secure Engine or any other analyzer is superior.
 
-No scanner was executed, inspected, imported, built, installed, updated, debugged, or consulted while Phase 5 was designed. Phase 4 outcomes, misses, partial matches, flagged controls, case identifiers, report wording, and scanner documentation were excluded. Phase 0–4 artifacts retain their historical meaning and bytes; Phase 3 remains sealed.
+No scanner was executed, inspected, imported, built, installed, updated, debugged, or consulted while Phase 5 was designed. Phase 4 outcomes, misses, partial matches, flagged controls, case identifiers, report wording, and scanner documentation were excluded. Phase 0–4 artifacts retain their historical meaning and bytes. Phase 3 remained sealed throughout Phase 5 creation; it was disclosed only later by the additive Phase 6 postmortem.
 
 ## Preregistered design
 

@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-bench.invalid/schemas/phase6-retired-diagnostic-v1.schema.json",
+  "title": "Secure Bench retired holdout diagnostic package v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "package_version", "package_id", "published_at_utc",
+    "holdout_status", "unbiased_holdout_use_prohibited",
+    "official_phase4_result_unchanged", "official_phase4_metrics",
+    "official_phase4_measurement", "official_phase4_provenance",
+    "category_counts", "family_category_counts", "framework_category_counts",
+    "language_category_counts", "topology_category_counts", "matrices", "confounding",
+    "evidence_contract_v1_audit", "cases", "pairs", "retained_report_examples",
+    "provenance", "content_sha256"
+  ],
+  "properties": {
+    "schema_version": { "const": "secure-bench-retired-holdout-diagnostic-v1" },
+    "package_version": { "const": "1.0.0" },
+    "package_id": { "const": "phase-3-retired-after-phase-4" },
+    "published_at_utc": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$" },
+    "holdout_status": { "const": "executed_and_retired_public_diagnostic_corpus" },
+    "unbiased_holdout_use_prohibited": { "const": true },
+    "official_phase4_result_unchanged": { "const": true },
+    "official_phase4_metrics": { "type": "object" },
+    "official_phase4_measurement": { "type": "object" },
+    "official_phase4_provenance": { "type": "object" },
+    "category_counts": { "$ref": "#/$defs/count_map" },
+    "family_category_counts": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/count_map" }
+    },
+    "framework_category_counts": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/count_map" }
+    },
+    "language_category_counts": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/count_map" }
+    },
+    "topology_category_counts": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/count_map" }
+    },
+    "matrices": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "sink", "evidence", "source_sink_evidence"],
+      "properties": {
+        "source": { "$ref": "#/$defs/count_map" },
+        "sink": { "$ref": "#/$defs/count_map" },
+        "evidence": { "$ref": "#/$defs/count_map" },
+        "source_sink_evidence": { "$ref": "#/$defs/count_map" }
+      }
+    },
+    "confounding": { "type": "object" },
+    "evidence_contract_v1_audit": { "type": "object" },
+    "cases": {
+      "type": "array", "minItems": 56, "maxItems": 56,
+      "items": { "$ref": "#/$defs/case" }
+    },
+    "pairs": {
+      "type": "array", "minItems": 28, "maxItems": 28,
+      "items": { "type": "object" }
+    },
+    "retained_report_examples": { "type": "array", "items": { "type": "object" } },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "retired_aggregate_corpus_sha256", "retired_contract_merkle_root",
+        "scanner_processes_launched", "phase5_holdout_inputs_read"
+      ],
+      "properties": {
+        "retired_aggregate_corpus_sha256": { "$ref": "#/$defs/sha256" },
+        "retired_contract_merkle_root": { "$ref": "#/$defs/sha256" },
+        "scanner_processes_launched": { "const": 0 },
+        "phase5_holdout_inputs_read": { "const": 0 }
+      }
+    },
+    "content_sha256": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "count_map": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+    "case": {
+      "type": "object",
+      "required": [
+        "case_id", "pair_id", "kind", "fixture_path", "fixture_sha256",
+        "original_contract_sha256", "framework", "language", "topology",
+        "taxonomy", "primary_cwe", "semantics", "official_outcome",
+        "execution_status", "retained_report_path", "retained_report_sha256",
+        "observations", "classifications", "record_sha256"
+      ],
+      "properties": {
+        "case_id": { "type": "string", "minLength": 1 },
+        "pair_id": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["vulnerable", "safe_control"] },
+        "fixture_path": { "type": "string", "pattern": "^diagnostics/phase-6/fixtures/" },
+        "fixture_sha256": { "$ref": "#/$defs/sha256" },
+        "original_contract_sha256": { "$ref": "#/$defs/sha256" },
+        "framework": { "type": "string" },
+        "language": { "type": "string" },
+        "topology": { "type": "string" },
+        "taxonomy": { "type": "object" },
+        "primary_cwe": { "type": "string", "pattern": "^CWE-[0-9]+$" },
+        "semantics": { "type": "object" },
+        "expected": { "type": ["object", "null"] },
+        "security_property": { "type": ["string", "null"] },
+        "official_outcome": { "type": "string" },
+        "execution_status": { "type": "string" },
+        "selected_finding_id": { "type": ["string", "null"] },
+        "official_criteria": { "type": ["object", "null"] },
+        "retained_report_path": { "type": "string", "pattern": "^artifacts/phase-4-" },
+        "retained_report_sha256": { "$ref": "#/$defs/sha256" },
+        "observations": { "type": "array", "items": { "type": "object" } },
+        "classifications": { "type": "array", "minItems": 1, "items": { "type": "object" } },
+        "record_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    }
+  }
+}
