@@ -1,0 +1,302 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/phase9-holdout-v3.schema.json",
+  "title": "Secure Bench Phase 9 orthogonal holdout v3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "holdout_id",
+    "title",
+    "description",
+    "methodology_version",
+    "git_base",
+    "branch",
+    "frozen_at_utc",
+    "neutrality",
+    "taxonomy",
+    "evidence_contract",
+    "protocol",
+    "design",
+    "historical_integrity",
+    "commitments",
+    "pairs"
+  ],
+  "properties": {
+    "schema_version": { "const": "secure-bench-orthogonal-holdout-v3" },
+    "holdout_id": { "const": "phase-9-orthogonal-holdout-v3" },
+    "title": { "type": "string", "minLength": 1 },
+    "description": { "type": "string", "minLength": 1 },
+    "methodology_version": { "const": "9.0.0" },
+    "git_base": { "$ref": "#/$defs/git_commit" },
+    "branch": { "const": "codex/phase-9-holdout-v3" },
+    "frozen_at_utc": { "type": "string", "format": "date-time" },
+    "neutrality": { "type": "string", "minLength": 1 },
+    "taxonomy": { "$ref": "#/$defs/taxonomy" },
+    "evidence_contract": { "$ref": "#/$defs/evidence" },
+    "protocol": { "$ref": "#/$defs/protocol" },
+    "design": { "$ref": "#/$defs/design" },
+    "historical_integrity": { "$ref": "#/$defs/hash_map" },
+    "commitments": { "$ref": "#/$defs/design_commitments" },
+    "pairs": {
+      "type": "array",
+      "minItems": 112,
+      "maxItems": 112,
+      "items": { "$ref": "#/$defs/pair" }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "git_commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "hash_map": {
+      "type": "object",
+      "minProperties": 6,
+      "additionalProperties": { "$ref": "#/$defs/sha256" }
+    },
+    "taxonomy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "schema_version", "taxonomy_version", "sha256", "content_hash"],
+      "properties": {
+        "path": { "const": "taxonomy/secure-bench-taxonomy-v1.json" },
+        "schema_version": { "const": "secure-bench-taxonomy-v1" },
+        "taxonomy_version": { "const": "1.0.0" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "content_hash": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "schema_version", "contract_version", "sha256", "decision"],
+      "properties": {
+        "path": { "const": "holdout/phase-5/evidence-contract-v2.json" },
+        "schema_version": { "const": "secure-bench-evidence-contract-v2" },
+        "contract_version": { "const": "2.0.0" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "decision": { "type": "string", "minLength": 1 }
+      }
+    },
+    "protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evaluation_state",
+        "one_shot_future_evaluation",
+        "network",
+        "ai_validation",
+        "scanner_projection",
+        "expected_data_visibility",
+        "ledger_path",
+        "result_path_template",
+        "result_write_mode"
+      ],
+      "properties": {
+        "evaluation_state": { "const": "not_executed" },
+        "one_shot_future_evaluation": { "const": true },
+        "network": { "const": "blocked_for_every_future_scanner_process" },
+        "ai_validation": { "const": "disabled_without_provider_credentials_endpoints_or_commands" },
+        "scanner_projection": { "type": "string", "minLength": 1 },
+        "expected_data_visibility": { "type": "string", "minLength": 1 },
+        "ledger_path": { "const": "holdout/phase-9/execution-ledger.jsonl" },
+        "result_path_template": { "const": "holdout/phase-9/results/{evaluation-id}.json" },
+        "result_write_mode": { "const": "create_new_only" }
+      }
+    },
+    "design": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schedule_id", "schedule_sha256", "balance", "deconfounding", "mutation_checks", "orthogonality_checks"],
+      "properties": {
+        "schedule_id": { "const": "counterbalanced-pairwise-orthogonal-112-pairs-v1" },
+        "schedule_sha256": { "$ref": "#/$defs/sha256" },
+        "balance": { "$ref": "#/$defs/balance" },
+        "deconfounding": { "$ref": "#/$defs/nonempty_strings" },
+        "mutation_checks": { "$ref": "#/$defs/nonempty_strings" },
+        "orthogonality_checks": { "$ref": "#/$defs/nonempty_strings" }
+      }
+    },
+    "nonempty_strings": {
+      "type": "array",
+      "minItems": 4,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "balance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pairs",
+        "cases",
+        "vulnerable",
+        "safe_controls",
+        "category_pairs_each",
+        "framework_pairs_each",
+        "language_pairs_each",
+        "topology_pairs_each",
+        "category_framework_pairs_each",
+        "category_language_pairs_each",
+        "category_topology_pairs_each",
+        "framework_language_pairs_each",
+        "framework_topology_pairs_each",
+        "language_topology_pairs_each",
+        "first_slot_vulnerable",
+        "first_slot_safe"
+      ],
+      "properties": {
+        "pairs": { "const": 112 },
+        "cases": { "const": 224 },
+        "vulnerable": { "const": 112 },
+        "safe_controls": { "const": 112 },
+        "category_pairs_each": { "const": 16 },
+        "framework_pairs_each": { "const": 28 },
+        "language_pairs_each": { "const": 56 },
+        "topology_pairs_each": { "const": 28 },
+        "category_framework_pairs_each": { "const": 4 },
+        "category_language_pairs_each": { "const": 8 },
+        "category_topology_pairs_each": { "const": 4 },
+        "framework_language_pairs_each": { "const": 14 },
+        "framework_topology_pairs_each": { "const": 7 },
+        "language_topology_pairs_each": { "const": 14 },
+        "first_slot_vulnerable": { "const": 56 },
+        "first_slot_safe": { "const": 56 }
+      }
+    },
+    "design_commitments": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["aggregate_corpus_sha256", "contract_merkle_root", "schedule_sha256"],
+      "properties": {
+        "aggregate_corpus_sha256": { "$ref": "#/$defs/sha256" },
+        "contract_merkle_root": { "$ref": "#/$defs/sha256" },
+        "schedule_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "assignment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ordinal", "framework", "language", "topology", "category_id", "family_id"],
+      "properties": {
+        "ordinal": { "type": "integer", "minimum": 1, "maximum": 112 },
+        "framework": { "enum": ["node_js", "express", "next_app_router", "server_actions"] },
+        "language": { "enum": ["java_script", "type_script"] },
+        "topology": { "enum": ["direct", "helper_mediated", "inter_file_aliased", "control_flow_sensitive"] },
+        "category_id": { "type": "string", "pattern": "^secure-bench\\.category\\." },
+        "family_id": { "enum": ["SE1001", "SE1002", "SE1003", "SE1004", "SE1005", "SE1006", "SE1007"] }
+      }
+    },
+    "line_range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end"],
+      "properties": {
+        "start": { "type": "integer", "minimum": 1 },
+        "end": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "mutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file",
+        "first_fragment_sha256",
+        "second_fragment_sha256",
+        "first_lines",
+        "second_lines",
+        "structural_property",
+        "inverse_required",
+        "identifier_literal_only_forbidden"
+      ],
+      "properties": {
+        "file": { "type": "string", "pattern": "^(app|src)/" },
+        "first_fragment_sha256": { "$ref": "#/$defs/sha256" },
+        "second_fragment_sha256": { "$ref": "#/$defs/sha256" },
+        "first_lines": { "$ref": "#/$defs/line_range" },
+        "second_lines": { "$ref": "#/$defs/line_range" },
+        "structural_property": { "type": "string", "minLength": 1 },
+        "inverse_required": { "const": true },
+        "identifier_literal_only_forbidden": { "const": true }
+      }
+    },
+    "span": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "start_line", "start_column", "end_line", "end_column"],
+      "properties": {
+        "file": { "type": "string", "pattern": "^(app|src)/" },
+        "start_line": { "type": "integer", "minimum": 1 },
+        "start_column": { "type": "integer", "minimum": 1 },
+        "end_line": { "type": "integer", "minimum": 1 },
+        "end_column": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "path_node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "effect", "source_kind", "sink_kind", "span", "summarizable"],
+      "properties": {
+        "role": { "enum": ["source", "intermediate", "sink"] },
+        "effect": { "const": "preserves_influence" },
+        "source_kind": { "type": ["string", "null"] },
+        "sink_kind": { "type": ["string", "null"] },
+        "span": { "$ref": "#/$defs/span" },
+        "summarizable": { "type": "boolean" }
+      }
+    },
+    "expectation": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["expectation_id", "taxonomy_version", "category_id", "invariant_id", "primary_cwe", "path"],
+      "properties": {
+        "expectation_id": { "type": "string", "pattern": "^expectation-case-v3-[0-9]{4}$" },
+        "taxonomy_version": { "const": "1.0.0" },
+        "category_id": { "type": "string", "pattern": "^secure-bench\\.category\\." },
+        "invariant_id": { "type": "string", "pattern": "^secure-bench\\.invariant\\." },
+        "primary_cwe": { "type": "string", "pattern": "^CWE-[0-9]+$" },
+        "path": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "$ref": "#/$defs/path_node" } }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["origin", "license", "revision", "modifications", "authors"],
+      "properties": {
+        "origin": { "const": "First-party synthetic Secure Bench Phase 9 fixture" },
+        "license": { "const": "Apache-2.0" },
+        "revision": { "const": "original" },
+        "modifications": { "type": "string", "minLength": 1 },
+        "authors": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_id", "fixture_path", "fixture_sha256", "contract_sha256", "kind", "expectation", "security_property", "provenance"],
+      "properties": {
+        "case_id": { "type": "string", "pattern": "^case-v3-[0-9]{4}$" },
+        "fixture_path": { "type": "string", "pattern": "^holdout/phase-9/cases/case-v3-[0-9]{4}$" },
+        "fixture_sha256": { "$ref": "#/$defs/sha256" },
+        "contract_sha256": { "$ref": "#/$defs/sha256" },
+        "kind": { "enum": ["vulnerable", "safe_control"] },
+        "expectation": { "$ref": "#/$defs/expectation" },
+        "security_property": { "type": ["string", "null"] },
+        "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "pair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pair_id", "assignment", "invariant_id", "primary_cwe", "source_kind", "sink_kind", "mutation", "first", "second"],
+      "properties": {
+        "pair_id": { "type": "string", "pattern": "^pair-v3-[0-9]{3}$" },
+        "assignment": { "$ref": "#/$defs/assignment" },
+        "invariant_id": { "type": "string", "pattern": "^secure-bench\\.invariant\\." },
+        "primary_cwe": { "type": "string", "pattern": "^CWE-[0-9]+$" },
+        "source_kind": { "type": "string", "minLength": 1 },
+        "sink_kind": { "type": "string", "minLength": 1 },
+        "mutation": { "$ref": "#/$defs/mutation" },
+        "first": { "$ref": "#/$defs/case" },
+        "second": { "$ref": "#/$defs/case" }
+      }
+    }
+  }
+}

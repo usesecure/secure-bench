@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/phase9-commitments-v1.schema.json",
+  "title": "Secure Bench Phase 9 commitment index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "holdout_id",
+    "manifest_sha256",
+    "evidence_contract_sha256",
+    "taxonomy_sha256",
+    "aggregate_corpus_sha256",
+    "contract_merkle_root",
+    "schedule_sha256",
+    "genesis_ledger_sha256",
+    "pair_count",
+    "case_count",
+    "authoring_source_sha256",
+    "schema_files",
+    "historical_integrity"
+  ],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase9-commitments-v1" },
+    "holdout_id": { "const": "phase-9-orthogonal-holdout-v3" },
+    "manifest_sha256": { "$ref": "#/$defs/sha256" },
+    "evidence_contract_sha256": { "$ref": "#/$defs/sha256" },
+    "taxonomy_sha256": { "$ref": "#/$defs/sha256" },
+    "aggregate_corpus_sha256": { "$ref": "#/$defs/sha256" },
+    "contract_merkle_root": { "$ref": "#/$defs/sha256" },
+    "schedule_sha256": { "$ref": "#/$defs/sha256" },
+    "genesis_ledger_sha256": { "$ref": "#/$defs/sha256" },
+    "pair_count": { "const": 112 },
+    "case_count": { "const": 224 },
+    "authoring_source_sha256": { "$ref": "#/$defs/sha256" },
+    "schema_files": {
+      "type": "object",
+      "minProperties": 3,
+      "additionalProperties": { "$ref": "#/$defs/sha256" }
+    },
+    "historical_integrity": {
+      "type": "object",
+      "minProperties": 6,
+      "additionalProperties": { "$ref": "#/$defs/sha256" }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

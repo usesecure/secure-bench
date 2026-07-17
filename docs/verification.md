@@ -1,5 +1,26 @@
 # Secure Bench Phase 0–2 Verification
 
+## Phase 9 frozen holdout v3
+
+Phase 9 uses a separate Rust workspace and has no process-launching or network API. Its validator
+regenerates the complete 112-pair, 224-case bundle in memory and byte-compares it with the
+committed fixtures, manifest, commitment index, and genesis ledger:
+
+```bash
+cargo fmt --manifest-path phase9/Cargo.toml --all --check
+cargo clippy --locked --manifest-path phase9/Cargo.toml --all-targets --all-features -- -D warnings
+cargo test --locked --manifest-path phase9/Cargo.toml --all-targets --all-features
+cargo run --locked --manifest-path phase9/Cargo.toml -- validate .
+cargo run --locked --manifest-path phase9/Cargo.toml -- summary .
+```
+
+Validation proves exact factor margins and all pairwise contingency cells, counterbalanced case
+orientation, one vulnerable/control inverse per assignment, exact bidirectional mutations,
+non-trivial structural deltas, scanner-visible answer-leakage rejection, source and fixture
+duplicate rejection against Phase 1, Phase 3, and Phase 5, normalized non-pair similarity bounds,
+schema validity, commitment and genesis-ledger binding, historical tree integrity, deterministic
+authoring, and zero scanner execution. The root-workspace gates remain independently required.
+
 ## Phase 8 retrospective adjudication
 
 Phase 8 is implemented in the separate `phase8` Rust workspace so the frozen Phase 7 evaluator

@@ -58,6 +58,19 @@ lifecycle without changing Phase 7 evidence:
 | Separate adjudication ledger | `secure-bench-phase8-adjudication-ledger-v1` | `schemas/phase8-adjudication-ledger-v1.schema.json` |
 | Adjudication artifact index | `secure-bench-phase8-artifacts-v1` | `schemas/phase8-artifacts-v1.schema.json` |
 
+Phase 9 reuses `secure-bench-evidence-contract-v2` without modification and adds only the
+contracts required to freeze a new examination:
+
+| Contract | Identifier | Committed schema |
+|---|---|---|
+| Orthogonal holdout manifest | `secure-bench-orthogonal-holdout-v3` | `schemas/phase9-holdout-v3.schema.json` |
+| Commitment index | `secure-bench-phase9-commitments-v1` | `schemas/phase9-commitments-v1.schema.json` |
+| Genesis/future ledger entry | `secure-bench-phase9-ledger-entry-v1` | `schemas/phase9-ledger-entry-v1.schema.json` |
+
+Evidence contract v3 was deliberately not created. Evidence contract v2 already defines every
+Phase 9 source kind, sink kind, location rule, connected path rule, barrier, partial outcome, and
+duplicate rule. A new version without changed semantics would weaken version meaning.
+
 Unknown fields are rejected by the native contract and the typed benchmark contracts. The SARIF adapter tolerates unrelated standard SARIF fields while requiring the Phase 0 properties used for neutral normalization.
 
 ## Recorded runs
