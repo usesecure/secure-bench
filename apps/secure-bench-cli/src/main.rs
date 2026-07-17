@@ -12,6 +12,7 @@ use secure_bench_core::phase4::{
     Phase4ExecutionRequest, Phase4PrepareRequest, Phase4Result, Phase4VerificationRequest,
     canonical_phase4_json, execute_phase4, prepare_phase4, verify_phase4_artifacts,
 };
+use secure_bench_core::phase5::{generate_phase5, validate_phase5};
 use secure_bench_core::runner::{
     DEFAULT_SECURE_ENGINE_ARGUMENTS, RunnerRequest, load_live_run, run_secure_engine,
     valid_report_path,
@@ -68,6 +69,11 @@ enum Command {
     Phase4 {
         #[command(subcommand)]
         command: Phase4Command,
+    },
+    /// Author or validate the scanner-neutral Phase 5 orthogonal holdout.
+    Phase5 {
+        #[command(subcommand)]
+        command: Phase5Command,
     },
     /// Validate or inspect the sealed Phase 3 holdout without executing a scanner.
     Holdout {
@@ -292,6 +298,40 @@ enum Phase4Command {
 }
 
 #[derive(Debug, Subcommand)]
+enum Phase5Command {
+    /// Create the frozen first-party synthetic corpus; never starts a scanner.
+    Generate {
+        #[arg(long, default_value = ".")]
+        repository_root: PathBuf,
+        #[arg(long, default_value = "taxonomy/secure-bench-taxonomy-v1.json")]
+        taxonomy: PathBuf,
+        #[arg(long)]
+        frozen_at_utc: String,
+    },
+    /// Validate all Phase 5 artifacts, commitments, overlap checks, and genesis ledger.
+    Validate {
+        #[arg(long, default_value = ".")]
+        repository_root: PathBuf,
+        #[arg(long, default_value = "taxonomy/secure-bench-taxonomy-v1.json")]
+        taxonomy: PathBuf,
+    },
+    /// Print the aggregate, answer-free Phase 5 validation projection as JSON.
+    Inspect {
+        #[arg(long, default_value = ".")]
+        repository_root: PathBuf,
+        #[arg(long, default_value = "taxonomy/secure-bench-taxonomy-v1.json")]
+        taxonomy: PathBuf,
+    },
+    /// Run only synthetic evidence-contract v2 conformance tests through full validation.
+    ContractTest {
+        #[arg(long, default_value = ".")]
+        repository_root: PathBuf,
+        #[arg(long, default_value = "taxonomy/secure-bench-taxonomy-v1.json")]
+        taxonomy: PathBuf,
+    },
+}
+
+#[derive(Debug, Subcommand)]
 enum HoldoutCommand {
     /// Validate schemas, frozen commitments, fixtures, mutation proofs, and ledger state.
     Validate {
@@ -376,6 +416,7 @@ fn run(cli: Cli) -> Result<(), String> {
         Command::Taxonomy { command } => run_taxonomy_command(command),
         Command::Phase2 { command } => run_phase2_command(command),
         Command::Phase4 { command } => run_phase4_command(command),
+        Command::Phase5 { command } => run_phase5_command(command),
         Command::Holdout { command } => run_holdout_command(command),
         Command::Isolation { command } => run_isolation_command(command),
         Command::Run {
@@ -497,6 +538,54 @@ fn run_holdout_command(command: HoldoutCommand) -> Result<(), String> {
         );
         Ok(())
     }
+}
+
+fn run_phase5_command(command: Phase5Command) -> Result<(), String> {
+    let (repository_root, taxonomy_path, inspect) = match command {
+        Phase5Command::Generate {
+            repository_root,
+            taxonomy,
+            frozen_at_utc,
+        } => {
+            let bytes = read_bounded(&taxonomy, MAX_MANIFEST_BYTES, "taxonomy")?;
+            let validation = generate_phase5(&repository_root, &bytes, &frozen_at_utc)
+                .map_err(|error| error.to_string())?;
+            println!(
+                "Created frozen Phase 5 holdout: {} pairs, {} cases, corpus {}; no scanner command was executed.",
+                validation.pairs, validation.cases, validation.aggregate_corpus_sha256
+            );
+            return Ok(());
+        }
+        Phase5Command::Validate {
+            repository_root,
+            taxonomy,
+        }
+        | Phase5Command::ContractTest {
+            repository_root,
+            taxonomy,
+        } => (repository_root, taxonomy, false),
+        Phase5Command::Inspect {
+            repository_root,
+            taxonomy,
+        } => (repository_root, taxonomy, true),
+    };
+    let bytes = read_bounded(&taxonomy_path, MAX_MANIFEST_BYTES, "taxonomy")?;
+    let validation =
+        validate_phase5(&repository_root, &bytes).map_err(|error| error.to_string())?;
+    if inspect {
+        let mut output = serde_json::to_vec_pretty(&validation)
+            .map_err(|error| format!("could not serialize Phase 5 inspection: {error}"))?;
+        output.push(b'\n');
+        io::stdout()
+            .write_all(&output)
+            .map_err(|error| format!("could not write Phase 5 inspection: {error}"))?;
+    } else {
+        println!(
+            "Validated frozen Phase 5 holdout: {} pairs, {} cases, Merkle root {}; no scanner command was executed.",
+            validation.pairs, validation.cases, validation.contract_merkle_root
+        );
+    }
+    Ok(())
 }
 
 #[allow(clippy::too_many_lines)]

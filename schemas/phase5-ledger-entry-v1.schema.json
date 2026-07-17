@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-bench.invalid/schemas/phase5-ledger-entry-v1.schema.json",
+  "title": "Secure Bench Phase 5 Ledger Entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "sequence", "event", "holdout_id", "manifest_sha256", "evidence_contract_sha256", "commitment_root", "previous_entry_hash", "timestamp_utc", "entry_hash"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase5-ledger-entry-v1" },
+    "sequence": { "type": "integer", "minimum": 0 },
+    "event": { "type": "string", "minLength": 1 },
+    "holdout_id": { "const": "phase-5-orthogonal-holdout-v2" },
+    "manifest_sha256": { "$ref": "#/$defs/hash" },
+    "evidence_contract_sha256": { "$ref": "#/$defs/hash" },
+    "commitment_root": { "$ref": "#/$defs/hash" },
+    "previous_entry_hash": { "$ref": "#/$defs/hash" },
+    "timestamp_utc": { "type": "string", "format": "date-time" },
+    "entry_hash": { "$ref": "#/$defs/hash" }
+  },
+  "$defs": { "hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" } }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-bench.invalid/schemas/phase5-commitments-v1.schema.json",
+  "title": "Secure Bench Phase 5 Commitment Index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "holdout_id", "manifest_sha256", "evidence_contract_sha256", "contract_tests_sha256", "aggregate_corpus_sha256", "contract_merkle_root", "evaluator_sha256", "genesis_ledger_sha256", "evaluator_files"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase5-commitments-v1" },
+    "holdout_id": { "const": "phase-5-orthogonal-holdout-v2" },
+    "manifest_sha256": { "$ref": "#/$defs/hash" },
+    "evidence_contract_sha256": { "$ref": "#/$defs/hash" },
+    "contract_tests_sha256": { "$ref": "#/$defs/hash" },
+    "aggregate_corpus_sha256": { "$ref": "#/$defs/hash" },
+    "contract_merkle_root": { "$ref": "#/$defs/hash" },
+    "evaluator_sha256": { "$ref": "#/$defs/hash" },
+    "genesis_ledger_sha256": { "$ref": "#/$defs/hash" },
+    "evaluator_files": { "type": "object", "minProperties": 10, "additionalProperties": { "$ref": "#/$defs/hash" } }
+  },
+  "$defs": { "hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" } }
+}

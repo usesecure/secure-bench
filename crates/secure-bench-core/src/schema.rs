@@ -7,6 +7,10 @@ use crate::model::{
 };
 use crate::phase2::{NetworkIsolationAttestation, Phase2Result, TaxonomyProfile};
 use crate::phase4::{Phase4Artifacts, Phase4PreExecutionContract, Phase4Result, Phase4Run};
+use crate::phase5::{
+    EvidenceContractV2, Phase5CommitmentIndex, Phase5LedgerEntry, Phase5Manifest,
+    SyntheticContractSuiteV2,
+};
 use crate::runner::LiveRun;
 use crate::taxonomy::FrozenTaxonomy;
 use serde_json::Value;
@@ -33,6 +37,15 @@ const PHASE4_RUN_SCHEMA: &str = include_str!("../../../schemas/phase4-run-v1.sch
 const PHASE4_RESULT_SCHEMA: &str = include_str!("../../../schemas/phase4-result-v1.schema.json");
 const PHASE4_ARTIFACTS_SCHEMA: &str =
     include_str!("../../../schemas/phase4-artifacts-v1.schema.json");
+const EVIDENCE_CONTRACT_V2_SCHEMA: &str =
+    include_str!("../../../schemas/evidence-contract-v2.schema.json");
+const PHASE5_HOLDOUT_SCHEMA: &str = include_str!("../../../schemas/phase5-holdout-v2.schema.json");
+const PHASE5_COMMITMENTS_SCHEMA: &str =
+    include_str!("../../../schemas/phase5-commitments-v1.schema.json");
+const PHASE5_LEDGER_SCHEMA: &str =
+    include_str!("../../../schemas/phase5-ledger-entry-v1.schema.json");
+const PHASE5_CONTRACT_TESTS_SCHEMA: &str =
+    include_str!("../../../schemas/phase5-contract-tests-v1.schema.json");
 
 /// Schema loading or validation failure.
 #[derive(Clone, Debug, Eq, Error, PartialEq)]
@@ -221,6 +234,59 @@ pub fn validate_phase4_artifacts(artifacts: &Phase4Artifacts) -> Result<(), Sche
     validate_typed("Phase 4 artifact index", PHASE4_ARTIFACTS_SCHEMA, artifacts)
 }
 
+/// Validates the tool-neutral evidence contract v2.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] if the committed schema, projection, or instance is invalid.
+pub fn validate_evidence_contract_v2(contract: &EvidenceContractV2) -> Result<(), SchemaError> {
+    validate_typed(
+        "evidence contract v2",
+        EVIDENCE_CONTRACT_V2_SCHEMA,
+        contract,
+    )
+}
+
+/// Validates the frozen Phase 5 manifest.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] if the committed schema, projection, or instance is invalid.
+pub fn validate_phase5_manifest(manifest: &Phase5Manifest) -> Result<(), SchemaError> {
+    validate_typed("Phase 5 manifest", PHASE5_HOLDOUT_SCHEMA, manifest)
+}
+
+/// Validates the Phase 5 commitment index.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] if the committed schema, projection, or instance is invalid.
+pub fn validate_phase5_commitments(index: &Phase5CommitmentIndex) -> Result<(), SchemaError> {
+    validate_typed("Phase 5 commitment index", PHASE5_COMMITMENTS_SCHEMA, index)
+}
+
+/// Validates one Phase 5 append-only ledger entry.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] if the committed schema, projection, or instance is invalid.
+pub fn validate_phase5_ledger_entry(entry: &Phase5LedgerEntry) -> Result<(), SchemaError> {
+    validate_typed("Phase 5 ledger entry", PHASE5_LEDGER_SCHEMA, entry)
+}
+
+/// Validates the synthetic evidence-contract conformance suite.
+///
+/// # Errors
+///
+/// Returns [`SchemaError`] if the committed schema, projection, or instance is invalid.
+pub fn validate_phase5_contract_tests(suite: &SyntheticContractSuiteV2) -> Result<(), SchemaError> {
+    validate_typed(
+        "Phase 5 contract tests",
+        PHASE5_CONTRACT_TESTS_SCHEMA,
+        suite,
+    )
+}
+
 fn validate_typed<T: serde::Serialize>(
     contract: &'static str,
     schema_text: &str,
@@ -272,6 +338,11 @@ mod tests {
             ("Phase 4 run", PHASE4_RUN_SCHEMA),
             ("Phase 4 result", PHASE4_RESULT_SCHEMA),
             ("Phase 4 artifact index", PHASE4_ARTIFACTS_SCHEMA),
+            ("evidence contract v2", EVIDENCE_CONTRACT_V2_SCHEMA),
+            ("Phase 5 holdout", PHASE5_HOLDOUT_SCHEMA),
+            ("Phase 5 commitments", PHASE5_COMMITMENTS_SCHEMA),
+            ("Phase 5 ledger", PHASE5_LEDGER_SCHEMA),
+            ("Phase 5 contract tests", PHASE5_CONTRACT_TESTS_SCHEMA),
         ] {
             let value: Value = serde_json::from_str(schema)?;
             jsonschema::validator_for(&value)

@@ -2182,11 +2182,15 @@ mod tests {
         let manifest_bytes = fs::read(root.join("holdout/phase-3/manifest.json"))?;
         let taxonomy_bytes = fs::read(root.join("taxonomy/secure-bench-taxonomy-v1.json"))?;
         let ledger_bytes = fs::read(root.join("holdout/phase-3/execution-ledger.jsonl"))?;
+        let genesis_ledger_bytes = ledger_bytes
+            .split_inclusive(|byte| *byte == b'\n')
+            .next()
+            .ok_or("Phase 3 genesis ledger entry is missing")?;
         let (manifest, _) = load_holdout_manifest(&manifest_bytes, &root, &taxonomy_bytes)?;
         let taxonomy = load_taxonomy(&taxonomy_bytes)?;
         let contract_bytes = canonical_phase4_json(&test_contract(&manifest, &taxonomy))?;
         load_phase4_pre_execution(&contract_bytes)?;
-        let genesis = validate_holdout_ledger(&ledger_bytes, &manifest)?;
+        let genesis = validate_holdout_ledger(genesis_ledger_bytes, &manifest)?;
         let started = execution_started_ledger_entry(
             &genesis,
             &manifest,

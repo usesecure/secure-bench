@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-bench.invalid/schemas/phase5-contract-tests-v1.schema.json",
+  "title": "Secure Bench Phase 5 Synthetic Contract Tests",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "contract_version", "synthetic_reports_only", "tests"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase5-contract-tests-v1" },
+    "contract_version": { "const": "2.0.0" },
+    "synthetic_reports_only": { "const": true },
+    "tests": { "type": "array", "minItems": 11, "uniqueItems": true }
+  }
+}

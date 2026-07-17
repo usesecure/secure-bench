@@ -32,6 +32,16 @@ Phase 2 adds prospective evaluation contracts without changing historical artifa
 | Network-isolation attestation | `secure-bench-network-isolation-v1` | `schemas/network-isolation-v1.schema.json` |
 | Prospective evaluation result | `secure-bench-phase2-result-v1` | `schemas/phase2-result-v1.schema.json` |
 
+Phase 5 adds scanner-neutral prospective contracts without changing historical artifacts:
+
+| Contract | Identifier | Committed schema |
+|---|---|---|
+| Evidence semantics | `secure-bench-evidence-contract-v2` | `schemas/evidence-contract-v2.schema.json` |
+| Orthogonal holdout | `secure-bench-orthogonal-holdout-v2` | `schemas/phase5-holdout-v2.schema.json` |
+| Commitment index | `secure-bench-phase5-commitments-v1` | `schemas/phase5-commitments-v1.schema.json` |
+| Genesis/future ledger entry | `secure-bench-phase5-ledger-entry-v1` | `schemas/phase5-ledger-entry-v1.schema.json` |
+| Synthetic conformance vectors | `secure-bench-phase5-contract-tests-v1` | `schemas/phase5-contract-tests-v1.schema.json` |
+
 Unknown fields are rejected by the native contract and the typed benchmark contracts. The SARIF adapter tolerates unrelated standard SARIF fields while requiring the Phase 0 properties used for neutral normalization.
 
 ## Recorded runs

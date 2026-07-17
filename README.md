@@ -2,7 +2,7 @@
 
 Reproducible, evidence-aware benchmarks for static security analyzers.
 
-Secure Bench is an independent, local-first Rust benchmark harness. Phase 0 established versioned contracts, scoring-blind adapters, deterministic matching, separate metrics, provenance, and explicit failure accounting using committed mock reports. Phase 1 adds an original JavaScript and TypeScript corpus and a direct black-box runner for an explicitly supplied Secure Engine binary. Phase 1.5 freezes a public neutral taxonomy for prospective reports without changing the historical Phase 1 result. Phase 2 applies that contract prospectively to two isolated, retained Secure Engine 0.1.1 runs while preserving every historical artifact. Phase 3 freezes a separate 56-case holdout examination. Phase 4 provides a one-shot, network-isolated evaluation contract for an explicitly supplied Secure Engine 0.1.2 artifact.
+Secure Bench is an independent, local-first Rust benchmark harness. Phase 0 established versioned contracts, scoring-blind adapters, deterministic matching, separate metrics, provenance, and explicit failure accounting using committed mock reports. Phase 1 adds an original JavaScript and TypeScript corpus and a direct black-box runner for an explicitly supplied Secure Engine binary. Phase 1.5 freezes a public neutral taxonomy for prospective reports without changing the historical Phase 1 result. Phase 2 applies that contract prospectively to two isolated, retained Secure Engine 0.1.1 runs while preserving every historical artifact. Phase 3 freezes a separate 56-case holdout examination. Phase 4 provides its one-shot, network-isolated Secure Engine 0.1.2 evaluation. Phase 5 independently freezes a new 112-case orthogonal holdout and tool-neutral evidence contract v2 without executing a scanner.
 
 This remains an intentionally neutral foundation. It is not a production benchmark, scanner comparison, public leaderboard, or basis for claiming that Secure Engine—or any other analyzer—is superior. A Phase 1 baseline measures one explicitly identified binary on a small synthetic corpus and must be reported with its raw artifacts, denominators, environment, and limitations.
 
@@ -105,6 +105,13 @@ cargo run --release --bin secure-bench -- phase2 evaluate \
 
 ## Verification
 
+Validate Phase 5 commitments and synthetic evidence-contract tests without executing a scanner:
+
+```bash
+cargo run --bin secure-bench -- phase5 validate
+cargo run --bin secure-bench -- phase5 contract-test
+```
+
 Validate or inspect the Phase 3 commitments without exposing per-case answers in terminal output:
 
 ```bash
@@ -122,7 +129,7 @@ cargo audit --deny warnings
 cargo deny check
 ```
 
-See [Architecture](docs/architecture.md), [Methodology](docs/methodology.md), [Contracts](docs/contracts.md), [Frozen taxonomy](docs/neutral-taxonomy-v1.md), [Corpus provenance](docs/phase-1-corpus.md), [Runner boundaries](docs/phase-1-runner.md), [Phase 2 evaluation](docs/phase-2-evaluation.md), [Phase 3 holdout](docs/phase-3-holdout.md), [Phase 4 evaluation](docs/phase-4-evaluation.md), and [Verification](docs/verification.md).
+See [Architecture](docs/architecture.md), [Methodology](docs/methodology.md), [Contracts](docs/contracts.md), [Frozen taxonomy](docs/neutral-taxonomy-v1.md), [Corpus provenance](docs/phase-1-corpus.md), [Runner boundaries](docs/phase-1-runner.md), [Phase 2 evaluation](docs/phase-2-evaluation.md), [Phase 3 holdout](docs/phase-3-holdout.md), [Phase 4 evaluation](docs/phase-4-evaluation.md), [Phase 5 orthogonal holdout](docs/phase-5-orthogonal-holdout.md), and [Verification](docs/verification.md).
 
 ## License
 

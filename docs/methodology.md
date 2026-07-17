@@ -95,3 +95,13 @@ Phase 3 adds 28 original vulnerable/control pairs distributed equally across the
 Fixture and contract SHA-256 values, an aggregate corpus hash, and a domain-separated Merkle root freeze the examination before any scanner execution. A hash-chained append-only ledger contains only the genesis seal. Its future protocol permits one execution reservation and one terminal outcome, requires create-new result storage, and forbids replacement or re-evaluation.
 
 No scanner was run or consulted to define Phase 3. This is a deliberately neutral examination foundation, not a production benchmark, public ranking, scanner comparison, or evidence that Secure Engine or another tool is superior.
+
+## Phase 5 orthogonal-holdout methodology
+
+Phase 5 is derived independently from taxonomy 1.0.0, official CWE records, official framework documentation, and general security principles. It excludes scanner source, fixtures, rules, reports, documentation, Phase 4 outcomes, and scanner-specific vocabulary. A deterministic preregistered schedule balances 56 pairs across framework, language, topology, and all seven taxonomy families. The manifest records contingency tables and association measurements so confounding can be audited without revealing case answers.
+
+Evidence contract v2 uses canonical taxonomy coordinates, semantic endpoints, bounded span containment, ordered connected paths, explicit summarization, semantic transforms and barriers, uncertainty, partial outcomes, and semantic duplicate fingerprints. Prose, variable names, rule identifiers, scanner aliases, and tool identity cannot grant credit. Only committed synthetic canonical and near-miss reports are used for conformance validation.
+
+Every vulnerable/control pair is an exact reversible semantic mutation. Scanner-visible files are answer-free and committed independently from complete case contracts. Aggregate token, structural-shape, and semantic-metadata comparisons guard against reuse of prior corpora. The append-only ledger begins with a freeze event and reserves any scanner execution for a separately authorized, network-blocked, AI-disabled one-shot evaluation.
+
+The synthetic corpus and evidence contract are intentionally narrow. They do not establish production readiness, complete coverage, rankings, cross-corpus score comparability, or superiority of any analyzer.
