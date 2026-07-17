@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/secure-bench-historical-baseline-v1.schema.json",
+  "title": "Secure Bench Historical Baseline v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "snapshot_version",
+    "cutoff_commit",
+    "excluded_mutable_surfaces",
+    "closed_roots",
+    "protected_files",
+    "aggregate_sha256"
+  ],
+  "properties": {
+    "schema_version": { "const": "secure-bench-historical-baseline-v1" },
+    "snapshot_version": { "const": "1.0.0" },
+    "cutoff_commit": { "$ref": "#/$defs/sha1" },
+    "excluded_mutable_surfaces": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "closed_roots": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/closedRoot" }
+    },
+    "protected_files": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/protectedFile" }
+    },
+    "aggregate_sha256": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "sha1": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "portablePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//)[A-Za-z0-9._/-]+$"
+    },
+    "closedRoot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "file_count", "content_sha256"],
+      "properties": {
+        "path": { "$ref": "#/$defs/portablePath" },
+        "file_count": { "type": "integer", "minimum": 1 },
+        "content_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "protectedFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "byte_length", "sha256"],
+      "properties": {
+        "path": { "$ref": "#/$defs/portablePath" },
+        "byte_length": { "type": "integer", "minimum": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    }
+  }
+}

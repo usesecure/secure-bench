@@ -1,4 +1,4 @@
-//! Secure Bench 0.2.0 prospective methodology repair and public conformance foundation.
+//! Secure Bench 0.2.1 prospective methodology and stable historical verification foundation.
 //!
 //! This workspace is scanner-free. It repairs adapter precedence prospectively, generates a
 //! disclosed public regression corpus, publishes the authoring contract for a later unseen
@@ -6,6 +6,7 @@
 
 pub mod adapter;
 mod conformance;
+mod historical;
 pub mod methodology;
 pub mod regression;
 
@@ -27,7 +28,8 @@ use std::path::{Component, Path, PathBuf};
 use thiserror::Error;
 
 /// Secure Bench prospective behavior version.
-pub const BENCHMARK_VERSION: &str = "0.2.0";
+pub const BENCHMARK_VERSION: &str = "0.2.1";
+const PUBLISHED_PHASE12_VERSION: &str = "0.2.0";
 /// Required unchanged starting commit.
 pub const BASE_COMMIT: &str = "1f3373e6f763876fba3af136648651e6235ede61";
 /// Required Phase 12 branch.
@@ -56,7 +58,7 @@ const HOLDOUT_POLICY_PATH: &str = "phase12/methodology/holdout-authoring-v1.json
 const PROVENANCE_PATH: &str = "phase12/provenance.json";
 const CHECKSUMS_PATH: &str = "phase12/SHA256SUMS";
 
-const HISTORICAL_ROOTS: [&str; 24] = [
+const PUBLISHED_HISTORICAL_ROOTS: [&str; 24] = [
     ".github",
     "Cargo.lock",
     "Cargo.toml",
@@ -224,72 +226,6 @@ fn verify_historical_inputs(root: &Path) -> Result<BTreeMap<String, String>, Pha
     Ok(inputs)
 }
 
-fn collect_history(
-    root: &Path,
-    absolute: &Path,
-    relative: &Path,
-    rows: &mut BTreeMap<String, String>,
-) -> Result<(), Phase12Error> {
-    let metadata = fs::symlink_metadata(absolute).map_err(|error| io(absolute, &error))?;
-    if metadata.file_type().is_symlink() {
-        return Err(Phase12Error::HistoricalIntegrity(format!(
-            "historical path `{}` is a symlink",
-            relative.display()
-        )));
-    }
-    if metadata.is_file() {
-        rows.insert(
-            relative.to_string_lossy().replace('\\', "/"),
-            sha256(&fs::read(absolute).map_err(|error| io(absolute, &error))?),
-        );
-        return Ok(());
-    }
-    if !metadata.is_dir() {
-        return Err(Phase12Error::HistoricalIntegrity(format!(
-            "historical path `{}` has an unsupported type",
-            relative.display()
-        )));
-    }
-    let mut entries = fs::read_dir(absolute)
-        .map_err(|error| io(absolute, &error))?
-        .collect::<Result<Vec<_>, _>>()
-        .map_err(|error| io(absolute, &error))?;
-    entries.sort_by_key(std::fs::DirEntry::file_name);
-    for entry in entries {
-        if entry.file_name() == "target" {
-            continue;
-        }
-        let child_relative = relative.join(entry.file_name());
-        if child_relative == Path::new("docs/phase-12-methodology.md") {
-            continue;
-        }
-        collect_history(root, &entry.path(), &child_relative, rows)?;
-    }
-    let _ = root;
-    Ok(())
-}
-
-fn historical_payload(root: &Path) -> Result<String, Phase12Error> {
-    let mut rows = BTreeMap::new();
-    for relative in HISTORICAL_ROOTS {
-        let path = root.join(relative);
-        if !path.exists() {
-            return Err(Phase12Error::HistoricalIntegrity(format!(
-                "historical root `{relative}` is missing"
-            )));
-        }
-        collect_history(root, &path, Path::new(relative), &mut rows)?;
-    }
-    let mut bytes = Vec::new();
-    for (path, hash) in rows {
-        bytes.extend_from_slice(path.as_bytes());
-        bytes.push(0);
-        bytes.extend_from_slice(hash.as_bytes());
-        bytes.push(b'\n');
-    }
-    Ok(sha256(&bytes))
-}
-
 fn load_contracts(root: &Path) -> Result<(FrozenTaxonomy, EvidenceContractV2), Phase12Error> {
     let taxonomy_bytes = read(root, TAXONOMY_PATH)?;
     let taxonomy = load_taxonomy(&taxonomy_bytes)
@@ -316,14 +252,17 @@ fn provenance(
 ) -> Result<Phase12Provenance, Phase12Error> {
     Ok(Phase12Provenance {
         schema_version: methodology::PROVENANCE_SCHEMA.to_owned(),
-        benchmark_version: BENCHMARK_VERSION.to_owned(),
+        benchmark_version: PUBLISHED_PHASE12_VERSION.to_owned(),
         base_commit: BASE_COMMIT.to_owned(),
         phase11_inputs,
         taxonomy_sha256: sha256(&read(root, TAXONOMY_PATH)?),
         evidence_contract_sha256: sha256(&read(root, EVIDENCE_CONTRACT_PATH)?),
         process_status_policy_sha256: sha256(&read(root, PROCESS_POLICY_PATH)?),
         historical_payload_sha256,
-        historical_roots: HISTORICAL_ROOTS.iter().map(ToString::to_string).collect(),
+        historical_roots: PUBLISHED_HISTORICAL_ROOTS
+            .iter()
+            .map(ToString::to_string)
+            .collect(),
         official_phase10_result_sha256: PHASE10_RESULT_SHA256.to_owned(),
         process_audit: ProcessAudit {
             scanner_processes_started: 0,
@@ -350,7 +289,7 @@ fn build_artifacts(
     root: &Path,
 ) -> Result<(BTreeMap<String, Vec<u8>>, Phase12Summary), Phase12Error> {
     let phase11_inputs = verify_historical_inputs(root)?;
-    let historical = historical_payload(root)?;
+    let historical = historical::verify_committed_baseline(root)?;
     let (taxonomy, contract) = load_contracts(root)?;
     let taxonomy_sha = sha256(&read(root, TAXONOMY_PATH)?);
     let contract_sha = sha256(&read(root, EVIDENCE_CONTRACT_PATH)?);
@@ -372,7 +311,11 @@ fn build_artifacts(
     );
     artifacts.insert(
         PROVENANCE_PATH.to_owned(),
-        canonical_json(&provenance(root, phase11_inputs, historical.clone())?)?,
+        canonical_json(&provenance(
+            root,
+            phase11_inputs,
+            "c21efa9e73b47b6d8e04986f576b6c835860c2b5b15a58bbab053fee2dcca0f5".to_owned(),
+        )?)?,
     );
     let artifact_count = u64::try_from(artifacts.len())
         .map_err(|_| Phase12Error::InvalidMethodology("artifact count overflow".to_owned()))?;
@@ -844,10 +787,44 @@ mod tests {
     #[test]
     fn committed_repository_validates_end_to_end() -> Result<(), Phase12Error> {
         let summary = verify_repository(&root())?;
-        assert_eq!(summary.benchmark_version, "0.2.0");
+        assert_eq!(summary.benchmark_version, "0.2.1");
         assert_eq!(summary.pairs, 28);
         assert_eq!(summary.cases, 56);
         assert_eq!(summary.conformance_vectors, 19);
+        Ok(())
+    }
+
+    #[test]
+    fn published_phase12_artifacts_remain_byte_identical() -> Result<(), Phase12Error> {
+        let repository = root();
+        for (path, expected) in [
+            (
+                MANIFEST_PATH,
+                "e4e2d0a4b36d798af3f6add084eb8dcc44958cd11d5a89eda89c52960a9a63ab",
+            ),
+            (
+                ADAPTER_POLICY_PATH,
+                "0255000731a6f63ecd1383f3aa9b219627e337a18600d20ff28ef968e4c1826f",
+            ),
+            (
+                HOLDOUT_POLICY_PATH,
+                "a13e317a9e515d5389a7ff7d8da99b67da6d588e69284041c8df8eebad8778c5",
+            ),
+            (
+                PROVENANCE_PATH,
+                "801929c79381c1f9862effc8f6db2c1fdb5dea35841f0afbd6fe6c1fd3fcf0da",
+            ),
+            (
+                CHECKSUMS_PATH,
+                "330724e1b956a19fb2d1e47d10958be28dc00334be35a7ddcaf5027c375b914a",
+            ),
+            (
+                "docs/phase-12-methodology.md",
+                "d221251ff0b92f35c43f09e60453331e24e4e92f00cf620267054b4d0974511d",
+            ),
+        ] {
+            assert_eq!(sha256(&read(&repository, path)?), expected, "{path}");
+        }
         Ok(())
     }
 
@@ -859,6 +836,7 @@ mod tests {
             include_str!("conformance.rs"),
             include_str!("methodology.rs"),
             include_str!("regression.rs"),
+            include_str!("historical.rs"),
         ]
         .concat();
         let process_api = ["std::process", "::Command"].concat();
