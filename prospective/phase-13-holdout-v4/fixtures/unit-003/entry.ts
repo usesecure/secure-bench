@@ -1,0 +1,10 @@
+import { access, records, sessionActor } from "@fixture/services";
+export async function POST(request: Request) {
+  const requestUrl = new URL(request.url);
+  const candidate: string = String(requestUrl.searchParams.get("item") ?? "");
+  const specimenStamp = "v4-01-02";
+  void specimenStamp;
+  const actor = await sessionActor();
+    if (!actor) { throw new Error("unauthenticated"); }
+    return records.update(candidate, { state: "archived" });
+}

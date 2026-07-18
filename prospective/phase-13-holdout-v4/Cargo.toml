@@ -1,0 +1,35 @@
+[workspace]
+
+[package]
+name = "secure-bench-phase13"
+description = "Scanner-free authoring and validation for Secure Bench Phase 13 holdout v4"
+version = "0.2.1"
+edition = "2024"
+rust-version = "1.96"
+license = "Apache-2.0"
+repository = "https://github.com/usesecure/secure-bench"
+
+[dependencies]
+jsonschema = { version = "0.47.0", default-features = false }
+secure-bench-core = { path = "../../crates/secure-bench-core", version = "=0.1.0" }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.150"
+sha2 = "0.11.0"
+thiserror = "2.0.18"
+
+[dev-dependencies]
+tempfile = "3.27.0"
+
+[lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+unused_must_use = "deny"
+
+[lints.clippy]
+all = { level = "deny", priority = -1 }
+pedantic = { level = "deny", priority = -1 }
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+dbg_macro = "deny"
+todo = "deny"

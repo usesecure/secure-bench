@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/phase13-manifest-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "benchmark_version", "holdout_id", "title", "status", "base_commit", "branch", "taxonomy_sha256", "evidence_contract_sha256", "adapter_policy_sha256", "authoring_policy_sha256", "process_status_policy_sha256", "expectation_sha256", "aggregate_corpus_sha256", "contract_merkle_root", "evaluator_sha256", "balance", "overlap", "pairs", "limitations"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase13-manifest-v1" },
+    "benchmark_version": { "const": "0.2.1" },
+    "holdout_id": { "const": "secure-bench-phase13-holdout-v4" },
+    "title": { "type": "string", "minLength": 1 },
+    "status": { "const": "frozen and intentionally unexecuted" },
+    "base_commit": { "$ref": "#/$defs/sha1" },
+    "branch": { "const": "codex/phase-13-prospective-holdout-v4" },
+    "taxonomy_sha256": { "$ref": "#/$defs/sha256" },
+    "evidence_contract_sha256": { "$ref": "#/$defs/sha256" },
+    "adapter_policy_sha256": { "$ref": "#/$defs/sha256" },
+    "authoring_policy_sha256": { "$ref": "#/$defs/sha256" },
+    "process_status_policy_sha256": { "$ref": "#/$defs/sha256" },
+    "expectation_sha256": { "$ref": "#/$defs/sha256" },
+    "aggregate_corpus_sha256": { "$ref": "#/$defs/sha256" },
+    "contract_merkle_root": { "$ref": "#/$defs/sha256" },
+    "evaluator_sha256": { "$ref": "#/$defs/sha256" },
+    "balance": { "type": "object" },
+    "overlap": { "type": "object" },
+    "pairs": { "type": "array", "minItems": 56, "maxItems": 56 },
+    "limitations": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+  },
+  "$defs": {
+    "sha1": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

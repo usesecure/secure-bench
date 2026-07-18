@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/phase13-expectations-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "holdout_id", "evidence_contract_sha256", "records"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase13-expectations-v1" },
+    "holdout_id": { "const": "secure-bench-phase13-holdout-v4" },
+    "evidence_contract_sha256": { "$ref": "#/$defs/sha256" },
+    "records": {
+      "type": "array",
+      "minItems": 112,
+      "maxItems": 112,
+      "items": {
+        "type": "object",
+        "required": ["case_id", "kind", "evidence_contract_version", "authoritative_projection", "value_id", "taxonomy_version", "category_id", "invariant_id", "primary_cwe", "source_kind", "sink_kind", "path", "connected_edges", "effective_barriers", "legacy_override_permitted"],
+        "properties": {
+          "evidence_contract_version": { "const": "2.0.0" },
+          "authoritative_projection": { "const": "evidence_contract_v2" },
+          "legacy_override_permitted": { "const": false }
+        }
+      }
+    }
+  },
+  "$defs": { "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" } }
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/phase13-provenance-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "benchmark_version", "holdout_id", "base_commit", "release_tag", "historical_baseline_sha256", "phase12_tree_sha256", "phase10_result_sha256", "commitment_index_sha256", "scanner_processes_started", "secure_engine_executed", "other_scanner_executed", "secure_engine_source_inspected", "previous_scanner_reports_used_for_authoring", "ai_provider_configured", "network_ai_calls", "result_or_score_created"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase13-provenance-v1" },
+    "benchmark_version": { "const": "0.2.1" },
+    "holdout_id": { "const": "secure-bench-phase13-holdout-v4" },
+    "base_commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "release_tag": { "const": "v0.2.1" },
+    "historical_baseline_sha256": { "$ref": "#/$defs/sha256" },
+    "phase12_tree_sha256": { "$ref": "#/$defs/sha256" },
+    "phase10_result_sha256": { "$ref": "#/$defs/sha256" },
+    "commitment_index_sha256": { "$ref": "#/$defs/sha256" },
+    "scanner_processes_started": { "const": 0 },
+    "secure_engine_executed": { "const": false },
+    "other_scanner_executed": { "const": false },
+    "secure_engine_source_inspected": { "const": false },
+    "previous_scanner_reports_used_for_authoring": { "const": false },
+    "ai_provider_configured": { "const": false },
+    "network_ai_calls": { "const": 0 },
+    "result_or_score_created": { "const": false }
+  },
+  "$defs": { "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" } }
+}

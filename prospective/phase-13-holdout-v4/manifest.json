@@ -1,0 +1,2822 @@
+{
+  "schema_version": "secure-bench-phase13-manifest-v1",
+  "benchmark_version": "0.2.1",
+  "holdout_id": "secure-bench-phase13-holdout-v4",
+  "title": "Secure Bench prospective holdout v4",
+  "status": "frozen and intentionally unexecuted",
+  "base_commit": "e6f1de05967f6600c663929591c1ac933bc3eced",
+  "branch": "codex/phase-13-prospective-holdout-v4",
+  "taxonomy_sha256": "059fe22d7707cf8d17f2c1621fdae9819787a1958ba2ef0421eca4e4ec858452",
+  "evidence_contract_sha256": "142c7f31c6c584cc808410130fa7db8451427e87504e72e64868c9cbc6564c42",
+  "adapter_policy_sha256": "0255000731a6f63ecd1383f3aa9b219627e337a18600d20ff28ef968e4c1826f",
+  "authoring_policy_sha256": "a13e317a9e515d5389a7ff7d8da99b67da6d588e69284041c8df8eebad8778c5",
+  "process_status_policy_sha256": "8b5ff33690828dc97afa8be24ef14dc66bf44d6da913e2621d92208e513f26ac",
+  "expectation_sha256": "9f94266a851caed513877afe4d2a59430b63707986e972fe4bdadbc0b2df9708",
+  "aggregate_corpus_sha256": "03545f0f6ff5a1796815d076542770aa3334fce276cdb2906e4cc5b76f6c75a9",
+  "contract_merkle_root": "853dbd66de362d9da8ecbe3d6eb262aadafd34fba2dee99d0bc5b2e284db76a6",
+  "evaluator_sha256": "65bb311a4d1b726b65e703e5f34e916cb8e3bddbb01cfec146e3af83f1ce054d",
+  "balance": {
+    "families": {
+      "SE1001": 8,
+      "SE1002": 8,
+      "SE1003": 8,
+      "SE1004": 8,
+      "SE1005": 8,
+      "SE1006": 8,
+      "SE1007": 8
+    },
+    "frameworks": {
+      "express": 14,
+      "next_app_router": 14,
+      "node_js": 14,
+      "server_actions": 14
+    },
+    "source_formats": {
+      "javascript": 14,
+      "jsx": 14,
+      "tsx": 14,
+      "typescript": 14
+    },
+    "language_groups": {
+      "javascript": 28,
+      "typescript": 28
+    },
+    "topologies": {
+      "control_flow_sensitive": 14,
+      "direct": 14,
+      "helper_mediated": 14,
+      "inter_file_aliased": 14
+    },
+    "framework_by_source_format": {
+      "express": {
+        "javascript": 4,
+        "jsx": 3,
+        "tsx": 3,
+        "typescript": 4
+      },
+      "next_app_router": {
+        "javascript": 3,
+        "jsx": 3,
+        "tsx": 4,
+        "typescript": 4
+      },
+      "node_js": {
+        "javascript": 4,
+        "jsx": 4,
+        "tsx": 3,
+        "typescript": 3
+      },
+      "server_actions": {
+        "javascript": 3,
+        "jsx": 4,
+        "tsx": 4,
+        "typescript": 3
+      }
+    },
+    "framework_by_topology": {
+      "express": {
+        "control_flow_sensitive": 3,
+        "direct": 4,
+        "helper_mediated": 3,
+        "inter_file_aliased": 4
+      },
+      "next_app_router": {
+        "control_flow_sensitive": 4,
+        "direct": 3,
+        "helper_mediated": 4,
+        "inter_file_aliased": 3
+      },
+      "node_js": {
+        "control_flow_sensitive": 4,
+        "direct": 3,
+        "helper_mediated": 3,
+        "inter_file_aliased": 4
+      },
+      "server_actions": {
+        "control_flow_sensitive": 3,
+        "direct": 4,
+        "helper_mediated": 4,
+        "inter_file_aliased": 3
+      }
+    },
+    "source_format_by_topology": {
+      "javascript": {
+        "control_flow_sensitive": 4,
+        "direct": 4,
+        "helper_mediated": 3,
+        "inter_file_aliased": 3
+      },
+      "jsx": {
+        "control_flow_sensitive": 4,
+        "direct": 3,
+        "helper_mediated": 3,
+        "inter_file_aliased": 4
+      },
+      "tsx": {
+        "control_flow_sensitive": 3,
+        "direct": 3,
+        "helper_mediated": 4,
+        "inter_file_aliased": 4
+      },
+      "typescript": {
+        "control_flow_sensitive": 3,
+        "direct": 4,
+        "helper_mediated": 4,
+        "inter_file_aliased": 3
+      }
+    },
+    "pairwise_cell_minimum": 3,
+    "pairwise_cell_maximum": 4,
+    "imbalance_justification": "Each 4x4 pairwise table contains 56 pairs, so perfect equality would require 3.5 pairs per cell; the preregistered schedule therefore uses only three or four pairs per cell."
+  },
+  "overlap": {
+    "historical_files_compared": 706,
+    "exact_matches": 0,
+    "maximum_normalized_overlap_basis_points": 2068,
+    "rejection_threshold_basis_points": 8500,
+    "limitation": "Exact hashes and normalized token five-gram Jaccard similarity are reproducible overlap proxies; they do not prove semantic independence."
+  },
+  "pairs": [
+    {
+      "pair_id": "v4-pair-001",
+      "family_id": "SE1001",
+      "framework": "node_js",
+      "source_format": "jsx",
+      "language_group": "javascript",
+      "topology": "control_flow_sensitive",
+      "adversarial_features": [
+        "authentication_vs_authorization",
+        "control_flow_sensitive_join",
+        "ownership_tenant_and_role_checks",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-001",
+        "v4-case-002"
+      ],
+      "mutation": {
+        "file": "entry.jsx",
+        "vulnerable_lines": {
+          "start": 12,
+          "end": 14
+        },
+        "control_lines": {
+          "start": 12,
+          "end": 16
+        },
+        "vulnerable_fragment_sha256": "17b2cb09fa439a863ba5d3d684eba680051c5daebbbac2861d2c7f84f1319bc5",
+        "control_fragment_sha256": "4274c0ce955d02fa9d90cdd73ad232fb07a297561b48007186a0a78beb9b26f9",
+        "security_invariant": "secure-bench.invariant.authorization-before-sensitive-operation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-001",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-001",
+        "fixture_sha256": "733804d6d2805248126b6f8716cad44b981dd0f819dd2ab49e1abab4ac9eaa25",
+        "contract_sha256": "716e34b618c8ee87da04bfed3c4ad445e5f2f06524ee606ea12e6a8f85d48dbe"
+      },
+      "control": {
+        "case_id": "v4-case-002",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-002",
+        "fixture_sha256": "0ca98db0825dd10d372d59785bf281e4e7c1b3910928d8be170bc89bce39b159",
+        "contract_sha256": "0915007d9075502f52c545af25aa6de48bb97da70e2e8c3364d7a64418bca6b3"
+      }
+    },
+    {
+      "pair_id": "v4-pair-002",
+      "family_id": "SE1001",
+      "framework": "next_app_router",
+      "source_format": "typescript",
+      "language_group": "typescript",
+      "topology": "direct",
+      "adversarial_features": [
+        "authentication_vs_authorization",
+        "ownership_tenant_and_role_checks",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-004",
+        "v4-case-003"
+      ],
+      "mutation": {
+        "file": "entry.ts",
+        "vulnerable_lines": {
+          "start": 7,
+          "end": 9
+        },
+        "control_lines": {
+          "start": 7,
+          "end": 11
+        },
+        "vulnerable_fragment_sha256": "a0897d287bb363ffa8647d7324433662b804e7ecb23318db305cad104c47c6fe",
+        "control_fragment_sha256": "d5a9c0311a30c25ac5a785ca83cb4c1f7b7019c9c7b564711f6116b84451d8f9",
+        "security_invariant": "secure-bench.invariant.authorization-before-sensitive-operation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-003",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-003",
+        "fixture_sha256": "b2ef6e808ff082bfdce8119fc558eb13e76e5ed45bb1b58e1c827a2e0dfa1ece",
+        "contract_sha256": "c8a1e32cf5b1b895f636ee38b748dae8209ff3c854c3b373e97185bb5a0608ec"
+      },
+      "control": {
+        "case_id": "v4-case-004",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-004",
+        "fixture_sha256": "f4fed646973e7034880a2bdd462f251c68357d3d53c28df1af0409a90ad6f131",
+        "contract_sha256": "b046a5a5e0f783e80540f2ca305a63bd734c58de1c86eb5cd82e5bbfe9074fbd"
+      }
+    },
+    {
+      "pair_id": "v4-pair-003",
+      "family_id": "SE1001",
+      "framework": "node_js",
+      "source_format": "javascript",
+      "language_group": "javascript",
+      "topology": "helper_mediated",
+      "adversarial_features": [
+        "authentication_vs_authorization",
+        "local_helpers",
+        "ownership_tenant_and_role_checks",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-005",
+        "v4-case-006"
+      ],
+      "mutation": {
+        "file": "entry.js",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 6
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 8
+        },
+        "vulnerable_fragment_sha256": "a0897d287bb363ffa8647d7324433662b804e7ecb23318db305cad104c47c6fe",
+        "control_fragment_sha256": "0984aa15bcfec6c3870976e136c778e3b39b687165645feb328533a35f7be467",
+        "security_invariant": "secure-bench.invariant.authorization-before-sensitive-operation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-005",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-005",
+        "fixture_sha256": "c757c1392e77b205d6f05ccb529d3ea68b4f5f39c978739dc2f26b62644797fd",
+        "contract_sha256": "8d8a7996c0b4413a66485a646794ce27b0a83643431fcdecb36fe75a64092b14"
+      },
+      "control": {
+        "case_id": "v4-case-006",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-006",
+        "fixture_sha256": "61d3623e496a870a5241f065dd8bbdc8d66b482f29bd92efd17124e1bd71d593",
+        "contract_sha256": "148188daff26744adbce228d23ab3c0fc62992bd9be8e19a0d0b51f4aeab990e"
+      }
+    },
+    {
+      "pair_id": "v4-pair-004",
+      "family_id": "SE1001",
+      "framework": "server_actions",
+      "source_format": "tsx",
+      "language_group": "typescript",
+      "topology": "direct",
+      "adversarial_features": [
+        "authentication_vs_authorization",
+        "ownership_tenant_and_role_checks",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-008",
+        "v4-case-007"
+      ],
+      "mutation": {
+        "file": "entry.tsx",
+        "vulnerable_lines": {
+          "start": 9,
+          "end": 11
+        },
+        "control_lines": {
+          "start": 9,
+          "end": 13
+        },
+        "vulnerable_fragment_sha256": "a0897d287bb363ffa8647d7324433662b804e7ecb23318db305cad104c47c6fe",
+        "control_fragment_sha256": "797923a167a0a3c91e6148bb0dfffeb9ec6e0956b61edaa8c370d2cd5a6b7fb9",
+        "security_invariant": "secure-bench.invariant.authorization-before-sensitive-operation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-007",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-007",
+        "fixture_sha256": "0c5b0c9eeb4b1bbab47fa0c2396ec585aec9d5060178f8a75bfdaf7383eba023",
+        "contract_sha256": "a80d4869a34f1cf10e9ef9b2c4b6a09f2818d76e2b0ce3e49e77e45ed4a04a69"
+      },
+      "control": {
+        "case_id": "v4-case-008",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-008",
+        "fixture_sha256": "cdf2757244ec6f4c6f9b485ecb832e4174bed73b8c0dcda1503be2da3a00107e",
+        "contract_sha256": "943f67de202dfbeee770b19ed8d798d80ef6e52b6b343892100ba361fe65e3a1"
+      }
+    },
+    {
+      "pair_id": "v4-pair-005",
+      "family_id": "SE1001",
+      "framework": "next_app_router",
+      "source_format": "tsx",
+      "language_group": "typescript",
+      "topology": "inter_file_aliased",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "authentication_vs_authorization",
+        "inter_file_helpers",
+        "ownership_tenant_and_role_checks",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-009",
+        "v4-case-010"
+      ],
+      "mutation": {
+        "file": "bridge.tsx",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 6
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 8
+        },
+        "vulnerable_fragment_sha256": "a0897d287bb363ffa8647d7324433662b804e7ecb23318db305cad104c47c6fe",
+        "control_fragment_sha256": "23d94f483b9700431c6cfcf98d4e4d2eb1574d59eb8ee3ef485783ba87e6b8e8",
+        "security_invariant": "secure-bench.invariant.authorization-before-sensitive-operation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-009",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-009",
+        "fixture_sha256": "bacb8fdb72315d1143db4b74debf6f97e4ce623972cc6a61aea0b7de5043f144",
+        "contract_sha256": "8a36656909882cd127d2c8e3e488d8f7883d74525ab324c35f8403aa7271b8af"
+      },
+      "control": {
+        "case_id": "v4-case-010",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-010",
+        "fixture_sha256": "52185e036f6bb381c7b478d5aebcfba196bcd75c97f4d2b49bbdd5d7cd003821",
+        "contract_sha256": "944a9238ba362d6a81c9ff620bfbf07337d4b5658c40c5a7a99c7c8c2f6de02c"
+      }
+    },
+    {
+      "pair_id": "v4-pair-006",
+      "family_id": "SE1001",
+      "framework": "express",
+      "source_format": "javascript",
+      "language_group": "javascript",
+      "topology": "control_flow_sensitive",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "authentication_vs_authorization",
+        "control_flow_sensitive_join",
+        "ownership_tenant_and_role_checks",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-012",
+        "v4-case-011"
+      ],
+      "mutation": {
+        "file": "entry.js",
+        "vulnerable_lines": {
+          "start": 12,
+          "end": 14
+        },
+        "control_lines": {
+          "start": 12,
+          "end": 16
+        },
+        "vulnerable_fragment_sha256": "17b2cb09fa439a863ba5d3d684eba680051c5daebbbac2861d2c7f84f1319bc5",
+        "control_fragment_sha256": "2a7ce4bc79c2e74501ca93f61d6b902c2d91622844b5fbc303d247a3951861ed",
+        "security_invariant": "secure-bench.invariant.authorization-before-sensitive-operation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-011",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-011",
+        "fixture_sha256": "291be1ab5edfeac9d1d50c0db473bf25143a0467b56e6e6a5374c9515230d06a",
+        "contract_sha256": "2c8d5f74d1374c4ee54f2e223ea07cb58e2c24c74548c2d9e2f64fb28b582fdc"
+      },
+      "control": {
+        "case_id": "v4-case-012",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-012",
+        "fixture_sha256": "aa8f52e1826db6f63a38718263a1276edcacf05d722243cd5954aa26cfadbebb",
+        "contract_sha256": "fb83fcb4a96d14063130b24f99d1b85679fe07d2210d52345a089d7585b35779"
+      }
+    },
+    {
+      "pair_id": "v4-pair-007",
+      "family_id": "SE1001",
+      "framework": "express",
+      "source_format": "jsx",
+      "language_group": "javascript",
+      "topology": "helper_mediated",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "ambiguous_resolution",
+        "authentication_vs_authorization",
+        "conservative_unsupported_boundary",
+        "local_helpers",
+        "ownership_tenant_and_role_checks",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-013",
+        "v4-case-014"
+      ],
+      "mutation": {
+        "file": "entry.jsx",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 6
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 8
+        },
+        "vulnerable_fragment_sha256": "a0897d287bb363ffa8647d7324433662b804e7ecb23318db305cad104c47c6fe",
+        "control_fragment_sha256": "278dbb11c87bf583bcb1d445e7d9331f28a39355e07b892861e657c80ced2f7e",
+        "security_invariant": "secure-bench.invariant.authorization-before-sensitive-operation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-013",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-013",
+        "fixture_sha256": "486386dedb40b5397691de1d9e05ed50d5307af095efd7e30e2cc27409eb0704",
+        "contract_sha256": "dc2a18923726d165a473f2582206f56e34dbd1b1d28d94db54a54fc66d4e7fe7"
+      },
+      "control": {
+        "case_id": "v4-case-014",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-014",
+        "fixture_sha256": "62bb443fcd98d5f0deb0f8eb8e6994d2d643197b8fb42692133d1c52bc7fd7a0",
+        "contract_sha256": "1cfbe9622f64efa76e0db775b31058120095c2bb0a207d95f4c01c3c3a2641f9"
+      }
+    },
+    {
+      "pair_id": "v4-pair-008",
+      "family_id": "SE1001",
+      "framework": "server_actions",
+      "source_format": "typescript",
+      "language_group": "typescript",
+      "topology": "inter_file_aliased",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "authentication_vs_authorization",
+        "inter_file_helpers",
+        "ownership_tenant_and_role_checks",
+        "recursion",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-016",
+        "v4-case-015"
+      ],
+      "mutation": {
+        "file": "bridge.ts",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 6
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 8
+        },
+        "vulnerable_fragment_sha256": "a0897d287bb363ffa8647d7324433662b804e7ecb23318db305cad104c47c6fe",
+        "control_fragment_sha256": "cb4828a9435f9e2965b7f63ebd9260d2b8b76d3c96cf1264a32966e4efcfab5f",
+        "security_invariant": "secure-bench.invariant.authorization-before-sensitive-operation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-015",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-015",
+        "fixture_sha256": "259c05de28121a4758fd7c7ceddf3502b7c751a4dc9ef8997e6bd55a57e1a456",
+        "contract_sha256": "401be9a643b3f580c39a47cdbffca9baeb4480c2f48c548766861f34266ba73a"
+      },
+      "control": {
+        "case_id": "v4-case-016",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-016",
+        "fixture_sha256": "44447177bf36e2876aee20b666ed74547759d9d4267cc102b1b5415902d67b20",
+        "contract_sha256": "a11bdbe6d90b3b81b9983aa2d3192071c5e7d6c5e9b95ce7cc6b60dd03e976c6"
+      }
+    },
+    {
+      "pair_id": "v4-pair-009",
+      "family_id": "SE1002",
+      "framework": "server_actions",
+      "source_format": "jsx",
+      "language_group": "javascript",
+      "topology": "inter_file_aliased",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "fixed_executable_argument_array",
+        "inter_file_helpers",
+        "non_dominating_guard",
+        "non_terminating_guard",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-017",
+        "v4-case-018"
+      ],
+      "mutation": {
+        "file": "bridge.jsx",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 5
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 5
+        },
+        "vulnerable_fragment_sha256": "318d568e3f9e8fc0fb779eab580624471123558593a4912993204349233d336c",
+        "control_fragment_sha256": "cd657f2ad2be4ded09456c4c2658ed09db374ab7439c0d119f6fa4a9ec620aeb",
+        "security_invariant": "secure-bench.invariant.command-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-017",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-017",
+        "fixture_sha256": "148f74f86ed28d991b5d2f177a33c0285b02c47be26a34193d4801cf0c53b5ea",
+        "contract_sha256": "effdc97f3a95945c3b0a1fc6225dce1a6f0c41fbc80f7686e64d8eaca9bfed07"
+      },
+      "control": {
+        "case_id": "v4-case-018",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-018",
+        "fixture_sha256": "dd0836ca5b6a4c53fced277d2f2cf2751987968469689b30ab18696624dbbda0",
+        "contract_sha256": "c6579ccd280f8c7ce217d9b89e138b64ce8cfaca78f6e7b9d3dc90f544fb6aaf"
+      }
+    },
+    {
+      "pair_id": "v4-pair-010",
+      "family_id": "SE1002",
+      "framework": "next_app_router",
+      "source_format": "javascript",
+      "language_group": "javascript",
+      "topology": "control_flow_sensitive",
+      "adversarial_features": [
+        "control_flow_sensitive_join",
+        "fixed_executable_argument_array",
+        "non_dominating_guard",
+        "non_terminating_guard",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-020",
+        "v4-case-019"
+      ],
+      "mutation": {
+        "file": "entry.js",
+        "vulnerable_lines": {
+          "start": 11,
+          "end": 12
+        },
+        "control_lines": {
+          "start": 11,
+          "end": 12
+        },
+        "vulnerable_fragment_sha256": "fc0388c8a406fa0160032e170818b2172a5ebbc825056ad6f983fb7cf1a66be9",
+        "control_fragment_sha256": "7948f254d6a53168eba563000a6e0f00555d7d4e4b4fe7f64c2828f6d7767210",
+        "security_invariant": "secure-bench.invariant.command-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-019",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-019",
+        "fixture_sha256": "a081a5d03bfb66203109ce0e3f1876e9781161bd1293cadb31934912ccfd6d14",
+        "contract_sha256": "f5f97df97aaa6e6118488bf59d138f3e1c5308a88fa5308ba902c30ae2fc0e55"
+      },
+      "control": {
+        "case_id": "v4-case-020",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-020",
+        "fixture_sha256": "df7c319b4814d7d56e6e18f612fa6fbec61a1823dbb175f213a2f736308b88e5",
+        "contract_sha256": "4136cb10ccd626de81a1d7ff130020b37d042a63df267bf3012d40004a2cde01"
+      }
+    },
+    {
+      "pair_id": "v4-pair-011",
+      "family_id": "SE1002",
+      "framework": "server_actions",
+      "source_format": "jsx",
+      "language_group": "javascript",
+      "topology": "helper_mediated",
+      "adversarial_features": [
+        "fixed_executable_argument_array",
+        "local_helpers",
+        "non_dominating_guard",
+        "non_terminating_guard",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-021",
+        "v4-case-022"
+      ],
+      "mutation": {
+        "file": "entry.jsx",
+        "vulnerable_lines": {
+          "start": 5,
+          "end": 6
+        },
+        "control_lines": {
+          "start": 5,
+          "end": 6
+        },
+        "vulnerable_fragment_sha256": "318d568e3f9e8fc0fb779eab580624471123558593a4912993204349233d336c",
+        "control_fragment_sha256": "cd657f2ad2be4ded09456c4c2658ed09db374ab7439c0d119f6fa4a9ec620aeb",
+        "security_invariant": "secure-bench.invariant.command-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-021",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-021",
+        "fixture_sha256": "ae60ed73940b6984411389af1d4c52e0a98b53e1fc9d1d4b01af8d94336af3d2",
+        "contract_sha256": "8841e45177eceb366dc1a1c768e71503fbfcf1ba81bb83473b8641ad131cbc51"
+      },
+      "control": {
+        "case_id": "v4-case-022",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-022",
+        "fixture_sha256": "b816ef1460dfcb1c50e77f599812db1bbf4d5a4480db50ef64121b2d66ac096a",
+        "contract_sha256": "8dd23b27ea9678838995aeada850d3d33e561fc4ade34e26b0e4f4e31c12a0cc"
+      }
+    },
+    {
+      "pair_id": "v4-pair-012",
+      "family_id": "SE1002",
+      "framework": "express",
+      "source_format": "javascript",
+      "language_group": "javascript",
+      "topology": "direct",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "fixed_executable_argument_array",
+        "non_dominating_guard",
+        "non_terminating_guard",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-024",
+        "v4-case-023"
+      ],
+      "mutation": {
+        "file": "entry.js",
+        "vulnerable_lines": {
+          "start": 8,
+          "end": 9
+        },
+        "control_lines": {
+          "start": 8,
+          "end": 9
+        },
+        "vulnerable_fragment_sha256": "318d568e3f9e8fc0fb779eab580624471123558593a4912993204349233d336c",
+        "control_fragment_sha256": "cd657f2ad2be4ded09456c4c2658ed09db374ab7439c0d119f6fa4a9ec620aeb",
+        "security_invariant": "secure-bench.invariant.command-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-023",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-023",
+        "fixture_sha256": "d032844041253cbba71ac2593bb6412bd6aa5344b6083459d3149c5be64d728c",
+        "contract_sha256": "1c608c409c474c036cfc8d28d5af7a7de6a21c5e612fa7c92bdfb10cfc9f29b3"
+      },
+      "control": {
+        "case_id": "v4-case-024",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-024",
+        "fixture_sha256": "2bd7cb404bbfe94f6f8fc06bff912e0f3921d63076a80308aa4c3d630792f465",
+        "contract_sha256": "40d5a20db4d40b11685ef65efc53ecae8b58cad89e4ef1547c7528cbce972780"
+      }
+    },
+    {
+      "pair_id": "v4-pair-013",
+      "family_id": "SE1002",
+      "framework": "node_js",
+      "source_format": "typescript",
+      "language_group": "typescript",
+      "topology": "inter_file_aliased",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "fixed_executable_argument_array",
+        "inter_file_helpers",
+        "non_dominating_guard",
+        "non_terminating_guard",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-025",
+        "v4-case-026"
+      ],
+      "mutation": {
+        "file": "bridge.ts",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 5
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 5
+        },
+        "vulnerable_fragment_sha256": "318d568e3f9e8fc0fb779eab580624471123558593a4912993204349233d336c",
+        "control_fragment_sha256": "cd657f2ad2be4ded09456c4c2658ed09db374ab7439c0d119f6fa4a9ec620aeb",
+        "security_invariant": "secure-bench.invariant.command-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-025",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-025",
+        "fixture_sha256": "ee97941d8fa112f51dcfe3fcdb56f9a475c096cd27fab7d1b3c06b34d556c424",
+        "contract_sha256": "55d34c658ed652492b1c580341b251bf9c1cb71bc8e80fa03f69554b9ff522ef"
+      },
+      "control": {
+        "case_id": "v4-case-026",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-026",
+        "fixture_sha256": "efeb9407cc8951d4acee5946c99557b1d9c3a2e3ea886678163f84b0f2dd3f42",
+        "contract_sha256": "8eda2d3b61af365c35897a822e3fa5f64fb489af156542297658fd22ca352b74"
+      }
+    },
+    {
+      "pair_id": "v4-pair-014",
+      "family_id": "SE1002",
+      "framework": "express",
+      "source_format": "tsx",
+      "language_group": "typescript",
+      "topology": "control_flow_sensitive",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "control_flow_sensitive_join",
+        "fixed_executable_argument_array",
+        "non_dominating_guard",
+        "non_terminating_guard",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-028",
+        "v4-case-027"
+      ],
+      "mutation": {
+        "file": "entry.tsx",
+        "vulnerable_lines": {
+          "start": 14,
+          "end": 15
+        },
+        "control_lines": {
+          "start": 14,
+          "end": 15
+        },
+        "vulnerable_fragment_sha256": "fc0388c8a406fa0160032e170818b2172a5ebbc825056ad6f983fb7cf1a66be9",
+        "control_fragment_sha256": "7948f254d6a53168eba563000a6e0f00555d7d4e4b4fe7f64c2828f6d7767210",
+        "security_invariant": "secure-bench.invariant.command-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-027",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-027",
+        "fixture_sha256": "34a7f12ba3138f2aec2524690b2bc3534fe82b7338b146f0db4c8b89ab911676",
+        "contract_sha256": "0c736e88d5895d5e970ec90797c7f0e7490e8169534c466f79797998ce5e52d3"
+      },
+      "control": {
+        "case_id": "v4-case-028",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-028",
+        "fixture_sha256": "45a7ccb6c26a750bfbda79c7b1bcc9879cdd30367657026efe11e34580f8e12e",
+        "contract_sha256": "e48bca2a4b141649388637bc282d8f2807f6222aad61d2f1f3888f6229360343"
+      }
+    },
+    {
+      "pair_id": "v4-pair-015",
+      "family_id": "SE1002",
+      "framework": "next_app_router",
+      "source_format": "typescript",
+      "language_group": "typescript",
+      "topology": "direct",
+      "adversarial_features": [
+        "ambiguous_resolution",
+        "conservative_unsupported_boundary",
+        "fixed_executable_argument_array",
+        "non_dominating_guard",
+        "non_terminating_guard",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-029",
+        "v4-case-030"
+      ],
+      "mutation": {
+        "file": "entry.ts",
+        "vulnerable_lines": {
+          "start": 10,
+          "end": 11
+        },
+        "control_lines": {
+          "start": 10,
+          "end": 11
+        },
+        "vulnerable_fragment_sha256": "318d568e3f9e8fc0fb779eab580624471123558593a4912993204349233d336c",
+        "control_fragment_sha256": "cd657f2ad2be4ded09456c4c2658ed09db374ab7439c0d119f6fa4a9ec620aeb",
+        "security_invariant": "secure-bench.invariant.command-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-029",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-029",
+        "fixture_sha256": "71801685b3d77c1295bf5acbd95eb5a6ed8e59201d5ad8995494a5ccc60ef250",
+        "contract_sha256": "026d5d1eb765a78dd74e1fe03692fb3f7792a56c32307e91f8e9cfd109826f17"
+      },
+      "control": {
+        "case_id": "v4-case-030",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-030",
+        "fixture_sha256": "6e013890ab3cfb8962076c0dd1195e910aa90ff5c24f394df8f05097024fe2b3",
+        "contract_sha256": "6f1f9f70e9771506a6a7850a44a829ed01578c52a1ec6f65937c6d7d220aef55"
+      }
+    },
+    {
+      "pair_id": "v4-pair-016",
+      "family_id": "SE1002",
+      "framework": "node_js",
+      "source_format": "tsx",
+      "language_group": "typescript",
+      "topology": "helper_mediated",
+      "adversarial_features": [
+        "fixed_executable_argument_array",
+        "local_helpers",
+        "non_dominating_guard",
+        "non_terminating_guard",
+        "recursion",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-032",
+        "v4-case-031"
+      ],
+      "mutation": {
+        "file": "entry.tsx",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 5
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 5
+        },
+        "vulnerable_fragment_sha256": "318d568e3f9e8fc0fb779eab580624471123558593a4912993204349233d336c",
+        "control_fragment_sha256": "cd657f2ad2be4ded09456c4c2658ed09db374ab7439c0d119f6fa4a9ec620aeb",
+        "security_invariant": "secure-bench.invariant.command-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-031",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-031",
+        "fixture_sha256": "8be73c66819229c0356ede852b91efc253b572bbd75180cb761b05fa46b793fe",
+        "contract_sha256": "629cdb621dce84b39e7ea8d4e7273fd34c33385348885d7eacfb7d17a8338625"
+      },
+      "control": {
+        "case_id": "v4-case-032",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-032",
+        "fixture_sha256": "9946f8e3e695baaea7bfb2aeac948061bd0d14c109d5167cc2474704c3ca80cf",
+        "contract_sha256": "e87e5927a50cb040fc6c080f046b46de7bbb867793009b9f184091decacffa2e"
+      }
+    },
+    {
+      "pair_id": "v4-pair-017",
+      "family_id": "SE1003",
+      "framework": "express",
+      "source_format": "typescript",
+      "language_group": "typescript",
+      "topology": "helper_mediated",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "dynamic_code_near_miss",
+        "local_helpers",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-033",
+        "v4-case-034"
+      ],
+      "mutation": {
+        "file": "entry.ts",
+        "vulnerable_lines": {
+          "start": 3,
+          "end": 4
+        },
+        "control_lines": {
+          "start": 3,
+          "end": 7
+        },
+        "vulnerable_fragment_sha256": "cc2cbf6deb507f29a7a19a8a83a36f7eabb22a97aefe34514ff291c76c1c3a92",
+        "control_fragment_sha256": "2a391e21d1ed4e78b9d20ad429bd9904e2786907162b777466fc945212e4da1c",
+        "security_invariant": "secure-bench.invariant.dynamic-code-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-033",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-033",
+        "fixture_sha256": "c387873d266a17f28314199c2af0fa196fb78a0f8f0b37faa9429914917f3077",
+        "contract_sha256": "a908fc44f0aadae852838413927e1aa714f34da3023d7e2f0f2b2c32e22182ba"
+      },
+      "control": {
+        "case_id": "v4-case-034",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-034",
+        "fixture_sha256": "3eb976ae414d8e202d1f221e22b152c474a0e14b8b41ac8e5344ebe064f0994f",
+        "contract_sha256": "20ce246e56b2bba9889349ac01a61333523768a33b65002ce3243212806ff572"
+      }
+    },
+    {
+      "pair_id": "v4-pair-018",
+      "family_id": "SE1003",
+      "framework": "node_js",
+      "source_format": "javascript",
+      "language_group": "javascript",
+      "topology": "direct",
+      "adversarial_features": [
+        "dynamic_code_near_miss",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-036",
+        "v4-case-035"
+      ],
+      "mutation": {
+        "file": "entry.js",
+        "vulnerable_lines": {
+          "start": 5,
+          "end": 6
+        },
+        "control_lines": {
+          "start": 5,
+          "end": 9
+        },
+        "vulnerable_fragment_sha256": "cc2cbf6deb507f29a7a19a8a83a36f7eabb22a97aefe34514ff291c76c1c3a92",
+        "control_fragment_sha256": "2a391e21d1ed4e78b9d20ad429bd9904e2786907162b777466fc945212e4da1c",
+        "security_invariant": "secure-bench.invariant.dynamic-code-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-035",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-035",
+        "fixture_sha256": "c1feccf0abff4b4db5bfae9e3a714a1bc047185124441d32c0666a5e9706c60e",
+        "contract_sha256": "288a2a15de54b04c19229d34ad1b51ab2a08e64a22c98224b3d3f3e5e56c55fd"
+      },
+      "control": {
+        "case_id": "v4-case-036",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-036",
+        "fixture_sha256": "367f729f8a2279aa855da1505f848ae607ede2940085e8630eb43c296968d7e9",
+        "contract_sha256": "56b5feee305197da9932772ead34796a1ee4e370859a552befb9b968d8e4e113"
+      }
+    },
+    {
+      "pair_id": "v4-pair-019",
+      "family_id": "SE1003",
+      "framework": "server_actions",
+      "source_format": "typescript",
+      "language_group": "typescript",
+      "topology": "control_flow_sensitive",
+      "adversarial_features": [
+        "control_flow_sensitive_join",
+        "dynamic_code_near_miss",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-037",
+        "v4-case-038"
+      ],
+      "mutation": {
+        "file": "entry.ts",
+        "vulnerable_lines": {
+          "start": 10,
+          "end": 11
+        },
+        "control_lines": {
+          "start": 10,
+          "end": 14
+        },
+        "vulnerable_fragment_sha256": "0de52e877bdd3ab8838c41a209640b60d581de3b8e3c1a831b0c02a32f7a33db",
+        "control_fragment_sha256": "4dd7aa7ae110bd7ad0bed26519ef4db3e8dd667cffb378d16beabb24e3a8fe42",
+        "security_invariant": "secure-bench.invariant.dynamic-code-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-037",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-037",
+        "fixture_sha256": "bd24435b43ca5137367b623515fceb2f94081e330039257b3b3c43c0276b35bf",
+        "contract_sha256": "c2b88068a2528b330102ad04976b80b1c6d6efadc3c40db6b727829c3b599289"
+      },
+      "control": {
+        "case_id": "v4-case-038",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-038",
+        "fixture_sha256": "57475bf2936e992c4ea45e8df2874d3195167cb9a78a9aeaa5c6e9a693eb2bec",
+        "contract_sha256": "cb706177c8ebeb3c77accfd7dca2b9eb91cf17782a755c62b9977394231896d0"
+      }
+    },
+    {
+      "pair_id": "v4-pair-020",
+      "family_id": "SE1003",
+      "framework": "server_actions",
+      "source_format": "tsx",
+      "language_group": "typescript",
+      "topology": "direct",
+      "adversarial_features": [
+        "dynamic_code_near_miss",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-040",
+        "v4-case-039"
+      ],
+      "mutation": {
+        "file": "entry.tsx",
+        "vulnerable_lines": {
+          "start": 8,
+          "end": 9
+        },
+        "control_lines": {
+          "start": 8,
+          "end": 12
+        },
+        "vulnerable_fragment_sha256": "cc2cbf6deb507f29a7a19a8a83a36f7eabb22a97aefe34514ff291c76c1c3a92",
+        "control_fragment_sha256": "2a391e21d1ed4e78b9d20ad429bd9904e2786907162b777466fc945212e4da1c",
+        "security_invariant": "secure-bench.invariant.dynamic-code-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-039",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-039",
+        "fixture_sha256": "bb7f0a723e02f073f2ec8a59cf1a126b4a5fe1bad781a45caa22ef9b20d07455",
+        "contract_sha256": "0241869ca0d198f70fb6814e9e65a807e633bf7f38cc68f5c507a38cfb0b70b7"
+      },
+      "control": {
+        "case_id": "v4-case-040",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-040",
+        "fixture_sha256": "9555867686c6c45a6d0e52c18a5880ba2e7969e7de4981a25bdeee665cca68c1",
+        "contract_sha256": "1e0a65b04752f466f6bd9d276afa510c9404e1bb06da2ffa0cb623503537810c"
+      }
+    },
+    {
+      "pair_id": "v4-pair-021",
+      "family_id": "SE1003",
+      "framework": "node_js",
+      "source_format": "jsx",
+      "language_group": "javascript",
+      "topology": "inter_file_aliased",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "dynamic_code_near_miss",
+        "inter_file_helpers",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-041",
+        "v4-case-042"
+      ],
+      "mutation": {
+        "file": "bridge.jsx",
+        "vulnerable_lines": {
+          "start": 3,
+          "end": 4
+        },
+        "control_lines": {
+          "start": 3,
+          "end": 7
+        },
+        "vulnerable_fragment_sha256": "cc2cbf6deb507f29a7a19a8a83a36f7eabb22a97aefe34514ff291c76c1c3a92",
+        "control_fragment_sha256": "2a391e21d1ed4e78b9d20ad429bd9904e2786907162b777466fc945212e4da1c",
+        "security_invariant": "secure-bench.invariant.dynamic-code-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-041",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-041",
+        "fixture_sha256": "d1970ef720114b427e72a983bbcdb6c39d2be2a8f10eeb67cf7810e33f6aaad3",
+        "contract_sha256": "933406122a3e508887f930d19fbfba98657ea951a92bf113622a15e1fe5476fc"
+      },
+      "control": {
+        "case_id": "v4-case-042",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-042",
+        "fixture_sha256": "f14bc2a60a3d7e8fb7b231da2f0bdb9563188486ce21c183455d71968b0c2e5c",
+        "contract_sha256": "c9ccb16eea9b5eea1cae450adc68219621b45ced010173ea24237a4bf43b11d6"
+      }
+    },
+    {
+      "pair_id": "v4-pair-022",
+      "family_id": "SE1003",
+      "framework": "express",
+      "source_format": "javascript",
+      "language_group": "javascript",
+      "topology": "helper_mediated",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "dynamic_code_near_miss",
+        "local_helpers",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-044",
+        "v4-case-043"
+      ],
+      "mutation": {
+        "file": "entry.js",
+        "vulnerable_lines": {
+          "start": 3,
+          "end": 4
+        },
+        "control_lines": {
+          "start": 3,
+          "end": 7
+        },
+        "vulnerable_fragment_sha256": "cc2cbf6deb507f29a7a19a8a83a36f7eabb22a97aefe34514ff291c76c1c3a92",
+        "control_fragment_sha256": "2a391e21d1ed4e78b9d20ad429bd9904e2786907162b777466fc945212e4da1c",
+        "security_invariant": "secure-bench.invariant.dynamic-code-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-043",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-043",
+        "fixture_sha256": "b2403d736a814146312a74e0a8034ffe3ff94605be07d6f430603885b968b37d",
+        "contract_sha256": "80ac00c9624430964bd492f4990c9dd5cccf32fed3946a37196a6d8e3d229de5"
+      },
+      "control": {
+        "case_id": "v4-case-044",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-044",
+        "fixture_sha256": "4a013abc9b1c4275bd1929b977cf3599be0ce8527f7a083f4d59b3410d9ea2f3",
+        "contract_sha256": "1cb72c736be72e9a283758924af8cfaa8251c5d530362c3f70db7d46cf9826af"
+      }
+    },
+    {
+      "pair_id": "v4-pair-023",
+      "family_id": "SE1003",
+      "framework": "next_app_router",
+      "source_format": "tsx",
+      "language_group": "typescript",
+      "topology": "control_flow_sensitive",
+      "adversarial_features": [
+        "ambiguous_resolution",
+        "conservative_unsupported_boundary",
+        "control_flow_sensitive_join",
+        "dynamic_code_near_miss",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-045",
+        "v4-case-046"
+      ],
+      "mutation": {
+        "file": "entry.tsx",
+        "vulnerable_lines": {
+          "start": 15,
+          "end": 16
+        },
+        "control_lines": {
+          "start": 15,
+          "end": 19
+        },
+        "vulnerable_fragment_sha256": "0de52e877bdd3ab8838c41a209640b60d581de3b8e3c1a831b0c02a32f7a33db",
+        "control_fragment_sha256": "4dd7aa7ae110bd7ad0bed26519ef4db3e8dd667cffb378d16beabb24e3a8fe42",
+        "security_invariant": "secure-bench.invariant.dynamic-code-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-045",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-045",
+        "fixture_sha256": "0eb7989ffe8562d7b7ae59e7366c33299aa0fee0d3588ea488c96266d174ef6c",
+        "contract_sha256": "8d4934abedb8d87fea733791d5bb6cd5fb347e09ce8163b0d43197aa021064d0"
+      },
+      "control": {
+        "case_id": "v4-case-046",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-046",
+        "fixture_sha256": "a373fd5ca9e8037ea63f220dcbd15197b85834db197713741fa8ce8321fed8ca",
+        "contract_sha256": "1dedda36dc0347167a52499ddef39e61f91b069f95c51083ded56296447ee021"
+      }
+    },
+    {
+      "pair_id": "v4-pair-024",
+      "family_id": "SE1003",
+      "framework": "next_app_router",
+      "source_format": "jsx",
+      "language_group": "javascript",
+      "topology": "inter_file_aliased",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "dynamic_code_near_miss",
+        "inter_file_helpers",
+        "recursion",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-048",
+        "v4-case-047"
+      ],
+      "mutation": {
+        "file": "bridge.jsx",
+        "vulnerable_lines": {
+          "start": 3,
+          "end": 4
+        },
+        "control_lines": {
+          "start": 3,
+          "end": 7
+        },
+        "vulnerable_fragment_sha256": "cc2cbf6deb507f29a7a19a8a83a36f7eabb22a97aefe34514ff291c76c1c3a92",
+        "control_fragment_sha256": "2a391e21d1ed4e78b9d20ad429bd9904e2786907162b777466fc945212e4da1c",
+        "security_invariant": "secure-bench.invariant.dynamic-code-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-047",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-047",
+        "fixture_sha256": "0a7155c664e6d8593aea08607314ab18543feb3ce46bd1934e8c1057ea15e316",
+        "contract_sha256": "8dec358df2762a11f8799d72049f8a12a522ad91147572c9446f4067aacc8b34"
+      },
+      "control": {
+        "case_id": "v4-case-048",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-048",
+        "fixture_sha256": "30a6af18cb46ff861bd295cbfb504cb4eb7566e38898cc246edd13f1c15fd4bd",
+        "contract_sha256": "f6a9e124a5fdf348e00ffa0b93743120f1e61068ff61b92e11cbed3d34a3e32a"
+      }
+    },
+    {
+      "pair_id": "v4-pair-025",
+      "family_id": "SE1004",
+      "framework": "express",
+      "source_format": "tsx",
+      "language_group": "typescript",
+      "topology": "inter_file_aliased",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "inter_file_helpers",
+        "non_terminating_guard",
+        "path_prefix_and_sibling_prefix",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-049",
+        "v4-case-050"
+      ],
+      "mutation": {
+        "file": "bridge.tsx",
+        "vulnerable_lines": {
+          "start": 5,
+          "end": 7
+        },
+        "control_lines": {
+          "start": 5,
+          "end": 9
+        },
+        "vulnerable_fragment_sha256": "975eefbf75e84498b1b2a3785b118016507764571f99bf9412eb601284586af6",
+        "control_fragment_sha256": "9fba14d25d7777ae798ccff2325f7a78c17f898e0b240cd3fafb3591bb869b09",
+        "security_invariant": "secure-bench.invariant.filesystem-path-confinement",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-049",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-049",
+        "fixture_sha256": "dc12a9f02e1425a33f2f34dd2184bd10639bb588b148efb07183893dd2ba1f38",
+        "contract_sha256": "d5869d62431012c366d099a31e1bd8765d1b4e6ad37919cbd3414e301f23d5ac"
+      },
+      "control": {
+        "case_id": "v4-case-050",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-050",
+        "fixture_sha256": "5df154a3318118954004989394e38355033b51c6c57acd94489598172753b238",
+        "contract_sha256": "785062642311839fd181cba3cc171004f11f6d88e5300c5318c3775830d7939c"
+      }
+    },
+    {
+      "pair_id": "v4-pair-026",
+      "family_id": "SE1004",
+      "framework": "server_actions",
+      "source_format": "javascript",
+      "language_group": "javascript",
+      "topology": "direct",
+      "adversarial_features": [
+        "non_terminating_guard",
+        "path_prefix_and_sibling_prefix",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-052",
+        "v4-case-051"
+      ],
+      "mutation": {
+        "file": "entry.js",
+        "vulnerable_lines": {
+          "start": 8,
+          "end": 10
+        },
+        "control_lines": {
+          "start": 8,
+          "end": 12
+        },
+        "vulnerable_fragment_sha256": "975eefbf75e84498b1b2a3785b118016507764571f99bf9412eb601284586af6",
+        "control_fragment_sha256": "9fba14d25d7777ae798ccff2325f7a78c17f898e0b240cd3fafb3591bb869b09",
+        "security_invariant": "secure-bench.invariant.filesystem-path-confinement",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-051",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-051",
+        "fixture_sha256": "1fa5ad326fc8d2753b2f286c06a3dba46a070c28d469ef660435a27495e0c03c",
+        "contract_sha256": "fcff87aea661473a57b7ecdcf7ebf1620a756b715d1f1fe80e34495df47c1687"
+      },
+      "control": {
+        "case_id": "v4-case-052",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-052",
+        "fixture_sha256": "8a51dcc7b78b0cc429101dfa9615a504012de9b641de620d9957b3185e8bef84",
+        "contract_sha256": "c262a9ae2bc6f665e2a0ee046baf341e7d4a40be27523546d70a05b0ac6618e2"
+      }
+    },
+    {
+      "pair_id": "v4-pair-027",
+      "family_id": "SE1004",
+      "framework": "next_app_router",
+      "source_format": "javascript",
+      "language_group": "javascript",
+      "topology": "helper_mediated",
+      "adversarial_features": [
+        "local_helpers",
+        "non_terminating_guard",
+        "path_prefix_and_sibling_prefix",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-053",
+        "v4-case-054"
+      ],
+      "mutation": {
+        "file": "entry.js",
+        "vulnerable_lines": {
+          "start": 5,
+          "end": 7
+        },
+        "control_lines": {
+          "start": 5,
+          "end": 9
+        },
+        "vulnerable_fragment_sha256": "975eefbf75e84498b1b2a3785b118016507764571f99bf9412eb601284586af6",
+        "control_fragment_sha256": "9fba14d25d7777ae798ccff2325f7a78c17f898e0b240cd3fafb3591bb869b09",
+        "security_invariant": "secure-bench.invariant.filesystem-path-confinement",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-053",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-053",
+        "fixture_sha256": "ea8a83203815b66a26fa969590370890d2ebb72377e5a4845c4fdca39dce318a",
+        "contract_sha256": "c4338417ddedd2e2ff96b71af23c86159666c18f9835948e3678d9571d825d47"
+      },
+      "control": {
+        "case_id": "v4-case-054",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-054",
+        "fixture_sha256": "1a6aa1a8a380f5ef325177ca5cb413035be304f693924ad03ab28218c124bacd",
+        "contract_sha256": "e2c06b9341f241fcbfa2edab3129937a517e39d2388de94bf344dbc812fba09a"
+      }
+    },
+    {
+      "pair_id": "v4-pair-028",
+      "family_id": "SE1004",
+      "framework": "node_js",
+      "source_format": "jsx",
+      "language_group": "javascript",
+      "topology": "control_flow_sensitive",
+      "adversarial_features": [
+        "control_flow_sensitive_join",
+        "non_terminating_guard",
+        "path_prefix_and_sibling_prefix",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-056",
+        "v4-case-055"
+      ],
+      "mutation": {
+        "file": "entry.jsx",
+        "vulnerable_lines": {
+          "start": 13,
+          "end": 15
+        },
+        "control_lines": {
+          "start": 13,
+          "end": 17
+        },
+        "vulnerable_fragment_sha256": "c48d7f6ff6c281a21c4209a8faa5ae0869c11a606b08e8f9d119d05a76656385",
+        "control_fragment_sha256": "3926bd5a2348cec156d5b5f2545a14ac7247a3995c105413ec297f68aecb39c6",
+        "security_invariant": "secure-bench.invariant.filesystem-path-confinement",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-055",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-055",
+        "fixture_sha256": "2bd4bdd349c775f6d24713f704503b674905fa1d6004d0de4cfcf1e8ad7e83a9",
+        "contract_sha256": "e0a31281cd39233417b57a7c57df20c7b9347553e4587cb45dad9507c9781257"
+      },
+      "control": {
+        "case_id": "v4-case-056",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-056",
+        "fixture_sha256": "127d3c37858832c00ab096e71cbd0e38eaad74086d6a84a0ef55a63d003c7bba",
+        "contract_sha256": "8ceed3c63ef9a64c0cecd2d6ae4938bf9cf7d7f83be9ec4e674589b891046786"
+      }
+    },
+    {
+      "pair_id": "v4-pair-029",
+      "family_id": "SE1004",
+      "framework": "express",
+      "source_format": "tsx",
+      "language_group": "typescript",
+      "topology": "inter_file_aliased",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "inter_file_helpers",
+        "non_terminating_guard",
+        "path_prefix_and_sibling_prefix",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-057",
+        "v4-case-058"
+      ],
+      "mutation": {
+        "file": "bridge.tsx",
+        "vulnerable_lines": {
+          "start": 5,
+          "end": 7
+        },
+        "control_lines": {
+          "start": 5,
+          "end": 9
+        },
+        "vulnerable_fragment_sha256": "975eefbf75e84498b1b2a3785b118016507764571f99bf9412eb601284586af6",
+        "control_fragment_sha256": "9fba14d25d7777ae798ccff2325f7a78c17f898e0b240cd3fafb3591bb869b09",
+        "security_invariant": "secure-bench.invariant.filesystem-path-confinement",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-057",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-057",
+        "fixture_sha256": "1b475b763c251afd843ad0b0b97aef883724241ec10c76d6466382a39f790e5f",
+        "contract_sha256": "3ef30190f30fe83a57cf189e49227e3aebd27605a4bc2c8585c772d3e15f300c"
+      },
+      "control": {
+        "case_id": "v4-case-058",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-058",
+        "fixture_sha256": "3af98688eef8eac22ca9e28993c05dc48feab6f0062984507c917fc54d26472a",
+        "contract_sha256": "a19586c68654d88b6ec90c14529b02f8a5f63514575b65a3702eadb51ce584f8"
+      }
+    },
+    {
+      "pair_id": "v4-pair-030",
+      "family_id": "SE1004",
+      "framework": "node_js",
+      "source_format": "typescript",
+      "language_group": "typescript",
+      "topology": "helper_mediated",
+      "adversarial_features": [
+        "local_helpers",
+        "non_terminating_guard",
+        "path_prefix_and_sibling_prefix",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-060",
+        "v4-case-059"
+      ],
+      "mutation": {
+        "file": "entry.ts",
+        "vulnerable_lines": {
+          "start": 5,
+          "end": 7
+        },
+        "control_lines": {
+          "start": 5,
+          "end": 9
+        },
+        "vulnerable_fragment_sha256": "975eefbf75e84498b1b2a3785b118016507764571f99bf9412eb601284586af6",
+        "control_fragment_sha256": "9fba14d25d7777ae798ccff2325f7a78c17f898e0b240cd3fafb3591bb869b09",
+        "security_invariant": "secure-bench.invariant.filesystem-path-confinement",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-059",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-059",
+        "fixture_sha256": "3c355af608821e0b99a1c8da796f439e1afd2605372e2e0a7b7e157b44cb60c7",
+        "contract_sha256": "4bbd57c0ab96f1f8cfe74b6ee60585436f98b5b0c72da4bb68585ae70f656989"
+      },
+      "control": {
+        "case_id": "v4-case-060",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-060",
+        "fixture_sha256": "14a971e49cbc56a5b9e50ecc071dfc0b3308a5a89b2612287c92abfb74388a10",
+        "contract_sha256": "24519eb52149ce6a43acea5a9aec3dde46745f4f9633611fe1ad611bbba49575"
+      }
+    },
+    {
+      "pair_id": "v4-pair-031",
+      "family_id": "SE1004",
+      "framework": "server_actions",
+      "source_format": "typescript",
+      "language_group": "typescript",
+      "topology": "direct",
+      "adversarial_features": [
+        "ambiguous_resolution",
+        "conservative_unsupported_boundary",
+        "non_terminating_guard",
+        "path_prefix_and_sibling_prefix",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-061",
+        "v4-case-062"
+      ],
+      "mutation": {
+        "file": "entry.ts",
+        "vulnerable_lines": {
+          "start": 11,
+          "end": 13
+        },
+        "control_lines": {
+          "start": 11,
+          "end": 15
+        },
+        "vulnerable_fragment_sha256": "975eefbf75e84498b1b2a3785b118016507764571f99bf9412eb601284586af6",
+        "control_fragment_sha256": "9fba14d25d7777ae798ccff2325f7a78c17f898e0b240cd3fafb3591bb869b09",
+        "security_invariant": "secure-bench.invariant.filesystem-path-confinement",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-061",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-061",
+        "fixture_sha256": "2be5aa16cff36aa2b3d41a9264784de6eacc9b96bbb4883f4d8bfe04e2bdddc4",
+        "contract_sha256": "641deb342d07bedd742175d613d2df1965c4e3d197cb4668440e01b3aa6e51f1"
+      },
+      "control": {
+        "case_id": "v4-case-062",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-062",
+        "fixture_sha256": "d85e45fe331d4286559c403a3542c9a88836c63c7196ed2d7c8a76ccd42df299",
+        "contract_sha256": "f119e5330162cbadb8c3bc9ac10aaef243be7471f58d61b25864c159059111a5"
+      }
+    },
+    {
+      "pair_id": "v4-pair-032",
+      "family_id": "SE1004",
+      "framework": "next_app_router",
+      "source_format": "jsx",
+      "language_group": "javascript",
+      "topology": "control_flow_sensitive",
+      "adversarial_features": [
+        "control_flow_sensitive_join",
+        "non_terminating_guard",
+        "path_prefix_and_sibling_prefix",
+        "recursion",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-064",
+        "v4-case-063"
+      ],
+      "mutation": {
+        "file": "entry.jsx",
+        "vulnerable_lines": {
+          "start": 19,
+          "end": 21
+        },
+        "control_lines": {
+          "start": 19,
+          "end": 23
+        },
+        "vulnerable_fragment_sha256": "c48d7f6ff6c281a21c4209a8faa5ae0869c11a606b08e8f9d119d05a76656385",
+        "control_fragment_sha256": "3926bd5a2348cec156d5b5f2545a14ac7247a3995c105413ec297f68aecb39c6",
+        "security_invariant": "secure-bench.invariant.filesystem-path-confinement",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-063",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-063",
+        "fixture_sha256": "b56dc690d59d46c3b24a80e34b6596de0e7b3f7b41523cf3ae2af7db2a6e1444",
+        "contract_sha256": "78a7c67425b49055c52fced079c31b5eaa30148060fa471ce269a281a0ed8725"
+      },
+      "control": {
+        "case_id": "v4-case-064",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-064",
+        "fixture_sha256": "6458959a021f76229001daed846052fe0e497594d653348d56f72e158df502e0",
+        "contract_sha256": "735409eb34fe7c8dee1f76650a41790abea75dc1de267b9e202def4ddacea517"
+      }
+    },
+    {
+      "pair_id": "v4-pair-033",
+      "family_id": "SE1005",
+      "framework": "server_actions",
+      "source_format": "jsx",
+      "language_group": "javascript",
+      "topology": "control_flow_sensitive",
+      "adversarial_features": [
+        "control_flow_sensitive_join",
+        "hostname_suffix_near_miss",
+        "url_protocol_and_userinfo",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-065",
+        "v4-case-066"
+      ],
+      "mutation": {
+        "file": "entry.jsx",
+        "vulnerable_lines": {
+          "start": 12,
+          "end": 13
+        },
+        "control_lines": {
+          "start": 12,
+          "end": 15
+        },
+        "vulnerable_fragment_sha256": "e3104a7f3c14fc4fe0afd4f0261348487b534c9422c67c64cf576f43840efe84",
+        "control_fragment_sha256": "d4d55683fa6f6ac45f18081fd91569e5413d31c29ea293da2d43be410a0f5433",
+        "security_invariant": "secure-bench.invariant.outbound-destination-policy",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-065",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-065",
+        "fixture_sha256": "a71121e28c4dd78f23d11a173e5b06de6694adef3fb340217ece05dabf0d04fd",
+        "contract_sha256": "e132669b8dd84b370af555a3a3d5b7de1abcbd36075934d37a2a78fa91285377"
+      },
+      "control": {
+        "case_id": "v4-case-066",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-066",
+        "fixture_sha256": "bd2d7e54eca95c6c7f0203c4d8687d3cfca3b840ffb36797f2853e897fc4c3bc",
+        "contract_sha256": "60ae21c0ff38916060bc455b15ea3f325a72f7fafcf694b23bdea263c55c7f8c"
+      }
+    },
+    {
+      "pair_id": "v4-pair-034",
+      "family_id": "SE1005",
+      "framework": "node_js",
+      "source_format": "tsx",
+      "language_group": "typescript",
+      "topology": "inter_file_aliased",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "hostname_suffix_near_miss",
+        "inter_file_helpers",
+        "url_protocol_and_userinfo",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-068",
+        "v4-case-067"
+      ],
+      "mutation": {
+        "file": "bridge.tsx",
+        "vulnerable_lines": {
+          "start": 3,
+          "end": 4
+        },
+        "control_lines": {
+          "start": 3,
+          "end": 6
+        },
+        "vulnerable_fragment_sha256": "2609fc8902c4b0eba8fa44792b13017e4b82d5c7a45ff4d8597bce5d00f79952",
+        "control_fragment_sha256": "3254d9d2a8365658e55c1473010c6b4aec1618abbfa1d992c5cbe859993555f1",
+        "security_invariant": "secure-bench.invariant.outbound-destination-policy",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-067",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-067",
+        "fixture_sha256": "ed94e272340d5e5090d817227c03690add0c6708af56b94cdb4cb39c1b90218e",
+        "contract_sha256": "ea06301ca9a125ac5022eabc9332d65c17931da79424bdccb0fa2a3f9b7d82a9"
+      },
+      "control": {
+        "case_id": "v4-case-068",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-068",
+        "fixture_sha256": "909c8c9def821acc19e724cdf49c40fe76bcf6634597113329508c7687461232",
+        "contract_sha256": "3db1a570cb81a13363f6564b02f93e85e93a2297c710c7fc717486b10e8a3724"
+      }
+    },
+    {
+      "pair_id": "v4-pair-035",
+      "family_id": "SE1005",
+      "framework": "node_js",
+      "source_format": "typescript",
+      "language_group": "typescript",
+      "topology": "control_flow_sensitive",
+      "adversarial_features": [
+        "control_flow_sensitive_join",
+        "hostname_suffix_near_miss",
+        "url_protocol_and_userinfo",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-069",
+        "v4-case-070"
+      ],
+      "mutation": {
+        "file": "entry.ts",
+        "vulnerable_lines": {
+          "start": 9,
+          "end": 10
+        },
+        "control_lines": {
+          "start": 9,
+          "end": 12
+        },
+        "vulnerable_fragment_sha256": "e3104a7f3c14fc4fe0afd4f0261348487b534c9422c67c64cf576f43840efe84",
+        "control_fragment_sha256": "d4d55683fa6f6ac45f18081fd91569e5413d31c29ea293da2d43be410a0f5433",
+        "security_invariant": "secure-bench.invariant.outbound-destination-policy",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-069",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-069",
+        "fixture_sha256": "2fd10c9ccf56f19068a943b3f3b2dbd7f173b448e6d5c9fb2eb1e0fc4c23600d",
+        "contract_sha256": "fd389e4ca4d6ea0290902b1e15912d14dbf103255e0b76ee9722138fe64549d9"
+      },
+      "control": {
+        "case_id": "v4-case-070",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-070",
+        "fixture_sha256": "f0a6982d1fd8901f1d491bc8f6680d839c3d44bee2d54184b191475dc586e198",
+        "contract_sha256": "63cb415a2a9bcdf19ca24f2a972ab4f6f82681793e2fd80dad6016e393ea1e2a"
+      }
+    },
+    {
+      "pair_id": "v4-pair-036",
+      "family_id": "SE1005",
+      "framework": "next_app_router",
+      "source_format": "javascript",
+      "language_group": "javascript",
+      "topology": "inter_file_aliased",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "hostname_suffix_near_miss",
+        "inter_file_helpers",
+        "url_protocol_and_userinfo",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-072",
+        "v4-case-071"
+      ],
+      "mutation": {
+        "file": "bridge.js",
+        "vulnerable_lines": {
+          "start": 3,
+          "end": 4
+        },
+        "control_lines": {
+          "start": 3,
+          "end": 6
+        },
+        "vulnerable_fragment_sha256": "2609fc8902c4b0eba8fa44792b13017e4b82d5c7a45ff4d8597bce5d00f79952",
+        "control_fragment_sha256": "3254d9d2a8365658e55c1473010c6b4aec1618abbfa1d992c5cbe859993555f1",
+        "security_invariant": "secure-bench.invariant.outbound-destination-policy",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-071",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-071",
+        "fixture_sha256": "352f97e90be3ebbbbcbd4886c85857dc6d2f71576733442cbb69356bacb6e967",
+        "contract_sha256": "13f16972d440111da1b75b22d23b791234354d66829785d9bf9aa79639e58cd2"
+      },
+      "control": {
+        "case_id": "v4-case-072",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-072",
+        "fixture_sha256": "5dd7724b7ff2f4294ceee2de4c7d7aba2a44166cdadd23f6dac5dbc1d42d744b",
+        "contract_sha256": "b35159af3bb588082a3b6d83a88750e1a0ef1a80d4d669f93ab45f4f3a525215"
+      }
+    },
+    {
+      "pair_id": "v4-pair-037",
+      "family_id": "SE1005",
+      "framework": "server_actions",
+      "source_format": "tsx",
+      "language_group": "typescript",
+      "topology": "helper_mediated",
+      "adversarial_features": [
+        "hostname_suffix_near_miss",
+        "local_helpers",
+        "url_protocol_and_userinfo",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-073",
+        "v4-case-074"
+      ],
+      "mutation": {
+        "file": "entry.tsx",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 5
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 7
+        },
+        "vulnerable_fragment_sha256": "2609fc8902c4b0eba8fa44792b13017e4b82d5c7a45ff4d8597bce5d00f79952",
+        "control_fragment_sha256": "3254d9d2a8365658e55c1473010c6b4aec1618abbfa1d992c5cbe859993555f1",
+        "security_invariant": "secure-bench.invariant.outbound-destination-policy",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-073",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-073",
+        "fixture_sha256": "47b2cfcfb92d6c142679e67736bf4f07018affe3d04ac33fb554a5b845ca3281",
+        "contract_sha256": "cc1188b048bef69552257496cd367175c3428087dc8513281440218d0f0231dd"
+      },
+      "control": {
+        "case_id": "v4-case-074",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-074",
+        "fixture_sha256": "3065638886f29eb664c945532568ffd56f72f3bc7b50fdbcfcc712d46136aace",
+        "contract_sha256": "330d9bc6af6e8773467531124b7fc6b733702be5629d06abe9514db00bdbdf20"
+      }
+    },
+    {
+      "pair_id": "v4-pair-038",
+      "family_id": "SE1005",
+      "framework": "express",
+      "source_format": "javascript",
+      "language_group": "javascript",
+      "topology": "direct",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "hostname_suffix_near_miss",
+        "url_protocol_and_userinfo",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-076",
+        "v4-case-075"
+      ],
+      "mutation": {
+        "file": "entry.js",
+        "vulnerable_lines": {
+          "start": 7,
+          "end": 8
+        },
+        "control_lines": {
+          "start": 7,
+          "end": 10
+        },
+        "vulnerable_fragment_sha256": "2609fc8902c4b0eba8fa44792b13017e4b82d5c7a45ff4d8597bce5d00f79952",
+        "control_fragment_sha256": "3254d9d2a8365658e55c1473010c6b4aec1618abbfa1d992c5cbe859993555f1",
+        "security_invariant": "secure-bench.invariant.outbound-destination-policy",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-075",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-075",
+        "fixture_sha256": "8f44c0186c07718166c61f441d816931ec81f89e8aa8707a5b2020afe60bdec3",
+        "contract_sha256": "d96199d7e70b4e67294db8018cfb17c8ab2e0149b99ff0f9f4c33b9499f052f7"
+      },
+      "control": {
+        "case_id": "v4-case-076",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-076",
+        "fixture_sha256": "858b9b5786945706d6dea64842b35617cd3ea50d9fc6488d89674f4d90dc2b80",
+        "contract_sha256": "c743e55cda665ab6fb19d0a8efe0056e668d1abb42373d0836faf5a134a55893"
+      }
+    },
+    {
+      "pair_id": "v4-pair-039",
+      "family_id": "SE1005",
+      "framework": "express",
+      "source_format": "jsx",
+      "language_group": "javascript",
+      "topology": "direct",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "ambiguous_resolution",
+        "conservative_unsupported_boundary",
+        "hostname_suffix_near_miss",
+        "url_protocol_and_userinfo",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-077",
+        "v4-case-078"
+      ],
+      "mutation": {
+        "file": "entry.jsx",
+        "vulnerable_lines": {
+          "start": 12,
+          "end": 13
+        },
+        "control_lines": {
+          "start": 12,
+          "end": 15
+        },
+        "vulnerable_fragment_sha256": "2609fc8902c4b0eba8fa44792b13017e4b82d5c7a45ff4d8597bce5d00f79952",
+        "control_fragment_sha256": "3254d9d2a8365658e55c1473010c6b4aec1618abbfa1d992c5cbe859993555f1",
+        "security_invariant": "secure-bench.invariant.outbound-destination-policy",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-077",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-077",
+        "fixture_sha256": "5d9b53b6d1709b8a353ea0e66f6bfa6e3bf55115dcdb1b4eaefb04181c70e8cd",
+        "contract_sha256": "c0e8eda6b8b75348efe346e79e730d2f84771166cbede1d0b11160fd7b57f956"
+      },
+      "control": {
+        "case_id": "v4-case-078",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-078",
+        "fixture_sha256": "399a3a109714d304d21677983d9d0e1b1caa29827dfbd334488007dd600f32bf",
+        "contract_sha256": "482f188e5e85e79ba4a10e684b3772c575d21be34887c37fe9d81f4c7ae34c8d"
+      }
+    },
+    {
+      "pair_id": "v4-pair-040",
+      "family_id": "SE1005",
+      "framework": "next_app_router",
+      "source_format": "typescript",
+      "language_group": "typescript",
+      "topology": "helper_mediated",
+      "adversarial_features": [
+        "hostname_suffix_near_miss",
+        "local_helpers",
+        "recursion",
+        "url_protocol_and_userinfo",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-080",
+        "v4-case-079"
+      ],
+      "mutation": {
+        "file": "entry.ts",
+        "vulnerable_lines": {
+          "start": 3,
+          "end": 4
+        },
+        "control_lines": {
+          "start": 3,
+          "end": 6
+        },
+        "vulnerable_fragment_sha256": "2609fc8902c4b0eba8fa44792b13017e4b82d5c7a45ff4d8597bce5d00f79952",
+        "control_fragment_sha256": "3254d9d2a8365658e55c1473010c6b4aec1618abbfa1d992c5cbe859993555f1",
+        "security_invariant": "secure-bench.invariant.outbound-destination-policy",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-079",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-079",
+        "fixture_sha256": "65b830fbc54dfb34a4569994a67d363dd510865e340ddcbec12785f27f0c4cff",
+        "contract_sha256": "f24b797f08efee7e8c1a7ee34243472312e7ab0e2004c4d39fdfea8c103e1100"
+      },
+      "control": {
+        "case_id": "v4-case-080",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-080",
+        "fixture_sha256": "7cdfff6274644601e43de525fd8bd4bc5fec4625cde600a781536e3086a13a63",
+        "contract_sha256": "c6f9ba8aa085ce6e88f7c4fe60ae28d96ccada83c7b53f7dc52866ea1abf740a"
+      }
+    },
+    {
+      "pair_id": "v4-pair-041",
+      "family_id": "SE1006",
+      "framework": "express",
+      "source_format": "jsx",
+      "language_group": "javascript",
+      "topology": "inter_file_aliased",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "inter_file_helpers",
+        "redirect_fallback",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-081",
+        "v4-case-082"
+      ],
+      "mutation": {
+        "file": "bridge.jsx",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 5
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 7
+        },
+        "vulnerable_fragment_sha256": "216077a97d5a0f8968d169e1e4cd81a3b95eb2c91242b6d5a82868c8b96cf499",
+        "control_fragment_sha256": "769c39ebe92585cf026c8896f0c183b0f5bbc561e1a7f6626a5587289516bc37",
+        "security_invariant": "secure-bench.invariant.redirect-destination-policy",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-081",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-081",
+        "fixture_sha256": "5a391d621cdb3deeed30d878ce9b6f857b1c3f4daa15063f079c14dc9e103ed3",
+        "contract_sha256": "ad9c979c7ad1405e9d7cda6bd60aee1c507cad45c0a92b0425f21b7a596a1c14"
+      },
+      "control": {
+        "case_id": "v4-case-082",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-082",
+        "fixture_sha256": "f1a1fa57bbbca66db907c6186fb8bc72e441ef8858224e130c68d71ac43f9c4f",
+        "contract_sha256": "286fee0159ec0625c890808aa560e209739fe18aa1ab1350bac8a943358241f7"
+      }
+    },
+    {
+      "pair_id": "v4-pair-042",
+      "family_id": "SE1006",
+      "framework": "server_actions",
+      "source_format": "javascript",
+      "language_group": "javascript",
+      "topology": "control_flow_sensitive",
+      "adversarial_features": [
+        "control_flow_sensitive_join",
+        "redirect_fallback",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-084",
+        "v4-case-083"
+      ],
+      "mutation": {
+        "file": "entry.js",
+        "vulnerable_lines": {
+          "start": 11,
+          "end": 12
+        },
+        "control_lines": {
+          "start": 11,
+          "end": 14
+        },
+        "vulnerable_fragment_sha256": "da9314325765793a33da3db13ae8bf6f4d96b23a353017c7491aa4bc587a4ac4",
+        "control_fragment_sha256": "bcc663a5bd13e3de5f5d295ee68349aba8a7ddfdb486bd95aad2619ec8311204",
+        "security_invariant": "secure-bench.invariant.redirect-destination-policy",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-083",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-083",
+        "fixture_sha256": "c4ea64c2626ec1bc3fc50908c412b7476f0290ccc2bc66e4b790af259b2b5cd7",
+        "contract_sha256": "096bc59bb5bf5a714a778c22294d09880c53e4477f788d1b14aa8ef111f58b33"
+      },
+      "control": {
+        "case_id": "v4-case-084",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-084",
+        "fixture_sha256": "fc6c8c1c412065c4f6e523f81b4512b288b35f981082514985faa217cafea3bb",
+        "contract_sha256": "da455c1553942fb644ae338a9a46eeb59d9a80e09636f7da75a2abea4b6b687f"
+      }
+    },
+    {
+      "pair_id": "v4-pair-043",
+      "family_id": "SE1006",
+      "framework": "express",
+      "source_format": "typescript",
+      "language_group": "typescript",
+      "topology": "inter_file_aliased",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "inter_file_helpers",
+        "redirect_fallback",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-085",
+        "v4-case-086"
+      ],
+      "mutation": {
+        "file": "bridge.ts",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 5
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 7
+        },
+        "vulnerable_fragment_sha256": "216077a97d5a0f8968d169e1e4cd81a3b95eb2c91242b6d5a82868c8b96cf499",
+        "control_fragment_sha256": "769c39ebe92585cf026c8896f0c183b0f5bbc561e1a7f6626a5587289516bc37",
+        "security_invariant": "secure-bench.invariant.redirect-destination-policy",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-085",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-085",
+        "fixture_sha256": "522b21f2f25c10f78614feba26499341275547f6ef2fe7c277da01264bbe56e8",
+        "contract_sha256": "c604458b162aa62100daaf0008bc4e3f190dadc45381b6e3ee884a130fb90f4c"
+      },
+      "control": {
+        "case_id": "v4-case-086",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-086",
+        "fixture_sha256": "fad893439757c832b1035ad6277b5e815dfefa9ff4f68f1baa2a2ec9bad292ff",
+        "contract_sha256": "d450f98091dd728757ec1d526c98e861ee81049d533b5aa76faab045af893864"
+      }
+    },
+    {
+      "pair_id": "v4-pair-044",
+      "family_id": "SE1006",
+      "framework": "next_app_router",
+      "source_format": "typescript",
+      "language_group": "typescript",
+      "topology": "helper_mediated",
+      "adversarial_features": [
+        "local_helpers",
+        "redirect_fallback",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-088",
+        "v4-case-087"
+      ],
+      "mutation": {
+        "file": "entry.ts",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 5
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 7
+        },
+        "vulnerable_fragment_sha256": "216077a97d5a0f8968d169e1e4cd81a3b95eb2c91242b6d5a82868c8b96cf499",
+        "control_fragment_sha256": "769c39ebe92585cf026c8896f0c183b0f5bbc561e1a7f6626a5587289516bc37",
+        "security_invariant": "secure-bench.invariant.redirect-destination-policy",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-087",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-087",
+        "fixture_sha256": "67a8091529d234e61c4ae3963193941b0d874cbfc592a188df7fe8153c57b1d8",
+        "contract_sha256": "e3943a3833112ad835a81d2a5a079cfe30da75b4df1adb01619d4cacbdeaa5d9"
+      },
+      "control": {
+        "case_id": "v4-case-088",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-088",
+        "fixture_sha256": "b08af27be02bf88e841256bbfa25c066778886219375fd62cc8254849301603d",
+        "contract_sha256": "0b762cdab5297e2f8c1ca708a97b3797bba2730b67266523a889bfcd915d384a"
+      }
+    },
+    {
+      "pair_id": "v4-pair-045",
+      "family_id": "SE1006",
+      "framework": "next_app_router",
+      "source_format": "jsx",
+      "language_group": "javascript",
+      "topology": "direct",
+      "adversarial_features": [
+        "redirect_fallback",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-089",
+        "v4-case-090"
+      ],
+      "mutation": {
+        "file": "entry.jsx",
+        "vulnerable_lines": {
+          "start": 9,
+          "end": 10
+        },
+        "control_lines": {
+          "start": 9,
+          "end": 12
+        },
+        "vulnerable_fragment_sha256": "216077a97d5a0f8968d169e1e4cd81a3b95eb2c91242b6d5a82868c8b96cf499",
+        "control_fragment_sha256": "769c39ebe92585cf026c8896f0c183b0f5bbc561e1a7f6626a5587289516bc37",
+        "security_invariant": "secure-bench.invariant.redirect-destination-policy",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-089",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-089",
+        "fixture_sha256": "af21aa3c29a21d2647ae765b7468d0f535ad0eadf2df063f9e96d8b98a94345b",
+        "contract_sha256": "bd71f3d66f431fc4660c8d3f0fddd287418245edc0a53b71847a60f4add4a567"
+      },
+      "control": {
+        "case_id": "v4-case-090",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-090",
+        "fixture_sha256": "eeab6b5062a9916b882d0cb3c456056043cc24cfb5f7c2b0432ec6d4b21c5762",
+        "contract_sha256": "34c6f5d8ce0fa3e4f9d8d449ff9beee7713c2a5b0d668b9015091837d1bcb1b5"
+      }
+    },
+    {
+      "pair_id": "v4-pair-046",
+      "family_id": "SE1006",
+      "framework": "node_js",
+      "source_format": "tsx",
+      "language_group": "typescript",
+      "topology": "direct",
+      "adversarial_features": [
+        "redirect_fallback",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-092",
+        "v4-case-091"
+      ],
+      "mutation": {
+        "file": "entry.tsx",
+        "vulnerable_lines": {
+          "start": 8,
+          "end": 9
+        },
+        "control_lines": {
+          "start": 8,
+          "end": 11
+        },
+        "vulnerable_fragment_sha256": "216077a97d5a0f8968d169e1e4cd81a3b95eb2c91242b6d5a82868c8b96cf499",
+        "control_fragment_sha256": "769c39ebe92585cf026c8896f0c183b0f5bbc561e1a7f6626a5587289516bc37",
+        "security_invariant": "secure-bench.invariant.redirect-destination-policy",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-091",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-091",
+        "fixture_sha256": "1a5efc9a8d206fb31256f60bfbe23b13e7dce42d748fb715cd9e1d7e9d4f0bbb",
+        "contract_sha256": "a92501a05c2994fe25746e90604c5102a149d40aaec9afb74ac48df4986b4c9a"
+      },
+      "control": {
+        "case_id": "v4-case-092",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-092",
+        "fixture_sha256": "ac52973e902d51c3805a44699c7456a1be5ad6cddad37200f0c51ffec13b05ce",
+        "contract_sha256": "92142c1bcf1dde534b5aecad078b6c1f8aaf95b0025a78eff359a2bf36208717"
+      }
+    },
+    {
+      "pair_id": "v4-pair-047",
+      "family_id": "SE1006",
+      "framework": "node_js",
+      "source_format": "javascript",
+      "language_group": "javascript",
+      "topology": "control_flow_sensitive",
+      "adversarial_features": [
+        "ambiguous_resolution",
+        "conservative_unsupported_boundary",
+        "control_flow_sensitive_join",
+        "redirect_fallback",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-093",
+        "v4-case-094"
+      ],
+      "mutation": {
+        "file": "entry.js",
+        "vulnerable_lines": {
+          "start": 13,
+          "end": 14
+        },
+        "control_lines": {
+          "start": 13,
+          "end": 16
+        },
+        "vulnerable_fragment_sha256": "da9314325765793a33da3db13ae8bf6f4d96b23a353017c7491aa4bc587a4ac4",
+        "control_fragment_sha256": "bcc663a5bd13e3de5f5d295ee68349aba8a7ddfdb486bd95aad2619ec8311204",
+        "security_invariant": "secure-bench.invariant.redirect-destination-policy",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-093",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-093",
+        "fixture_sha256": "b970242920bfb589546a6783f33985c132ed22915e859e9f346315c58d5185c4",
+        "contract_sha256": "958edf46319bd92f13d65a953bff4da3a5ce990e25e40e6085933974a0e0d433"
+      },
+      "control": {
+        "case_id": "v4-case-094",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-094",
+        "fixture_sha256": "5c2a2a2ffe234d462f13bb87eee1935339fc6f6c6172232201fee2cdde783997",
+        "contract_sha256": "e885572997d55ae419e6e0b902fd10a58560a1e4f106de6cbd5fe5586de2309c"
+      }
+    },
+    {
+      "pair_id": "v4-pair-048",
+      "family_id": "SE1006",
+      "framework": "server_actions",
+      "source_format": "tsx",
+      "language_group": "typescript",
+      "topology": "helper_mediated",
+      "adversarial_features": [
+        "local_helpers",
+        "recursion",
+        "redirect_fallback",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-096",
+        "v4-case-095"
+      ],
+      "mutation": {
+        "file": "entry.tsx",
+        "vulnerable_lines": {
+          "start": 5,
+          "end": 6
+        },
+        "control_lines": {
+          "start": 5,
+          "end": 8
+        },
+        "vulnerable_fragment_sha256": "216077a97d5a0f8968d169e1e4cd81a3b95eb2c91242b6d5a82868c8b96cf499",
+        "control_fragment_sha256": "769c39ebe92585cf026c8896f0c183b0f5bbc561e1a7f6626a5587289516bc37",
+        "security_invariant": "secure-bench.invariant.redirect-destination-policy",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-095",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-095",
+        "fixture_sha256": "fcf95b1c47e526d30388d122ede4a80474e0061ccf0ef7c85a0fcc130207ca71",
+        "contract_sha256": "09d1b100c0981d79df74dd13f0759b22049ef921a453941a6e7605bca4f40ada"
+      },
+      "control": {
+        "case_id": "v4-case-096",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-096",
+        "fixture_sha256": "ed5175134a5c493788c58fdd731b6b381871420bfbb547f2bcb64d1884945135",
+        "contract_sha256": "2a04e2907825c84accd13b023a4a4a65b3c325188441cada2f0003a7c16c67ae"
+      }
+    },
+    {
+      "pair_id": "v4-pair-049",
+      "family_id": "SE1007",
+      "framework": "next_app_router",
+      "source_format": "tsx",
+      "language_group": "typescript",
+      "topology": "helper_mediated",
+      "adversarial_features": [
+        "local_helpers",
+        "parameterized_sql",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-097",
+        "v4-case-098"
+      ],
+      "mutation": {
+        "file": "entry.tsx",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 4
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 4
+        },
+        "vulnerable_fragment_sha256": "4aa85456a858991af133c9ccc7db97707aa4a0e1c1f0832428070b8627047e02",
+        "control_fragment_sha256": "e065609852e27c2f8c4ef54190f05d2bcfe8ff02bbd479a896522cbc6791e38a",
+        "security_invariant": "secure-bench.invariant.sql-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-097",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-097",
+        "fixture_sha256": "00fce4254a6c66e4907fe133e0357b740d91b3045f380733260dd5b77021a835",
+        "contract_sha256": "714c18a90c8eda76d6f81b6b5dffcb45603c41c31c567a5c73cb1312616b9aa7"
+      },
+      "control": {
+        "case_id": "v4-case-098",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-098",
+        "fixture_sha256": "dd4a776b52a7cf52c27b72c75447501694c477cb77d5a0422eaa61752363e42e",
+        "contract_sha256": "425dffa2ea16fbcb497c7cebd0bcb4704019cc911d5a39b329a2a4d9c80ac0a4"
+      }
+    },
+    {
+      "pair_id": "v4-pair-050",
+      "family_id": "SE1007",
+      "framework": "node_js",
+      "source_format": "javascript",
+      "language_group": "javascript",
+      "topology": "inter_file_aliased",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "inter_file_helpers",
+        "parameterized_sql",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-100",
+        "v4-case-099"
+      ],
+      "mutation": {
+        "file": "bridge.js",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 4
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 4
+        },
+        "vulnerable_fragment_sha256": "4aa85456a858991af133c9ccc7db97707aa4a0e1c1f0832428070b8627047e02",
+        "control_fragment_sha256": "e065609852e27c2f8c4ef54190f05d2bcfe8ff02bbd479a896522cbc6791e38a",
+        "security_invariant": "secure-bench.invariant.sql-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-099",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-099",
+        "fixture_sha256": "0df47cdb1cfe4c024032d5ed3a7533b1d891efe0f5fb2b2162c25fdab5d0f9c8",
+        "contract_sha256": "e3b6063a7717eadefde34aeee80fb218fa0ee8b772267b8b65f58207a4898b6a"
+      },
+      "control": {
+        "case_id": "v4-case-100",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-100",
+        "fixture_sha256": "7f0004c6c9205b42ec9bca3f8c0ab9cc527788a006dbe8b11365d00eb9bb804b",
+        "contract_sha256": "8e2b2fe32007bad629d933685b406148384c1bbbeb0c33e3f29fbab8f6afa022"
+      }
+    },
+    {
+      "pair_id": "v4-pair-051",
+      "family_id": "SE1007",
+      "framework": "server_actions",
+      "source_format": "javascript",
+      "language_group": "javascript",
+      "topology": "inter_file_aliased",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "inter_file_helpers",
+        "parameterized_sql",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-101",
+        "v4-case-102"
+      ],
+      "mutation": {
+        "file": "bridge.js",
+        "vulnerable_lines": {
+          "start": 4,
+          "end": 4
+        },
+        "control_lines": {
+          "start": 4,
+          "end": 4
+        },
+        "vulnerable_fragment_sha256": "4aa85456a858991af133c9ccc7db97707aa4a0e1c1f0832428070b8627047e02",
+        "control_fragment_sha256": "e065609852e27c2f8c4ef54190f05d2bcfe8ff02bbd479a896522cbc6791e38a",
+        "security_invariant": "secure-bench.invariant.sql-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-101",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-101",
+        "fixture_sha256": "6be066a7d89966a64c00732825a569314b32599e05aa33ab037d3f0a5051a91b",
+        "contract_sha256": "087cedefa34ccee6a5b7e5b8944e9aa8ad86986630b10bff464a4442fab0d8ef"
+      },
+      "control": {
+        "case_id": "v4-case-102",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-102",
+        "fixture_sha256": "9e9db2e830f964081155a9bf99d2085120070f98911a842b0fa1cdfdbc70bd2f",
+        "contract_sha256": "989f0c03afca0079fbae44e7c40094694d5ce9cb3ac38c4e45ef8c7f6774afb1"
+      }
+    },
+    {
+      "pair_id": "v4-pair-052",
+      "family_id": "SE1007",
+      "framework": "express",
+      "source_format": "typescript",
+      "language_group": "typescript",
+      "topology": "direct",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "parameterized_sql",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-104",
+        "v4-case-103"
+      ],
+      "mutation": {
+        "file": "entry.ts",
+        "vulnerable_lines": {
+          "start": 8,
+          "end": 8
+        },
+        "control_lines": {
+          "start": 8,
+          "end": 8
+        },
+        "vulnerable_fragment_sha256": "4aa85456a858991af133c9ccc7db97707aa4a0e1c1f0832428070b8627047e02",
+        "control_fragment_sha256": "e065609852e27c2f8c4ef54190f05d2bcfe8ff02bbd479a896522cbc6791e38a",
+        "security_invariant": "secure-bench.invariant.sql-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-103",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-103",
+        "fixture_sha256": "90043a3d168f1b4ea2c9b692c21b6e438bc4439040c32c9e71a119e933fa49dd",
+        "contract_sha256": "c699d259e9dcb8b2e11ad6046b1dd97ac12964a3511267eb3c873fa1227b6c62"
+      },
+      "control": {
+        "case_id": "v4-case-104",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-104",
+        "fixture_sha256": "b47ac1af33eb5f5895dcd3a2bf6ee37e427a37b1c22dafacad91bf36fe43e8b7",
+        "contract_sha256": "ec9501dedaf03e8e0ea1a8be9ac8ba8670854e81f7ce92af1fbf75bfcf3c123c"
+      }
+    },
+    {
+      "pair_id": "v4-pair-053",
+      "family_id": "SE1007",
+      "framework": "express",
+      "source_format": "typescript",
+      "language_group": "typescript",
+      "topology": "control_flow_sensitive",
+      "adversarial_features": [
+        "aliases_and_destructuring",
+        "control_flow_sensitive_join",
+        "parameterized_sql",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-105",
+        "v4-case-106"
+      ],
+      "mutation": {
+        "file": "entry.ts",
+        "vulnerable_lines": {
+          "start": 12,
+          "end": 12
+        },
+        "control_lines": {
+          "start": 12,
+          "end": 12
+        },
+        "vulnerable_fragment_sha256": "efa74a477ffa36f6ba843631a1223fc5537d9a9b5c71acb9b056b08539ef7ead",
+        "control_fragment_sha256": "f59016b915dd39ebe7b36319cfb2ddf590d30a1fa34150736c066c604fadd798",
+        "security_invariant": "secure-bench.invariant.sql-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-105",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-105",
+        "fixture_sha256": "a8e8636361f3b8400e3e085856b77f013a412bd5df7d84ec2d5aaaf051a68697",
+        "contract_sha256": "0813f631fa137f7b35a7d09c402a5d2df51ee2752a244d2a0611916215a65b0d"
+      },
+      "control": {
+        "case_id": "v4-case-106",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-106",
+        "fixture_sha256": "8624a323f7c67bf7ef31fe3ae05fc1539f34b40c96fe11007752b9956606bb5e",
+        "contract_sha256": "37e542e9057376bdae841259b4a9bf69202ee368480e9acc95e9ab940354c5a6"
+      }
+    },
+    {
+      "pair_id": "v4-pair-054",
+      "family_id": "SE1007",
+      "framework": "node_js",
+      "source_format": "jsx",
+      "language_group": "javascript",
+      "topology": "direct",
+      "adversarial_features": [
+        "parameterized_sql",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-108",
+        "v4-case-107"
+      ],
+      "mutation": {
+        "file": "entry.jsx",
+        "vulnerable_lines": {
+          "start": 8,
+          "end": 8
+        },
+        "control_lines": {
+          "start": 8,
+          "end": 8
+        },
+        "vulnerable_fragment_sha256": "4aa85456a858991af133c9ccc7db97707aa4a0e1c1f0832428070b8627047e02",
+        "control_fragment_sha256": "e065609852e27c2f8c4ef54190f05d2bcfe8ff02bbd479a896522cbc6791e38a",
+        "security_invariant": "secure-bench.invariant.sql-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-107",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-107",
+        "fixture_sha256": "0d847b9d2a75634f48102761f6f0976c3741ac97f7a0a2c79deae51677e8d5fa",
+        "contract_sha256": "d8e055aade3f8a67e28ccc94ccf695251624f6bc6b66272c675ccb84d53c3571"
+      },
+      "control": {
+        "case_id": "v4-case-108",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-108",
+        "fixture_sha256": "0a3557279e88017e7db9312ca97708afd4f7b27e5b3d76f52166b62ac60cef56",
+        "contract_sha256": "ca1fd4bdec84e299635ccfbedfcc5e35b68dadaab0d2c46cb896e39b864c954c"
+      }
+    },
+    {
+      "pair_id": "v4-pair-055",
+      "family_id": "SE1007",
+      "framework": "server_actions",
+      "source_format": "jsx",
+      "language_group": "javascript",
+      "topology": "helper_mediated",
+      "adversarial_features": [
+        "ambiguous_resolution",
+        "conservative_unsupported_boundary",
+        "local_helpers",
+        "parameterized_sql",
+        "value_preserving_wrappers",
+        "wrappers_with_multiple_arguments"
+      ],
+      "presentation_order": [
+        "v4-case-109",
+        "v4-case-110"
+      ],
+      "mutation": {
+        "file": "entry.jsx",
+        "vulnerable_lines": {
+          "start": 5,
+          "end": 5
+        },
+        "control_lines": {
+          "start": 5,
+          "end": 5
+        },
+        "vulnerable_fragment_sha256": "4aa85456a858991af133c9ccc7db97707aa4a0e1c1f0832428070b8627047e02",
+        "control_fragment_sha256": "e065609852e27c2f8c4ef54190f05d2bcfe8ff02bbd479a896522cbc6791e38a",
+        "security_invariant": "secure-bench.invariant.sql-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-109",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-109",
+        "fixture_sha256": "0a81d42d2733e4bc53aea458dd997ea6b5d7d4aa21eb8697cd8e1b3523ff5273",
+        "contract_sha256": "3110b82f4832ecabae321481fb930e1f9aef961c5b3c1ac7101f1ef7ca0c0bf2"
+      },
+      "control": {
+        "case_id": "v4-case-110",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-110",
+        "fixture_sha256": "9001e8aee1a1899fe20623f7633baa8a39f037fee8b657d010e6e776368df279",
+        "contract_sha256": "f7debc6e0fc1d517e36d0d1b91e6af660b228ede494dd681bfd5a8b0e5db4414"
+      }
+    },
+    {
+      "pair_id": "v4-pair-056",
+      "family_id": "SE1007",
+      "framework": "next_app_router",
+      "source_format": "tsx",
+      "language_group": "typescript",
+      "topology": "control_flow_sensitive",
+      "adversarial_features": [
+        "control_flow_sensitive_join",
+        "parameterized_sql",
+        "recursion",
+        "value_preserving_wrappers"
+      ],
+      "presentation_order": [
+        "v4-case-112",
+        "v4-case-111"
+      ],
+      "mutation": {
+        "file": "entry.tsx",
+        "vulnerable_lines": {
+          "start": 18,
+          "end": 18
+        },
+        "control_lines": {
+          "start": 18,
+          "end": 18
+        },
+        "vulnerable_fragment_sha256": "efa74a477ffa36f6ba843631a1223fc5537d9a9b5c71acb9b056b08539ef7ead",
+        "control_fragment_sha256": "f59016b915dd39ebe7b36319cfb2ddf590d30a1fa34150736c066c604fadd798",
+        "security_invariant": "secure-bench.invariant.sql-control-data-separation",
+        "bidirectional_exact": true,
+        "metamorphic_rename_stable": true,
+        "metamorphic_insertion_stable": true
+      },
+      "vulnerable": {
+        "case_id": "v4-case-111",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-111",
+        "fixture_sha256": "38503e6feb2f9eaec258a692f016b317827d2c6b6e664952b8be0957a1c1803c",
+        "contract_sha256": "2e7bb3d41bde02a1862f71734da29219b1f4d73d9d71b87b2009194eef8992c6"
+      },
+      "control": {
+        "case_id": "v4-case-112",
+        "fixture_path": "prospective/phase-13-holdout-v4/fixtures/unit-112",
+        "fixture_sha256": "65d867d3f0fe337e01d3244d8b64666f2adbe48937bbfddf86a2b70abea73c2e",
+        "contract_sha256": "4a9e65b1e8a50ec71176908c170b6e56a3ec12e1b5b2f24f86f815da2021d379"
+      }
+    }
+  ],
+  "limitations": [
+    "This is a frozen examination definition, not a scanner result or score.",
+    "No result supports rankings, superiority, production readiness, or complete coverage.",
+    "Exact and normalized overlap checks are proxies and cannot prove semantic independence.",
+    "Ambiguous, recursive, and unsupported-boundary cases require conservative evidence rather than assumed reachability."
+  ]
+}

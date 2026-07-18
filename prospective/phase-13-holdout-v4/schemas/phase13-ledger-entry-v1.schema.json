@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/phase13-ledger-entry-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "sequence", "event", "holdout_id", "manifest_sha256", "aggregate_corpus_sha256", "contract_merkle_root", "previous_entry_hash", "timestamp_utc", "entry_hash"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase13-ledger-entry-v1" },
+    "sequence": { "const": 0 },
+    "event": { "const": "holdout_frozen" },
+    "holdout_id": { "const": "secure-bench-phase13-holdout-v4" },
+    "manifest_sha256": { "$ref": "#/$defs/sha256" },
+    "aggregate_corpus_sha256": { "$ref": "#/$defs/sha256" },
+    "contract_merkle_root": { "$ref": "#/$defs/sha256" },
+    "previous_entry_hash": { "const": "0000000000000000000000000000000000000000000000000000000000000000" },
+    "timestamp_utc": { "const": "2026-07-17T00:00:00Z" },
+    "entry_hash": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": { "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" } }
+}
