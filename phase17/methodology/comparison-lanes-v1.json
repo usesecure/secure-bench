@@ -1,0 +1,31 @@
+{
+  "schema_version": "secure-bench-scanner-comparison-lanes-v1",
+  "methodology_version": "1.0.0",
+  "lanes": [
+    {
+      "id": "native",
+      "ruleset_requirement": "A pinned, public, maintained, scanner-recommended ruleset selected before execution with immutable origin, revision, license, and SHA-256.",
+      "reporting": "Report this lane independently as the scanner's native public profile."
+    },
+    {
+      "id": "capability_normalized",
+      "ruleset_requirement": "Pinned scanner-specific public rules authored from the same already-frozen public vulnerability families, without reading cases, answers, scanner internals, or native-lane output.",
+      "reporting": "Report this lane independently as capability-normalized methodology evidence."
+    }
+  ],
+  "prohibitions": [
+    "never combine native and capability-normalized observations into one score denominator aggregate or rank",
+    "never choose or revise either ruleset after observing comparison cases or outputs",
+    "never treat the archived opengrep/opengrep-rules repository as implicitly current or recommended",
+    "never use adapter-conformance rules as a comparison ruleset",
+    "never infer missing evidence fields from rule names metadata messages or lane identity"
+  ],
+  "required_per_lane_artifacts": [
+    "scanner manifest",
+    "ruleset bytes and SHA-256",
+    "ruleset origin revision and license",
+    "raw report bytes and SHA-256",
+    "separate process audit",
+    "separate metrics and limitations"
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.github.io/secure-bench/schemas/adapted-report-v1.schema.json",
+  "title": "Secure Bench adapted scanner report v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "scanner_version", "adapter_version", "raw_sha256", "raw_size_bytes", "findings"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-adapted-report-v1" },
+    "scanner_version": { "type": "string", "minLength": 1 },
+    "adapter_version": { "type": "string", "minLength": 1 },
+    "raw_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "raw_size_bytes": { "type": "integer", "minimum": 0 },
+    "findings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/finding" }
+    }
+  },
+  "$defs": {
+    "availability": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["availability", "value"],
+          "properties": {
+            "availability": { "const": "available" },
+            "value": true
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["availability", "reason"],
+          "properties": {
+            "availability": { "const": "unavailable" },
+            "reason": { "type": "string", "minLength": 1 }
+          }
+        }
+      ]
+    },
+    "span": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "start_line", "start_column", "end_line", "end_column", "start_offset", "end_offset"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1, "not": { "pattern": "(^/|(^|/)\\.\\.(/|$)|\\\\|:)" } },
+        "start_line": { "type": "integer", "minimum": 1 },
+        "start_column": { "type": "integer", "minimum": 1 },
+        "end_line": { "type": "integer", "minimum": 1 },
+        "end_column": { "type": "integer", "minimum": 1 },
+        "start_offset": { "$ref": "#/$defs/availability" },
+        "end_offset": { "$ref": "#/$defs/availability" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_identity", "sink_identity", "evidence_path", "guards", "cwe", "taxonomy", "confidence"],
+      "properties": {
+        "source_identity": { "$ref": "#/$defs/availability" },
+        "sink_identity": { "$ref": "#/$defs/availability" },
+        "evidence_path": { "$ref": "#/$defs/availability" },
+        "guards": { "$ref": "#/$defs/availability" },
+        "cwe": { "$ref": "#/$defs/availability" },
+        "taxonomy": { "$ref": "#/$defs/availability" },
+        "confidence": { "$ref": "#/$defs/availability" }
+      }
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "finding_id", "projection_fingerprint", "duplicate_of", "rule_id", "primary_location",
+        "message", "severity", "scanner_fingerprint", "rule_metadata", "evidence"
+      ],
+      "properties": {
+        "finding_id": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "projection_fingerprint": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "duplicate_of": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" },
+        "rule_id": { "type": "string", "minLength": 1 },
+        "primary_location": { "$ref": "#/$defs/span" },
+        "message": { "$ref": "#/$defs/availability" },
+        "severity": { "$ref": "#/$defs/availability" },
+        "scanner_fingerprint": { "$ref": "#/$defs/availability" },
+        "rule_metadata": { "type": "object" },
+        "evidence": { "$ref": "#/$defs/evidence" }
+      }
+    }
+  }
+}

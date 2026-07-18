@@ -1,0 +1,35 @@
+{
+  "schema_version": "secure-bench-adapter-precedence-policy-v3",
+  "policy_version": "3.0.0",
+  "extends_without_replacement": "phase16/policies/adapter-precedence-v2.json",
+  "protocol_version": "1.0.0",
+  "precedence": [
+    "capture and fingerprint raw output before parsing",
+    "validate the exact scanner manifest and adapter route",
+    "reject malformed incomplete internally errored oversized or version-mismatched output",
+    "validate pinned rule identity portable path regular-file containment and source span",
+    "project only fields explicitly represented by the raw scanner format",
+    "mark every unsupported Evidence Contract v2 dimension unavailable",
+    "derive finding IDs from the generic post-projection identity algorithm",
+    "pass only adapter assessment to the separate scanner-neutral process policy"
+  ],
+  "never_infer": [
+    "source identity",
+    "sink identity",
+    "evidence path or connectivity",
+    "guards or barriers",
+    "CWE",
+    "Secure Bench taxonomy",
+    "confidence",
+    "severity absent from raw output"
+  ],
+  "fail_closed": [
+    "malformed output",
+    "duplicate identity ambiguity is retained and marked rather than credited twice",
+    "path traversal absolute paths platform prefixes and symlinks",
+    "missing files and invalid or out-of-file spans",
+    "unknown rules or ruleset drift",
+    "nonzero clean-report exits timeouts signals and partial reports"
+  ],
+  "historical_boundary": "Prospective and additive only. Phase 0 through Phase 16 artifacts and all official prior results remain unchanged."
+}

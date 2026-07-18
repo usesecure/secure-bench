@@ -1,0 +1,52 @@
+{
+  "schema_version": "secure-bench-opengrep-provenance-v1",
+  "verified_at_utc": "2026-07-18T08:06:42Z",
+  "release": {
+    "repository": "https://github.com/opengrep/opengrep",
+    "tag": "v1.22.0",
+    "latest_stable_at_verification": true,
+    "draft": false,
+    "prerelease": false,
+    "published_at": "2026-05-19T23:04:22Z",
+    "source_revision": "f458d7f0d52cc58eae1ca3cf3d5caf101e637519",
+    "license": "LGPL-2.1-only"
+  },
+  "artifact": {
+    "name": "opengrep_manylinux_x86",
+    "size_bytes": 40750411,
+    "sha256": "45bcd58440e397ed52c50e953ccf5948909ea77087c9186fc7d277216f62e319",
+    "verification": "downloaded directly from the official GitHub release outside the repository; local SHA-256 equals the GitHub release digest"
+  },
+  "signature": {
+    "scheme": "Sigstore keyless detached ECDSA signature",
+    "encoded_signature_sha256": "d44b03294ff6931458cfeac77b44e79fd41c2096b87c597884468d923c864dbd",
+    "encoded_certificate_sha256": "bd823447c6413716691a1f568b793aa1f561aa30829309159cc09cf3190ce4b5",
+    "certificate_issuer": "https://token.actions.githubusercontent.com",
+    "certificate_identity": "https://github.com/opengrep/opengrep/.github/workflows/rolling-release.yml@refs/heads/main",
+    "certificate_source_revision": "f458d7f0d52cc58eae1ca3cf3d5caf101e637519",
+    "certificate_validity": {
+      "not_before": "2026-05-19T23:02:18Z",
+      "not_after": "2026-05-19T23:12:18Z"
+    },
+    "offline_cryptographic_check": "base64-decode certificate and signature; extract the certificate public key; openssl dgst -sha256 -verify returned Verified OK for the downloaded artifact",
+    "cosign_verification": "Cosign 3.1.2 verify-blob returned Verified OK for the downloaded artifact, detached signature, exact certificate identity, OIDC issuer, and transparency-log evidence; the v3 CLI notes that separate certificate/signature flags are deprecated in favor of bundles",
+    "production_verification": "use the manifest cosign verify-blob identity/issuer constraints (or an equivalently constrained trusted bundle form) before admitting a cache entry"
+  },
+  "installation": {
+    "curl_pipe_shell_used": false,
+    "repository_contains_downloaded_binary": false,
+    "cache_policy": "download only to an ignored deterministic tool cache, verify before executable permission, and never download during tests"
+  },
+  "disclosed_live_conformance": {
+    "fixture": "phase17/fixtures/conformance/workspace",
+    "ruleset": "phase17/rules/opengrep-conformance-v1.yml",
+    "networked_rule_or_package_resolution": false,
+    "normal_exit_code": 1,
+    "raw_output_size_bytes": 683,
+    "raw_output_sha256": "da7edb97f8c58f0d7f100be392c7fd9ddb0771473dc5708e612a8fff202817e7",
+    "observed_results": 1,
+    "observed_errors": 0,
+    "observed_skipped_rules": 0,
+    "purpose": "command-template and raw-shape conformance only; not a comparison lane or score"
+  }
+}

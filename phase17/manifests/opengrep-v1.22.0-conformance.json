@@ -1,0 +1,96 @@
+{
+  "schema_version": "secure-bench-scanner-manifest-v1",
+  "protocol_version": "1.0.0",
+  "scanner": {
+    "id": "opengrep",
+    "version": "1.22.0",
+    "upstream_repository": "https://github.com/opengrep/opengrep",
+    "license": "LGPL-2.1-only"
+  },
+  "artifact": {
+    "url": "https://github.com/opengrep/opengrep/releases/download/v1.22.0/opengrep_manylinux_x86",
+    "name": "opengrep_manylinux_x86",
+    "operating_system": "linux",
+    "architecture": "x86_64",
+    "size_bytes": 40750411,
+    "sha256": "45bcd58440e397ed52c50e953ccf5948909ea77087c9186fc7d277216f62e319",
+    "verification": {
+      "scheme": "sigstore-keyless-cosign",
+      "signature_url": "https://github.com/opengrep/opengrep/releases/download/v1.22.0/opengrep_manylinux_x86.sig",
+      "signature_sha256": "d44b03294ff6931458cfeac77b44e79fd41c2096b87c597884468d923c864dbd",
+      "certificate_url": "https://github.com/opengrep/opengrep/releases/download/v1.22.0/opengrep_manylinux_x86.cert",
+      "certificate_sha256": "bd823447c6413716691a1f568b793aa1f561aa30829309159cc09cf3190ce4b5",
+      "certificate_issuer": "https://token.actions.githubusercontent.com",
+      "certificate_identity": "https://github.com/opengrep/opengrep/.github/workflows/rolling-release.yml@refs/heads/main",
+      "source_revision": "f458d7f0d52cc58eae1ca3cf3d5caf101e637519",
+      "verification_command": [
+        "cosign",
+        "verify-blob",
+        "--certificate={certificate}",
+        "--signature={signature}",
+        "--certificate-identity=https://github.com/opengrep/opengrep/.github/workflows/rolling-release.yml@refs/heads/main",
+        "--certificate-oidc-issuer=https://token.actions.githubusercontent.com",
+        "{artifact}"
+      ]
+    }
+  },
+  "ruleset": {
+    "id": "secure-bench-opengrep-adapter-conformance",
+    "version": "1.0.0",
+    "origin": "phase17/rules/opengrep-conformance-v1.yml",
+    "license": "CC0-1.0",
+    "sha256": "a9b0c304d6f12c00f7efa6bb648fe97b9d4b64c49e97fffccc0287cf03f97a96",
+    "rule_ids": [
+      "secure-bench.phase17.eval-call"
+    ]
+  },
+  "capabilities": {
+    "languages": [
+      "apex", "bash", "c", "c++", "c#", "clojure", "dart", "dockerfile", "elixir",
+      "generic", "go", "html", "java", "javascript", "json", "jsonnet", "jsx", "julia",
+      "kotlin", "lisp", "lua", "ocaml", "php", "python", "r", "ruby", "rust", "scala",
+      "scheme", "solidity", "swift", "terraform", "tsx", "typescript", "visual-basic", "xml",
+      "yaml"
+    ],
+    "frameworks": [
+      "rule-defined"
+    ],
+    "inter_file": false,
+    "interprocedural": true,
+    "taint": true,
+    "qualification": "Upstream-declared engine capabilities only; not observed benchmark coverage or a production-readiness claim. OpenGrep 1.22.0 documents intrafile inter-method taint, not general cross-file analysis."
+  },
+  "command_template": [
+    "{binary}",
+    "scan",
+    "--json",
+    "--json-output={raw_output}",
+    "--error",
+    "--disable-version-check",
+    "--no-rewrite-rule-ids",
+    "--config={ruleset}",
+    "{fixture_root}"
+  ],
+  "resources": {
+    "timeout_ms": 120000,
+    "max_output_bytes": 10485760,
+    "memory_limit_mib": 4096,
+    "process_limit": 64,
+    "network_allowed": false,
+    "isolated_fixture_copy": true
+  },
+  "exit_semantics": {
+    "clean": [
+      0
+    ],
+    "findings": [
+      1
+    ],
+    "all_other": "genuine process failure unless stronger timeout or signal evidence exists"
+  },
+  "adapter": {
+    "raw_output_format": "opengrep-json-v1",
+    "adapter_id": "secure-bench-opengrep-json",
+    "adapter_version": "1.0.0"
+  }
+}

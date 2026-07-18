@@ -1,0 +1,25 @@
+{
+  "schema_version": "secure-bench-phase17-process-conformance-v1",
+  "cases": [
+    {
+      "id": "nonzero-findings",
+      "report": "phase17/fixtures/conformance/reports/finding.json",
+      "termination": "exited",
+      "exit_code": 7,
+      "expected": "policy_exit_with_valid_findings_report"
+    },
+    {
+      "id": "timeout-partial-bytes",
+      "report": "phase17/fixtures/conformance/reports/finding.json",
+      "termination": "timeout",
+      "expected": "timeout"
+    },
+    {
+      "id": "nonzero-clean",
+      "report": "phase17/fixtures/conformance/reports/clean.json",
+      "termination": "exited",
+      "exit_code": 7,
+      "expected": "genuine_crash"
+    }
+  ]
+}
