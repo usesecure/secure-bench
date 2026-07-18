@@ -162,6 +162,13 @@ cargo run --offline --manifest-path phase21/Cargo.toml \
   --bin independent-verify -- .
 ```
 
+Verify the sealed Phase 22 post-open recovery study without starting a scanner:
+
+```bash
+cargo run --offline --manifest-path phase22/Cargo.toml \
+  --bin independent-verify -- .
+```
+
 ```bash
 cargo fmt --all --check
 cargo clippy --workspace --all-targets --all-features -- -D warnings
@@ -170,7 +177,7 @@ cargo audit --deny warnings
 cargo deny check
 ```
 
-See [Architecture](docs/architecture.md), [Methodology](docs/methodology.md), [Contracts](docs/contracts.md), [Frozen taxonomy](docs/neutral-taxonomy-v1.md), [Corpus provenance](docs/phase-1-corpus.md), [Runner boundaries](docs/phase-1-runner.md), [Phase 2 evaluation](docs/phase-2-evaluation.md), [Phase 3 holdout](docs/phase-3-holdout.md), [Phase 4 evaluation](docs/phase-4-evaluation.md), [Phase 5 orthogonal holdout](docs/phase-5-orthogonal-holdout.md), [Phase 6 postmortem](docs/phase-6-postmortem.md), [Phase 7 evaluation](docs/phase-7-evaluation.md), [Phase 8 adjudication](docs/phase-8-exit-code-adjudication.md), [Phase 9 holdout](docs/phase-9-holdout-v3.md), [Phase 10 evaluation](docs/phase-10-evaluation.md), [Phase 11 postmortem](docs/phase-11-postmortem.md), [Phase 12 methodology](docs/phase-12-methodology.md), [Phase 12.1 historical verification](docs/phase-12-1-historical-verification.md), [Phase 13 holdout v4](docs/phase-13-holdout-v4.md), [Phase 21 sandbox remediation](docs/phase-21-sandbox-remediation.md), and [Verification](docs/verification.md).
+See [Architecture](docs/architecture.md), [Methodology](docs/methodology.md), [Contracts](docs/contracts.md), [Frozen taxonomy](docs/neutral-taxonomy-v1.md), [Corpus provenance](docs/phase-1-corpus.md), [Runner boundaries](docs/phase-1-runner.md), [Phase 2 evaluation](docs/phase-2-evaluation.md), [Phase 3 holdout](docs/phase-3-holdout.md), [Phase 4 evaluation](docs/phase-4-evaluation.md), [Phase 5 orthogonal holdout](docs/phase-5-orthogonal-holdout.md), [Phase 6 postmortem](docs/phase-6-postmortem.md), [Phase 7 evaluation](docs/phase-7-evaluation.md), [Phase 8 adjudication](docs/phase-8-exit-code-adjudication.md), [Phase 9 holdout](docs/phase-9-holdout-v3.md), [Phase 10 evaluation](docs/phase-10-evaluation.md), [Phase 11 postmortem](docs/phase-11-postmortem.md), [Phase 12 methodology](docs/phase-12-methodology.md), [Phase 12.1 historical verification](docs/phase-12-1-historical-verification.md), [Phase 13 holdout v4](docs/phase-13-holdout-v4.md), [Phase 21 sandbox remediation](docs/phase-21-sandbox-remediation.md), [Phase 22 post-open recovery](docs/phase-22-post-open-normalized-recovery.md), and [Verification](docs/verification.md).
 
 ## License
 
