@@ -1,0 +1,27 @@
+{
+  "schema_version": "secure-bench-adapter-precedence-policy-v2",
+  "policy_version": "2.0.0",
+  "benchmark_version": "0.2.2",
+  "authoritative_route": "evidence_contract_v2",
+  "legacy_route": "secure-json-v1-legacy-canonical-v1",
+  "precedence": [
+    "validate declared Evidence Contract v2 version and schema before projection",
+    "validate taxonomy 1.0.0 and primary CWE before projection",
+    "preserve the complete declared v2 projection and derive canonical semantics from it",
+    "derive finding identifiers only from validated canonical semantics and case scope",
+    "reject a fully canonicalizable legacy projection that conflicts with declared v2",
+    "use legacy only when v2 is absent and the versioned legacy route is explicitly selected"
+  ],
+  "fail_closed": [
+    "malformed incomplete unsupported or version-mismatched v2",
+    "taxonomy drift unknown taxonomy coordinates or primary CWE conflict",
+    "unsafe or invalid spans",
+    "missing source sink ordered path connectivity or value-identity evidence",
+    "invalid or inconsistent barrier semantics",
+    "conflicting fully canonicalizable v2 and legacy projections",
+    "implicit legacy selection or legacy selection while v2 is declared"
+  ],
+  "non_enrichment": "Legacy evidence never overrides enriches repairs or supplies fields to an authoritative v2 projection.",
+  "process_separation": "Process termination adjudication consumes only the adapter assessment after projection and never changes projection precedence or matching semantics.",
+  "historical_boundary": "The policy is prospective only and does not modify or rescore any Phase 0 through Phase 15 artifact."
+}

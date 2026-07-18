@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-bench.invalid/phase16/declared-evidence-contract-v2.schema.json",
+  "title": "Secure Bench declared Evidence Contract v2 projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "semantics_version",
+    "path",
+    "connected_edges",
+    "effective_barriers",
+    "unresolved_call",
+    "uncertain",
+    "fingerprint",
+    "duplicate_fingerprint"
+  ],
+  "properties": {
+    "contract_version": { "const": "2.0.0" },
+    "semantics_version": { "const": "secure-evidence-semantics-v2" },
+    "path": {
+      "type": "array",
+      "minItems": 2,
+      "items": { "$ref": "#/$defs/node" }
+    },
+    "connected_edges": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "boolean" }
+    },
+    "effective_barriers": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/effect" }
+    },
+    "unresolved_call": { "type": "boolean" },
+    "uncertain": { "type": "boolean" },
+    "fingerprint": { "$ref": "#/$defs/sha256" },
+    "duplicate_fingerprint": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "effect": {
+      "enum": [
+        "preserves_influence",
+        "separates_control_and_data",
+        "constrains_to_policy",
+        "rejects_and_terminates",
+        "authorizes_operation"
+      ]
+    },
+    "span": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start_byte",
+        "end_byte",
+        "start_line",
+        "start_column",
+        "end_line",
+        "end_column"
+      ],
+      "properties": {
+        "start_byte": { "type": "integer", "minimum": 0 },
+        "end_byte": { "type": "integer", "minimum": 0 },
+        "start_line": { "type": "integer", "minimum": 1 },
+        "start_column": { "type": "integer", "minimum": 1 },
+        "end_line": { "type": "integer", "minimum": 1 },
+        "end_column": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "span"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "span": { "$ref": "#/$defs/span" }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "effect", "span", "summarizable"],
+      "properties": {
+        "role": {
+          "enum": [
+            "source",
+            "propagation",
+            "transformation",
+            "guard",
+            "sanitizer",
+            "authorization",
+            "sink"
+          ]
+        },
+        "effect": { "$ref": "#/$defs/effect" },
+        "source_kind": {
+          "enum": [
+            "http_query_value",
+            "http_body_field",
+            "form_data_value",
+            "protected_resource_id"
+          ]
+        },
+        "sink_kind": {
+          "enum": [
+            "protected_record_mutation",
+            "os_command_execution",
+            "dynamic_code_evaluation",
+            "filesystem_read",
+            "outbound_request",
+            "redirect_response",
+            "sql_query_execution"
+          ]
+        },
+        "span": { "$ref": "#/$defs/location" },
+        "summarizable": { "type": "boolean" }
+      }
+    }
+  }
+}
