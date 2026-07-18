@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "ai_processes_started": {
+      "const": 0
+    },
+    "mode": {
+      "const": "offline-retained-evidence-only"
+    },
+    "network_operations": {
+      "const": 0
+    },
+    "other_scanner_processes_started": {
+      "const": 0
+    },
+    "phase": {
+      "const": 15
+    },
+    "scanner_binary_read_or_inspected": {
+      "const": false
+    },
+    "scanner_processes_started": {
+      "const": 0
+    },
+    "schema_version": {
+      "const": "secure-bench-phase15-process-audit-v1"
+    },
+    "secure_engine_processes_started": {
+      "const": 0
+    },
+    "secure_engine_source_inspected": {
+      "const": false
+    },
+    "source_audit": {
+      "additionalProperties": false,
+      "properties": {
+        "binary_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "inputs_are_committed_phase13_and_phase14_files": {
+          "const": true
+        },
+        "library_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "process_launch_constructor_present": {
+          "const": false
+        },
+        "tcp_or_udp_api_present": {
+          "const": false
+        }
+      },
+      "required": [
+        "library_sha256",
+        "binary_sha256",
+        "process_launch_constructor_present",
+        "tcp_or_udp_api_present",
+        "inputs_are_committed_phase13_and_phase14_files"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "phase",
+    "mode",
+    "scanner_processes_started",
+    "secure_engine_processes_started",
+    "other_scanner_processes_started",
+    "ai_processes_started",
+    "network_operations",
+    "secure_engine_source_inspected",
+    "scanner_binary_read_or_inspected",
+    "source_audit"
+  ],
+  "type": "object"
+}

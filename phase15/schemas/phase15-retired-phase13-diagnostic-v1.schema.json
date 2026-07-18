@@ -1,0 +1,345 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "agreement_explanation": {
+      "type": "object"
+    },
+    "breakdowns": {
+      "minProperties": 15,
+      "type": "object"
+    },
+    "cases": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "authoritative_projection_comparison": {},
+          "case_id": {
+            "pattern": "^v4-case-[0-9]{3}$",
+            "type": "string"
+          },
+          "causal_attribution": {
+            "additionalProperties": false,
+            "properties": {
+              "contract_ambiguity": {
+                "const": false
+              },
+              "contributing": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "uniqueItems": true
+              },
+              "fixture_expectation_defect": {
+                "const": false
+              },
+              "internal_scanner_mechanism_boundary": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "internal_scanner_mechanism_resolved": {
+                "type": "boolean"
+              },
+              "matcher_defect": {
+                "const": false
+              },
+              "mismatch_links": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "uniqueItems": true
+              },
+              "operational_failure": {
+                "const": false
+              },
+              "primary": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 1,
+                "minItems": 0,
+                "type": "array",
+                "uniqueItems": true
+              },
+              "taxonomy_drift": {
+                "const": false
+              },
+              "unresolved": {
+                "const": false
+              }
+            },
+            "required": [
+              "primary",
+              "contributing",
+              "matcher_defect",
+              "fixture_expectation_defect",
+              "taxonomy_drift",
+              "contract_ambiguity",
+              "operational_failure",
+              "unresolved"
+            ],
+            "type": "object"
+          },
+          "factors": {
+            "type": "object"
+          },
+          "fixture_validation": {
+            "type": "object"
+          },
+          "frozen_contract": {
+            "type": "object"
+          },
+          "kind": {
+            "enum": [
+              "vulnerable",
+              "safe_control"
+            ]
+          },
+          "pair_id": {
+            "pattern": "^v4-pair-[0-9]{3}$",
+            "type": "string"
+          },
+          "phase14_immutable_decision": {
+            "type": "object"
+          },
+          "projection_pipeline": {
+            "additionalProperties": false,
+            "properties": {
+              "projection_loss_observed": {
+                "type": "boolean"
+              },
+              "projection_loss_outcome_causal": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "projection_loss_observed",
+              "projection_loss_outcome_causal"
+            ],
+            "type": "object"
+          },
+          "retained_finding": {}
+        },
+        "required": [
+          "case_id",
+          "pair_id",
+          "kind",
+          "frozen_contract",
+          "fixture_validation",
+          "phase14_immutable_decision",
+          "projection_pipeline",
+          "causal_attribution"
+        ],
+        "type": "object"
+      },
+      "maxItems": 112,
+      "minItems": 112,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "cause_counts": {
+      "additionalProperties": {
+        "additionalProperties": false,
+        "properties": {
+          "affected_cases": {
+            "maximum": 112,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "affected_findings": {
+            "maximum": 96,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "contributing_cases": {
+            "maximum": 112,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "contributing_findings": {
+            "maximum": 96,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "primary_cases": {
+            "maximum": 112,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "primary_findings": {
+            "maximum": 96,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "primary_cases",
+          "primary_findings",
+          "contributing_cases",
+          "contributing_findings",
+          "affected_cases",
+          "affected_findings"
+        ],
+        "type": "object"
+      },
+      "maxProperties": 20,
+      "minProperties": 20,
+      "type": "object"
+    },
+    "confounding_and_unsupported_claims": {
+      "type": "object"
+    },
+    "historical_phase14_score_unchanged": {
+      "type": "object"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 4,
+      "type": "array"
+    },
+    "method": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "offline_authoritative_projection_only": {
+      "additionalProperties": false,
+      "properties": {
+        "clean_controls": {
+          "const": 16
+        },
+        "flagged_controls": {
+          "const": 40
+        },
+        "interpretation": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "vulnerable_exact": {
+          "const": 10
+        },
+        "vulnerable_no_match": {
+          "maximum": 56,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "vulnerable_partial": {
+          "maximum": 56,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "vulnerable_exact",
+        "vulnerable_partial",
+        "vulnerable_no_match",
+        "flagged_controls",
+        "clean_controls",
+        "interpretation"
+      ],
+      "type": "object"
+    },
+    "phase": {
+      "const": 15
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "retired_corpus": {
+      "additionalProperties": false,
+      "properties": {
+        "aggregate_corpus_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "cases": {
+          "const": 112
+        },
+        "contract_merkle_root": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "disclosed": {
+          "const": true
+        },
+        "holdout_id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "safe_controls": {
+          "const": 56
+        },
+        "vulnerable": {
+          "const": 56
+        }
+      },
+      "required": [
+        "holdout_id",
+        "cases",
+        "vulnerable",
+        "safe_controls",
+        "disclosed",
+        "aggregate_corpus_sha256",
+        "contract_merkle_root"
+      ],
+      "type": "object"
+    },
+    "root_cause": {
+      "additionalProperties": false,
+      "properties": {
+        "causal_boundary": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "confirmed": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "mechanism": {
+          "type": "object"
+        },
+        "projection_loss_observed_findings": {
+          "const": 96
+        },
+        "projection_loss_outcome_causal_findings": {
+          "const": 10
+        },
+        "projection_loss_outcome_noncausal_findings": {
+          "const": 86
+        }
+      },
+      "required": [
+        "confirmed",
+        "mechanism",
+        "projection_loss_observed_findings",
+        "projection_loss_outcome_causal_findings",
+        "projection_loss_outcome_noncausal_findings",
+        "causal_boundary"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "secure-bench-phase15-retired-phase13-diagnostic-v1"
+    }
+  },
+  "required": [
+    "schema_version",
+    "phase",
+    "method",
+    "retired_corpus",
+    "root_cause",
+    "historical_phase14_score_unchanged",
+    "agreement_explanation",
+    "offline_authoritative_projection_only",
+    "cause_counts",
+    "confounding_and_unsupported_claims",
+    "breakdowns",
+    "cases",
+    "provenance",
+    "limitations"
+  ],
+  "type": "object"
+}

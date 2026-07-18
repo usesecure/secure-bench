@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "affected_case_ids": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "affected_cases": {
+      "maximum": 112,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "affected_finding_ids": {
+      "items": {
+        "pattern": "^[0-9a-f]{64}$",
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "affected_findings": {
+      "maximum": 96,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "class": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "defect_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "entry_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "historical_phase14_score_changed": {
+      "const": false
+    },
+    "outcome_causal_case_ids": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "outcome_causal_cases": {
+      "maximum": 112,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "outcome_causal_finding_ids": {
+      "items": {
+        "pattern": "^[0-9a-f]{64}$",
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "outcome_causal_findings": {
+      "maximum": 96,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "phase14_completed_ledger_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "phase14_report_set_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "phase14_result_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "previous_entry_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "secure-bench-phase15-benchmark-defect-ledger-entry-v1"
+    },
+    "sequence": {
+      "maximum": 3,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "status": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "sequence",
+    "defect_id",
+    "class",
+    "status",
+    "affected_case_ids",
+    "affected_finding_ids",
+    "affected_cases",
+    "affected_findings",
+    "outcome_causal_case_ids",
+    "outcome_causal_finding_ids",
+    "outcome_causal_cases",
+    "outcome_causal_findings",
+    "phase14_result_sha256",
+    "phase14_completed_ledger_sha256",
+    "phase14_report_set_sha256",
+    "historical_phase14_score_changed",
+    "previous_entry_hash",
+    "entry_hash"
+  ],
+  "type": "object"
+}

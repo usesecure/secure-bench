@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "adapter_precedence_policy_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "canonical_interpretation": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "evidence_contract_version": {
+      "const": "2.0.0"
+    },
+    "matching_vectors": {
+      "maxItems": 16,
+      "minItems": 16,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "precedence_vectors": {
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "scanner_reports_used": {
+      "const": false
+    },
+    "schema_version": {
+      "const": "secure-bench-phase15-evidence-contract-v2-conformance-v2"
+    },
+    "synthetic_only": {
+      "const": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "evidence_contract_version",
+    "adapter_precedence_policy_sha256",
+    "synthetic_only",
+    "scanner_reports_used",
+    "precedence_vectors",
+    "matching_vectors",
+    "canonical_interpretation"
+  ],
+  "type": "object"
+}

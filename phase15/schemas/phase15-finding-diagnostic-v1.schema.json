@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "findings": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "attribution": {
+            "additionalProperties": false,
+            "properties": {
+              "contributing": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "uniqueItems": true
+              },
+              "direct_evidence": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 4,
+                "minItems": 4,
+                "type": "array",
+                "uniqueItems": true
+              },
+              "internal_scanner_mechanism": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "no_retrospective_credit": {
+                "const": true
+              },
+              "primary": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 1,
+                "minItems": 1,
+                "type": "array",
+                "uniqueItems": true
+              },
+              "unsupported_internal_alternatives": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "primary",
+              "contributing",
+              "direct_evidence",
+              "no_retrospective_credit",
+              "internal_scanner_mechanism",
+              "unsupported_internal_alternatives"
+            ],
+            "type": "object"
+          },
+          "authoritative_evidence_contract_v2": {
+            "type": "object"
+          },
+          "case_id": {
+            "pattern": "^v4-case-[0-9]{3}$",
+            "type": "string"
+          },
+          "official_phase14_finding_id": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "offline_authoritative_comparison": {
+            "type": "object"
+          },
+          "pair_id": {
+            "pattern": "^v4-pair-[0-9]{3}$",
+            "type": "string"
+          },
+          "phase14_adapter_decision": {
+            "type": "object"
+          },
+          "projection_pipeline": {
+            "additionalProperties": false,
+            "properties": {
+              "authoritative_v2_declared": {
+                "const": true
+              },
+              "authoritative_v2_ignored_by_phase14_adapter": {
+                "const": true
+              },
+              "noncausal_reason": {},
+              "projection_loss_observed": {
+                "const": true
+              },
+              "projection_loss_outcome_causal": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "authoritative_v2_declared",
+              "authoritative_v2_ignored_by_phase14_adapter",
+              "projection_loss_observed",
+              "projection_loss_outcome_causal",
+              "noncausal_reason"
+            ],
+            "type": "object"
+          },
+          "raw_finding_id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "raw_legacy_projection": {
+            "type": "object"
+          },
+          "report_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "reported_primary_cwe": {
+            "pattern": "^CWE-[0-9]+$",
+            "type": "string"
+          },
+          "reported_taxonomy": {
+            "type": "object"
+          },
+          "rule_id_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "case_id",
+          "pair_id",
+          "raw_finding_id",
+          "official_phase14_finding_id",
+          "report_sha256",
+          "raw_legacy_projection",
+          "authoritative_evidence_contract_v2",
+          "phase14_adapter_decision",
+          "offline_authoritative_comparison",
+          "projection_pipeline",
+          "attribution"
+        ],
+        "type": "object"
+      },
+      "maxItems": 96,
+      "minItems": 96,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "no_retrospective_credit": {
+      "const": true
+    },
+    "phase": {
+      "const": 15
+    },
+    "phase14_adapter_source_audit": {
+      "type": "object"
+    },
+    "population": {
+      "additionalProperties": false,
+      "properties": {
+        "exactly_once_accounting": {
+          "const": true
+        },
+        "retained_findings": {
+          "const": 96
+        }
+      },
+      "required": [
+        "retained_findings",
+        "exactly_once_accounting"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "secure-bench-phase15-finding-diagnostic-v1"
+    }
+  },
+  "required": [
+    "schema_version",
+    "phase",
+    "population",
+    "phase14_adapter_source_audit",
+    "findings",
+    "no_retrospective_credit"
+  ],
+  "type": "object"
+}

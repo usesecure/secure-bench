@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "branch": {
+      "const": "codex/phase-15-phase14-offline-postmortem"
+    },
+    "evidence_contract_v2_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "evidence_lifecycle": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "generated_artifact_sha256": {
+      "additionalProperties": {
+        "pattern": "^[0-9a-f]{64}$",
+        "type": "string"
+      },
+      "minProperties": 14,
+      "type": "object"
+    },
+    "immutable_inputs": {
+      "type": "object"
+    },
+    "method": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "phase": {
+      "const": 15
+    },
+    "phase13_expectations_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "phase13_manifest_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "phase14_modified_or_rescored": {
+      "const": false
+    },
+    "phase14_run_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "phase14_source_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "process_accounting": {
+      "additionalProperties": false,
+      "properties": {
+        "ai_processes_started": {
+          "const": 0
+        },
+        "network_operations": {
+          "const": 0
+        },
+        "other_scanner_processes_started": {
+          "const": 0
+        },
+        "scanner_processes_started": {
+          "const": 0
+        },
+        "secure_engine_processes_started": {
+          "const": 0
+        },
+        "subprocesses_started_by_library": {
+          "const": 0
+        }
+      },
+      "required": [
+        "scanner_processes_started",
+        "secure_engine_processes_started",
+        "other_scanner_processes_started",
+        "ai_processes_started",
+        "network_operations",
+        "subprocesses_started_by_library"
+      ],
+      "type": "object"
+    },
+    "repository_base_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "retained_report_sha256": {
+      "additionalProperties": {
+        "pattern": "^[0-9a-f]{64}$",
+        "type": "string"
+      },
+      "maxProperties": 112,
+      "minProperties": 112,
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "secure-bench-phase15-provenance-v1"
+    }
+  },
+  "required": [
+    "schema_version",
+    "phase",
+    "method",
+    "repository_base_commit",
+    "branch",
+    "immutable_inputs",
+    "phase13_manifest_sha256",
+    "phase13_expectations_sha256",
+    "evidence_contract_v2_sha256",
+    "phase14_run_sha256",
+    "phase14_source_sha256",
+    "retained_report_sha256",
+    "generated_artifact_sha256",
+    "process_accounting",
+    "evidence_lifecycle",
+    "phase14_modified_or_rescored"
+  ],
+  "type": "object"
+}

@@ -31,8 +31,13 @@ jobs:
             manifest: prospective/phase-13-holdout-v4/Cargo.toml
           - workspace: phase14
             manifest: phase14/Cargo.toml
+          - workspace: phase15
+            manifest: phase15/Cargo.toml
     steps:
       - uses: actions/checkout@v5
+      - name: Select immutable historical projection
+        if: matrix.workspace == 'phase12' || matrix.workspace == 'phase13' || matrix.workspace == 'phase14'
+        run: rm -rf diagnostics/phase-15
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: 1.96.1

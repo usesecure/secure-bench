@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "cases": {
+      "items": {
+        "additionalProperties": true,
+        "properties": {
+          "case_id": {
+            "pattern": "^v4-case-[0-9]{3}$",
+            "type": "string"
+          },
+          "historical_phase14_score_immutable": {
+            "const": true
+          },
+          "pair_id": {
+            "pattern": "^v4-pair-[0-9]{3}$",
+            "type": "string"
+          },
+          "retired_disclosed_material": {
+            "const": true
+          }
+        },
+        "required": [
+          "case_id",
+          "pair_id",
+          "retired_disclosed_material",
+          "historical_phase14_score_immutable"
+        ],
+        "type": "object"
+      },
+      "maxItems": 112,
+      "minItems": 112,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "constraints": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 4,
+      "type": "array"
+    },
+    "purpose": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "secure-bench-phase15-regression-manifest-v1"
+    },
+    "source": {
+      "const": "retired-disclosed-phase13-development-material"
+    }
+  },
+  "required": [
+    "schema_version",
+    "source",
+    "purpose",
+    "cases",
+    "constraints"
+  ],
+  "type": "object"
+}
