@@ -1,0 +1,80 @@
+{
+  "schema_version": "secure-bench-scanner-manifest-v1",
+  "protocol_version": "1.0.0",
+  "scanner": {
+    "id": "opengrep",
+    "version": "1.22.0",
+    "upstream_repository": "https://github.com/opengrep/opengrep",
+    "license": "LGPL-2.1-only"
+  },
+  "artifact": {
+    "url": "https://github.com/opengrep/opengrep/releases/download/v1.22.0/opengrep_manylinux_x86",
+    "name": "opengrep_manylinux_x86",
+    "operating_system": "linux",
+    "architecture": "x86_64",
+    "size_bytes": 40750411,
+    "sha256": "45bcd58440e397ed52c50e953ccf5948909ea77087c9186fc7d277216f62e319",
+    "verification": {
+      "scheme": "sigstore-keyless-cosign",
+      "signature_url": "https://github.com/opengrep/opengrep/releases/download/v1.22.0/opengrep_manylinux_x86.sig",
+      "signature_sha256": "d44b03294ff6931458cfeac77b44e79fd41c2096b87c597884468d923c864dbd",
+      "certificate_url": "https://github.com/opengrep/opengrep/releases/download/v1.22.0/opengrep_manylinux_x86.cert",
+      "certificate_sha256": "bd823447c6413716691a1f568b793aa1f561aa30829309159cc09cf3190ce4b5",
+      "certificate_issuer": "https://token.actions.githubusercontent.com",
+      "certificate_identity": "https://github.com/opengrep/opengrep/.github/workflows/rolling-release.yml@refs/heads/main",
+      "source_revision": "f458d7f0d52cc58eae1ca3cf3d5caf101e637519",
+      "verification_command": [
+        "cosign", "verify-blob", "--certificate={certificate}", "--signature={signature}",
+        "--certificate-identity=https://github.com/opengrep/opengrep/.github/workflows/rolling-release.yml@refs/heads/main",
+        "--certificate-oidc-issuer=https://token.actions.githubusercontent.com", "{artifact}"
+      ]
+    }
+  },
+  "ruleset": {
+    "id": "secure-bench-phase19-capability-normalized-v1",
+    "version": "1.0.0",
+    "origin": "phase19/rules/capability-normalized-v1.yml",
+    "license": "CC0-1.0",
+    "sha256": "06af4cf6d10da30ad585d57b781cf6aef734add03b90ea36c78e920c4c10a07c",
+    "rule_ids": [
+      "secure-bench.phase19.SE1001.resource-authorization",
+      "secure-bench.phase19.SE1002.command-injection",
+      "secure-bench.phase19.SE1003.dynamic-code",
+      "secure-bench.phase19.SE1004.path-traversal",
+      "secure-bench.phase19.SE1005.outbound-request",
+      "secure-bench.phase19.SE1006.open-redirect",
+      "secure-bench.phase19.SE1007.sql-injection"
+    ]
+  },
+  "capabilities": {
+    "languages": ["javascript", "jsx", "typescript", "tsx"],
+    "frameworks": ["rule-defined"],
+    "inter_file": false,
+    "interprocedural": true,
+    "taint": true,
+    "qualification": "Frozen normalized-lane rule coverage only; not equivalence, ranking, or production readiness."
+  },
+  "command_template": [
+    "{binary}", "scan", "--json", "--json-output={raw_output}", "--error",
+    "--disable-version-check", "--no-rewrite-rule-ids", "--config={ruleset}", "{fixture_root}"
+  ],
+  "resources": {
+    "timeout_ms": 120000,
+    "max_output_bytes": 10485760,
+    "memory_limit_mib": 4096,
+    "process_limit": 64,
+    "network_allowed": false,
+    "isolated_fixture_copy": true
+  },
+  "exit_semantics": {
+    "clean": [0],
+    "findings": [1],
+    "all_other": "genuine process failure unless stronger timeout or signal evidence exists"
+  },
+  "adapter": {
+    "raw_output_format": "opengrep-json-v1",
+    "adapter_id": "secure-bench-opengrep-json",
+    "adapter_version": "1.0.0"
+  }
+}
+

@@ -1,0 +1,31 @@
+{
+  "schema_version": "secure-bench-phase20-scoring-methodology-v1",
+  "frozen_before_holdout_opening": true,
+  "case_population": 112,
+  "pair_population": 56,
+  "prediction_rule": "adapter-valid finding_count > 0",
+  "positive_class": "vulnerable",
+  "negative_class": "control",
+  "confusion_matrix": ["tp", "fp", "tn", "fn"],
+  "metrics": {
+    "precision": "tp / (tp + fp)",
+    "recall": "tp / (tp + fn)",
+    "specificity": "tn / (tn + fp)",
+    "f1": "2tp / (2tp + fp + fn)",
+    "balanced_accuracy": "(recall + specificity) / 2"
+  },
+  "zero_denominator": "null with no imputation",
+  "pair_exact": "vulnerable member flagged and control member not flagged",
+  "stratification": ["family", "framework", "source_format", "topology"],
+  "lane_completion": "metrics exist only when all 112 eligible attempts complete with adapter-valid evidence",
+  "unsupported_lane": "explicit unsupported state with null metrics and zero attempts",
+  "failed_attempt": "preserved as failed evidence; no retry and no imputed finding count",
+  "comparisons": {
+    "same_lane": "paired binary decisions and absolute metric differences",
+    "cross_lane": "unavailable; native and capability-normalized lanes are not equivalent",
+    "ranking": false
+  },
+  "timing": "descriptive process evidence, excluded from detection quality",
+  "scanner_identity_blind_scoring": true,
+  "lane_aggregation": false
+}

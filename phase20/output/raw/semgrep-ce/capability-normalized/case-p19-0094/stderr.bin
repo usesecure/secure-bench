@@ -1,0 +1,115 @@
+[Errno 13] Permission denied: '/dev/null'
+Traceback (most recent call last):
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/commands/wrapper.py", line 49, in wrapper
+    func(*args, **kwargs)
+    ~~~~^^^^^^^^^^^^^^^^^
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/commands/scan.py", line 1124, in scan
+    ) = semgrep.run_scan.run_scan(
+        ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dump_command_for_core=dump_command_for_core,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<54 lines>...
+        x_mem_policy=x_mem_policy,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/telemetry.py", line 468, in inner
+    return f(*args, **kwargs)
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/simple_profiling.py", line 100, in wrapper
+    result = func(*args, **kwargs)
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/run_scan.py", line 1389, in run_scan
+    configs_obj, config_errors = Config.from_config_list(
+                                 ~~~~~~~~~~~~~~~~~~~~~~~^
+        config_strs or [],
+        ^^^^^^^^^^^^^^^^^^
+        project_url,
+        ^^^^^^^^^^^^
+        validation_mode=validation_mode,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/telemetry.py", line 468, in inner
+    return f(*args, **kwargs)
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/config_resolver.py", line 692, in from_config_list
+    resolved_config, config_errors, missed = resolve_config(
+                                             ~~~~~~~~~~~~~~^
+        config,
+        ^^^^^^^
+    ...<2 lines>...
+        validation_mode=validation_mode,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/telemetry.py", line 468, in inner
+    return f(*args, **kwargs)
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/config_resolver.py", line 572, in resolve_config
+    config, errors, missed_rule_count = parse_config_files(
+                                        ~~~~~~~~~~~~~~~~~~^
+        config_loader.load_config(),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        force_jsonschema=force_jsonschema,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        validation_mode=validation_mode,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/telemetry.py", line 468, in inner
+    return f(*args, **kwargs)
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/config_resolver.py", line 544, in parse_config_files
+    result = future.result()
+  File "/usr/lib64/python3.14/concurrent/futures/_base.py", line 447, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib64/python3.14/concurrent/futures/_base.py", line 396, in __get_result
+    raise self._exception
+  File "/usr/lib64/python3.14/concurrent/futures/thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "/usr/lib64/python3.14/concurrent/futures/thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/config_resolver.py", line 499, in context_aware_parse_config_string
+    return parse_config_string(*args, **kwargs)
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/telemetry.py", line 468, in inner
+    return f(*args, **kwargs)
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/config_resolver.py", line 984, in parse_config_string
+    validate_via_rpc_with_fallback(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        contents,
+        ^^^^^^^^^
+    ...<5 lines>...
+        validation_mode,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/rule_lang.py", line 750, in validate_via_rpc_with_fallback
+    run_rpc_validate_exn(rules_tmp_path=tmp_path)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/rule_lang.py", line 695, in run_rpc_validate_exn
+    raise e
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/rule_lang.py", line 688, in run_rpc_validate_exn
+    error = rpc_validate(out.Fpath(rules_tmp_path))
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/telemetry.py", line 468, in inner
+    return f(*args, **kwargs)
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/rpc_call.py", line 78, in validate
+    ret: Optional[out.RetValidate] = rpc_call(call, out.RetValidate)
+                                     ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/simple_profiling.py", line 100, in wrapper
+    result = func(*args, **kwargs)
+  File "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib64/python3.14/site-packages/semgrep/rpc.py", line 201, in rpc_call
+    with subprocess.Popen(
+         ~~~~~~~~~~~~~~~~^
+        cmd,
+        ^^^^
+    ...<3 lines>...
+        text=False,
+        ^^^^^^^^^^^
+    ) as proc:
+    ^
+  File "/usr/lib64/python3.14/subprocess.py", line 1005, in __init__
+    errread, errwrite) = self._get_handles(stdin, stdout, stderr)
+                         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/subprocess.py", line 1774, in _get_handles
+    errwrite = self._get_devnull()
+  File "/usr/lib64/python3.14/subprocess.py", line 1149, in _get_devnull
+    self._devnull = os.open(os.devnull, os.O_RDWR)
+                    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: '/dev/null'

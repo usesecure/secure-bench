@@ -41,6 +41,8 @@ jobs:
             manifest: phase18/Cargo.toml
           - workspace: phase19
             manifest: phase19/Cargo.toml
+          - workspace: phase20
+            manifest: phase20/Cargo.toml
     steps:
       - uses: actions/checkout@v5
       - name: Select immutable historical projection
@@ -56,5 +58,8 @@ jobs:
       - run: cargo fmt --manifest-path "${{ matrix.manifest }}" --all --check
       - run: cargo clippy --manifest-path "${{ matrix.manifest }}" --workspace --all-targets --all-features -- -D warnings
       - run: cargo test --manifest-path "${{ matrix.manifest }}" --workspace --all-features
+      - name: Recompute Phase 20 evidence from raw reports
+        if: matrix.workspace == 'phase20'
+        run: cargo run --offline --manifest-path phase20/Cargo.toml --bin independent-verify -- .
       - run: cargo audit --file "$(dirname '${{ matrix.manifest }}')/Cargo.lock" --deny warnings
       - run: cargo deny --manifest-path "${{ matrix.manifest }}" check

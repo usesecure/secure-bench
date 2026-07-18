@@ -1,0 +1,34 @@
+{
+  "schema_version": "secure-bench-phase20-post-execution-failure-analysis-v1",
+  "analysis_kind": "read-only post-execution diagnosis",
+  "one_shot_execution_modified": false,
+  "rerun_performed": false,
+  "affected_attempts": 224,
+  "affected_lanes": [
+    {
+      "scanner": "opengrep",
+      "lane": "capability-normalized",
+      "attempts": 112,
+      "exit_code": 2,
+      "raw_reports_produced": 0,
+      "process_decision": "malformed-report",
+      "identical_stderr_sha256": "88b61c5326521baedab9526aa6961435babddfeb2646dbec3a0d49ab91a7748b"
+    },
+    {
+      "scanner": "semgrep-ce",
+      "lane": "capability-normalized",
+      "attempts": 112,
+      "exit_code": 2,
+      "raw_reports_produced": 0,
+      "process_decision": "malformed-report",
+      "identical_stderr_sha256": "738938f9fcc7b8a17bea627dacb125c219b0593886b89984214875681cbfb2b1"
+    }
+  ],
+  "root_cause": {
+    "category": "runner isolation device configuration",
+    "evidence": "Both Python scanner wrappers failed while opening /dev/null for a subprocess with PermissionError EACCES.",
+    "consequence": "The scanners could not start their analysis subprocesses and emitted no raw JSON report."
+  },
+  "scoring_treatment": "Both lanes remain failed with null metrics; no findings, zeros, denominators, or comparisons are imputed.",
+  "corrective_action": "Deferred to a future phase: provide a functional isolated /dev mount and extend scanner-free preflight with a subprocess that opens /dev/null. Phase 20 is not rerun."
+}
