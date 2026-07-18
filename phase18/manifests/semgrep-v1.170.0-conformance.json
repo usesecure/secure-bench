@@ -1,0 +1,90 @@
+{
+  "schema_version": "secure-bench-scanner-manifest-v1",
+  "protocol_version": "1.0.0",
+  "scanner": {
+    "id": "semgrep",
+    "version": "1.170.0",
+    "upstream_repository": "https://github.com/semgrep/semgrep",
+    "license": "LGPL-2.1-or-later"
+  },
+  "artifact": {
+    "url": "https://files.pythonhosted.org/packages/1e/6e/fb85a111af1415f1d96f572d2bf4e769292213405e87be26544a47ba7f09/semgrep-1.170.0-cp310.cp311.cp312.cp313.cp314.py310.py311.py312.py313.py314-none-manylinux_2_34_x86_64.whl",
+    "name": "semgrep-1.170.0-cp310.cp311.cp312.cp313.cp314.py310.py311.py312.py313.py314-none-manylinux_2_34_x86_64.whl",
+    "operating_system": "linux",
+    "architecture": "x86_64",
+    "size_bytes": 69565645,
+    "sha256": "09a7e8eeff5e2549161124957184f3566f484370aa6127e425897cef725eb99b",
+    "verification": {
+      "scheme": "pypi-publish-attestation-sigstore",
+      "signature_url": "https://pypi.org/integrity/semgrep/1.170.0/semgrep-1.170.0-cp310.cp311.cp312.cp313.cp314.py310.py311.py312.py313.py314-none-manylinux_2_34_x86_64.whl/provenance",
+      "signature_sha256": "61305c4553d1b68effe5d2d0554b33bf02b4b380726b05fa66f8b0b934d16f04",
+      "certificate_url": "https://pypi.org/integrity/semgrep/1.170.0/semgrep-1.170.0-cp310.cp311.cp312.cp313.cp314.py310.py311.py312.py313.py314-none-manylinux_2_34_x86_64.whl/provenance",
+      "certificate_sha256": "61305c4553d1b68effe5d2d0554b33bf02b4b380726b05fa66f8b0b934d16f04",
+      "certificate_issuer": "https://token.actions.githubusercontent.com",
+      "certificate_identity": "https://github.com/semgrep/semgrep-proprietary/.github/workflows/pro-release.yml@refs/heads/develop",
+      "source_revision": "bda7855c097344c0e9de5e21efdd30fc550a33fd",
+      "verification_command": [
+        "pypi-attestations",
+        "verify",
+        "pypi:semgrep==1.170.0"
+      ]
+    }
+  },
+  "ruleset": {
+    "id": "secure-bench-semgrep-ce-adapter-conformance",
+    "version": "1.0.0",
+    "origin": "phase17/rules/opengrep-conformance-v1.yml",
+    "license": "CC0-1.0",
+    "sha256": "a9b0c304d6f12c00f7efa6bb648fe97b9d4b64c49e97fffccc0287cf03f97a96",
+    "rule_ids": [
+      "secure-bench.phase17.eval-call"
+    ]
+  },
+  "capabilities": {
+    "languages": [
+      "javascript"
+    ],
+    "frameworks": [
+      "rule-defined"
+    ],
+    "inter_file": false,
+    "interprocedural": false,
+    "taint": true,
+    "qualification": "Conservative CE declaration: JavaScript is the disclosed conformance language; CE taint is intraprocedural and no general cross-file or interprocedural capability is claimed. This is not observed benchmark coverage or a production-readiness claim."
+  },
+  "command_template": [
+    "{binary}",
+    "scan",
+    "--json",
+    "--json-output={raw_output}",
+    "--error",
+    "--metrics=off",
+    "--disable-version-check",
+    "--no-rewrite-rule-ids",
+    "--no-git-ignore",
+    "--config={ruleset}",
+    "{fixture_root}"
+  ],
+  "resources": {
+    "timeout_ms": 120000,
+    "max_output_bytes": 10485760,
+    "memory_limit_mib": 4096,
+    "process_limit": 64,
+    "network_allowed": false,
+    "isolated_fixture_copy": true
+  },
+  "exit_semantics": {
+    "clean": [
+      0
+    ],
+    "findings": [
+      1
+    ],
+    "all_other": "genuine process failure unless stronger timeout or signal evidence exists"
+  },
+  "adapter": {
+    "raw_output_format": "semgrep-json-v1",
+    "adapter_id": "secure-bench-semgrep-json",
+    "adapter_version": "1.0.0"
+  }
+}

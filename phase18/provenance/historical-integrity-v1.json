@@ -1,0 +1,12 @@
+{
+  "schema_version": "secure-bench-phase18-historical-integrity-v1",
+  "base_commit": "241600628315db6d8a77e62bbaf6e61ba5c628f1",
+  "phase17_tree": "e2512d180118e6487a979ba03d1961c41d17825d",
+  "protected_scope": "every path present at the base commit except .github/workflows/ci.yml",
+  "permitted_additions": [
+    "docs/phase-18-semgrep-ce-adapter.md",
+    "phase18/"
+  ],
+  "permitted_existing_file_change": ".github/workflows/ci.yml",
+  "verification": "git diff --name-status against the base must contain no other existing path change, deletion, rename, copy, submodule change, or type change; HEAD:phase17 must equal the recorded tree"
+}

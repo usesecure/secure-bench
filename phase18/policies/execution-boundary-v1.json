@@ -1,0 +1,33 @@
+{
+  "schema_version": "secure-bench-semgrep-ce-execution-boundary-v1",
+  "scanner": "semgrep==1.170.0",
+  "edition": "Community Edition OSS only",
+  "required_cli_arguments": [
+    "--metrics=off",
+    "--disable-version-check",
+    "--no-rewrite-rule-ids",
+    "--no-git-ignore"
+  ],
+  "required_environment": {
+    "SEMGREP_SEND_METRICS": "off",
+    "SEMGREP_ENABLE_VERSION_CHECK": "0"
+  },
+  "required_absent_environment": [
+    "SEMGREP_APP_TOKEN",
+    "HTTP_PROXY",
+    "HTTPS_PROXY",
+    "ALL_PROXY",
+    "NO_PROXY"
+  ],
+  "forbidden_arguments": [
+    "--pro",
+    "--pro-intrafile",
+    "--pro-languages",
+    "--pro-path-sensitive",
+    "--config=auto"
+  ],
+  "rules": "local repository path only",
+  "network": "bubblewrap --unshare-net; manifest network_allowed=false",
+  "credential_policy": "Never log in, create a Semgrep AppSec token, or configure proprietary functionality.",
+  "output_policy": "Accept JSON only when engine_requested and every result engine_kind equal OSS."
+}
