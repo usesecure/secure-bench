@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/phase14-result-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "holdout_id", "interpretation", "cases", "findings", "metrics", "breakdowns", "measurement", "semantic_fingerprint", "provenance", "limitations"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase14-result-v1" },
+    "run_id": { "const": "secure-engine-0-1-4-phase13-holdout-v4-once" },
+    "holdout_id": { "const": "secure-bench-phase13-holdout-v4" },
+    "interpretation": { "type": "string", "minLength": 1 },
+    "cases": { "type": "array", "minItems": 112, "maxItems": 112, "items": { "type": "object" } },
+    "findings": { "type": "array", "items": { "type": "object" } },
+    "metrics": { "type": "object" },
+    "breakdowns": { "type": "object" },
+    "measurement": { "type": "object" },
+    "semantic_fingerprint": { "$ref": "#/$defs/sha256" },
+    "provenance": { "type": "object" },
+    "limitations": { "type": "array", "minItems": 5, "items": { "type": "string", "minLength": 1 } }
+  },
+  "$defs": { "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" } }
+}

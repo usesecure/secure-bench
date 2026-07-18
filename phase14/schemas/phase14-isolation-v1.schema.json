@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/phase14-isolation-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "case_id", "mechanism", "namespace_scope", "interfaces", "outbound_connectivity", "probe_target", "scanner_invoked_after_probe", "ai_environment"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase14-isolation-v1" },
+    "case_id": { "type": "string", "pattern": "^v4-case-[0-9]{3}$" },
+    "mechanism": { "const": "bubblewrap-minimal-read-only-runtime-unshare-net" },
+    "namespace_scope": { "const": "fresh-bwrap-unshare-net-per-case" },
+    "interfaces": { "const": ["lo"] },
+    "outbound_connectivity": { "const": "blocked" },
+    "probe_target": { "const": "1.1.1.1:53" },
+    "scanner_invoked_after_probe": { "const": true },
+    "ai_environment": { "const": "absent-after-env-clear" }
+  }
+}

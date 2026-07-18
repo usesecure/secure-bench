@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/phase14-pre-execution-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "frozen_at_utc", "run_id", "git", "scanner", "holdout", "evaluator", "resources", "environment", "benchmark_binary_sha256", "historical_integrity", "evidence_lifecycle", "interpretation"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase14-pre-execution-v1" },
+    "frozen_at_utc": { "type": "string", "format": "date-time" },
+    "run_id": { "const": "secure-engine-0-1-4-phase13-holdout-v4-once" },
+    "git": { "type": "object" },
+    "scanner": { "type": "object" },
+    "holdout": { "type": "object" },
+    "evaluator": { "type": "object" },
+    "resources": { "type": "object" },
+    "environment": { "type": "object" },
+    "benchmark_binary_sha256": { "$ref": "#/$defs/sha256" },
+    "historical_integrity": { "type": "object", "minProperties": 6, "additionalProperties": { "$ref": "#/$defs/sha256" } },
+    "evidence_lifecycle": { "type": "string", "minLength": 1 },
+    "interpretation": { "type": "string", "minLength": 1 }
+  },
+  "$defs": { "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" } }
+}

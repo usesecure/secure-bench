@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usesecure.dev/schemas/phase14-process-audit-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "frozen_cases", "unique_case_records", "scanner_launch_attempts", "maximum_attempts_per_case", "isolation_attested_scanner_processes", "version_probes", "ai_commands", "network_permitted_processes", "command_template", "process_status_policy_version", "conclusion"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase14-process-audit-v1" },
+    "run_id": { "const": "secure-engine-0-1-4-phase13-holdout-v4-once" },
+    "frozen_cases": { "const": 112 },
+    "unique_case_records": { "const": 112 },
+    "scanner_launch_attempts": { "const": 112 },
+    "maximum_attempts_per_case": { "const": 1 },
+    "isolation_attested_scanner_processes": { "type": "integer", "minimum": 0, "maximum": 112 },
+    "version_probes": { "const": 0 },
+    "ai_commands": { "const": 0 },
+    "network_permitted_processes": { "const": 0 },
+    "command_template": { "type": "array", "minItems": 6, "maxItems": 6, "items": { "type": "string" } },
+    "process_status_policy_version": { "const": "1.0.0" },
+    "conclusion": { "type": "string", "minLength": 1 }
+  }
+}
