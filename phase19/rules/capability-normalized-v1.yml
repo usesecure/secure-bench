@@ -1,0 +1,83 @@
+# SPDX-License-Identifier: CC0-1.0
+# Frozen public capability-normalized rules for OpenGrep 1.22.0 and Semgrep CE 1.170.0.
+# These rules are a distinct comparison lane and are never combined with native/default results.
+rules:
+  - id: secure-bench.phase19.SE1001.resource-authorization
+    languages: [javascript, typescript]
+    message: Protected mutation must be dominated by resource-bound authorization.
+    severity: ERROR
+    patterns:
+      - pattern: await $RECORDS.update($RESOURCE, $PATCH)
+      - pattern-not-inside: |
+          if (!(await $POLICY.allows($ACTOR, "update", $RESOURCE))) {
+            throw $ERROR;
+          }
+          ...
+          await $RECORDS.update($RESOURCE, $PATCH)
+  - id: secure-bench.phase19.SE1002.command-injection
+    languages: [javascript, typescript]
+    message: Request-controlled data reaches shell command execution.
+    severity: ERROR
+    pattern-either:
+      - pattern: exec($VALUE)
+      - pattern: execSync($VALUE)
+  - id: secure-bench.phase19.SE1003.dynamic-code
+    languages: [javascript, typescript]
+    message: Request-controlled data reaches dynamic code evaluation.
+    severity: ERROR
+    pattern-either:
+      - pattern: (0, eval)($VALUE)
+      - pattern: eval($VALUE)
+      - pattern: new Function($VALUE)
+  - id: secure-bench.phase19.SE1004.path-traversal
+    languages: [javascript, typescript]
+    message: Request-controlled path reaches a filesystem read without canonical confinement.
+    severity: ERROR
+    patterns:
+      - pattern: await readFile($TARGET, ...)
+      - pattern-not-inside: |
+          const $ROOT_REAL = await realpath($ROOT);
+          ...
+          const $TARGET = await realpath(join($ROOT_REAL, $VALUE));
+          ...
+          if ($TARGET !== $ROOT_REAL && !$TARGET.startsWith($ROOT_REAL + sep)) {
+            throw $ERROR;
+          }
+          ...
+          await readFile($TARGET, ...)
+  - id: secure-bench.phase19.SE1005.outbound-request
+    languages: [javascript, typescript]
+    message: Request-controlled destination reaches an outbound request.
+    severity: ERROR
+    patterns:
+      - pattern: await fetch($VALUE, ...)
+      - pattern-not-inside: |
+          const $ALLOWED = Object.freeze(["https://api.example.test"]);
+          const $URL = new URL($VALUE);
+          ...
+          if ($URL.protocol !== "https:" || !$ALLOWED.includes($URL.origin)) {
+            throw $ERROR;
+          }
+          ...
+          await fetch($URL, ...)
+  - id: secure-bench.phase19.SE1006.open-redirect
+    languages: [javascript, typescript]
+    message: Request-controlled destination reaches a redirect response.
+    severity: ERROR
+    patterns:
+      - pattern: Response.redirect($VALUE, ...)
+      - pattern-not-inside: |
+          const $URL = new URL($VALUE, $ORIGIN);
+          ...
+          if ($URL.origin !== $ORIGIN) {
+            throw $ERROR;
+          }
+          ...
+          Response.redirect($URL, ...)
+  - id: secure-bench.phase19.SE1007.sql-injection
+    languages: [javascript, typescript]
+    message: Request-controlled data is concatenated into a SQL query.
+    severity: ERROR
+    pattern-either:
+      - pattern: await $DB.query($PREFIX + $VALUE)
+      - pattern: await $DB.query(`${$PREFIX}${$VALUE}`)

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-bench.invalid/phase19/holdout-manifest-v1.schema.json",
+  "title": "Secure Bench Phase 19 frozen multi-scanner holdout",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "holdout_id", "status", "seed", "ordering_procedure", "taxonomy", "evidence_contract", "counts", "aggregate_corpus_sha256", "contract_merkle_root", "balance", "pairs"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase19-holdout-v1" },
+    "holdout_id": { "const": "secure-bench-phase19-multi-scanner-holdout-v1" },
+    "status": { "const": "frozen-before-execution" },
+    "seed": { "type": "string", "minLength": 32 },
+    "ordering_procedure": { "type": "string", "minLength": 1 },
+    "taxonomy": { "$ref": "#/$defs/binding" },
+    "evidence_contract": { "$ref": "#/$defs/binding" },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pairs", "cases", "vulnerable", "controls"],
+      "properties": {
+        "pairs": { "const": 56 },
+        "cases": { "const": 112 },
+        "vulnerable": { "const": 56 },
+        "controls": { "const": 56 }
+      }
+    },
+    "aggregate_corpus_sha256": { "$ref": "#/$defs/sha256" },
+    "contract_merkle_root": { "$ref": "#/$defs/sha256" },
+    "balance": { "type": "object" },
+    "pairs": {
+      "type": "array",
+      "minItems": 56,
+      "maxItems": 56,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["pair_id", "assignment", "invariants", "mutation", "first", "second"],
+        "properties": {
+          "pair_id": { "type": "string", "pattern": "^pair-p19-[0-9]{4}$" },
+          "assignment": { "type": "object" },
+          "invariants": { "type": "object" },
+          "mutation": { "type": "object" },
+          "first": { "$ref": "#/$defs/case" },
+          "second": { "$ref": "#/$defs/case" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "path", "sha256"],
+      "properties": {
+        "version": { "type": "string", "minLength": 1 },
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_id", "classification", "fixture_path", "files", "expected_findings", "security_property", "evidence"],
+      "properties": {
+        "case_id": { "type": "string", "pattern": "^case-p19-[0-9]{4}$" },
+        "classification": { "enum": ["vulnerable", "control"] },
+        "fixture_path": { "type": "string", "pattern": "^phase19/holdout/cases/case-p19-[0-9]{4}$" },
+        "files": { "type": "array", "minItems": 2, "items": { "type": "object" } },
+        "expected_findings": { "type": "integer", "minimum": 0, "maximum": 1 },
+        "security_property": { "type": ["string", "null"] },
+        "evidence": { "type": "object" }
+      }
+    }
+  }
+}

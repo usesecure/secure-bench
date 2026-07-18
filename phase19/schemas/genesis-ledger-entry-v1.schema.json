@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-bench.invalid/phase19/genesis-ledger-entry-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "sequence", "event", "holdout_id", "status", "manifest_sha256", "commitments_sha256", "aggregate_corpus_sha256", "contract_merkle_root", "previous_entry_hash", "entry_hash"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase19-ledger-entry-v1" },
+    "sequence": { "const": 0 },
+    "event": { "const": "holdout_frozen" },
+    "holdout_id": { "const": "secure-bench-phase19-multi-scanner-holdout-v1" },
+    "status": { "const": "genesis-no-execution" },
+    "manifest_sha256": { "$ref": "#/$defs/sha256" },
+    "commitments_sha256": { "$ref": "#/$defs/sha256" },
+    "aggregate_corpus_sha256": { "$ref": "#/$defs/sha256" },
+    "contract_merkle_root": { "$ref": "#/$defs/sha256" },
+    "previous_entry_hash": { "const": "0000000000000000000000000000000000000000000000000000000000000000" },
+    "entry_hash": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": { "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" } }
+}

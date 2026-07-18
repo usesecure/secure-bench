@@ -1,0 +1,53 @@
+{
+  "schema_version": "secure-bench-phase19-execution-contract-v1",
+  "scanner": { "id": "secure-engine", "version": "0.1.6", "license": "Apache-2.0" },
+  "artifact": {
+    "name": "secure-engine-0.1.6-1.fc44.x86_64.rpm",
+    "url": "https://github.com/usesecure/secure-engine/releases/download/v0.1.6/secure-engine-0.1.6-1.fc44.x86_64.rpm",
+    "sha256": "0f336a262d1c1cac51a73c625a7398c392feb9f3ecad2aa81f62cbc128a62a64",
+    "executable_sha256": "ad91499f3de9918963c9189bd236f5eb99b78cb99954e30f50bbc3098f18a5e0",
+    "runtime": null,
+    "cache_path": "/tmp/secure-bench-tools/secure-engine/0.1.6/usr/bin/secure",
+    "rebuild_allowed": false,
+    "version_probe_allowed": false
+  },
+  "adapter": {
+    "id": "secure-bench-authoritative-evidence-v2",
+    "version": "2.0.0",
+    "source": "phase16/policies/adapter-precedence-v2.json",
+    "sha256": "18b0ce241fefdd81619a547772a6871128b5fe020341158b3d62a05563236413",
+    "evidence_contract": "2.0.0"
+  },
+  "isolation": {
+    "network_allowed": false,
+    "fixture_copy": "one-case-read-only-copy",
+    "host_root_read_only": true,
+    "writable_paths": ["{run_tmp}", "{raw_output_parent}"],
+    "wrapper": ["bwrap", "--unshare-net", "--ro-bind", "/", "/", "--tmpfs", "/tmp", "--"]
+  },
+  "ai": {
+    "enabled": false,
+    "providers_allowed": false,
+    "credentials_allowed": false,
+    "environment_policy": "clear-provider-endpoint-token-and-proxy-variables"
+  },
+  "limits": { "timeout_ms": 120000, "max_output_bytes": 10485760, "memory_mib": 4096, "processes": 64 },
+  "process_policy": { "finding_adaptation_separate": true, "timeout_dominates": true, "unsupported_is_unavailable": true },
+  "lanes": {
+    "native": {
+      "availability": "available",
+      "reason": null,
+      "ruleset": { "id": "secure-engine-v0.1.6-built-in", "kind": "built-in", "path": null, "sha256": null, "license": "Apache-2.0" },
+      "command_template": ["{binary}", "scan", "{fixture_root}", "--format", "secure-json-v1", "--output", "{raw_output}"],
+      "raw_output": "secure-json-v1-with-declared-evidence-contract-v2"
+    },
+    "capability_normalized": {
+      "availability": "unsupported",
+      "reason": "Secure Engine 0.1.6 exposes no frozen public external-rule interface; no result or failure credit may be invented.",
+      "ruleset": null,
+      "command_template": null,
+      "raw_output": null
+    }
+  },
+  "reporting": { "combine_lanes": false, "ranking_allowed": false, "production_readiness_claim_allowed": false }
+}

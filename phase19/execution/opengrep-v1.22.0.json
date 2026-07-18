@@ -1,0 +1,53 @@
+{
+  "schema_version": "secure-bench-phase19-execution-contract-v1",
+  "scanner": { "id": "opengrep", "version": "1.22.0", "license": "LGPL-2.1-only" },
+  "artifact": {
+    "name": "opengrep_manylinux_x86",
+    "url": "https://github.com/opengrep/opengrep/releases/download/v1.22.0/opengrep_manylinux_x86",
+    "sha256": "45bcd58440e397ed52c50e953ccf5948909ea77087c9186fc7d277216f62e319",
+    "executable_sha256": "45bcd58440e397ed52c50e953ccf5948909ea77087c9186fc7d277216f62e319",
+    "runtime": null,
+    "cache_path": "/tmp/secure-bench-tools/opengrep/1.22.0/opengrep_manylinux_x86",
+    "rebuild_allowed": false,
+    "version_probe_allowed": false
+  },
+  "adapter": {
+    "id": "secure-bench-opengrep-json",
+    "version": "1.0.0",
+    "source": "phase17/manifests/opengrep-v1.22.0-conformance.json",
+    "sha256": "159bdf5207c822385934dbeec9ee13011416cd88a651827638228de350f92dad",
+    "evidence_contract": "2.0.0"
+  },
+  "isolation": {
+    "network_allowed": false,
+    "fixture_copy": "one-case-read-only-copy",
+    "host_root_read_only": true,
+    "writable_paths": ["{run_tmp}", "{raw_output_parent}"],
+    "wrapper": ["bwrap", "--unshare-net", "--ro-bind", "/", "/", "--tmpfs", "/tmp", "--"]
+  },
+  "ai": {
+    "enabled": false,
+    "providers_allowed": false,
+    "credentials_allowed": false,
+    "environment_policy": "clear-provider-endpoint-token-and-proxy-variables"
+  },
+  "limits": { "timeout_ms": 120000, "max_output_bytes": 10485760, "memory_mib": 4096, "processes": 64 },
+  "process_policy": { "finding_adaptation_separate": true, "timeout_dominates": true, "unsupported_is_unavailable": true },
+  "lanes": {
+    "native": {
+      "availability": "unsupported",
+      "reason": "No maintained public recommended OpenGrep ruleset is available as a frozen local artifact; the archived opengrep-rules repository is ineligible.",
+      "ruleset": null,
+      "command_template": null,
+      "raw_output": null
+    },
+    "capability_normalized": {
+      "availability": "available",
+      "reason": null,
+      "ruleset": { "id": "secure-bench-phase19-capability-normalized-v1", "kind": "local-public", "path": "phase19/rules/capability-normalized-v1.yml", "sha256": "06af4cf6d10da30ad585d57b781cf6aef734add03b90ea36c78e920c4c10a07c", "license": "CC0-1.0" },
+      "command_template": ["{binary}", "scan", "--json", "--json-output={raw_output}", "--error", "--disable-version-check", "--no-rewrite-rule-ids", "--config={ruleset}", "{fixture_root}"],
+      "raw_output": "opengrep-json-v1"
+    }
+  },
+  "reporting": { "combine_lanes": false, "ranking_allowed": false, "production_readiness_claim_allowed": false }
+}

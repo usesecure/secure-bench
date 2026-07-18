@@ -1,0 +1,32 @@
+{
+  "schema_version": "secure-bench-phase19-comparison-lanes-v1",
+  "holdout_id": "secure-bench-phase19-multi-scanner-holdout-v1",
+  "lanes": [
+    {
+      "id": "native",
+      "reporting": "scanner-native/default capability, reported independently",
+      "availability": {
+        "secure-engine": "available with v0.1.6 built-in analysis",
+        "opengrep": "unsupported because no eligible maintained offline native ruleset is frozen",
+        "semgrep-ce": "unsupported because CE has no offline built-in default security ruleset"
+      }
+    },
+    {
+      "id": "capability_normalized",
+      "reporting": "public local rules for the seven frozen taxonomy families, reported independently",
+      "availability": {
+        "secure-engine": "unsupported because v0.1.6 exposes no public external-rule interface",
+        "opengrep": "available with phase19/rules/capability-normalized-v1.yml",
+        "semgrep-ce": "available with phase19/rules/capability-normalized-v1.yml"
+      }
+    }
+  ],
+  "prohibitions": [
+    "never combine lane scores, denominators, aggregates, or rankings",
+    "never revise rules after viewing a holdout case or scanner output",
+    "never infer unavailable Evidence Contract v2 fields",
+    "never convert unsupported capability into failure or partial credit",
+    "never claim superiority, production readiness, or complete coverage"
+  ],
+  "status": "frozen-before-any-scanner-execution"
+}

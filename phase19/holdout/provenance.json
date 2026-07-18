@@ -1,0 +1,58 @@
+{
+  "authoring": {
+    "ai_providers": 0,
+    "credential_flows": 0,
+    "generator": "secure-bench-phase19-binding/holdout-v1",
+    "holdout_cases_executed": 0,
+    "network_operations": 0,
+    "scanner_free": true
+  },
+  "base": {
+    "commit": "aee2c7094983cfb8bdc16cf59b1962add82ca1db",
+    "tree": "23faa0979e7bf641612a768d9952948bc6df2264"
+  },
+  "frozen_at_utc": "2026-07-18T00:00:00Z",
+  "historical_corpus_roots_compared": [
+    "fixtures/vulnerable",
+    "fixtures/safe",
+    "holdout/phase-3",
+    "holdout/phase-5",
+    "holdout/phase-9",
+    "diagnostics/phase-6",
+    "phase12/public-regression",
+    "phase17/fixtures/conformance/workspace",
+    "phase18/fixtures/conformance/workspace"
+  ],
+  "holdout_id": "secure-bench-phase19-multi-scanner-holdout-v1",
+  "inputs": {
+    "comparison_methodology_sha256": "ad6119de510efc64c6fe8f871e69106526e7b517e494612232706ca1310137f2",
+    "evidence_contract_schema_sha256": "f4d2ee7f02a4bf1f668a44ac7770ed290acc388234eb3b6fa2963c0ea7a684f5",
+    "execution_contracts": {
+      "opengrep": "197f9e0d3555a9fa5f3c3ffb23850a958ecd632f773aa43cc69e31d517ed8827",
+      "secure-engine": "646a2c63225ec37ed6cd897856f282794c06e424feb9980dd5d00744090d8e02",
+      "semgrep-ce": "0482ddcfac5db6cd9750b40077a0e01a2c797a6e862e95a2702996a81a50a2f4"
+    },
+    "normalized_rules_sha256": "06af4cf6d10da30ad585d57b781cf6aef734add03b90ea36c78e920c4c10a07c",
+    "secure_engine_binding_sha256": "f0a37799d4bc6b66eef8b4d9fcfc0eae3c9272b00bc3901ce996917f4cdcc1e1",
+    "taxonomy_sha256": "059fe22d7707cf8d17f2c1621fdae9819787a1958ba2ef0421eca4e4ec858452"
+  },
+  "limitations": [
+    "This phase freezes an examination and contains no scanner observations or scores.",
+    "OpenGrep and Semgrep native lanes are unavailable because no eligible offline native ruleset is frozen.",
+    "Secure Engine capability-normalized lane is unavailable because v0.1.6 exposes no public external-rule interface.",
+    "Static fixtures model bounded framework entrypoints and do not claim complete real-world coverage."
+  ],
+  "overlap": {
+    "historical_limit_basis_points": 9500,
+    "historical_max_basis_points": 843,
+    "internal_cross_pair_max_basis_points": 7076,
+    "internal_limit_basis_points": 9850,
+    "new_case_exact_fingerprints_unique": true,
+    "new_case_normalized_fingerprints_unique": true,
+    "normalization": "lowercase lexical tokens; strings and numbers normalized; comments removed; seven-token shingles",
+    "phase13_phase14_consumed": false,
+    "prior_public_source_files_compared": 694
+  },
+  "phase13_phase14_boundary": "not read or consumed; integrity is bound only by the Phase 18 base tree",
+  "schema_version": "secure-bench-phase19-holdout-provenance-v1"
+}

@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-bench.invalid/phase19/execution-contract-v1.schema.json",
+  "title": "Secure Bench Phase 19 immutable scanner execution contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "scanner", "artifact", "adapter", "isolation", "ai", "limits", "process_policy", "lanes", "reporting"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase19-execution-contract-v1" },
+    "scanner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "license"],
+      "properties": {
+        "id": { "enum": ["secure-engine", "opengrep", "semgrep-ce"] },
+        "version": { "type": "string", "minLength": 1 },
+        "license": { "type": "string", "minLength": 1 }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "url", "sha256", "executable_sha256", "runtime", "cache_path", "rebuild_allowed", "version_probe_allowed"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "pattern": "^https://" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "executable_sha256": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] },
+        "runtime": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["python_version", "python_executable_sha256", "dependency_lock", "dependency_lock_sha256", "wheel_closure_sha256"],
+              "properties": {
+                "python_version": { "const": "3.14.6" },
+                "python_executable_sha256": { "$ref": "#/$defs/sha256" },
+                "dependency_lock": { "const": "phase18/provenance/semgrep-python314-linux-x86_64-lock.json" },
+                "dependency_lock_sha256": { "$ref": "#/$defs/sha256" },
+                "wheel_closure_sha256": { "$ref": "#/$defs/sha256" }
+              }
+            }
+          ]
+        },
+        "cache_path": { "type": "string", "pattern": "^/tmp/secure-bench-tools/" },
+        "rebuild_allowed": { "const": false },
+        "version_probe_allowed": { "const": false }
+      }
+    },
+    "adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "source", "sha256", "evidence_contract"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "source": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "evidence_contract": { "const": "2.0.0" }
+      }
+    },
+    "isolation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["network_allowed", "fixture_copy", "host_root_read_only", "writable_paths", "wrapper"],
+      "properties": {
+        "network_allowed": { "const": false },
+        "fixture_copy": { "const": "one-case-read-only-copy" },
+        "host_root_read_only": { "const": true },
+        "writable_paths": { "type": "array", "const": ["{run_tmp}", "{raw_output_parent}"] },
+        "wrapper": { "type": "array", "minItems": 2, "items": { "type": "string" } }
+      }
+    },
+    "ai": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enabled", "providers_allowed", "credentials_allowed", "environment_policy"],
+      "properties": {
+        "enabled": { "const": false },
+        "providers_allowed": { "const": false },
+        "credentials_allowed": { "const": false },
+        "environment_policy": { "const": "clear-provider-endpoint-token-and-proxy-variables" }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["timeout_ms", "max_output_bytes", "memory_mib", "processes"],
+      "properties": {
+        "timeout_ms": { "const": 120000 },
+        "max_output_bytes": { "const": 10485760 },
+        "memory_mib": { "const": 4096 },
+        "processes": { "const": 64 }
+      }
+    },
+    "process_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["finding_adaptation_separate", "timeout_dominates", "unsupported_is_unavailable"],
+      "properties": {
+        "finding_adaptation_separate": { "const": true },
+        "timeout_dominates": { "const": true },
+        "unsupported_is_unavailable": { "const": true }
+      }
+    },
+    "lanes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["native", "capability_normalized"],
+      "properties": {
+        "native": { "$ref": "#/$defs/lane" },
+        "capability_normalized": { "$ref": "#/$defs/lane" }
+      }
+    },
+    "reporting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["combine_lanes", "ranking_allowed", "production_readiness_claim_allowed"],
+      "properties": {
+        "combine_lanes": { "const": false },
+        "ranking_allowed": { "const": false },
+        "production_readiness_claim_allowed": { "const": false }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "lane": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["availability", "reason", "ruleset", "command_template", "raw_output"],
+      "properties": {
+        "availability": { "enum": ["available", "unsupported"] },
+        "reason": { "type": ["string", "null"] },
+        "ruleset": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "kind", "path", "sha256", "license"],
+              "properties": {
+                "id": { "type": "string", "minLength": 1 },
+                "kind": { "enum": ["built-in", "local-public"] },
+                "path": { "type": ["string", "null"] },
+                "sha256": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] },
+                "license": { "type": "string", "minLength": 1 }
+              }
+            }
+          ]
+        },
+        "command_template": { "type": ["array", "null"], "items": { "type": "string" } },
+        "raw_output": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

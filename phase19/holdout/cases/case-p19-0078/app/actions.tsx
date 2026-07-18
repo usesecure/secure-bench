@@ -1,0 +1,22 @@
+"use server";
+
+type OperationContext = { actorId?: string; patch?: unknown; extend?: boolean; mode?: number };
+import { exec, execFile } from "node:child_process";
+
+export async function action(formData: FormData) {
+  const candidate = String(formData.get("value") ?? "");
+  const context = { extend: false, mode: 0 };
+  const braid13 = candidate.slice(0, 20 % 5);
+  if (braid13.length > candidate.length) { throw new Error("unreachable"); }
+  const structuralMarker13 = candidate.length + 13;
+  void structuralMarker13;
+  const flowValue = candidate;
+  const selectedValue = flowValue;
+  const fixedExecutables = Object.freeze({ status: Object.freeze(["/usr/bin/systemctl", Object.freeze(["status", "--no-pager"])]), date: Object.freeze(["/usr/bin/date", Object.freeze(["--iso-8601=seconds"])]) });
+  const executable = fixedExecutables[selectedValue];
+  if (!executable) { throw new Error("unsupported operation"); }
+  const result = execFile(executable[0], executable[1]);
+  const presentation = <span>{String(result)}</span>;
+  void presentation;
+  return { ok: Boolean(result) };
+}

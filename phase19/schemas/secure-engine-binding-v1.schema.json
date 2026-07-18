@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-bench.invalid/phase19/secure-engine-binding-v1.schema.json",
+  "title": "Secure Bench Phase 19 immutable Secure Engine binding",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "phase", "binding_id", "release", "rpm", "extracted_binary", "policy"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase19-secure-engine-binding-v1" },
+    "phase": { "const": 19 },
+    "binding_id": { "const": "secure-engine-v0.1.6-fedora44-x86_64" },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "url", "tag", "commit", "signed_tag_object"],
+      "properties": {
+        "repository": { "const": "https://github.com/usesecure/secure-engine" },
+        "url": { "const": "https://github.com/usesecure/secure-engine/releases/tag/v0.1.6" },
+        "tag": { "const": "v0.1.6" },
+        "commit": { "const": "a921b9b0b737fa04af66903eeff43c1fd9ce6bcf" },
+        "signed_tag_object": { "const": "542d10b70987e6b5fe81af9d9f4a534703f18f25" }
+      }
+    },
+    "rpm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["filename", "url", "sha256", "source"],
+      "properties": {
+        "filename": { "const": "secure-engine-0.1.6-1.fc44.x86_64.rpm" },
+        "url": { "const": "https://github.com/usesecure/secure-engine/releases/download/v0.1.6/secure-engine-0.1.6-1.fc44.x86_64.rpm" },
+        "sha256": { "const": "0f336a262d1c1cac51a73c625a7398c392feb9f3ecad2aa81f62cbc128a62a64" },
+        "source": { "const": "official-github-release-asset" }
+      }
+    },
+    "extracted_binary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "relationship"],
+      "properties": {
+        "path": { "const": "/usr/bin/secure" },
+        "sha256": { "const": "ad91499f3de9918963c9189bd236f5eb99b78cb99954e30f50bbc3098f18a5e0" },
+        "relationship": { "const": "unmodified-rpm-payload" }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selection",
+        "moving_latest_reference_allowed",
+        "future_release_auto_upgrade_allowed",
+        "rebuild_allowed",
+        "artifact_mutation_allowed",
+        "binary_execution_allowed_during_binding_verification"
+      ],
+      "properties": {
+        "selection": { "const": "explicit-immutable-release" },
+        "moving_latest_reference_allowed": { "const": false },
+        "future_release_auto_upgrade_allowed": { "const": false },
+        "rebuild_allowed": { "const": false },
+        "artifact_mutation_allowed": { "const": false },
+        "binary_execution_allowed_during_binding_verification": { "const": false }
+      }
+    }
+  }
+}

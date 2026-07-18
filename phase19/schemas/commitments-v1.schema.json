@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-bench.invalid/phase19/commitments-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "holdout_id", "frozen_before_execution", "seed_sha256", "aggregate_corpus_sha256", "contract_merkle_root", "manifest_sha256", "provenance_sha256", "execution_contracts", "ruleset_sha256", "methodology_sha256", "balance", "overlap", "checksum_scope"],
+  "properties": {
+    "schema_version": { "const": "secure-bench-phase19-commitments-v1" },
+    "holdout_id": { "const": "secure-bench-phase19-multi-scanner-holdout-v1" },
+    "frozen_before_execution": { "const": true },
+    "seed_sha256": { "$ref": "#/$defs/sha256" },
+    "aggregate_corpus_sha256": { "$ref": "#/$defs/sha256" },
+    "contract_merkle_root": { "$ref": "#/$defs/sha256" },
+    "manifest_sha256": { "$ref": "#/$defs/sha256" },
+    "provenance_sha256": { "$ref": "#/$defs/sha256" },
+    "execution_contracts": { "type": "object", "minProperties": 3 },
+    "ruleset_sha256": { "$ref": "#/$defs/sha256" },
+    "methodology_sha256": { "$ref": "#/$defs/sha256" },
+    "balance": { "type": "object" },
+    "overlap": { "type": "object" },
+    "checksum_scope": { "const": "all generated holdout files plus frozen Phase 19 bindings, execution contracts, schemas, rules, methodology, and provenance; excludes SHA256SUMS itself" }
+  },
+  "$defs": { "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" } }
+}
