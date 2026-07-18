@@ -1,0 +1,46 @@
+{
+  "schema_version": "secure-bench-phase23-corrected-environment-v1",
+  "phase22_commit": "b8ef30bfcd9761644001b63ed9b9f717ebd09d93",
+  "scanner": {
+    "id": "semgrep-ce",
+    "version": "1.170.0",
+    "entrypoint_sha256": "0280e5c6cca8d8e4cb2c41858b06697b957daf23d718cac411999c4c515507e1"
+  },
+  "frozen_inputs": {
+    "ruleset": "phase19/rules/capability-normalized-v1.yml",
+    "ruleset_sha256": "06af4cf6d10da30ad585d57b781cf6aef734add03b90ea36c78e920c4c10a07c",
+    "adapter": "phase20/config/semgrep-normalized-adapter-v1.json",
+    "adapter_sha256": "53317a4e71b14548d618fd79430b74b8fc906edebbf7180cbea418df98b1afc3"
+  },
+  "resource_limits": {
+    "address_space_bytes": 4294967296,
+    "processes": 64,
+    "stack_soft_bytes": 8388608,
+    "stack_hard_bytes": 8388608,
+    "timeout_ms": 120000,
+    "max_output_bytes": 10485760
+  },
+  "isolation": {
+    "network_namespace": "unshared",
+    "pid_namespace": "unshared-with-fresh-procfs",
+    "root": "read-only",
+    "dev": "private-tmpfs-with-dev-null",
+    "temporary_paths": "private-tmpfs",
+    "credentials": "cleared-and-sensitive-host-paths-masked",
+    "fixture": "read-only-single-synthetic-or-phase24-case",
+    "ruleset": "read-only-single-file",
+    "output": "single-writable-evidence-bind"
+  },
+  "environment": [
+    "HOME=/tmp/home",
+    "LANG=C.UTF-8",
+    "LC_ALL=C.UTF-8",
+    "PATH=/usr/bin:/bin",
+    "SEMGREP_ENABLE_VERSION_CHECK=0",
+    "SEMGREP_SEND_METRICS=off",
+    "TZ=UTC",
+    "XDG_CACHE_HOME=/tmp/cache"
+  ],
+  "correction": "outer prlimit adds --stack=8388608; no other frozen behavior changes",
+  "qualification": "Phase 23 synthetic only; eligible for a separate future Phase 24 normalized recovery lane"
+}

@@ -47,6 +47,8 @@ jobs:
             manifest: phase21/Cargo.toml
           - workspace: phase22
             manifest: phase22/Cargo.toml
+          - workspace: phase23
+            manifest: phase23/Cargo.toml
     steps:
       - uses: actions/checkout@v5
       - name: Select immutable historical projection
@@ -71,5 +73,8 @@ jobs:
       - name: Verify Phase 22 post-open recovery evidence
         if: matrix.workspace == 'phase22'
         run: cargo run --offline --manifest-path phase22/Cargo.toml --bin independent-verify -- .
+      - name: Verify Phase 23 synthetic crash evidence
+        if: matrix.workspace == 'phase23'
+        run: cargo run --offline --locked --manifest-path phase23/Cargo.toml --bin independent-verify -- .
       - run: cargo audit --file "$(dirname '${{ matrix.manifest }}')/Cargo.lock" --deny warnings
       - run: cargo deny --manifest-path "${{ matrix.manifest }}" check
