@@ -1,0 +1,47 @@
+{
+  "schema_version": "secure-bench-phase29-preopen-corrections-v1",
+  "classification": "post-open recovery study pre-open corrections",
+  "corrections": [
+    {
+      "id": "phase29-build-staging-filesystem",
+      "stage": "before-recovery-marker",
+      "trigger": "isolated /tmp build staging stopped with disk quota exceeded before producing an artifact",
+      "change": "move only the isolated Cargo target staging directory to /home/danielcastrillon/Proyectos",
+      "unchanged": ["Phase 28 source", "Cargo.lock", "Rust toolchain", "offline mode", "release profile", "durable destination"],
+      "artifact_produced_by_failed_build": false,
+      "scanner_processes": 0,
+      "holdout_case_accesses": 0
+    },
+    {
+      "id": "phase29-native-determinism-case-scope",
+      "stage": "before-recovery-marker",
+      "trigger": "the first synthetic determinism check used a different case_scope and therefore produced a different stable finding ID",
+      "change": "repeat the exact synthetic raw with the same case_scope",
+      "unchanged": ["native helper bytes", "synthetic raw bytes", "adapter semantics", "Phase 28", "holdout"],
+      "prior_synthetic_native_processes": 6,
+      "scanner_processes": 0,
+      "holdout_case_accesses": 0
+    },
+    {
+      "id": "phase29-phase28-checksum-path-scope",
+      "stage": "before-recovery-marker",
+      "trigger": "the first preflight treated Phase 28 repository-relative SHA256SUMS paths as subdirectory-relative",
+      "change": "resolve Phase 28 checksum entries against the repository root while keeping durable cache manifests root-relative",
+      "unchanged": ["Phase 28 bytes", "Phase 28 SHA256SUMS", "evidence", "tools", "plan"],
+      "scanner_processes": 0,
+      "synthetic_processes": 0,
+      "holdout_case_accesses": 0
+    },
+    {
+      "id": "phase29-opengrep-post-manifest-receipt",
+      "stage": "before-recovery-marker",
+      "trigger": "the durable OpenGrep restoration receipt was created after its self-excluding SHA256SUMS inventory",
+      "change": "verify the administrative receipt separately by its frozen SHA-256 and exclude only that exact path from SHA256SUMS coverage comparison",
+      "receipt_sha256": "208142f73443ffc4e60af5ff5ea1d0320928c4527122f9ea6c906b6eb47ff6e6",
+      "unchanged": ["OpenGrep executable", "provenance", "SHA256SUMS", "ruleset", "adapter", "scanner plan"],
+      "scanner_processes": 0,
+      "synthetic_processes": 0,
+      "holdout_case_accesses": 0
+    }
+  ]
+}
