@@ -1,0 +1,3 @@
+# Phase 24 methodological limitations
+
+Phase 24 is post-open and additive. It cannot restore blind-holdout or one-shot validity. It preserves the 112 failed Semgrep observations from Phase 22 unchanged and does not reinterpret, replace, repair, or retry them. The paired comparison is restricted to OpenGrep capability-normalized Phase 22 and Semgrep capability-normalized Phase 24. Secure Engine and native evidence are excluded; no overall three-scanner winner is declared. Process failures are explicit, are not imputed, and make Phase 24 detection metrics and the normalized comparison unavailable unless all 112 attempts complete and independent recalculation succeeds.
