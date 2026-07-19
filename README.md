@@ -194,6 +194,7 @@ cargo run --offline --locked --manifest-path phase23/Cargo.toml \
 Verify the additive Phase 26 certification of the frozen Phase 25 evidence:
 
 ```bash
+cp .github/allowed_signers "$(git rev-parse --git-common-dir)/allowed_signers"
 python3 phase26/reproducer/independent_verify.py verify .
 ```
 
@@ -201,9 +202,14 @@ Verify the Phase 29 recovery evidence and Phase 30 exit-status certification wit
 
 ```bash
 python3 phase29/harness.py verify
-cargo test --offline --locked --manifest-path phase30/Cargo.toml
+cargo test --offline --locked --manifest-path phase30/Cargo.toml -- \
+  --skip frozen_schema_rejects_malformed_raw
 sha256sum --check phase30/SHA256SUMS
 ```
+
+The skipped Phase 30 test requires the separately preserved Secure Engine RC schema at its frozen
+absolute provenance path. Its exact expected hash remains recorded in Phase 30; the self-contained
+tests and exhaustive Phase 30 checksum inventory run in public CI.
 
 ```bash
 cargo fmt --all --check

@@ -71,6 +71,10 @@ jobs:
             manifest: phase30/Cargo.toml
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Install repository signature trust root
+        run: cp .github/allowed_signers "$(git rev-parse --git-common-dir)/allowed_signers"
       - name: Select immutable historical projection
         if: matrix.workspace == 'phase12' || matrix.workspace == 'phase13' || matrix.workspace == 'phase14'
         run: rm -rf diagnostics/phase-15
@@ -83,7 +87,14 @@ jobs:
           tool: cargo-audit,cargo-deny
       - run: cargo fmt --manifest-path "${{ matrix.manifest }}" --all --check
       - run: cargo clippy --manifest-path "${{ matrix.manifest }}" --workspace --all-targets --all-features -- -D warnings
-      - run: cargo test --manifest-path "${{ matrix.manifest }}" --workspace --all-features
+      - if: matrix.workspace != 'phase25' && matrix.workspace != 'phase30'
+        run: cargo test --manifest-path "${{ matrix.manifest }}" --workspace --all-features
+      - name: Test Phase 25 without its local-common-dir fixture
+        if: matrix.workspace == 'phase25'
+        run: cargo test --manifest-path phase25/Cargo.toml --workspace --all-features -- --skip normal_repository_uses_common_dir_allowed_signers
+      - name: Test Phase 30 without its external RC schema fixture
+        if: matrix.workspace == 'phase30'
+        run: cargo test --manifest-path phase30/Cargo.toml --workspace --all-features -- --skip frozen_schema_rejects_malformed_raw
       - name: Recompute Phase 20 evidence from raw reports
         if: matrix.workspace == 'phase20'
         run: cargo run --offline --manifest-path phase20/Cargo.toml --bin independent-verify -- .
