@@ -1,0 +1,30 @@
+[workspace]
+
+[package]
+name = "secure-bench-phase27-2-synthetic-conformance"
+description = "Synthetic scanner-free conformance for the original Phase 17 Cargo closure"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.96"
+license = "Apache-2.0"
+repository = "https://github.com/usesecure/secure-bench"
+publish = false
+
+[dependencies]
+secure-bench-opengrep-adapter = { path = "/home/danielcastrillon/Proyectos/secure-bench-tool-cache/phase17-workspace/241600628315db6d8a77e62bbaf6e61ba5c628f1/workspace/opengrep-adapter", version = "=0.3.0" }
+secure-bench-scanner-protocol = { path = "/home/danielcastrillon/Proyectos/secure-bench-tool-cache/phase17-workspace/241600628315db6d8a77e62bbaf6e61ba5c628f1/workspace/scanner-protocol", version = "=0.3.0" }
+serde_json = "1.0.150"
+
+[lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+unused_must_use = "deny"
+
+[lints.clippy]
+all = { level = "deny", priority = -1 }
+pedantic = { level = "deny", priority = -1 }
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+dbg_macro = "deny"
+todo = "deny"

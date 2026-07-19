@@ -1,0 +1,85 @@
+{
+  "schema_version": "secure-bench-phase27-2-adapter-protocol-closure-overlay-v1",
+  "overlay_version": "1.0.0",
+  "scope": {
+    "base_commit": "0f6fe9f06f1f88233e6d537b9c4e1d826575d0ee",
+    "target": "phase28-preflight-opengrep-cargo-closure-only",
+    "phase27_immutable": true,
+    "phase27_1_immutable": true,
+    "phase28_execution_authorized": false,
+    "holdout_access": "forbidden"
+  },
+  "precedence": {
+    "mode": "atomic-two-package-cargo-closure",
+    "priority": "after-phase27-1-for-opengrep-cargo-pair-only",
+    "replaces_jointly": [
+      "cargo.secure-bench-opengrep-adapter",
+      "cargo.secure-bench-scanner-protocol"
+    ],
+    "atomic_pair_required": true,
+    "mixed_workspace_or_version_forbidden": true,
+    "inherits_from_phase27_1": [
+      "scanner-identities",
+      "scanner-executables",
+      "rulesets",
+      "normalized-adapters",
+      "sandbox",
+      "environment",
+      "all-other-artifact-bindings"
+    ],
+    "phase27_1_overlay_path": "phase27-1/binding-overlay.json",
+    "phase27_1_overlay_sha256": "5b9c147142099f39242f70128bb70217d0c14f2d55890a86f089ae9a678185cf"
+  },
+  "closure": {
+    "source_commit": "241600628315db6d8a77e62bbaf6e61ba5c628f1",
+    "source_parent": "c42f686514177936a20a1d323f6a2d1b1c7d26c9",
+    "commit_tree": "0b5b8315d319ff8903e7611011eab38199326ec8",
+    "workspace_tree": "e2512d180118e6487a979ba03d1961c41d17825d",
+    "workspace_archive_sha256": "bcfb9f8cc7c71bc486aa9f7f789da946e722560c1e76e1ddfdd28d592e7bf243",
+    "materialized_path": "/home/danielcastrillon/Proyectos/secure-bench-phase17-workspace-241600628315db6d8a77e62bbaf6e61ba5c628f1/phase17",
+    "durable_path": "/home/danielcastrillon/Proyectos/secure-bench-tool-cache/phase17-workspace/241600628315db6d8a77e62bbaf6e61ba5c628f1/workspace",
+    "workspace_manifest": {
+      "path": "Cargo.toml",
+      "git_blob": "a0df5ec8ee3645fde87703c992c7c7edfaa041fb",
+      "sha256": "84cffd7bf1454aa7b6a755bd27ec9c3067a6902a1913b521efabd14121432e64"
+    },
+    "lock": {
+      "path": "Cargo.lock",
+      "git_blob": "2fb49ce1abc348d11c20d08b432bfb585efc8127",
+      "sha256": "4c826bbc6f77a3db0084257b383cb6892bc23a265234b08bc738e03bcb77ef36"
+    },
+    "packages": {
+      "secure-bench-opengrep-adapter": {
+        "cargo_version": "0.3.0",
+        "public_adapter_version": "1.0.0",
+        "workspace_path": "opengrep-adapter",
+        "tree": "d5ee03764e2d8c53a6b976a727ce660a386772ae",
+        "manifest_sha256": "70f7c274b47518a3cbce1dd66e381d9250cd18dda1f411254dda79c65208984b",
+        "lib_source_sha256": "81891e9dd2f84c4dbf2946450b194db51b64b9bcbaeee18093c736ddf54e5fa2",
+        "main_source_sha256": "d53c55d72f79bd74020d128be8673aba81f772db6965e553f8fa58f9fa8fe4e4"
+      },
+      "secure-bench-scanner-protocol": {
+        "cargo_version": "0.3.0",
+        "public_protocol_version": "1.0.0",
+        "workspace_path": "scanner-protocol",
+        "tree": "7fd40434d1226bbf4bdba6a042e2824856fa7590",
+        "manifest_sha256": "da5f89e0c223cb0cc328febb2920978b6a00cd9e87362c7d71dce52e01f3efe1",
+        "lib_source_sha256": "30ee34b335fbaf32fdbd1e09920e1656cafc6b5fed38ac60c7c99de2dd9d815f"
+      }
+    },
+    "dependency_edge": {
+      "from": "secure-bench-opengrep-adapter",
+      "to": "secure-bench-scanner-protocol",
+      "requirement": "=0.3.0",
+      "relative_path": "../scanner-protocol",
+      "same_workspace": true,
+      "external_or_registry_protocol_forbidden": true
+    }
+  },
+  "phase28_consumption": {
+    "instruction": "Resolve the OpenGrep adapter and scanner protocol atomically from the isolated Phase 17 workspace closure after Phase 27.1; never import either package through the repository-root 0.1.0 workspace context.",
+    "overlay_path": "phase27-2/binding-overlay.json",
+    "phase27_1_remains_authoritative_for_other_bindings": true,
+    "phase28_campaign_must_remain_unopened": true
+  }
+}
