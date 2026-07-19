@@ -1,0 +1,35 @@
+[workspace]
+
+[package]
+name = "secure-bench-semgrep-json-runner"
+description = "Minimal JSON process boundary for the frozen Phase 18 Semgrep adapter"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.96"
+license = "Apache-2.0"
+publish = false
+
+[dependencies]
+secure-bench-semgrep-adapter = { path = "../semgrep-adapter", version = "=0.4.0" }
+secure-bench-scanner-protocol = { path = "../../phase17/scanner-protocol", version = "=0.3.0" }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.150"
+
+[lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+unused_must_use = "deny"
+
+[lints.clippy]
+all = { level = "deny", priority = -1 }
+pedantic = { level = "deny", priority = -1 }
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+dbg_macro = "deny"
+todo = "deny"
+
+[profile.release]
+codegen-units = 1
+lto = "thin"
+strip = "symbols"

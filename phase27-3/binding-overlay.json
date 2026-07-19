@@ -1,0 +1,142 @@
+{
+  "schema_version": "secure-bench-phase27-3-dual-adapter-closure-overlay-v1",
+  "overlay_version": "1.0.0",
+  "scope": {
+    "base_commit": "467413eeb2a22017b5bc19f7f2052fdbc5d43d0d",
+    "target": "phase28-preflight-dual-adapter-json-boundary-only",
+    "phase27_immutable": true,
+    "phase27_1_immutable": true,
+    "phase27_2_immutable": true,
+    "phase28_execution_authorized": false,
+    "holdout_access": "forbidden"
+  },
+  "precedence": {
+    "mode": "separate-historical-closures-with-json-process-boundary",
+    "priority": "after-phase27-1-and-phase27-2-for-multi-adapter-cargo-composition",
+    "governs": [
+      "cargo.secure-bench-opengrep-adapter",
+      "cargo.secure-bench-semgrep-adapter",
+      "cargo.secure-bench-scanner-protocol-within-each-closure",
+      "runner.opengrep",
+      "runner.semgrep",
+      "interface.normalized-json"
+    ],
+    "phase27_1_contextualized_cargo_identities_superseded": true,
+    "phase27_2_status": "preserved-valid-opengrep-certification-superseded-for-multi-adapter-composition",
+    "separate_processes_required": true,
+    "shared_rust_types_between_workspaces_forbidden": true,
+    "phase27_1_overlay": {
+      "path": "phase27-1/binding-overlay.json",
+      "sha256": "5b9c147142099f39242f70128bb70217d0c14f2d55890a86f089ae9a678185cf"
+    },
+    "phase27_2_overlay": {
+      "path": "phase27-2/binding-overlay.json",
+      "sha256": "1a8792cb3b6736b2599fc74ab1352755c15d3e5a39fed008759b78a02e08dea2"
+    },
+    "inherits_exclusively_from_phase27_1": [
+      "scanner-identities",
+      "scanner-executables",
+      "rulesets",
+      "sandbox",
+      "environment",
+      "resource-limits",
+      "all-non-cargo-artifact-bindings"
+    ]
+  },
+  "closures": {
+    "opengrep": {
+      "source_commit": "241600628315db6d8a77e62bbaf6e61ba5c628f1",
+      "commit_tree": "0b5b8315d319ff8903e7611011eab38199326ec8",
+      "workspace_tree": "e2512d180118e6487a979ba03d1961c41d17825d",
+      "workspace_archive_sha256": "bcfb9f8cc7c71bc486aa9f7f789da946e722560c1e76e1ddfdd28d592e7bf243",
+      "tree_inventory_sha256": "0082f9d0cf1a00d02cc377f331a983e7d6feb6f5188d191d3171474f46b4bde0",
+      "durable_path": "/home/danielcastrillon/Proyectos/secure-bench-tool-cache/adapter-workspaces/opengrep-phase17",
+      "historical_lock_sha256": "4c826bbc6f77a3db0084257b383cb6892bc23a265234b08bc738e03bcb77ef36",
+      "adapter": {
+        "name": "secure-bench-opengrep-adapter",
+        "cargo_version": "0.3.0",
+        "tree": "d5ee03764e2d8c53a6b976a727ce660a386772ae",
+        "package_id": "path+file://{closure}/phase17/opengrep-adapter#secure-bench-opengrep-adapter@0.3.0",
+        "public_adapter_version": "1.0.0",
+        "raw_format": "opengrep-json-v1"
+      },
+      "protocol": {
+        "name": "secure-bench-scanner-protocol",
+        "cargo_version": "0.3.0",
+        "tree": "7fd40434d1226bbf4bdba6a042e2824856fa7590",
+        "package_id": "path+file://{closure}/phase17/scanner-protocol#secure-bench-scanner-protocol@0.3.0",
+        "public_protocol_version": "1.0.0"
+      },
+      "runner": {
+        "name": "secure-bench-opengrep-json-runner",
+        "cargo_version": "0.1.0",
+        "source_path": "phase27-3/runners/opengrep",
+        "source_sha256": "3e08f5b17dc84c5acd8dc4275fbf176b3c5c0d0a597b4314440494b8b579995e",
+        "lock_sha256": "4510745e806917c3c6ed93f7bde315b627b8181684424c31375d0efb5090cba9",
+        "binary_path": "/home/danielcastrillon/Proyectos/secure-bench-tool-cache/adapter-workspaces/opengrep-phase17/bin/secure-bench-opengrep-json-runner",
+        "binary_sha256": "5af3904e995ee59987553648d92d83ecd9ad09e0362869bec843ee830ddb049b"
+      }
+    },
+    "semgrep": {
+      "source_commit": "aee2c7094983cfb8bdc16cf59b1962add82ca1db",
+      "commit_tree": "23faa0979e7bf641612a768d9952948bc6df2264",
+      "phase17_workspace_tree": "e2512d180118e6487a979ba03d1961c41d17825d",
+      "phase18_workspace_tree": "d2d32cc9147666c5447c225aa9bfe8ba5b0ca8bc",
+      "workspace_archive_sha256": "543d09af63af8933a6ea0499df8b35319cb88e8e391b5ae69f60639796ab026a",
+      "tree_inventory_sha256": "f13ec1be82ea2c1f7de771575bcceca35dabed07d51db470813310bb414f59fe",
+      "durable_path": "/home/danielcastrillon/Proyectos/secure-bench-tool-cache/adapter-workspaces/semgrep-phase18",
+      "phase17_lock_sha256": "4c826bbc6f77a3db0084257b383cb6892bc23a265234b08bc738e03bcb77ef36",
+      "phase18_lock_sha256": "b67e4a8ac758d5c40d84bcce136cee0f8af932d65a3b8fd53a2155f7ce1e9d86",
+      "adapter": {
+        "name": "secure-bench-semgrep-adapter",
+        "cargo_version": "0.4.0",
+        "tree": "eb7c38b4f59f2c71426e99decb418d63dea5ab8e",
+        "package_id": "path+file://{closure}/phase18/semgrep-adapter#secure-bench-semgrep-adapter@0.4.0",
+        "public_adapter_version": "1.0.0",
+        "raw_format": "semgrep-json-v1"
+      },
+      "protocol": {
+        "name": "secure-bench-scanner-protocol",
+        "cargo_version": "0.3.0",
+        "tree": "7fd40434d1226bbf4bdba6a042e2824856fa7590",
+        "package_id": "path+file://{closure}/phase17/scanner-protocol#secure-bench-scanner-protocol@0.3.0",
+        "public_protocol_version": "1.0.0"
+      },
+      "runner": {
+        "name": "secure-bench-semgrep-json-runner",
+        "cargo_version": "0.1.0",
+        "source_path": "phase27-3/runners/semgrep",
+        "source_sha256": "1a7611f11482a76e0f75a78d9b7c81b09810fd374f2c8cde7b625f34551efdda",
+        "lock_sha256": "3227b2efff7e88ef1b1401ba164dc5d51ee75531a75c83bbc7a32b135c3f5cf3",
+        "binary_path": "/home/danielcastrillon/Proyectos/secure-bench-tool-cache/adapter-workspaces/semgrep-phase18/bin/secure-bench-semgrep-json-runner",
+        "binary_sha256": "be600adf907376a7d3bb70a2373b458ce4688ff42ba01ee9b0cd6fff639c91bc"
+      }
+    }
+  },
+  "json_interface": {
+    "request_schema": {
+      "path": "phase27-3/schemas/runner-request-v1.schema.json",
+      "sha256": "a75fa1edba1cce5bfaeb877a97c12ef5f40dc9e873a55d84edf50b205227bd60"
+    },
+    "normalized_schema": {
+      "id": "secure-bench-adapted-report-v1",
+      "path": "phase27-3/schemas/adapted-report-v1.schema.json",
+      "sha256": "9a8cc038d12c8cdf13a05537a45ae773831290549576df5f58c28f10fcb5e91b"
+    },
+    "error_schema": {
+      "path": "phase27-3/schemas/runner-error-v1.schema.json",
+      "sha256": "fa93f04624015b4962494092643537a89695e40c47c078aa62e56e1c3340978d"
+    },
+    "success_stdout": "historical-adapter-public-projection-only",
+    "adapter_errors": "verbatim-message-in-structured-stderr",
+    "raw_formats_are_not_interchangeable": true,
+    "rust_type_exchange_between_runners": false
+  },
+  "phase28_consumption": {
+    "instruction": "Invoke each certified runner as a separate process after the corresponding scanner produces raw JSON; never combine the historical crates in one Cargo lock or process.",
+    "runner_failure_belongs_to_current_attempt": true,
+    "runner_failure_authorizes_scanner_retry": false,
+    "campaign_attempts": 336,
+    "execution_authorized_by_this_overlay": false
+  }
+}

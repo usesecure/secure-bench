@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure.dev/schemas/secure-bench-adapter-runner-error-v1.json",
+  "title": "Secure Bench adapter runner error v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "message"],
+  "properties": {
+    "schema_version": {"const": "secure-bench-adapter-runner-error-v1"},
+    "kind": {"enum": ["input", "adapter", "output"]},
+    "message": {"type": "string", "minLength": 1}
+  }
+}

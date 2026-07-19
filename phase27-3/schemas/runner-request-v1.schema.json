@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure.dev/schemas/secure-bench-adapter-runner-request-v1.json",
+  "title": "Secure Bench adapter runner request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "raw_format", "case_scope", "fixture_root", "manifest", "raw_json"],
+  "properties": {
+    "schema_version": {"const": "secure-bench-adapter-runner-request-v1"},
+    "raw_format": {"enum": ["opengrep-json-v1", "semgrep-json-v1"]},
+    "case_scope": {"type": "string", "minLength": 1},
+    "fixture_root": {"type": "string", "minLength": 1},
+    "manifest": {"type": "object"},
+    "raw_json": {"type": "string"}
+  }
+}
