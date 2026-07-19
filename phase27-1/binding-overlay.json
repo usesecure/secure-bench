@@ -1,0 +1,216 @@
+{
+  "schema_version": "secure-bench-phase27-1-scanner-binding-overlay-v1",
+  "overlay_version": "1.0.0",
+  "scope": {
+    "base_commit": "540502c8bf1f139c7d54cb5f6e7c29ce97ffb934",
+    "target": "phase28-preflight-scanner-identities-only",
+    "permitted_override": [
+      "scanners.secure-engine.identity",
+      "scanners.opengrep.identity",
+      "scanners.semgrep-ce.identity"
+    ],
+    "phase27_immutable": true,
+    "phase28_execution_authorized": false,
+    "holdout_access": "forbidden"
+  },
+  "precedence": {
+    "mode": "conditional-identity-overlay",
+    "applies_when_base_status": "verify-at-phase28-preflight",
+    "priority": "after-phase27-plan-before-phase28-preflight",
+    "replaces_only": [
+      "scanner-path",
+      "scanner-version",
+      "scanner-artifact-hashes",
+      "scanner-adapter-and-ruleset-hashes",
+      "scanner-environment-binding"
+    ],
+    "forbidden_effects": [
+      "change-lanes",
+      "change-methodology",
+      "change-cases",
+      "change-scoring",
+      "change-attempt-plan",
+      "authorize-execution"
+    ]
+  },
+  "phase28_consumption": {
+    "overlay_path": "phase27-1/binding-overlay.json",
+    "instruction": "Load this overlay after the frozen Phase 27 plan and before Phase 28 preflight; apply it only to scanner identities whose base status is verify-at-phase28-preflight; reject any mismatch fail-closed.",
+    "phase27_changes_required": false,
+    "phase28_campaign_must_remain_unopened": true
+  },
+  "scanners": {
+    "secure-engine": {
+      "id": "secure-engine",
+      "version": "0.1.7",
+      "release_candidate": "rc1",
+      "lane": "native",
+      "release": {
+        "commit": "1e3d300cb7092097f21be164b6c403b71f2b2520",
+        "tree": "8f08ac800a43afcd39eb70cecd29c8643a24157b",
+        "provenance_path": "/home/danielcastrillon/Proyectos/secure-engine-rc/0.1.7-rc1/provenance.json",
+        "provenance_sha256": "80c543e8821a2f3ebc692f3fd325c35efcafcd34b6b4dbf3c758ff19dedd6826"
+      },
+      "rpm": {
+        "path": "/home/danielcastrillon/Proyectos/secure-engine-rc/0.1.7-rc1/rpm/secure-engine-0.1.7-1.fc44.x86_64.rpm",
+        "sha256": "8f26b69981c7ba88081496b0c1dd1fce9da62c03a38927e07b3d64541cf45f75",
+        "size_bytes": 9010509
+      },
+      "executable": {
+        "path": "/home/danielcastrillon/Proyectos/secure-engine-rc/0.1.7-rc1/extracted/secure",
+        "sha256": "5feca58fda54e4f9af0bf3846d04a98825d7315e64cbf80268a2395cf07ff2e6",
+        "size_bytes": 13736440,
+        "relationship": "rpm-extracted-payload"
+      },
+      "adapter": {
+        "id": "secure-bench-authoritative-evidence-v2",
+        "version": "2.0.0",
+        "path": "phase16/policies/adapter-precedence-v2.json",
+        "sha256": "18b0ce241fefdd81619a547772a6871128b5fe020341158b3d62a05563236413"
+      },
+      "ruleset": {
+        "kind": "built-in",
+        "path": null,
+        "sha256": null
+      },
+      "policy": {
+        "network_allowed": false,
+        "ai_enabled": false,
+        "credentials_allowed": false,
+        "binary_execution_during_certification": false
+      }
+    },
+    "opengrep": {
+      "id": "opengrep",
+      "version": "1.22.0",
+      "lane": "capability_normalized",
+      "executable": {
+        "active_path": "/tmp/secure-bench-tools/opengrep/1.22.0/opengrep_manylinux_x86",
+        "durable_path": "/home/danielcastrillon/Proyectos/secure-bench-tool-cache/opengrep/1.22.0/opengrep_manylinux_x86",
+        "sha256": "45bcd58440e397ed52c50e953ccf5948909ea77087c9186fc7d277216f62e319",
+        "size_bytes": 40750411
+      },
+      "provenance": {
+        "repository_path": "phase17/provenance/opengrep-v1.22.0.json",
+        "durable_path": "/home/danielcastrillon/Proyectos/secure-bench-tool-cache/opengrep/1.22.0/provenance.json",
+        "sha256": "245d3796801741304fcedc9df6c98cd43886c1da8477c83427ca6c47ab09a58e"
+      },
+      "sigstore": {
+        "status": "preserved-not-reverified-this-run",
+        "historical_verification": "verified-cosign-phase17",
+        "signature_sha256": "d44b03294ff6931458cfeac77b44e79fd41c2096b87c597884468d923c864dbd",
+        "certificate_sha256": "bd823447c6413716691a1f568b793aa1f561aa30829309159cc09cf3190ce4b5",
+        "issuer": "https://token.actions.githubusercontent.com",
+        "identity": "https://github.com/opengrep/opengrep/.github/workflows/rolling-release.yml@refs/heads/main",
+        "source_revision": "f458d7f0d52cc58eae1ca3cf3d5caf101e637519"
+      },
+      "ruleset": {
+        "path": "phase19/rules/capability-normalized-v1.yml",
+        "sha256": "06af4cf6d10da30ad585d57b781cf6aef734add03b90ea36c78e920c4c10a07c"
+      },
+      "adapter": {
+        "id": "secure-bench-opengrep-json",
+        "version": "1.0.0",
+        "path": "phase20/config/opengrep-normalized-adapter-v1.json",
+        "sha256": "6a922a0ecac31b55f1591782df548822caa62064aaf7f8b9c1b0addc07cd0998"
+      },
+      "sandbox": {
+        "bwrap_path": "/usr/bin/bwrap",
+        "bwrap_sha256": "139bf12775025adf5c8523d119c5ad2950281335573708fd839c60181a3886dc",
+        "network_namespace": "unshared-loopback-only-no-default-route",
+        "pid_namespace": "unshared-with-fresh-procfs",
+        "root_filesystem": "read-only-with-sensitive-path-masks",
+        "device_policy": "private-tmpfs-with-dev-null-only",
+        "working_directory": "/tmp/fixture",
+        "environment": [
+          "HOME=/tmp/home",
+          "LANG=C.UTF-8",
+          "LC_ALL=C.UTF-8",
+          "PATH=/usr/bin:/bin",
+          "SEMGREP_ENABLE_VERSION_CHECK=0",
+          "SEMGREP_SEND_METRICS=off",
+          "TZ=UTC",
+          "XDG_CACHE_HOME=/tmp/cache"
+        ],
+        "prlimit": {
+          "address_space_bytes": 4294967296,
+          "processes": 64
+        },
+        "timeout_ms": 120000,
+        "max_output_bytes": 10485760
+      }
+    },
+    "semgrep-ce": {
+      "id": "semgrep-ce",
+      "version": "1.170.0",
+      "lane": "capability_normalized",
+      "active_root": "/tmp/secure-bench-tools/semgrep/1.170.0",
+      "durable_root": "/home/danielcastrillon/Proyectos/secure-bench-tool-cache/semgrep/1.170.0",
+      "runtime": {
+        "python_version": "3.14.6",
+        "python_path": "/usr/bin/python3.14",
+        "python_sha256": "7af874aca05879e1823cd820913b42fb8d8b994738a05ec39ce4256d85b03861"
+      },
+      "artifacts": {
+        "wheel_path": "/tmp/secure-bench-tools/semgrep/1.170.0/wheelhouse/semgrep-1.170.0-cp310.cp311.cp312.cp313.cp314.py310.py311.py312.py313.py314-none-manylinux_2_34_x86_64.whl",
+        "wheel_sha256": "09a7e8eeff5e2549161124957184f3566f484370aa6127e425897cef725eb99b",
+        "dependency_lock_path": "/tmp/secure-bench-tools/semgrep/1.170.0/dependency-lock.json",
+        "dependency_lock_sha256": "50bc99977b0205235301b2508c5cc84dbc4a421f593f18d75e19fa19d7969e39",
+        "wheel_count": 66,
+        "wheel_closure_sha256": "5371b438dc6e3c5529794b21c668057164f52fa1375e0e91ee6c8f241fb74181",
+        "requirements_lock_path": "/tmp/secure-bench-tools/semgrep/1.170.0/requirements.lock",
+        "requirements_lock_sha256": "bae00f126f98e84b32b92269d42f6567abab789307383094009030d7f13caf50",
+        "installed_inventory_path": "/tmp/secure-bench-tools/semgrep/1.170.0/installed-distributions.json",
+        "installed_inventory_sha256": "703922233fb0e415b50e4b88ba9622dc6ea3d207a5f4fcb64b6b980da35056df",
+        "entrypoint_path": "/tmp/secure-bench-tools/semgrep/1.170.0/venv/bin/semgrep",
+        "entrypoint_sha256": "0280e5c6cca8d8e4cb2c41858b06697b957daf23d718cac411999c4c515507e1",
+        "core_runner_path": "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib/python3.14/site-packages/semgrep/core_runner.py",
+        "core_runner_sha256": "76f298b49667228a6157504ab8b7b56f87033693ed0aab279faa465bb895058a",
+        "semgrep_core_path": "/tmp/secure-bench-tools/semgrep/1.170.0/venv/lib/python3.14/site-packages/semgrep/bin/semgrep-core",
+        "semgrep_core_sha256": "33e39c192b7271e3a9f64167ad61303aa49b556efda683cf94aea9db90ec9fc3",
+        "durable_venv_archive_path": "/home/danielcastrillon/Proyectos/secure-bench-tool-cache/semgrep/1.170.0/venv.tar.zst",
+        "durable_venv_archive_sha256": "9c4ebccb8efd7e2d4e95fa684a9f686f53cd5e27c1c86401036b135695c14483"
+      },
+      "ruleset": {
+        "path": "phase19/rules/capability-normalized-v1.yml",
+        "sha256": "06af4cf6d10da30ad585d57b781cf6aef734add03b90ea36c78e920c4c10a07c"
+      },
+      "adapter": {
+        "id": "secure-bench-semgrep-json",
+        "version": "1.0.0",
+        "path": "phase20/config/semgrep-normalized-adapter-v1.json",
+        "sha256": "53317a4e71b14548d618fd79430b74b8fc906edebbf7180cbea418df98b1afc3"
+      },
+      "sandbox": {
+        "contract_path": "phase23/config/corrected-environment-contract-v1.json",
+        "contract_sha256": "df737de168c1c78855ee589cbe105f9123601be3571a765dfcc21cddbf4cbe5a",
+        "bwrap_path": "/usr/bin/bwrap",
+        "bwrap_sha256": "139bf12775025adf5c8523d119c5ad2950281335573708fd839c60181a3886dc",
+        "network_namespace": "unshared",
+        "pid_namespace": "unshared-with-fresh-procfs",
+        "root_filesystem": "read-only",
+        "device_policy": "private-tmpfs-with-dev-null-only",
+        "working_directory": "/tmp/fixture",
+        "environment": [
+          "HOME=/tmp/home",
+          "LANG=C.UTF-8",
+          "LC_ALL=C.UTF-8",
+          "PATH=/usr/bin:/bin",
+          "SEMGREP_ENABLE_VERSION_CHECK=0",
+          "SEMGREP_SEND_METRICS=off",
+          "TZ=UTC",
+          "XDG_CACHE_HOME=/tmp/cache"
+        ],
+        "prlimit": {
+          "path": "/usr/bin/prlimit",
+          "address_space_bytes": 4294967296,
+          "processes": 64,
+          "stack_soft_bytes": 8388608,
+          "stack_hard_bytes": 8388608
+        },
+        "timeout_ms": 120000,
+        "max_output_bytes": 10485760
+      }
+    }
+  }
+}
