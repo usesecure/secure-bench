@@ -10,7 +10,21 @@ Reproducible, evidence-aware benchmarks for static security analyzers.
 
 Secure Bench is an independent, local-first Rust benchmark harness. Phase 0 established versioned contracts, scoring-blind adapters, deterministic matching, separate metrics, provenance, and explicit failure accounting using committed mock reports. Phase 1 adds an original JavaScript and TypeScript corpus and a direct black-box runner for an explicitly supplied Secure Engine binary. Phase 1.5 freezes a public neutral taxonomy for prospective reports without changing the historical Phase 1 result. Phase 2 applies that contract prospectively to two isolated, retained Secure Engine 0.1.1 runs while preserving every historical artifact. Phase 3 freezes a separate 56-case holdout examination. Phase 4 provides its one-shot, network-isolated Secure Engine 0.1.2 evaluation. Phase 5 independently freezes a new 112-case orthogonal holdout and tool-neutral evidence contract v2 without executing a scanner. Phase 6 retires the executed Phase 3 corpus and publishes an additive diagnostic package without changing the official Phase 4 result. Phase 7 records the one-shot, per-process network-isolated Secure Engine 0.1.3 evaluation of the frozen Phase 5 holdout, including every nonzero exit and retained report without reruns or result repair. Phase 8 corrects the exit-code adjudication protocol retrospectively from those immutable reports, preserves the original result, and introduces a prospective tool-neutral process-status policy without another scanner execution. Phase 9 freezes a new 224-case counterbalanced orthogonal holdout v3. Phase 10 records its one-shot Secure Engine 0.1.4 evaluation. Phase 11 retires and discloses that corpus, reconstructs an exhaustive offline postmortem from retained evidence, and leaves the official Phase 10 score unchanged. Phase 12 repairs prospective authoring and adapter methodology, and Phase 12.1 establishes stable content-addressed verification for the frozen Phase 0–11 boundary. Phase 13 freezes a new, intentionally unexecuted 112-case holdout v4 without creating a scanner result.
 
+Phases 14–26 preserve and extend that history with execution, failure analysis, sandbox remediation, normalized OpenGrep and Semgrep recovery studies, and independent evidence certification. Phases 27–30 add a new 112-case multi-scanner corpus, frozen scanner bindings, one terminal-failed campaign, a post-open recovery study, and a final scanner-free certification of Secure Engine exit-status semantics. Every exception remains visible in the committed evidence; no failed or unavailable observation is converted to zero or silently rerun.
+
 This remains an intentionally neutral foundation. It is not a production benchmark, scanner comparison, public leaderboard, or basis for claiming that Secure Engine—or any other analyzer—is superior. A Phase 1 baseline measures one explicitly identified binary on a small synthetic corpus and must be reported with its raw artifacts, denominators, environment, and limitations.
+
+## Latest certified study
+
+Phase 30 certifies all 336 unique scanner/case combinations derived from Phases 28 and 29, with zero scanner retries. Phase 28 stopped after one consumed scanner attempt because a sealed helper was missing; Phase 29 recovered that retained raw report and executed the remaining 335 combinations once. The result is therefore a **post-open recovery study**, not a pristine one-shot independent comparison.
+
+| Scanner / lane | TP | FP | TN | FN | Precision | Recall | F1 | Balanced accuracy |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Secure Engine 0.1.7 RC1 / native | 23 | 9 | 47 | 33 | 0.718750 | 0.410714 | 0.522727 | 0.625000 |
+| OpenGrep 1.22.0 / capability-normalized | 40 | 32 | 24 | 16 | 0.555556 | 0.714286 | 0.625000 | 0.571429 |
+| Semgrep CE 1.170.0 / capability-normalized | 40 | 32 | 24 | 16 | 0.555556 | 0.714286 | 0.625000 | 0.571429 |
+
+Native and capability-normalized lanes are deliberately separate. OpenGrep and Semgrep tie exactly within the normalized lane; no cross-lane or overall winner is declared. See the [Phase 29 recovery report](phase29/report.md), [Phase 30 certification report](phase30/report.md), [machine-readable comparison](phase30/comparison.json), and [limitations](phase30/limitations.md).
 
 The committed Phase 1 Secure Engine Phase 6 bundle is one deterministic black-box measurement with raw public reports and matching decisions. Its exact-match result is preserved without post-execution vocabulary aliases or tool-specific scoring exceptions. The separate Phase 2 bundle records the prospective evaluation, including raw repeat-run stability and isolation provenance. See [Phase 1 baseline reporting](docs/phase-1-baseline.md) and [Phase 2 prospective evaluation](docs/phase-2-evaluation.md).
 
@@ -177,6 +191,20 @@ cargo run --offline --locked --manifest-path phase23/Cargo.toml \
   --bin independent-verify -- .
 ```
 
+Verify the additive Phase 26 certification of the frozen Phase 25 evidence:
+
+```bash
+python3 phase26/reproducer/independent_verify.py verify .
+```
+
+Verify the Phase 29 recovery evidence and Phase 30 exit-status certification without starting a scanner:
+
+```bash
+python3 phase29/harness.py verify
+cargo test --offline --locked --manifest-path phase30/Cargo.toml
+sha256sum --check phase30/SHA256SUMS
+```
+
 ```bash
 cargo fmt --all --check
 cargo clippy --workspace --all-targets --all-features -- -D warnings
@@ -185,7 +213,7 @@ cargo audit --deny warnings
 cargo deny check
 ```
 
-See [Architecture](docs/architecture.md), [Methodology](docs/methodology.md), [Contracts](docs/contracts.md), [Frozen taxonomy](docs/neutral-taxonomy-v1.md), [Corpus provenance](docs/phase-1-corpus.md), [Runner boundaries](docs/phase-1-runner.md), [Phase 2 evaluation](docs/phase-2-evaluation.md), [Phase 3 holdout](docs/phase-3-holdout.md), [Phase 4 evaluation](docs/phase-4-evaluation.md), [Phase 5 orthogonal holdout](docs/phase-5-orthogonal-holdout.md), [Phase 6 postmortem](docs/phase-6-postmortem.md), [Phase 7 evaluation](docs/phase-7-evaluation.md), [Phase 8 adjudication](docs/phase-8-exit-code-adjudication.md), [Phase 9 holdout](docs/phase-9-holdout-v3.md), [Phase 10 evaluation](docs/phase-10-evaluation.md), [Phase 11 postmortem](docs/phase-11-postmortem.md), [Phase 12 methodology](docs/phase-12-methodology.md), [Phase 12.1 historical verification](docs/phase-12-1-historical-verification.md), [Phase 13 holdout v4](docs/phase-13-holdout-v4.md), [Phase 21 sandbox remediation](docs/phase-21-sandbox-remediation.md), [Phase 22 post-open recovery](docs/phase-22-post-open-normalized-recovery.md), [Phase 23 Semgrep crash remediation](docs/phase-23-semgrep-crash-remediation.md), and [Verification](docs/verification.md).
+See [Architecture](docs/architecture.md), [Methodology](docs/methodology.md), [Contracts](docs/contracts.md), [Frozen taxonomy](docs/neutral-taxonomy-v1.md), [Corpus provenance](docs/phase-1-corpus.md), [Runner boundaries](docs/phase-1-runner.md), [Phase 2 evaluation](docs/phase-2-evaluation.md), [Phase 3 holdout](docs/phase-3-holdout.md), [Phase 4 evaluation](docs/phase-4-evaluation.md), [Phase 5 orthogonal holdout](docs/phase-5-orthogonal-holdout.md), [Phase 6 postmortem](docs/phase-6-postmortem.md), [Phase 7 evaluation](docs/phase-7-evaluation.md), [Phase 8 adjudication](docs/phase-8-exit-code-adjudication.md), [Phase 9 holdout](docs/phase-9-holdout-v3.md), [Phase 10 evaluation](docs/phase-10-evaluation.md), [Phase 11 postmortem](docs/phase-11-postmortem.md), [Phase 12 methodology](docs/phase-12-methodology.md), [Phase 12.1 historical verification](docs/phase-12-1-historical-verification.md), [Phase 13 holdout v4](docs/phase-13-holdout-v4.md), [Phase 21 sandbox remediation](docs/phase-21-sandbox-remediation.md), [Phase 22 post-open recovery](docs/phase-22-post-open-normalized-recovery.md), [Phase 23 Semgrep crash remediation](docs/phase-23-semgrep-crash-remediation.md), [Phase 26 certification](phase26/output/report.md), [Phase 29 recovery](phase29/report.md), [Phase 30 certification](phase30/report.md), and [Verification](docs/verification.md).
 
 ## License
 

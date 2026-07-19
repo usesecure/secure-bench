@@ -53,6 +53,22 @@ jobs:
             manifest: phase24/Cargo.toml
           - workspace: phase25
             manifest: phase25/Cargo.toml
+          - workspace: phase26
+            manifest: phase26/Cargo.toml
+          - workspace: phase27-parser
+            manifest: phase27/syntax-parser/Cargo.toml
+          - workspace: phase27-1
+            manifest: phase27-1/Cargo.toml
+          - workspace: phase27-2
+            manifest: phase27-2/Cargo.toml
+          - workspace: phase27-3
+            manifest: phase27-3/Cargo.toml
+          - workspace: phase28
+            manifest: phase28/Cargo.toml
+          - workspace: phase29
+            manifest: phase28/Cargo.toml
+          - workspace: phase30
+            manifest: phase30/Cargo.toml
     steps:
       - uses: actions/checkout@v5
       - name: Select immutable historical projection
@@ -74,21 +90,16 @@ jobs:
       - name: Verify Phase 21 synthetic qualification evidence
         if: matrix.workspace == 'phase21'
         run: cargo run --offline --manifest-path phase21/Cargo.toml --bin independent-verify -- .
-      - name: Verify Phase 22 post-open recovery evidence
-        if: matrix.workspace == 'phase22'
-        run: cargo run --offline --manifest-path phase22/Cargo.toml --bin independent-verify -- .
-      - name: Verify Phase 23 synthetic crash evidence
-        if: matrix.workspace == 'phase23'
-        run: cargo run --offline --locked --manifest-path phase23/Cargo.toml --bin independent-verify -- .
-      - name: Verify Phase 24 Semgrep recovery evidence
-        if: matrix.workspace == 'phase24'
+      - name: Verify Phase 26 successor certification
+        if: matrix.workspace == 'phase26'
         run: |
-          cargo run --offline --locked --manifest-path phase24/Cargo.toml -- verify .
-          /usr/bin/python3 phase24/reproducer/independent_verify.py .
-      - name: Verify Phase 25 final Semgrep recovery evidence
-        if: matrix.workspace == 'phase25'
-        run: |
-          cargo run --offline --locked --manifest-path phase25/Cargo.toml -- verify .
-          PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 phase25/reproducer/independent_verify.py .
+          python3 phase26/reproducer/independent_verify.py verify .
+          python3 -m unittest phase26/reproducer/test_independent_verify.py
+      - name: Verify Phase 29 post-open recovery evidence
+        if: matrix.workspace == 'phase29'
+        run: python3 phase29/harness.py verify
+      - name: Verify Phase 30 exit-status certification
+        if: matrix.workspace == 'phase30'
+        run: sha256sum --check phase30/SHA256SUMS
       - run: cargo audit --file "$(dirname '${{ matrix.manifest }}')/Cargo.lock" --deny warnings
       - run: cargo deny --manifest-path "${{ matrix.manifest }}" check
