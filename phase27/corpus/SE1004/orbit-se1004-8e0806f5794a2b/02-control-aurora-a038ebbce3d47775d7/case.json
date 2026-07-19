@@ -1,0 +1,58 @@
+{
+  "adversarial_variant": "non-dominating-guards",
+  "case_id": "aurora-a038ebbce3d47775d7",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": {
+      "barrier": {
+        "effect": "constrains-to-policy",
+        "end_column": 64,
+        "end_line": 12,
+        "file": "entry.js",
+        "role": "barrier",
+        "start_column": 44,
+        "start_line": 12
+      },
+      "sink": {
+        "effect": "preserves-influence",
+        "end_column": 15,
+        "end_line": 13,
+        "file": "entry.js",
+        "role": "sink",
+        "sink_kind": "outbound-request",
+        "source_kind": null,
+        "start_column": 3,
+        "start_line": 13
+      },
+      "status": "effective-barrier-dominates-sink"
+    },
+    "expected_finding": null,
+    "expected_outcome": "control",
+    "taxonomy": {
+      "category_id": "secure-bench.category.outbound-request-boundary",
+      "invariant_id": "secure-bench.invariant.outbound-destination-policy",
+      "primary_cwe": "CWE-918",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "af4c48fdfd1915d88d229cb4233f6cafdff222fa314ea06d85882c314de39881",
+  "family_id": "SE1004",
+  "fixture_ticket": "ticket-29a77544ceffac9e",
+  "framework": "express",
+  "label": "control",
+  "normalized_fingerprint": "d704cc121a38aff2fba8fa95c44f6cc921a3d918b868b18eabf50f6a2e4e9532",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1004-8e0806f5794a2b",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 753,
+      "path": "entry.js",
+      "sha256": "34c8a9b51bafd9d99765417e9236191d1f60b6cbddd503433866b0d85284a1e6"
+    }
+  ],
+  "source_format": "javascript",
+  "topology": "control-flow-sensitive"
+}

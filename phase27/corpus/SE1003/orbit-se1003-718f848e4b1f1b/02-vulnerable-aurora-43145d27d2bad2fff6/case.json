@@ -1,0 +1,72 @@
+{
+  "adversarial_variant": "destructuring",
+  "case_id": "aurora-43145d27d2bad2fff6",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 8,
+          "file": "entry.tsx",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "http-query-value",
+          "start_column": 3,
+          "start_line": 8
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 18,
+          "end_line": 5,
+          "file": "policy.tsx",
+          "role": "sink",
+          "sink_kind": "filesystem-read",
+          "source_kind": null,
+          "start_column": 3,
+          "start_line": 5
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.filesystem-boundary",
+      "invariant_id": "secure-bench.invariant.filesystem-path-confinement",
+      "primary_cwe": "CWE-22",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "3f45e9d10e76ecb5ce3d7d05bec3191a20443002f826f7dbdd51641387038545",
+  "family_id": "SE1003",
+  "fixture_ticket": "ticket-fe3c8da6f60963c5",
+  "framework": "express",
+  "label": "vulnerable",
+  "normalized_fingerprint": "78f6e7e5f84b678e8e83d56ed891d3e3f74400924f519bdc4d86f620acae4fcf",
+  "orientation": "control-first",
+  "pair_id": "orbit-se1003-718f848e4b1f1b",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 649,
+      "path": "entry.tsx",
+      "sha256": "01480834b8d3668f2061df179648d0ecca54095a4f8c05c8b4e00d2b403430bb"
+    },
+    {
+      "bytes": 203,
+      "path": "policy.tsx",
+      "sha256": "f6222e4e491123acf6881c67d9876f9ca852056dbc104e70fcd5406e9c287d30"
+    }
+  ],
+  "source_format": "tsx",
+  "topology": "inter-file-aliased"
+}

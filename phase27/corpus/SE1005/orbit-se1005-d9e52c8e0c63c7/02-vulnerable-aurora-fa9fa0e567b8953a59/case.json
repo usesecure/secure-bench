@@ -1,0 +1,67 @@
+{
+  "adversarial_variant": "ambiguous-helpers",
+  "case_id": "aurora-fa9fa0e567b8953a59",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 6,
+          "file": "entry.tsx",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "form-data-value",
+          "start_column": 3,
+          "start_line": 6
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 28,
+          "end_line": 13,
+          "file": "entry.tsx",
+          "role": "sink",
+          "sink_kind": "redirect-response",
+          "source_kind": null,
+          "start_column": 10,
+          "start_line": 13
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.redirect-boundary",
+      "invariant_id": "secure-bench.invariant.redirect-destination-policy",
+      "primary_cwe": "CWE-601",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "1b9ca4512f961ba1c5c150bdbe58790c8e9cf949cee3a78bf1c179694c614c6d",
+  "family_id": "SE1005",
+  "fixture_ticket": "ticket-208f16f389efe81e",
+  "framework": "server-actions",
+  "label": "vulnerable",
+  "normalized_fingerprint": "23af39b4a7a0bad56e698aaf361cf6c6755648c2df1cb2773c6e4d6e6407abd0",
+  "orientation": "control-first",
+  "pair_id": "orbit-se1005-d9e52c8e0c63c7",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 617,
+      "path": "entry.tsx",
+      "sha256": "75708a73025764c44de72c385c7cf216ca9bd1c07d5bc91c2028aa27278b9191"
+    }
+  ],
+  "source_format": "tsx",
+  "topology": "direct"
+}

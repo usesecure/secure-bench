@@ -1,0 +1,72 @@
+{
+  "adversarial_variant": "suffix-tricks",
+  "case_id": "aurora-9a0333c50bf161e7dd",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 8,
+          "file": "entry.jsx",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "http-query-value",
+          "start_column": 3,
+          "start_line": 8
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 24,
+          "end_line": 2,
+          "file": "policy.jsx",
+          "role": "sink",
+          "sink_kind": "sql-query-execution",
+          "source_kind": null,
+          "start_column": 9,
+          "start_line": 2
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.sql-construction",
+      "invariant_id": "secure-bench.invariant.sql-control-data-separation",
+      "primary_cwe": "CWE-89",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "ff3487964fdf6afa00c263f092c72277c37c90b68e143146c9a251241b8c73e5",
+  "family_id": "SE1002",
+  "fixture_ticket": "ticket-3707ed7195ca9d4f",
+  "framework": "node",
+  "label": "vulnerable",
+  "normalized_fingerprint": "b4e15dd3449143be6f970f3c73132ce31e10eccf01872808f5fe0a9b4fdf8112",
+  "orientation": "control-first",
+  "pair_id": "orbit-se1002-89978e1b8f2368",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 707,
+      "path": "entry.jsx",
+      "sha256": "0fba790750cce084465cf18730a940c7d58c8384e0655635fd31ee993f6d5c62"
+    },
+    {
+      "bytes": 139,
+      "path": "policy.jsx",
+      "sha256": "9ae53c622c98b4b4b5b4a17b60a857815f477d364b777fbd284eef29c777d6d5"
+    }
+  ],
+  "source_format": "jsx",
+  "topology": "inter-file-aliased"
+}

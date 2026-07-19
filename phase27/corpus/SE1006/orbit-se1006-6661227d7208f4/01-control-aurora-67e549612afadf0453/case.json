@@ -1,0 +1,63 @@
+{
+  "adversarial_variant": "aliasing",
+  "case_id": "aurora-67e549612afadf0453",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": {
+      "barrier": {
+        "effect": "constrains-to-policy",
+        "end_column": 34,
+        "end_line": 2,
+        "file": "policy.jsx",
+        "role": "barrier",
+        "start_column": 23,
+        "start_line": 2
+      },
+      "sink": {
+        "effect": "preserves-influence",
+        "end_column": 34,
+        "end_line": 2,
+        "file": "policy.jsx",
+        "role": "sink",
+        "sink_kind": "dynamic-code-evaluation",
+        "source_kind": null,
+        "start_column": 23,
+        "start_line": 2
+      },
+      "status": "effective-barrier-dominates-sink"
+    },
+    "expected_finding": null,
+    "expected_outcome": "control",
+    "taxonomy": {
+      "category_id": "secure-bench.category.dynamic-code-execution",
+      "invariant_id": "secure-bench.invariant.dynamic-code-control-data-separation",
+      "primary_cwe": "CWE-95",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "41b88a2b864133f75644888ffa4451d26bcf646be58b594faef41a4b241bb05a",
+  "family_id": "SE1006",
+  "fixture_ticket": "ticket-a727fa12e2e0f3ef",
+  "framework": "node",
+  "label": "control",
+  "normalized_fingerprint": "ba06fdccfb4fb4ddf36e7aee771fb1dfbd20166dec0324e2a5945e0d39cd02d3",
+  "orientation": "control-first",
+  "pair_id": "orbit-se1006-6661227d7208f4",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 616,
+      "path": "entry.jsx",
+      "sha256": "19d29165bb9a58fd1797887af0233631be0e6c8ada75f05f832fd374e0273fbb"
+    },
+    {
+      "bytes": 129,
+      "path": "policy.jsx",
+      "sha256": "5762511c3791aedaf1b8279f7168b43b09c2213aa5638f6dabc540fdf089550b"
+    }
+  ],
+  "source_format": "jsx",
+  "topology": "inter-file-aliased"
+}

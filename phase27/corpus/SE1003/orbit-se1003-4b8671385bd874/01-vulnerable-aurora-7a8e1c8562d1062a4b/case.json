@@ -1,0 +1,67 @@
+{
+  "adversarial_variant": "wrappers",
+  "case_id": "aurora-7a8e1c8562d1062a4b",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 10,
+          "file": "entry.js",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "http-body-field",
+          "start_column": 3,
+          "start_line": 10
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 18,
+          "end_line": 14,
+          "file": "entry.js",
+          "role": "sink",
+          "sink_kind": "filesystem-read",
+          "source_kind": null,
+          "start_column": 3,
+          "start_line": 14
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.filesystem-boundary",
+      "invariant_id": "secure-bench.invariant.filesystem-path-confinement",
+      "primary_cwe": "CWE-22",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "20aac505c8283c2f76b34322b9ea86ec0204d108ceebb959e7b8014c4d5e83ea",
+  "family_id": "SE1003",
+  "fixture_ticket": "ticket-28ce6fab2f0cf88c",
+  "framework": "next-app-router",
+  "label": "vulnerable",
+  "normalized_fingerprint": "eca49795f185e294e893dc127cfee2876ed487e29e35149f68363251fd5d5508",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1003-4b8671385bd874",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 641,
+      "path": "entry.js",
+      "sha256": "3864ccdf98cd505b31aa6d886c36fe65408edd851568665b12619b4c777b3b61"
+    }
+  ],
+  "source_format": "javascript",
+  "topology": "control-flow-sensitive"
+}

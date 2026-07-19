@@ -1,0 +1,67 @@
+{
+  "adversarial_variant": "non-dominating-guards",
+  "case_id": "aurora-a0f4140ae1d2ebda3e",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 6,
+          "file": "entry.tsx",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "form-data-value",
+          "start_column": 3,
+          "start_line": 6
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 28,
+          "end_line": 12,
+          "file": "entry.tsx",
+          "role": "sink",
+          "sink_kind": "redirect-response",
+          "source_kind": null,
+          "start_column": 10,
+          "start_line": 12
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.redirect-boundary",
+      "invariant_id": "secure-bench.invariant.redirect-destination-policy",
+      "primary_cwe": "CWE-601",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "f680536dc129039750398b7ff7c9faf37ee744f24f5d2ce2bb827ed0fbfb8e8d",
+  "family_id": "SE1005",
+  "fixture_ticket": "ticket-459a12cbd218e2c3",
+  "framework": "server-actions",
+  "label": "vulnerable",
+  "normalized_fingerprint": "d6deed29b3311205c5ee103ffd154bed821e924fd75acf8723ba020dc898d5f3",
+  "orientation": "control-first",
+  "pair_id": "orbit-se1005-3647d3fc20592d",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 611,
+      "path": "entry.tsx",
+      "sha256": "a0166a46544ba1ef639a2fc325487a156f746af046447c19e1a5ed2040c994b0"
+    }
+  ],
+  "source_format": "tsx",
+  "topology": "control-flow-sensitive"
+}

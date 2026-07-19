@@ -1,0 +1,67 @@
+{
+  "adversarial_variant": "destructuring",
+  "case_id": "aurora-9531c341fd806134dd",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 9,
+          "file": "entry.jsx",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "http-query-value",
+          "start_column": 3,
+          "start_line": 9
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 16,
+          "end_line": 20,
+          "file": "entry.jsx",
+          "role": "sink",
+          "sink_kind": "os-command-execution",
+          "source_kind": null,
+          "start_column": 3,
+          "start_line": 20
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.command-execution",
+      "invariant_id": "secure-bench.invariant.command-control-data-separation",
+      "primary_cwe": "CWE-78",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "e70b3fb3ab679108ebd0c6e28a7a1aeb6bf24d1b4ba6ffe42c80f0c8bc29605c",
+  "family_id": "SE1001",
+  "fixture_ticket": "ticket-744494d11b843243",
+  "framework": "express",
+  "label": "vulnerable",
+  "normalized_fingerprint": "6580a115a18e6af3a1695185043633f58972713eccffcec4ba9146339a6e9edf",
+  "orientation": "control-first",
+  "pair_id": "orbit-se1001-b94f31dc9d96eb",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 738,
+      "path": "entry.jsx",
+      "sha256": "dd3a3722d0404655da38765603fe9774221b96c06cae2d369f7e61503509ab86"
+    }
+  ],
+  "source_format": "jsx",
+  "topology": "helper-mediated"
+}

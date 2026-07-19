@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-bench.invalid/schemas/phase27-manifest-v2.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "phase", "holdout_id", "status", "authoritative_base", "design_sha256", "seed_sha256", "contract_sha256", "pair_count", "case_count", "vulnerable_count", "control_count", "pairs", "cases", "aggregate_exact_fingerprint", "aggregate_normalized_fingerprint", "scanner_executions", "case_executions"],
+  "properties": {
+    "schema_version": {"const": "secure-bench-phase27-manifest-v2"},
+    "phase": {"const": 27},
+    "holdout_id": {"const": "phase-27-independent-holdout-v2-clean-restart"},
+    "status": {"enum": ["authored-unfrozen", "frozen-not-executed"]},
+    "authoritative_base": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "design_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "seed_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "contract_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "pair_count": {"const": 56},
+    "case_count": {"const": 112},
+    "vulnerable_count": {"const": 56},
+    "control_count": {"const": 56},
+    "pairs": {"type": "array", "minItems": 56, "maxItems": 56},
+    "cases": {"type": "array", "minItems": 112, "maxItems": 112},
+    "aggregate_exact_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "aggregate_normalized_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "scanner_executions": {"const": 0},
+    "case_executions": {"const": 0}
+  }
+}

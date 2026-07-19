@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-bench.invalid/schemas/phase27-ledger-entry-v2.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "sequence", "event", "holdout_id", "timestamp_utc", "previous_entry_hash", "commitment_root", "commitments_sha256", "execution_count", "entry_hash"],
+  "properties": {
+    "schema_version": {"const": "secure-bench-phase27-ledger-entry-v2"},
+    "sequence": {"const": 0},
+    "event": {"const": "holdout-frozen-not-executed"},
+    "holdout_id": {"const": "phase-27-independent-holdout-v2-clean-restart"},
+    "timestamp_utc": {"type": "string"},
+    "previous_entry_hash": {"type": "string", "pattern": "^0{64}$"},
+    "commitment_root": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "commitments_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "execution_count": {"const": 0},
+    "entry_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

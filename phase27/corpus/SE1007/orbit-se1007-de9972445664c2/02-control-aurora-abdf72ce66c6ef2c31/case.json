@@ -1,0 +1,63 @@
+{
+  "adversarial_variant": "aliasing",
+  "case_id": "aurora-abdf72ce66c6ef2c31",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": {
+      "barrier": {
+        "effect": "authorizes-operation",
+        "end_column": 51,
+        "end_line": 4,
+        "file": "policy.js",
+        "role": "barrier",
+        "start_column": 27,
+        "start_line": 4
+      },
+      "sink": {
+        "effect": "preserves-influence",
+        "end_column": 24,
+        "end_line": 6,
+        "file": "policy.js",
+        "role": "sink",
+        "sink_kind": "protected-record-mutation",
+        "source_kind": null,
+        "start_column": 9,
+        "start_line": 6
+      },
+      "status": "effective-barrier-dominates-sink"
+    },
+    "expected_finding": null,
+    "expected_outcome": "control",
+    "taxonomy": {
+      "category_id": "secure-bench.category.authorization-dominance",
+      "invariant_id": "secure-bench.invariant.authorization-before-sensitive-operation",
+      "primary_cwe": "CWE-862",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "b5e389015d53f7b2243beb0d1d18cc47f171efcde488f441322fdcf3cac664d5",
+  "family_id": "SE1007",
+  "fixture_ticket": "ticket-d387a4d321ad25f9",
+  "framework": "next-app-router",
+  "label": "control",
+  "normalized_fingerprint": "99b180ed7411505808f5ba3d1bca2271cb159e0c927944e460bb0e786749e2c6",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1007-de9972445664c2",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 467,
+      "path": "entry.js",
+      "sha256": "f2aa772ec63e21f9204f7221a0ceb2e3d3041388c73325376833ad645f637b74"
+    },
+    {
+      "bytes": 487,
+      "path": "policy.js",
+      "sha256": "7ec2c6572466c00ad2e82cb026de825b2ba70770299229cc1a0af1c88fc0de9e"
+    }
+  ],
+  "source_format": "javascript",
+  "topology": "inter-file-aliased"
+}

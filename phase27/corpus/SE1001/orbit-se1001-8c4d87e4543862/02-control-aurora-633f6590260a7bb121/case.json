@@ -1,0 +1,63 @@
+{
+  "adversarial_variant": "wrappers",
+  "case_id": "aurora-633f6590260a7bb121",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": {
+      "barrier": {
+        "effect": "constrains-to-policy",
+        "end_column": 71,
+        "end_line": 4,
+        "file": "policy.ts",
+        "role": "barrier",
+        "start_column": 59,
+        "start_line": 4
+      },
+      "sink": {
+        "effect": "preserves-influence",
+        "end_column": 16,
+        "end_line": 4,
+        "file": "policy.ts",
+        "role": "sink",
+        "sink_kind": "os-command-execution",
+        "source_kind": null,
+        "start_column": 3,
+        "start_line": 4
+      },
+      "status": "effective-barrier-dominates-sink"
+    },
+    "expected_finding": null,
+    "expected_outcome": "control",
+    "taxonomy": {
+      "category_id": "secure-bench.category.command-execution",
+      "invariant_id": "secure-bench.invariant.command-control-data-separation",
+      "primary_cwe": "CWE-78",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "4ab4339006762c17f40e63f906ba5737ea5c31a2fa2eb35eed920620a1fc57c9",
+  "family_id": "SE1001",
+  "fixture_ticket": "ticket-023cbb0756cbc8d5",
+  "framework": "next-app-router",
+  "label": "control",
+  "normalized_fingerprint": "c2b0a15edee0c1e9c735c49f1119c3f73cf2e20b9cf873b07122b2d018936f7a",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1001-8c4d87e4543862",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 527,
+      "path": "entry.ts",
+      "sha256": "60b6e72c27adb36e32535db582e35bb8c9336c86eabd81a609d7383641cfc94d"
+    },
+    {
+      "bytes": 178,
+      "path": "policy.ts",
+      "sha256": "80d35d630d45ed40d47980b2e7bc1943d585ec8059ad03d7d10e124c146d90a1"
+    }
+  ],
+  "source_format": "typescript",
+  "topology": "inter-file-aliased"
+}

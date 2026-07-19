@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-bench.invalid/schemas/phase27-provenance-v2.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "phase", "holdout_id", "authoritative_base", "seed_sha256", "design_sha256", "taxonomy", "secure_engine_rc1_identity", "review_receipt_sha256", "syntax_receipt_sha256", "historical_overlap", "process_attestation", "limitations"],
+  "properties": {
+    "schema_version": {"const": "secure-bench-phase27-provenance-v2"},
+    "phase": {"const": 27},
+    "holdout_id": {"const": "phase-27-independent-holdout-v2-clean-restart"},
+    "authoritative_base": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "seed_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "design_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "taxonomy": {"type": "object"},
+    "secure_engine_rc1_identity": {"type": "object"},
+    "review_receipt_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "syntax_receipt_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "historical_overlap": {"type": "object"},
+    "process_attestation": {"type": "object"},
+    "limitations": {"type": "array", "minItems": 3}
+  }
+}

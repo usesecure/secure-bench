@@ -1,0 +1,67 @@
+{
+  "adversarial_variant": "ambiguous-helpers",
+  "case_id": "aurora-49128269579529c43b",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 7,
+          "file": "entry.ts",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "http-query-value",
+          "start_column": 3,
+          "start_line": 7
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 24,
+          "end_line": 13,
+          "file": "entry.ts",
+          "role": "sink",
+          "sink_kind": "sql-query-execution",
+          "source_kind": null,
+          "start_column": 9,
+          "start_line": 13
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.sql-construction",
+      "invariant_id": "secure-bench.invariant.sql-control-data-separation",
+      "primary_cwe": "CWE-89",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "5c648c3de4287dfa67c2f6729a437ad174c5312c8aeb70549d79fb5e494121a8",
+  "family_id": "SE1002",
+  "fixture_ticket": "ticket-b1618b3de92bdb0e",
+  "framework": "express",
+  "label": "vulnerable",
+  "normalized_fingerprint": "d0093f0be27b4990458f3d4fc36bc6cc0117f404b6389284878b319e6b873681",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1002-cb70cde5ce461c",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 707,
+      "path": "entry.ts",
+      "sha256": "a57eab5f25702f7880cd23adb5976c8bfe4f1eb9d6e292dc051e2918220ee810"
+    }
+  ],
+  "source_format": "typescript",
+  "topology": "control-flow-sensitive"
+}

@@ -1,0 +1,67 @@
+{
+  "adversarial_variant": "mutable-allowlists",
+  "case_id": "aurora-8e7e9e5b094be9a94a",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 7,
+          "file": "entry.tsx",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "http-body-field",
+          "start_column": 3,
+          "start_line": 7
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 24,
+          "end_line": 19,
+          "file": "entry.tsx",
+          "role": "sink",
+          "sink_kind": "sql-query-execution",
+          "source_kind": null,
+          "start_column": 9,
+          "start_line": 19
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.sql-construction",
+      "invariant_id": "secure-bench.invariant.sql-control-data-separation",
+      "primary_cwe": "CWE-89",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "28ee267b72a9cb7642bad80cead6770f88cfa248dae8d82f3c4a0a3498dc6089",
+  "family_id": "SE1002",
+  "fixture_ticket": "ticket-77ea209a640fd689",
+  "framework": "next-app-router",
+  "label": "vulnerable",
+  "normalized_fingerprint": "325cdfbd57d509ef8b8a35c2ad4abf94fea73fc1cf387881228b616ab61ed70a",
+  "orientation": "control-first",
+  "pair_id": "orbit-se1002-18cb0921cf1742",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 779,
+      "path": "entry.tsx",
+      "sha256": "452591085ec63b78aa2b82796f61708ad107f9affd42b6e85a8dfb4969f91e21"
+    }
+  ],
+  "source_format": "tsx",
+  "topology": "helper-mediated"
+}

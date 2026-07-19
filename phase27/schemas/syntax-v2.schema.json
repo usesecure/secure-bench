@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-bench.invalid/schemas/phase27-syntax-v2.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "parser", "status", "files_parsed", "javascript", "jsx", "typescript", "tsx", "inventory_sha256", "case_executions", "scanner_executions"],
+  "properties": {
+    "schema_version": {"const": "secure-bench-phase27-syntax-v2"},
+    "parser": {"const": "tree-sitter-neutral"},
+    "status": {"const": "passed-before-freeze"},
+    "files_parsed": {"type": "integer"},
+    "javascript": {"type": "integer"},
+    "jsx": {"type": "integer"},
+    "typescript": {"type": "integer"},
+    "tsx": {"type": "integer"},
+    "inventory_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "case_executions": {"const": 0},
+    "scanner_executions": {"const": 0}
+  }
+}

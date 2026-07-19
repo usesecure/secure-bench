@@ -1,0 +1,67 @@
+{
+  "adversarial_variant": "suffix-tricks",
+  "case_id": "aurora-a5197408bf9606d85d",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 7,
+          "file": "entry.tsx",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "http-query-value",
+          "start_column": 3,
+          "start_line": 7
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 15,
+          "end_line": 14,
+          "file": "entry.tsx",
+          "role": "sink",
+          "sink_kind": "outbound-request",
+          "source_kind": null,
+          "start_column": 3,
+          "start_line": 14
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.outbound-request-boundary",
+      "invariant_id": "secure-bench.invariant.outbound-destination-policy",
+      "primary_cwe": "CWE-918",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "31501788981dd8fcef7283ef714956710a8bf63ae5a3af5b1c4b964ef2055814",
+  "family_id": "SE1004",
+  "fixture_ticket": "ticket-59524e2589178467",
+  "framework": "node",
+  "label": "vulnerable",
+  "normalized_fingerprint": "abf6a1fb1c60e43e4892495f6bff1a7e6fda1a8fbe30cd2a9ee7991feccbee97",
+  "orientation": "control-first",
+  "pair_id": "orbit-se1004-34b42494ba43c1",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 716,
+      "path": "entry.tsx",
+      "sha256": "fa2a4095a35a50c71633d80299b3be6112661350a9cbfae28f20428949717f7e"
+    }
+  ],
+  "source_format": "tsx",
+  "topology": "control-flow-sensitive"
+}

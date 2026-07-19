@@ -1,0 +1,67 @@
+{
+  "adversarial_variant": "aliasing",
+  "case_id": "aurora-6dcd68095644dfb976",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 9,
+          "file": "entry.js",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "http-query-value",
+          "start_column": 3,
+          "start_line": 9
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 16,
+          "end_line": 11,
+          "file": "entry.js",
+          "role": "sink",
+          "sink_kind": "os-command-execution",
+          "source_kind": null,
+          "start_column": 3,
+          "start_line": 11
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.command-execution",
+      "invariant_id": "secure-bench.invariant.command-control-data-separation",
+      "primary_cwe": "CWE-78",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "069b1d59d517de962ae7804930fd67121de9f44903e92f2179531c10b731e051",
+  "family_id": "SE1001",
+  "fixture_ticket": "ticket-2817aa4d28889aaf",
+  "framework": "node",
+  "label": "vulnerable",
+  "normalized_fingerprint": "d454af2439a705a36a4a4fe5622dc3df47b16b1dc9ae3e896f7e8d918f9018df",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1001-9a80d47281f575",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 516,
+      "path": "entry.js",
+      "sha256": "58eec341b06736b92a4a6f5d857eeacd09c1883a614232eefca326f33fe9ec51"
+    }
+  ],
+  "source_format": "javascript",
+  "topology": "direct"
+}

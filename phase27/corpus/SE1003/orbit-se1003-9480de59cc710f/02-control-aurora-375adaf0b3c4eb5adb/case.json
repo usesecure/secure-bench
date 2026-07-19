@@ -1,0 +1,63 @@
+{
+  "adversarial_variant": "suffix-tricks",
+  "case_id": "aurora-375adaf0b3c4eb5adb",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": {
+      "barrier": {
+        "effect": "constrains-to-policy",
+        "end_column": 32,
+        "end_line": 7,
+        "file": "policy.js",
+        "role": "barrier",
+        "start_column": 8,
+        "start_line": 7
+      },
+      "sink": {
+        "effect": "preserves-influence",
+        "end_column": 18,
+        "end_line": 8,
+        "file": "policy.js",
+        "role": "sink",
+        "sink_kind": "filesystem-read",
+        "source_kind": null,
+        "start_column": 3,
+        "start_line": 8
+      },
+      "status": "effective-barrier-dominates-sink"
+    },
+    "expected_finding": null,
+    "expected_outcome": "control",
+    "taxonomy": {
+      "category_id": "secure-bench.category.filesystem-boundary",
+      "invariant_id": "secure-bench.invariant.filesystem-path-confinement",
+      "primary_cwe": "CWE-22",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "dc1b7e53ba5733af4bd5db12a664d6621df79e6ed3d74f97a33ba11f5458fd14",
+  "family_id": "SE1003",
+  "fixture_ticket": "ticket-539f9e35e43c3f53",
+  "framework": "next-app-router",
+  "label": "control",
+  "normalized_fingerprint": "fc77826a188c35048418e1912cf779db3e7064e18eae872a4889ed50e231a484",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1003-9480de59cc710f",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 558,
+      "path": "entry.js",
+      "sha256": "8f298b4e62e9ed561ab93753d183b06e0cd6628a420f14fbaca3cd6a0b84753c"
+    },
+    {
+      "bytes": 374,
+      "path": "policy.js",
+      "sha256": "82cc8f07ca72bdba395e60a108e739d1b40b027a44ed1081d123d13db17f92c9"
+    }
+  ],
+  "source_format": "javascript",
+  "topology": "inter-file-aliased"
+}

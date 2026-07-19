@@ -1,0 +1,58 @@
+{
+  "adversarial_variant": "mutable-allowlists",
+  "case_id": "aurora-9dc8cda58995922d18",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": {
+      "barrier": {
+        "effect": "authorizes-operation",
+        "end_column": 51,
+        "end_line": 14,
+        "file": "entry.js",
+        "role": "barrier",
+        "start_column": 27,
+        "start_line": 14
+      },
+      "sink": {
+        "effect": "preserves-influence",
+        "end_column": 24,
+        "end_line": 16,
+        "file": "entry.js",
+        "role": "sink",
+        "sink_kind": "protected-record-mutation",
+        "source_kind": null,
+        "start_column": 9,
+        "start_line": 16
+      },
+      "status": "effective-barrier-dominates-sink"
+    },
+    "expected_finding": null,
+    "expected_outcome": "control",
+    "taxonomy": {
+      "category_id": "secure-bench.category.authorization-dominance",
+      "invariant_id": "secure-bench.invariant.authorization-before-sensitive-operation",
+      "primary_cwe": "CWE-862",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "6d95d2d57d2ef0cf34f2b995f3b326bc8390b30249feb0d998cfafac9942ed86",
+  "family_id": "SE1007",
+  "fixture_ticket": "ticket-f896c4fea74e2552",
+  "framework": "next-app-router",
+  "label": "control",
+  "normalized_fingerprint": "c7f52ac505741af3ec699dfbdf4afb0dc2380811764ecc7165f55b26afe19356",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1007-9916a523e47fd3",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 984,
+      "path": "entry.js",
+      "sha256": "b6fc9ef233f36b4f152b36934b0e75713fbf6687866972fb037abe87c0f0eab4"
+    }
+  ],
+  "source_format": "javascript",
+  "topology": "control-flow-sensitive"
+}

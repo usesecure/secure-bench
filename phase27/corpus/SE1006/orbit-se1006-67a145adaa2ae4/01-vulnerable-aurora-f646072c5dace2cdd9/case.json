@@ -1,0 +1,72 @@
+{
+  "adversarial_variant": "blocklists",
+  "case_id": "aurora-f646072c5dace2cdd9",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 7,
+          "file": "entry.js",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "form-data-value",
+          "start_column": 3,
+          "start_line": 7
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 12,
+          "end_line": 2,
+          "file": "policy.js",
+          "role": "sink",
+          "sink_kind": "dynamic-code-evaluation",
+          "source_kind": null,
+          "start_column": 3,
+          "start_line": 2
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.dynamic-code-execution",
+      "invariant_id": "secure-bench.invariant.dynamic-code-control-data-separation",
+      "primary_cwe": "CWE-95",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "37177cdbc9cc06d11821929aa036a5a574779ecdfc120512d4f14a7acd3ad44c",
+  "family_id": "SE1006",
+  "fixture_ticket": "ticket-feab43ef413c82b7",
+  "framework": "server-actions",
+  "label": "vulnerable",
+  "normalized_fingerprint": "2cd1d44c7fbca133d4171e707b1c0bdfa482c8e9bf775e52613924e2fe35977b",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1006-67a145adaa2ae4",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 448,
+      "path": "entry.js",
+      "sha256": "e056845f705254477728b6ef5686c8e835aa20003259b9bc5a65182a52e0f844"
+    },
+    {
+      "bytes": 98,
+      "path": "policy.js",
+      "sha256": "eff26bd85453d8ab575d9851fbd494d277d2a87fd13698b67381949214bb0ad0"
+    }
+  ],
+  "source_format": "javascript",
+  "topology": "inter-file-aliased"
+}

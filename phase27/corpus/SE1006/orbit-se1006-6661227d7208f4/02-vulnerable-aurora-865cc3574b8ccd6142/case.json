@@ -1,0 +1,72 @@
+{
+  "adversarial_variant": "aliasing",
+  "case_id": "aurora-865cc3574b8ccd6142",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 8,
+          "file": "entry.jsx",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "http-query-value",
+          "start_column": 3,
+          "start_line": 8
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 12,
+          "end_line": 2,
+          "file": "policy.jsx",
+          "role": "sink",
+          "sink_kind": "dynamic-code-evaluation",
+          "source_kind": null,
+          "start_column": 3,
+          "start_line": 2
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.dynamic-code-execution",
+      "invariant_id": "secure-bench.invariant.dynamic-code-control-data-separation",
+      "primary_cwe": "CWE-95",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "766bd48f92bfa63354afc9ae1f064dfc58a8821195c7a3c936c6a1c6c11c9bf6",
+  "family_id": "SE1006",
+  "fixture_ticket": "ticket-6de622761053efb5",
+  "framework": "node",
+  "label": "vulnerable",
+  "normalized_fingerprint": "439b7bd954eb08efe2545d6d6ef21f88c7118d9757b1dd8088b339802f3eac0e",
+  "orientation": "control-first",
+  "pair_id": "orbit-se1006-6661227d7208f4",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 616,
+      "path": "entry.jsx",
+      "sha256": "9d4f3ce6c56cb776ac36f24fa03188482a3791d82c1967f62c7f68c10cab9920"
+    },
+    {
+      "bytes": 98,
+      "path": "policy.jsx",
+      "sha256": "eff26bd85453d8ab575d9851fbd494d277d2a87fd13698b67381949214bb0ad0"
+    }
+  ],
+  "source_format": "jsx",
+  "topology": "inter-file-aliased"
+}

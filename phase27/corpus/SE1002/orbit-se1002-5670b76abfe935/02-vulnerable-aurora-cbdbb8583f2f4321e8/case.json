@@ -1,0 +1,67 @@
+{
+  "adversarial_variant": "wrappers",
+  "case_id": "aurora-cbdbb8583f2f4321e8",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 7,
+          "file": "entry.jsx",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "http-query-value",
+          "start_column": 3,
+          "start_line": 7
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 24,
+          "end_line": 13,
+          "file": "entry.jsx",
+          "role": "sink",
+          "sink_kind": "sql-query-execution",
+          "source_kind": null,
+          "start_column": 9,
+          "start_line": 13
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.sql-construction",
+      "invariant_id": "secure-bench.invariant.sql-control-data-separation",
+      "primary_cwe": "CWE-89",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "e8899a830095f8405795a9c6123e6ddf1aef14e5e87845bfed92577121959a7c",
+  "family_id": "SE1002",
+  "fixture_ticket": "ticket-1c94a8b9a67d720e",
+  "framework": "node",
+  "label": "vulnerable",
+  "normalized_fingerprint": "e73fadcf42c61a97bd7bdfe586fbceaeeae1a4b1188be73eda3231ce302f160b",
+  "orientation": "control-first",
+  "pair_id": "orbit-se1002-5670b76abfe935",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 725,
+      "path": "entry.jsx",
+      "sha256": "47035e612eed613f981c88297a163fc2b21c7122007cfc492a60aed8e27f0bee"
+    }
+  ],
+  "source_format": "jsx",
+  "topology": "control-flow-sensitive"
+}

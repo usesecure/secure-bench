@@ -1,0 +1,67 @@
+{
+  "adversarial_variant": "wrappers",
+  "case_id": "aurora-dfc697e3a3b189024b",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 7,
+          "file": "entry.js",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "http-query-value",
+          "start_column": 3,
+          "start_line": 7
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 28,
+          "end_line": 10,
+          "file": "entry.js",
+          "role": "sink",
+          "sink_kind": "redirect-response",
+          "source_kind": null,
+          "start_column": 10,
+          "start_line": 10
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.redirect-boundary",
+      "invariant_id": "secure-bench.invariant.redirect-destination-policy",
+      "primary_cwe": "CWE-601",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "52c11bd9eaf4d26668ce082892f205f747fca0396c4ffbb0919c0c431afd65cd",
+  "family_id": "SE1005",
+  "fixture_ticket": "ticket-52b91f87ed22ba98",
+  "framework": "node",
+  "label": "vulnerable",
+  "normalized_fingerprint": "2f0b51d71a139836d6dda797286398ee274d5b52262c681d323733b2f20c54c1",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1005-c8e9dbecdd698f",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 455,
+      "path": "entry.js",
+      "sha256": "e5024e67223cf6647c890815ce025aecebd48d296b91e912e4412f4a0cbc49c0"
+    }
+  ],
+  "source_format": "javascript",
+  "topology": "direct"
+}

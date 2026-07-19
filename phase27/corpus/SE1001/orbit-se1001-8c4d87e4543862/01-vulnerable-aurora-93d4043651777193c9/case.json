@@ -1,0 +1,72 @@
+{
+  "adversarial_variant": "wrappers",
+  "case_id": "aurora-93d4043651777193c9",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 8,
+          "file": "entry.ts",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "http-body-field",
+          "start_column": 3,
+          "start_line": 8
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 16,
+          "end_line": 4,
+          "file": "policy.ts",
+          "role": "sink",
+          "sink_kind": "os-command-execution",
+          "source_kind": null,
+          "start_column": 3,
+          "start_line": 4
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.command-execution",
+      "invariant_id": "secure-bench.invariant.command-control-data-separation",
+      "primary_cwe": "CWE-78",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "7c1d1d58bd49fcd0e50f7c5f99e6751bde2f68da3d3b6895187a85ad20fe4331",
+  "family_id": "SE1001",
+  "fixture_ticket": "ticket-486c57c2be519f1e",
+  "framework": "next-app-router",
+  "label": "vulnerable",
+  "normalized_fingerprint": "ac61ad6092f2b8402912d29f019a88cf3c8a063c5f71317da19be7785ff4e047",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1001-8c4d87e4543862",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 527,
+      "path": "entry.ts",
+      "sha256": "ba80419bdc8eeec95c96651a1e2fdec3566cfd717d6de66b0fb29dcf558313ce"
+    },
+    {
+      "bytes": 167,
+      "path": "policy.ts",
+      "sha256": "f0302a4a73ead3ae55d88286c7f18d76c7615a26cbcd6ae49709c5ed6232b240"
+    }
+  ],
+  "source_format": "typescript",
+  "topology": "inter-file-aliased"
+}

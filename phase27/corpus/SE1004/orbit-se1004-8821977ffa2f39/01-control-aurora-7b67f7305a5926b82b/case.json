@@ -1,0 +1,63 @@
+{
+  "adversarial_variant": "mutable-allowlists",
+  "case_id": "aurora-7b67f7305a5926b82b",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": {
+      "barrier": {
+        "effect": "constrains-to-policy",
+        "end_column": 64,
+        "end_line": 3,
+        "file": "policy.tsx",
+        "role": "barrier",
+        "start_column": 44,
+        "start_line": 3
+      },
+      "sink": {
+        "effect": "preserves-influence",
+        "end_column": 15,
+        "end_line": 4,
+        "file": "policy.tsx",
+        "role": "sink",
+        "sink_kind": "outbound-request",
+        "source_kind": null,
+        "start_column": 3,
+        "start_line": 4
+      },
+      "status": "effective-barrier-dominates-sink"
+    },
+    "expected_finding": null,
+    "expected_outcome": "control",
+    "taxonomy": {
+      "category_id": "secure-bench.category.outbound-request-boundary",
+      "invariant_id": "secure-bench.invariant.outbound-destination-policy",
+      "primary_cwe": "CWE-918",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "388064c90221ab431c53d042e8066b34b3b716b7151c11d582fc9660a499ad6b",
+  "family_id": "SE1004",
+  "fixture_ticket": "ticket-538b742ec9878ec4",
+  "framework": "node",
+  "label": "control",
+  "normalized_fingerprint": "bde83d7b567b25e232f7d549ad75c2749dc90b5a72941679a57febc366e2ff50",
+  "orientation": "control-first",
+  "pair_id": "orbit-se1004-8821977ffa2f39",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 740,
+      "path": "entry.tsx",
+      "sha256": "07dfc24704ddbc917dc18dc49a1b95e6edcd80631091b9b47736edf0484a5f63"
+    },
+    {
+      "bytes": 274,
+      "path": "policy.tsx",
+      "sha256": "70773e1fa3eb7546dd8a15f68acef90e0673cf914e1de744256c0c8e73ee817b"
+    }
+  ],
+  "source_format": "tsx",
+  "topology": "inter-file-aliased"
+}

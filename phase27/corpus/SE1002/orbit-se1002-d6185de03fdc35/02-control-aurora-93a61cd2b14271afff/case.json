@@ -1,0 +1,63 @@
+{
+  "adversarial_variant": "non-dominating-guards",
+  "case_id": "aurora-93a61cd2b14271afff",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": {
+      "barrier": {
+        "effect": "constrains-to-policy",
+        "end_column": 64,
+        "end_line": 2,
+        "file": "policy.js",
+        "role": "barrier",
+        "start_column": 56,
+        "start_line": 2
+      },
+      "sink": {
+        "effect": "preserves-influence",
+        "end_column": 24,
+        "end_line": 2,
+        "file": "policy.js",
+        "role": "sink",
+        "sink_kind": "sql-query-execution",
+        "source_kind": null,
+        "start_column": 9,
+        "start_line": 2
+      },
+      "status": "effective-barrier-dominates-sink"
+    },
+    "expected_finding": null,
+    "expected_outcome": "control",
+    "taxonomy": {
+      "category_id": "secure-bench.category.sql-construction",
+      "invariant_id": "secure-bench.invariant.sql-control-data-separation",
+      "primary_cwe": "CWE-89",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "30e4f8044e19c88099c66020b6deba695c5a07cf2de6522c10cb9e405344a6e5",
+  "family_id": "SE1002",
+  "fixture_ticket": "ticket-2588a1d7b55a958f",
+  "framework": "server-actions",
+  "label": "control",
+  "normalized_fingerprint": "4c035cfd8fcb2889394f90f609f9b8231d1dd0963bff5d394967cd293ff2d86a",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1002-d6185de03fdc35",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 495,
+      "path": "entry.js",
+      "sha256": "598b96c0b27de74be594861d163bc33fcca4119c0c530dc58df3e166a202cbf0"
+    },
+    {
+      "bytes": 134,
+      "path": "policy.js",
+      "sha256": "afd0015fb0e1560b1708d93bab07530973311132cb7b199e115b4c642d7384da"
+    }
+  ],
+  "source_format": "javascript",
+  "topology": "inter-file-aliased"
+}

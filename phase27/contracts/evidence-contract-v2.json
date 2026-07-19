@@ -1,0 +1,62 @@
+{
+  "barrier_rules": {
+    "authorization_binds_operation": true,
+    "effective_barrier_blocks_match": true,
+    "guard_requires_terminating_failure": true,
+    "sanitizer_requires_semantic_effect": true
+  },
+  "contract_version": "2.0.0",
+  "duplicate_rules": {
+    "duplicate_credit": false,
+    "exclude_prose": true,
+    "exclude_tool_and_rule_identity": true,
+    "semantic_fields_only": true
+  },
+  "location_rules": {
+    "bidirectional_containment": true,
+    "exact_normalized_file": true,
+    "exact_span": true,
+    "maximum_containment_lines": 2
+  },
+  "non_scoring_fields": [
+    "rule_id",
+    "tool_identity",
+    "message",
+    "severity",
+    "prose"
+  ],
+  "partial_rules": {
+    "detection_credit": false,
+    "taxonomy_and_endpoints_required": true,
+    "uncertainty_is_partial": true,
+    "unresolved_call_is_partial": true
+  },
+  "path_rules": {
+    "connected_hops": true,
+    "helper_summary_preserves_endpoints": true,
+    "source_before_sink": true,
+    "summarizable_nodes_only": true
+  },
+  "schema_version": "secure-bench-evidence-contract-v2",
+  "sink_semantic_kinds": [
+    "os-command-execution",
+    "sql-query-execution",
+    "filesystem-read",
+    "outbound-request",
+    "redirect-response",
+    "dynamic-code-evaluation",
+    "protected-record-mutation"
+  ],
+  "source_semantic_kinds": [
+    "http-query-value",
+    "http-body-field",
+    "form-data-value",
+    "protected-resource-id"
+  ],
+  "taxonomy": {
+    "artifact_sha256": "059fe22d7707cf8d17f2c1621fdae9819787a1958ba2ef0421eca4e4ec858452",
+    "content_hash": "22852bd7401020b315af11dfa2b60c0b46f78eb19f95079e6400d7b3bea3272c",
+    "schema_version": "secure-bench-taxonomy-v1",
+    "taxonomy_version": "1.0.0"
+  }
+}

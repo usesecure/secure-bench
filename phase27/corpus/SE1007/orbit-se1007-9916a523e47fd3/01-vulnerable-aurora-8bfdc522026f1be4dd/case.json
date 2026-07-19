@@ -1,0 +1,67 @@
+{
+  "adversarial_variant": "mutable-allowlists",
+  "case_id": "aurora-8bfdc522026f1be4dd",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 7,
+          "file": "entry.js",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "protected-resource-id",
+          "start_column": 3,
+          "start_line": 7
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 24,
+          "end_line": 14,
+          "file": "entry.js",
+          "role": "sink",
+          "sink_kind": "protected-record-mutation",
+          "source_kind": null,
+          "start_column": 9,
+          "start_line": 14
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.authorization-dominance",
+      "invariant_id": "secure-bench.invariant.authorization-before-sensitive-operation",
+      "primary_cwe": "CWE-862",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "5bcaf3ef13258184e2f110d35d98ca61150a1c12d945c3c5adfaedf302162916",
+  "family_id": "SE1007",
+  "fixture_ticket": "ticket-d2d41c23f7591e2a",
+  "framework": "next-app-router",
+  "label": "vulnerable",
+  "normalized_fingerprint": "6669d5e181ddfa74474e402ab68acb61bb11b9af1448851339a608b402936bdf",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1007-9916a523e47fd3",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 728,
+      "path": "entry.js",
+      "sha256": "7f32bb273b1868b34177dface3cf614ee483559d421f44d387b87fb893f9b0a2"
+    }
+  ],
+  "source_format": "javascript",
+  "topology": "control-flow-sensitive"
+}

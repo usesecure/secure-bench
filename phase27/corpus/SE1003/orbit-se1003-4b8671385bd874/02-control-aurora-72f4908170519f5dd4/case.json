@@ -1,0 +1,58 @@
+{
+  "adversarial_variant": "wrappers",
+  "case_id": "aurora-72f4908170519f5dd4",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": {
+      "barrier": {
+        "effect": "constrains-to-policy",
+        "end_column": 32,
+        "end_line": 16,
+        "file": "entry.js",
+        "role": "barrier",
+        "start_column": 8,
+        "start_line": 16
+      },
+      "sink": {
+        "effect": "preserves-influence",
+        "end_column": 18,
+        "end_line": 17,
+        "file": "entry.js",
+        "role": "sink",
+        "sink_kind": "filesystem-read",
+        "source_kind": null,
+        "start_column": 3,
+        "start_line": 17
+      },
+      "status": "effective-barrier-dominates-sink"
+    },
+    "expected_finding": null,
+    "expected_outcome": "control",
+    "taxonomy": {
+      "category_id": "secure-bench.category.filesystem-boundary",
+      "invariant_id": "secure-bench.invariant.filesystem-path-confinement",
+      "primary_cwe": "CWE-22",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "df7844b807f037957b81637c52f54693fbbd7cbb89b67a8c3f708a3b82a8dae5",
+  "family_id": "SE1003",
+  "fixture_ticket": "ticket-0f1b81aa6b762bbc",
+  "framework": "next-app-router",
+  "label": "control",
+  "normalized_fingerprint": "4015e2c53fc0fd5a8a7c60faa2c09d2ececc4ef425751c9fcff5581e9a690eae",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1003-4b8671385bd874",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 808,
+      "path": "entry.js",
+      "sha256": "459bcc638d03bad82c41570d0f5f3e01f667a4a35206fec983ba1abc9a5d3969"
+    }
+  ],
+  "source_format": "javascript",
+  "topology": "control-flow-sensitive"
+}

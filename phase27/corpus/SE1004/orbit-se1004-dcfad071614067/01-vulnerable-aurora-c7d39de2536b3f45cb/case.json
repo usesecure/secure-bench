@@ -1,0 +1,67 @@
+{
+  "adversarial_variant": "blocklists",
+  "case_id": "aurora-c7d39de2536b3f45cb",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 6,
+          "file": "entry.ts",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "form-data-value",
+          "start_column": 3,
+          "start_line": 6
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 15,
+          "end_line": 14,
+          "file": "entry.ts",
+          "role": "sink",
+          "sink_kind": "outbound-request",
+          "source_kind": null,
+          "start_column": 3,
+          "start_line": 14
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.outbound-request-boundary",
+      "invariant_id": "secure-bench.invariant.outbound-destination-policy",
+      "primary_cwe": "CWE-918",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "b0bb8884f22b5b1919238a9eea73b996cb67ab8ecde42c55d991c3439a98ef57",
+  "family_id": "SE1004",
+  "fixture_ticket": "ticket-244e6abdc8d25e10",
+  "framework": "server-actions",
+  "label": "vulnerable",
+  "normalized_fingerprint": "dd62bec42acb427611b28c63a1f6033201879d041520811942aca3fc56e50cc0",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1004-dcfad071614067",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 471,
+      "path": "entry.ts",
+      "sha256": "3cd7fe2812c781677720c8359cbbff5924d1f0db95d049accbc54aca4c3699a4"
+    }
+  ],
+  "source_format": "typescript",
+  "topology": "helper-mediated"
+}

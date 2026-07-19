@@ -1,0 +1,63 @@
+{
+  "adversarial_variant": "mutable-allowlists",
+  "case_id": "aurora-6d9a25d6a699282c2d",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": {
+      "barrier": {
+        "effect": "constrains-to-policy",
+        "end_column": 25,
+        "end_line": 3,
+        "file": "policy.ts",
+        "role": "barrier",
+        "start_column": 7,
+        "start_line": 3
+      },
+      "sink": {
+        "effect": "preserves-influence",
+        "end_column": 28,
+        "end_line": 4,
+        "file": "policy.ts",
+        "role": "sink",
+        "sink_kind": "redirect-response",
+        "source_kind": null,
+        "start_column": 10,
+        "start_line": 4
+      },
+      "status": "effective-barrier-dominates-sink"
+    },
+    "expected_finding": null,
+    "expected_outcome": "control",
+    "taxonomy": {
+      "category_id": "secure-bench.category.redirect-boundary",
+      "invariant_id": "secure-bench.invariant.redirect-destination-policy",
+      "primary_cwe": "CWE-601",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "8c8096266cd638ace6cad3f8cfeb264228202166ce0b330f16e87a7d9271e779",
+  "family_id": "SE1005",
+  "fixture_ticket": "ticket-0809d34ffdd8703d",
+  "framework": "next-app-router",
+  "label": "control",
+  "normalized_fingerprint": "1cb568eb6cb3794012119c2b86bef0cc589658be1f199cf98fd032d8ee4a84d0",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1005-41f9f03c6c25b9",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 551,
+      "path": "entry.ts",
+      "sha256": "a23690fa13a51e65718aea99e6c7545653ecbc8db3ac98b820a05224c0ad3192"
+    },
+    {
+      "bytes": 318,
+      "path": "policy.ts",
+      "sha256": "fca84d25088fe80a33251f333c2a575c7dd1fd6ab143bb896e8058d10b1012db"
+    }
+  ],
+  "source_format": "typescript",
+  "topology": "inter-file-aliased"
+}

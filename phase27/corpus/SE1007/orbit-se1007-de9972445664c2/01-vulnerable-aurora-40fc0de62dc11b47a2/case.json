@@ -1,0 +1,72 @@
+{
+  "adversarial_variant": "aliasing",
+  "case_id": "aurora-40fc0de62dc11b47a2",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 8,
+          "file": "entry.js",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "protected-resource-id",
+          "start_column": 3,
+          "start_line": 8
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 24,
+          "end_line": 4,
+          "file": "policy.js",
+          "role": "sink",
+          "sink_kind": "protected-record-mutation",
+          "source_kind": null,
+          "start_column": 9,
+          "start_line": 4
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.authorization-dominance",
+      "invariant_id": "secure-bench.invariant.authorization-before-sensitive-operation",
+      "primary_cwe": "CWE-862",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "55fee444a2f796aa39b182e063ec0662db23dd30fdee99e855ab2e80e3940d56",
+  "family_id": "SE1007",
+  "fixture_ticket": "ticket-9dbff48768e487ec",
+  "framework": "next-app-router",
+  "label": "vulnerable",
+  "normalized_fingerprint": "303ec1e199a9b45df3dc94d47600f49423478943eaeb8df267cb80e6691ae762",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1007-de9972445664c2",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 467,
+      "path": "entry.js",
+      "sha256": "4af434e9ae80b01d23fbc6e80c8eccd776a58887d3228133c426e278d4d5875c"
+    },
+    {
+      "bytes": 227,
+      "path": "policy.js",
+      "sha256": "c2f83f91c96a2b169d777daeeefa9a5e37e0d06311c3f69ff3811cb3242827bb"
+    }
+  ],
+  "source_format": "javascript",
+  "topology": "inter-file-aliased"
+}

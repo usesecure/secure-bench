@@ -1,0 +1,63 @@
+{
+  "adversarial_variant": "blocklists",
+  "case_id": "aurora-34b6bca22d9cabd84f",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": {
+      "barrier": {
+        "effect": "constrains-to-policy",
+        "end_column": 34,
+        "end_line": 2,
+        "file": "policy.js",
+        "role": "barrier",
+        "start_column": 23,
+        "start_line": 2
+      },
+      "sink": {
+        "effect": "preserves-influence",
+        "end_column": 34,
+        "end_line": 2,
+        "file": "policy.js",
+        "role": "sink",
+        "sink_kind": "dynamic-code-evaluation",
+        "source_kind": null,
+        "start_column": 23,
+        "start_line": 2
+      },
+      "status": "effective-barrier-dominates-sink"
+    },
+    "expected_finding": null,
+    "expected_outcome": "control",
+    "taxonomy": {
+      "category_id": "secure-bench.category.dynamic-code-execution",
+      "invariant_id": "secure-bench.invariant.dynamic-code-control-data-separation",
+      "primary_cwe": "CWE-95",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "086c9128a0c22b27cf08c9037d78df454e040885f11036741486843e127b6697",
+  "family_id": "SE1006",
+  "fixture_ticket": "ticket-fc58bf3185e67469",
+  "framework": "server-actions",
+  "label": "control",
+  "normalized_fingerprint": "41f29c2b830dcadd063bcd8d3fc869b32ce683615c98395c9542492031e6d53c",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1006-67a145adaa2ae4",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 448,
+      "path": "entry.js",
+      "sha256": "d152da4be28ab1567e4a11d8198570d492fcaf2984040754414e39bfba018ed1"
+    },
+    {
+      "bytes": 129,
+      "path": "policy.js",
+      "sha256": "5762511c3791aedaf1b8279f7168b43b09c2213aa5638f6dabc540fdf089550b"
+    }
+  ],
+  "source_format": "javascript",
+  "topology": "inter-file-aliased"
+}

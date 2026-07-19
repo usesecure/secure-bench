@@ -1,0 +1,58 @@
+{
+  "adversarial_variant": "caught-exceptions",
+  "case_id": "aurora-d68369930654af0e06",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": {
+      "barrier": {
+        "effect": "constrains-to-policy",
+        "end_column": 32,
+        "end_line": 15,
+        "file": "entry.ts",
+        "role": "barrier",
+        "start_column": 8,
+        "start_line": 15
+      },
+      "sink": {
+        "effect": "preserves-influence",
+        "end_column": 18,
+        "end_line": 16,
+        "file": "entry.ts",
+        "role": "sink",
+        "sink_kind": "filesystem-read",
+        "source_kind": null,
+        "start_column": 3,
+        "start_line": 16
+      },
+      "status": "effective-barrier-dominates-sink"
+    },
+    "expected_finding": null,
+    "expected_outcome": "control",
+    "taxonomy": {
+      "category_id": "secure-bench.category.filesystem-boundary",
+      "invariant_id": "secure-bench.invariant.filesystem-path-confinement",
+      "primary_cwe": "CWE-22",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "4fe3d248001753275883735c3fb49fd38c02659232716d61d8809e7503c1e5ef",
+  "family_id": "SE1003",
+  "fixture_ticket": "ticket-134ca6a29fdbbfb4",
+  "framework": "node",
+  "label": "control",
+  "normalized_fingerprint": "98444e79faaeee1b4c7f31b3ef9d93499909cdde2b7f924370ba8061ca2880a2",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1003-ae0a1822c032d8",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 836,
+      "path": "entry.ts",
+      "sha256": "c692956374d2b96c1741c77f0bef3fba3c705c86e1cd94296740e66eb612cddc"
+    }
+  ],
+  "source_format": "typescript",
+  "topology": "direct"
+}

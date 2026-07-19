@@ -1,0 +1,67 @@
+{
+  "adversarial_variant": "destructuring",
+  "case_id": "aurora-1375361a99d2111c48",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 6,
+          "file": "entry.jsx",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "protected-resource-id",
+          "start_column": 3,
+          "start_line": 6
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 24,
+          "end_line": 13,
+          "file": "entry.jsx",
+          "role": "sink",
+          "sink_kind": "protected-record-mutation",
+          "source_kind": null,
+          "start_column": 9,
+          "start_line": 13
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.authorization-dominance",
+      "invariant_id": "secure-bench.invariant.authorization-before-sensitive-operation",
+      "primary_cwe": "CWE-862",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "c9e6486fcb90fe0fa0a4378d23ee1db54886310ea4c895bd900bc3d9aa60d988",
+  "family_id": "SE1007",
+  "fixture_ticket": "ticket-4af3767f4ab6740e",
+  "framework": "server-actions",
+  "label": "vulnerable",
+  "normalized_fingerprint": "6a02b6dd25bc256674cc363c7514a99dde05d9131969aaf66cb9f6aa21d2df05",
+  "orientation": "control-first",
+  "pair_id": "orbit-se1007-1834a9d14cdbed",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 717,
+      "path": "entry.jsx",
+      "sha256": "ef8749a46ddee0dfe315f59d5c96708ebd20f3692e49517314498dc7103f8f2f"
+    }
+  ],
+  "source_format": "jsx",
+  "topology": "control-flow-sensitive"
+}

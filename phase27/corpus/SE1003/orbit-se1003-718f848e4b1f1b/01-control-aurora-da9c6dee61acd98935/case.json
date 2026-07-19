@@ -1,0 +1,63 @@
+{
+  "adversarial_variant": "destructuring",
+  "case_id": "aurora-da9c6dee61acd98935",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": {
+      "barrier": {
+        "effect": "constrains-to-policy",
+        "end_column": 32,
+        "end_line": 7,
+        "file": "policy.tsx",
+        "role": "barrier",
+        "start_column": 8,
+        "start_line": 7
+      },
+      "sink": {
+        "effect": "preserves-influence",
+        "end_column": 18,
+        "end_line": 8,
+        "file": "policy.tsx",
+        "role": "sink",
+        "sink_kind": "filesystem-read",
+        "source_kind": null,
+        "start_column": 3,
+        "start_line": 8
+      },
+      "status": "effective-barrier-dominates-sink"
+    },
+    "expected_finding": null,
+    "expected_outcome": "control",
+    "taxonomy": {
+      "category_id": "secure-bench.category.filesystem-boundary",
+      "invariant_id": "secure-bench.invariant.filesystem-path-confinement",
+      "primary_cwe": "CWE-22",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "17b534404f85622b5d51344ead0d14d5d9af36098f56c497d3d853e73ecb455e",
+  "family_id": "SE1003",
+  "fixture_ticket": "ticket-5f41897355e008ed",
+  "framework": "express",
+  "label": "control",
+  "normalized_fingerprint": "b48cab4a76278fb9ca277ea5efabe90acad264ad5fb0d88fd64dbc4603827930",
+  "orientation": "control-first",
+  "pair_id": "orbit-se1003-718f848e4b1f1b",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 649,
+      "path": "entry.tsx",
+      "sha256": "ca26083c79e0556b0b026378e26cd46d69681902e1b71a443b8b3ebf9e6f5433"
+    },
+    {
+      "bytes": 374,
+      "path": "policy.tsx",
+      "sha256": "82cc8f07ca72bdba395e60a108e739d1b40b027a44ed1081d123d13db17f92c9"
+    }
+  ],
+  "source_format": "tsx",
+  "topology": "inter-file-aliased"
+}

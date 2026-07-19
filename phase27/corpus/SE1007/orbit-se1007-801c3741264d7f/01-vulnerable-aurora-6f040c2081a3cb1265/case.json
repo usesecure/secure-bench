@@ -1,0 +1,67 @@
+{
+  "adversarial_variant": "suffix-tricks",
+  "case_id": "aurora-6f040c2081a3cb1265",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 7,
+          "file": "entry.ts",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "protected-resource-id",
+          "start_column": 3,
+          "start_line": 7
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 24,
+          "end_line": 13,
+          "file": "entry.ts",
+          "role": "sink",
+          "sink_kind": "protected-record-mutation",
+          "source_kind": null,
+          "start_column": 9,
+          "start_line": 13
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.authorization-dominance",
+      "invariant_id": "secure-bench.invariant.authorization-before-sensitive-operation",
+      "primary_cwe": "CWE-862",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "9ccbaa8cdec450a938cd2dcd6d4abc125c09881a75d90867853ffeb7ea98fddb",
+  "family_id": "SE1007",
+  "fixture_ticket": "ticket-10a8bf0ac0311550",
+  "framework": "node",
+  "label": "vulnerable",
+  "normalized_fingerprint": "1d09a2f2c4e90236104e1b642f29a0daa44ed8095963b3c265ab261c24961eea",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1007-801c3741264d7f",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 677,
+      "path": "entry.ts",
+      "sha256": "4272023edf25f9668233c8bb00b2946ecf0113c96b9075ace79aed16fe7d9320"
+    }
+  ],
+  "source_format": "typescript",
+  "topology": "direct"
+}

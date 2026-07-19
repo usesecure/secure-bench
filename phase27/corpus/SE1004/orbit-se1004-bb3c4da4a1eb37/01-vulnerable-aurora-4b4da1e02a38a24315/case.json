@@ -1,0 +1,72 @@
+{
+  "adversarial_variant": "destructuring",
+  "case_id": "aurora-4b4da1e02a38a24315",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 7,
+          "file": "entry.ts",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "form-data-value",
+          "start_column": 3,
+          "start_line": 7
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 15,
+          "end_line": 2,
+          "file": "policy.ts",
+          "role": "sink",
+          "sink_kind": "outbound-request",
+          "source_kind": null,
+          "start_column": 3,
+          "start_line": 2
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.outbound-request-boundary",
+      "invariant_id": "secure-bench.invariant.outbound-destination-policy",
+      "primary_cwe": "CWE-918",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "dee086ac5c4db615afa350c1237a96c20e173889239e1fa6c841d0e8587db35f",
+  "family_id": "SE1004",
+  "fixture_ticket": "ticket-84e7402ab56769db",
+  "framework": "server-actions",
+  "label": "vulnerable",
+  "normalized_fingerprint": "86b5e3717b0cf49082b5c58993c04f105ea6889bfab688081c658c622c30e87a",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1004-bb3c4da4a1eb37",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 463,
+      "path": "entry.ts",
+      "sha256": "2a94b9bc739e2383c6c0770ada2959440a7b100c1310e87877a61065869630f7"
+    },
+    {
+      "bytes": 80,
+      "path": "policy.ts",
+      "sha256": "113c3b970d091d016bef06458138c7eda1bd4801a86f84943a381df3aea3461b"
+    }
+  ],
+  "source_format": "typescript",
+  "topology": "inter-file-aliased"
+}

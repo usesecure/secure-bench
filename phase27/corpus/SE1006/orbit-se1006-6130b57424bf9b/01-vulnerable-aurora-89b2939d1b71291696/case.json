@@ -1,0 +1,67 @@
+{
+  "adversarial_variant": "destructuring",
+  "case_id": "aurora-89b2939d1b71291696",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 7,
+          "file": "entry.ts",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "http-query-value",
+          "start_column": 3,
+          "start_line": 7
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 12,
+          "end_line": 10,
+          "file": "entry.ts",
+          "role": "sink",
+          "sink_kind": "dynamic-code-evaluation",
+          "source_kind": null,
+          "start_column": 3,
+          "start_line": 10
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.dynamic-code-execution",
+      "invariant_id": "secure-bench.invariant.dynamic-code-control-data-separation",
+      "primary_cwe": "CWE-95",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "5248cbad6158d7728274ab0a10333cf99c8171c74edf298902c1473bb7b5e894",
+  "family_id": "SE1006",
+  "fixture_ticket": "ticket-0ab8b6e927ea1fc6",
+  "framework": "express",
+  "label": "vulnerable",
+  "normalized_fingerprint": "9a2a6343cb1d35c4452599114a44e7ab1ab472bb9db24c8599ab7dbcd8acec9a",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1006-6130b57424bf9b",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 549,
+      "path": "entry.ts",
+      "sha256": "35db975a3b2fdb888a30dc2ed8ebf065fc2eaeba17c40a2e89d876fe51ddc3f2"
+    }
+  ],
+  "source_format": "typescript",
+  "topology": "control-flow-sensitive"
+}

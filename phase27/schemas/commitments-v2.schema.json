@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-bench.invalid/schemas/phase27-commitments-v2.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "holdout_id", "algorithm", "leaf_count", "manifest_sha256", "leaves", "merkle_root"],
+  "properties": {
+    "schema_version": {"const": "secure-bench-phase27-commitments-v2"},
+    "holdout_id": {"const": "phase-27-independent-holdout-v2-clean-restart"},
+    "algorithm": {"const": "sha256-domain-separated-binary-merkle-v1"},
+    "leaf_count": {"const": 112},
+    "manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "leaves": {"type": "array", "minItems": 112, "maxItems": 112},
+    "merkle_root": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

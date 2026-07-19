@@ -1,0 +1,72 @@
+{
+  "adversarial_variant": "misleading-names-comments",
+  "case_id": "aurora-707683102ef9b2e08a",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 8,
+          "file": "entry.tsx",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "protected-resource-id",
+          "start_column": 3,
+          "start_line": 8
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 24,
+          "end_line": 4,
+          "file": "policy.tsx",
+          "role": "sink",
+          "sink_kind": "protected-record-mutation",
+          "source_kind": null,
+          "start_column": 9,
+          "start_line": 4
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.authorization-dominance",
+      "invariant_id": "secure-bench.invariant.authorization-before-sensitive-operation",
+      "primary_cwe": "CWE-862",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "ea54de140e81010174eaf894ceae055b9f4675d97f7b63f00fd969721c4659eb",
+  "family_id": "SE1007",
+  "fixture_ticket": "ticket-e7810a394975312c",
+  "framework": "express",
+  "label": "vulnerable",
+  "normalized_fingerprint": "7dc4334c2a82bdd99facc952e8e636ab874b76b3aa48112fa3800c03438ddb8b",
+  "orientation": "control-first",
+  "pair_id": "orbit-se1007-f8d9a6d68074c7",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 709,
+      "path": "entry.tsx",
+      "sha256": "5b712576e70ac6d0f5d9b64c94ade5cbde8a8837f64414896ef763fd89bb577d"
+    },
+    {
+      "bytes": 243,
+      "path": "policy.tsx",
+      "sha256": "7d34c0862240da0f9a89fe070d8947447075fc7703e0d551fc4521ddf106b5f9"
+    }
+  ],
+  "source_format": "tsx",
+  "topology": "inter-file-aliased"
+}

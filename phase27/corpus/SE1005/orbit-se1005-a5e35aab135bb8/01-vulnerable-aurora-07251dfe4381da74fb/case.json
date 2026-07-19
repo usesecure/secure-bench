@@ -1,0 +1,67 @@
+{
+  "adversarial_variant": "suffix-tricks",
+  "case_id": "aurora-07251dfe4381da74fb",
+  "evidence_contract_v2": {
+    "contract_path": "phase27/contracts/evidence-contract-v2.json",
+    "contract_sha256": "1181e027efb0e731eec9d038e96457103ee0e30113f46ba1e8588dada33fdf95",
+    "contract_version": "2.0.0",
+    "control_proof": null,
+    "expected_finding": {
+      "connected_edges": [
+        true
+      ],
+      "effective_barriers": [],
+      "path": [
+        {
+          "effect": "preserves-influence",
+          "end_column": 21,
+          "end_line": 7,
+          "file": "entry.ts",
+          "role": "source",
+          "sink_kind": null,
+          "source_kind": "http-body-field",
+          "start_column": 3,
+          "start_line": 7
+        },
+        {
+          "effect": "preserves-influence",
+          "end_column": 28,
+          "end_line": 12,
+          "file": "entry.ts",
+          "role": "sink",
+          "sink_kind": "redirect-response",
+          "source_kind": null,
+          "start_column": 10,
+          "start_line": 12
+        }
+      ],
+      "uncertain": false,
+      "unresolved_call": false
+    },
+    "expected_outcome": "vulnerable",
+    "taxonomy": {
+      "category_id": "secure-bench.category.redirect-boundary",
+      "invariant_id": "secure-bench.invariant.redirect-destination-policy",
+      "primary_cwe": "CWE-601",
+      "version": "1.0.0"
+    }
+  },
+  "exact_fingerprint": "0bae3db9b5c4021d4b8ae4c2597a877bb3cde1eb3334c57cb58bd2339dcb018b",
+  "family_id": "SE1005",
+  "fixture_ticket": "ticket-89d2f05260186da8",
+  "framework": "next-app-router",
+  "label": "vulnerable",
+  "normalized_fingerprint": "40399cc6c1db89da39169beb88e0f62034d5e26a60e94df617cfe1f8aa403ddb",
+  "orientation": "vulnerable-first",
+  "pair_id": "orbit-se1005-a5e35aab135bb8",
+  "schema_version": "secure-bench-phase27-case-v2",
+  "source_files": [
+    {
+      "bytes": 539,
+      "path": "entry.ts",
+      "sha256": "6731c862adc7b1a6ce402caa1347ee68002bbe4be3a92b75dba9632beba760ec"
+    }
+  ],
+  "source_format": "typescript",
+  "topology": "control-flow-sensitive"
+}

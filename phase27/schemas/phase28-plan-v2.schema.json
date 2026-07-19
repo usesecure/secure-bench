@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-bench.invalid/schemas/phase28-plan-v2.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "phase", "status", "attempt_count", "retry_count", "lanes_separate", "non_numeric_statuses", "artifacts", "attempts"],
+  "properties": {
+    "schema_version": {"const": "secure-bench-phase28-plan-v2"},
+    "phase": {"const": 28},
+    "status": {"const": "frozen-not-executed"},
+    "attempt_count": {"const": 336},
+    "retry_count": {"const": 0},
+    "lanes_separate": {"const": true},
+    "non_numeric_statuses": {"type": "array", "minItems": 5, "maxItems": 5, "uniqueItems": true},
+    "artifacts": {"type": "array", "minItems": 3, "maxItems": 3},
+    "attempts": {"type": "array", "minItems": 336, "maxItems": 336}
+  }
+}

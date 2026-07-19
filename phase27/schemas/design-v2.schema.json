@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-bench.invalid/schemas/phase27-design-v2.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "phase",
+    "holdout_id",
+    "status",
+    "created_at_utc",
+    "authoritative_base",
+    "seed",
+    "objective",
+    "families",
+    "factors",
+    "adversarial_variants",
+    "required_balance",
+    "construction_rules",
+    "pre_authoring_counts"
+  ],
+  "properties": {
+    "schema_version": {"const": "secure-bench-phase27-design-v2"},
+    "phase": {"const": 27},
+    "holdout_id": {"const": "phase-27-independent-holdout-v2-clean-restart"},
+    "status": {"const": "frozen_before_case_authoring"},
+    "created_at_utc": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"},
+    "authoritative_base": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "seed": {"type": "object"},
+    "objective": {"type": "string"},
+    "families": {"type": "array", "minItems": 7, "maxItems": 7},
+    "factors": {"type": "object"},
+    "adversarial_variants": {"type": "array", "minItems": 10, "maxItems": 10, "uniqueItems": true},
+    "required_balance": {"type": "object"},
+    "construction_rules": {"type": "object"},
+    "pre_authoring_counts": {"type": "object"}
+  }
+}

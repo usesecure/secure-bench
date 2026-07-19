@@ -1,0 +1,106 @@
+{
+  "schema_version": "secure-bench-phase27-design-v2",
+  "phase": 27,
+  "holdout_id": "phase-27-independent-holdout-v2-clean-restart",
+  "status": "frozen_before_case_authoring",
+  "created_at_utc": "2026-07-19T13:00:38Z",
+  "authoritative_base": "df1cf5f078ec861581f1d11dcc8d4ae35feb0315",
+  "seed": {
+    "algorithm": "os-csprng-256-bit",
+    "hex": "d1f5f5e7e5136905b3a1ff3720ebcd2fbf9c8d1af4537577f17e2e4d342704f9",
+    "generated_before_cases": true
+  },
+  "objective": "Scanner-neutral JavaScript and TypeScript vulnerability/control holdout",
+  "families": [
+    {
+      "family_id": "SE1001",
+      "category_id": "secure-bench.category.command-execution",
+      "invariant_id": "secure-bench.invariant.command-control-data-separation",
+      "primary_cwe": "CWE-78"
+    },
+    {
+      "family_id": "SE1002",
+      "category_id": "secure-bench.category.sql-construction",
+      "invariant_id": "secure-bench.invariant.sql-control-data-separation",
+      "primary_cwe": "CWE-89"
+    },
+    {
+      "family_id": "SE1003",
+      "category_id": "secure-bench.category.filesystem-boundary",
+      "invariant_id": "secure-bench.invariant.filesystem-path-confinement",
+      "primary_cwe": "CWE-22"
+    },
+    {
+      "family_id": "SE1004",
+      "category_id": "secure-bench.category.outbound-request-boundary",
+      "invariant_id": "secure-bench.invariant.outbound-destination-policy",
+      "primary_cwe": "CWE-918"
+    },
+    {
+      "family_id": "SE1005",
+      "category_id": "secure-bench.category.redirect-boundary",
+      "invariant_id": "secure-bench.invariant.redirect-destination-policy",
+      "primary_cwe": "CWE-601"
+    },
+    {
+      "family_id": "SE1006",
+      "category_id": "secure-bench.category.dynamic-code-execution",
+      "invariant_id": "secure-bench.invariant.dynamic-code-control-data-separation",
+      "primary_cwe": "CWE-95"
+    },
+    {
+      "family_id": "SE1007",
+      "category_id": "secure-bench.category.authorization-dominance",
+      "invariant_id": "secure-bench.invariant.authorization-before-sensitive-operation",
+      "primary_cwe": "CWE-862"
+    }
+  ],
+  "factors": {
+    "framework": ["node", "express", "next-app-router", "server-actions"],
+    "source_format": ["javascript", "jsx", "typescript", "tsx"],
+    "topology": ["direct", "helper-mediated", "inter-file-aliased", "control-flow-sensitive"],
+    "orientation": ["vulnerable-first", "control-first"]
+  },
+  "adversarial_variants": [
+    "aliasing",
+    "destructuring",
+    "wrappers",
+    "misleading-names-comments",
+    "mutable-allowlists",
+    "non-dominating-guards",
+    "caught-exceptions",
+    "blocklists",
+    "suffix-tricks",
+    "ambiguous-helpers"
+  ],
+  "required_balance": {
+    "pairs": 56,
+    "cases": 112,
+    "vulnerable": 56,
+    "control": 56,
+    "pairs_per_family": 8,
+    "pairs_per_framework": 14,
+    "pairs_per_source_format": 14,
+    "pairs_per_topology": 14,
+    "vulnerable_first": 28,
+    "control_first": 28,
+    "pairs_per_family_factor_cell": 2
+  },
+  "construction_rules": {
+    "minimal_counterfactual_controls": true,
+    "trusted_server_principal_for_authorization": true,
+    "requester_fields_never_prove_identity": true,
+    "guard_must_dominate_sink": true,
+    "tenant_owner_resource_alignment": true,
+    "ambiguity_is_fail_closed": true,
+    "scanner_implementation_blind": true,
+    "historical_overlap_source": "redacted-precomputed-index-only-or-unavailable",
+    "case_mutation_after_freeze": false
+  },
+  "pre_authoring_counts": {
+    "pairs": 0,
+    "cases": 0,
+    "scanner_executions": 0,
+    "case_executions": 0
+  }
+}
